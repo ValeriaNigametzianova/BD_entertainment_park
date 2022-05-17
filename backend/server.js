@@ -4,28 +4,29 @@ const connection = require('./db')
 // const Sequelize = require('./db')
 // const models = require('./models/models')
 const cors = require('cors')
+const router = require('./routes/index')
 
-
+const PORT = process.env.PORT || 8000
 
 
 
 const app = express()
 app.use(cors())
 app.use(express.json())
-const PORT = process.env.PORT || 5000
+app.use('/api', router)
 
-app.get ('/main', (req , res )=>{
+app.get ('/', (req , res )=>{
     res.status( 200).json({message: 'WORKING!!'})
 })
 
-async function start() {
+const start =  async() => {
     try {
         // await Sequelize.authenticate()
         // await Sequelize.sync()
-        await connection.authenticate()
-        await connection.sync()
+        // await connection.authenticate()
+        // await connection.sync()
         app.listen(PORT, () => {
-            console.log("working on the port " + PORT)
+            console.log("working on the port ",PORT)
         })
     } catch (e) {
         console.log(e)
