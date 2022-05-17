@@ -1,3 +1,5 @@
+const ApiError = require('../error/ApiError') 
+
 class parkController{
     async create (req, res){
 
