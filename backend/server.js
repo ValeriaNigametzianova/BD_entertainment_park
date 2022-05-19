@@ -1,8 +1,8 @@
 require('dotenv').config()
 const express = require ('express')
-const connection = require('./db')
-// const Sequelize = require('./db')
-// const models = require('./models/models')
+// const connection = require('./db')
+const sequelize = require('./db')
+const models = require('./models/models')
 const cors = require('cors')
 const router = require('./routes/index')
 const ErrorHandler = require ('./middleware/ErrorHandlingMiddleware')
@@ -22,8 +22,8 @@ app.get ('/', (req , res )=>{
 
 const start =  async() => {
     try {
-        // await Sequelize.authenticate()
-        // await Sequelize.sync()
+        await sequelize.authenticate()
+        await sequelize.sync()
         // await connection.authenticate()
         // await connection.sync()
         app.listen(PORT, () => {

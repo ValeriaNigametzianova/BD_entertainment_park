@@ -1,10 +1,10 @@
 const sequelize= require('../db')
 const {DataTypes} = require ('sequelize')
 
-const Park = sequelize.define('park',{
+const Park = sequelize.define('Park',{
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name: {type: DataTypes.STRING, allowNull: true},
-    town: {type: DataTypes.STRING,allowNull: true },
+    name: {type: DataTypes.STRING, allowNull: false},
+    town: {type: DataTypes.STRING, allowNull: false},
     square: {type: DataTypes.FLOAT, },
     opening_time: {type: DataTypes.TIME, },
     closing_time: {type: DataTypes.TIME, },
