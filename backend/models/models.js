@@ -65,7 +65,7 @@ const Admin = sequelize.define('Admin',{
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
 
-Park.hasMany(Attraction);
+Park.hasMany(Attraction, {as: "attractions"});
 Attraction.belongsTo(Park)
 
 Park.hasMany(GreenZone)
