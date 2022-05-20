@@ -58,7 +58,7 @@ const Ticket = sequelize.define('Tickets',{
 })
 const Stuff = sequelize.define('Stuff',{
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    login: {type: DataTypes.INTEGER,unique: true, allowNull: false },
+    login: {type: DataTypes.STRING, unique: true, allowNull: false },
     password: {type: DataTypes.STRING,  allowNull: false },
 })
 const Admin = sequelize.define('Admin',{
