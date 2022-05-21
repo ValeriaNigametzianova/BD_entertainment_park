@@ -19,7 +19,6 @@ class CustomerController{
             return next(ApiError.badRequest("Пользователь с таким email уже существует"))
         }
         const customer = await Customer.create({email, phone_number})
-        //выводить все билеты, у чела -корзина
         const token = generateJwt(customer.id, customer.email, customer.phone_number)
         return res.json({token})
     }

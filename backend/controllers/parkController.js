@@ -23,10 +23,14 @@ class parkController{
 
     async getOne (req, res){
         const {id} = req.params
+        if (!id){
+            return next(ApiError.badRequest("Такого парка не существует"))
+        }
         const park = await Park.findOne(
             {
                 where: {id},
-                include: [{model: Park, as: "name", as: "description"}]
+                attributes:["name","description"]
+                // include: [{model: Park, as: "name", as: "description"}]
             },
         )
         return res.json(park)
@@ -48,7 +52,8 @@ class parkController{
         const park = await Park.findOne(
             {
                 where: {id},
-                include: [{model: Park, as: "opening_time", as: "closing_time", as: "cafe", as: "shops"}]
+                attributes:["opening_time", "closing_time", "adress"]
+                // include: [{model: Park, as: "opening_time", as: "closing_time", as: "cafe", as: "shops"}]
             },
         )
         return res.json(park)

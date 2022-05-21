@@ -3,7 +3,7 @@ const router = new Router()
 const customerController = require("../controllers/customerController")
 const ticketController = require("../controllers/ticketController")
 
-
+router.post('/registration', customerController.registration)
 router.post('/login', customerController.login)
 router.get('/auth', customerController.check)
 router.get('/ticket', ticketController.getAll)

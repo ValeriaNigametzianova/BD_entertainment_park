@@ -1,7 +1,7 @@
 const ApiError = require('../error/ApiError') 
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken')
-const {Stuff, Admin, Customer, Ticket} = require("../models/models")
+const {Stuff, Park, Admin, Customer, Ticket} = require("../models/models")
 
 const generateJwt = (id, login) => {
     return jwt.sign(
@@ -42,9 +42,15 @@ class StuffController{
         return res.json({token})
     }
     
-    async check (req, res){
+    async check (req, res, next){
         const token = generateJwt(req.stuff.id, req.stuff.login)
         return res.json({token})   
+    }
+
+    async park (req, res, next){
+        const stuff = await Stuff.findOne({where: {login}})
+        const parks = await Park.findAll({stuffId: stuff.id}) //пагинация, выдает кол-во всех полей и записи с указанным лимитом
+        return res.json(parks)
     }
 }
 

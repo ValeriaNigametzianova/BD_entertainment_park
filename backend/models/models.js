@@ -50,7 +50,7 @@ const Customer = sequelize.define('Customer',{
 })
 const Ticket = sequelize.define('Tickets',{
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    number: {type: DataTypes.INTEGER, allowNull: false},
+    number: {type: DataTypes.INTEGER, allowNull: false,},
     surname: {type: DataTypes.STRING,   allowNull: false},
     name: {type: DataTypes.STRING,allowNull: false },
     date: {type: DataTypes.DATE,allowNull: false},
@@ -65,7 +65,7 @@ const Admin = sequelize.define('Admin',{
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
 
-Park.hasMany(Attraction, {as: "attractions"});
+Park.hasMany(Attraction, {as: "attraction"});
 Attraction.belongsTo(Park)
 
 Park.hasMany(GreenZone)
