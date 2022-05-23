@@ -23,6 +23,7 @@ class StuffController{
         }
         const hashPassword = await bcrypt.hash(password, 5)
         const stuff = await Stuff.create({login, password: hashPassword})
+        const admin = await Admin.create({stuffId: stuff.id})
         //выводить все билеты, у чела -корзина
         const token = generateJwt(stuff.id, stuff.login)
         return res.json({token})
@@ -48,9 +49,26 @@ class StuffController{
     }
 
     async park (req, res, next){
-        const stuff = await Stuff.findOne({where: {login}})
-        const parks = await Park.findAll({stuffId: stuff.id}) //пагинация, выдает кол-во всех полей и записи с указанным лимитом
-        return res.json(parks)
+        const {id} = req.stuff
+        // const stuff = await Stuff.findOne({where: {id}})
+        // // const stuffId = stuff.id
+        // const parks = await Park.findAll({include: [
+        //     {
+        //         model: Admin,
+        //         through: {
+        //             attributes: [{stuffId: stuff.id}]
+        // }}]}) 
+        // return res.json(parks)
+        Stuff.findOne({where: {id}}).
+            then(stuff=>{
+               if(!stuff) return;
+               stuff.getParks().then(parks=>{
+                //    for(park of parks){
+                //        console.log(park);
+                //     }
+                return res.json({parks})  
+            });
+        });
     }
 }
 

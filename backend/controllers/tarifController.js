@@ -22,6 +22,28 @@ class tarifController{
         let tarif = await Tarif.findAll({parkId: park.id}) 
         return res.json(tarif)
     }
+
+    async update (req, res){
+        const tarif = req.body
+        if (!tarif.id){
+            res.json(ApiError.badRequest({message:"Id не указан"}))
+        }
+        const updateTarif = await Tarif.findByIdAndUpdate(tarif.id,tarif,{new:true})
+        return res.json(updateTarif)
+    }
+
+    async delete(req,res){
+        try{
+            const {id}=req.params
+            if(!id){
+                res.json(ApiError.badRequest({message: "Id не указан"}))
+            }
+            const tarif = await Tarif.findByIdAndDelete(id)
+            return res.json(tarif)
+        }catch(e){
+            res.json(ApiError.internal({message: "Ошибка сервера"}))
+        }
+    }
 }
 
 module.exports = new tarifController()

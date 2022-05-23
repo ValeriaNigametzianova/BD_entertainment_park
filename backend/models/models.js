@@ -40,9 +40,6 @@ const Tarif = sequelize.define('Tarif',{
     cost: {type: DataTypes.FLOAT, allowNull: false},
     description: {type: DataTypes.TEXT, },
 })
-const TarifHasAttraction = sequelize.define('Tarif_has_Attraction',{
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-})
 const Customer = sequelize.define('Customer',{
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     phone_number: {type: DataTypes.STRING, unique: true, allowNull: false},
@@ -53,7 +50,7 @@ const Ticket = sequelize.define('Tickets',{
     number: {type: DataTypes.INTEGER, allowNull: false,},
     surname: {type: DataTypes.STRING,   allowNull: false},
     name: {type: DataTypes.STRING,allowNull: false },
-    date: {type: DataTypes.DATE,allowNull: false},
+    date: {type: DataTypes.DATE, defaultValue: DataTypes.NOW},
     active: {type: DataTypes.TINYINT, allowNull: false, defaultValue: true},
 })
 const Stuff = sequelize.define('Stuff',{
@@ -65,7 +62,7 @@ const Admin = sequelize.define('Admin',{
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
 
-Park.hasMany(Attraction, {as: "attraction"});
+Park.hasMany(Attraction);
 Attraction.belongsTo(Park)
 
 Park.hasMany(GreenZone)
@@ -74,8 +71,8 @@ GreenZone.belongsTo(Park)
 Park.belongsToMany (Stuff,  {through: Admin})
 Stuff.belongsToMany (Park, {through: Admin})
 
-Attraction.belongsToMany (Tarif,  {through: TarifHasAttraction})
-Tarif.belongsToMany (Attraction, {through: TarifHasAttraction})
+Park.hasMany(Tarif)
+Tarif.belongsTo (Park)
 
 Tarif.hasMany(Ticket)
 Ticket.belongsTo(Tarif)
@@ -84,5 +81,5 @@ Customer.hasMany(Ticket)
 Ticket.belongsTo(Customer)
 
 module.exports = {
-Park, Attraction, GreenZone, Tarif, TarifHasAttraction, Customer,Ticket, Stuff, Admin
+Park, Attraction, GreenZone, Tarif,  Customer,Ticket, Stuff, Admin
 }
