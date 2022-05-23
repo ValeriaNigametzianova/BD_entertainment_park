@@ -15,7 +15,8 @@ router.get('/auth',authStuffMiddleware, stuffController.check)
 router.get('/park',authStuffMiddleware,stuffController.park)
 router.post('/park', authStuffMiddleware, parkController.create)
 router.use('/attraction',attractionRouter)
-router.use('/tarif',tarifRouter)
+router.use('/tarif',authStuffMiddleware, tarifRouter)
+router.get('/tarif',authStuffMiddleware, stuffController.getTarif)
 
 
 module.exports = router

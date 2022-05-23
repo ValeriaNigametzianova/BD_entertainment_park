@@ -4,8 +4,8 @@ const {Tarif, Park} = require("../models/models")
 class tarifController{
     async create (req, res){
         try{
-            const {name, cost, description, parkId} = req.body
-            const tarif = await Tarif.create({name, cost, description, parkId})
+            const {name, cost, description, ParkId} = req.body
+            const tarif = await Tarif.create({name, cost, description, ParkId})
             return res.json(tarif)
         } catch(e){
             next(ApiError.badRequest(e.massage))

@@ -1,7 +1,7 @@
 const ApiError = require('../error/ApiError') 
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken')
-const {Stuff, Park, Admin, Customer, Ticket} = require("../models/models")
+const {Stuff, Park, Admin, Customer, Ticket,Tarif} = require("../models/models")
 
 const generateJwt = (id, login) => {
     return jwt.sign(
@@ -69,6 +69,20 @@ class StuffController{
                 return res.json({parks})  
             });
         });
+    }
+
+    async getTarif (req, res, next){
+        const {id} = req.stuff
+        let findParks
+        Stuff.findOne({where: {id}}).
+            then(stuff=>{
+                if(!stuff) return;
+                stuff.getParks().then(parks=>{
+                        findParks =   parks
+                });
+        })
+        const tarifs = Tarif.findAll({where: {ParkId:findParks.id}})
+        return res.json({tarifs})  
     }
 }
 
