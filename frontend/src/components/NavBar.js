@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Button, Container, Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {Context} from "../index";
+import {observer} from "mobx-react-lite";
 
-const NavBar = () => {
+const NavBar = observer(() => {
+    const {user} = useContext(Context)
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="#FEFDEF" expand="lg">
             <Container fluid>
                 <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
@@ -35,11 +38,16 @@ const NavBar = () => {
                             aria-label="Search"
                         />
                         <Button variant="outline-success">Search</Button>
+                        {user.isAuth ?
+                            <Button variant="outline-success">Личный кабинет</Button>
+                            :
+                            <Button variant="outline-success" onClick={() => user.setIsAuth(true)}>Войти</Button>
+                        }
                     </Form>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
     );
-};
+});
 
 export default NavBar;

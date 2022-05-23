@@ -1,18 +1,17 @@
 import {
-    ATTRACTIONS_ADMIN_ROUTE,
-    AUTH_ROUTE, BASKET_ROUTE,
+    ATTRACTIONS_ADMIN_ROUTE, BASKET_ROUTE,
     CONFIRMATION_ROUTE,
     EDITING_ATTRACTIONS_ROUTE,
     EDITING_INFO_ROUTE,
     EDITING_MAIN_ROUTE,
-    INFO_ADMIN_ROUTE,
+    INFO_ADMIN_ROUTE, LOGIN_ROUTE,
     MAIN_ADMIN_ROUTE, MAIN_ROUTE, ORDER_ROUTE,
     PARK_ATTRACTIONS_ROUTE,
     PARK_INFO_ROUTE,
     PARK_MAIN_ROUTE,
     RECOVERY_BAD_ROUTE,
     RECOVERY_GOOD_ROUTE,
-    RECOVERY_ROUTE, TICKETS_ROUTE
+    RECOVERY_ROUTE, REGISTRATION_ROUTE, TICKETS_ROUTE
 } from "./utils/Consts";
 import Auth_for_admin from "./pages/Auth_for_admin";
 import Park_main_for_admin from "./pages/Park_main_for_admin";
@@ -35,10 +34,6 @@ import Main from "./pages/Main";
 
 
 export const authRoutes = [
-    {
-        path: AUTH_ROUTE,
-        Component: Auth_for_admin
-    },
     {
         path: MAIN_ADMIN_ROUTE,
         Component: Park_main_for_admin
@@ -66,6 +61,14 @@ export const authRoutes = [
 ]
 
 export const publicRoutes = [
+    {
+        path: LOGIN_ROUTE,
+        Component: Auth_for_admin
+    },
+    {
+        path: REGISTRATION_ROUTE,
+        Component: Auth_for_admin
+    },
     {
         path: MAIN_ROUTE,
         Component: Main
