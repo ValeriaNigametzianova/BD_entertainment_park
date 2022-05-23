@@ -83,6 +83,7 @@ class StuffController{
         })
         const tarifs = Tarif.findAll({where: {ParkId:findParks.id}})
         return res.json({tarifs})  
+        
     }
 }
 
