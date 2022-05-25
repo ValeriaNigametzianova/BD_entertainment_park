@@ -71,7 +71,7 @@ foreignKey: { allowNull: false },
 hooks: true})
 
 Park.belongsToMany (Stuff,  {through: Admin}, { onDelete: 'set null'})
-Stuff.belongsToMany (Park, {through: Admin},{ onDelete: 'set null'})
+Stuff.belongsToMany (Park, {through: Admin})
 
 Park.hasMany(Tarif,{onDelete: 'cascade'})
 Tarif.belongsTo (Park, { onDelete: 'cascade', 

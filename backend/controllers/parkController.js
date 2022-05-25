@@ -2,6 +2,7 @@ const ApiError = require('../error/ApiError')
 const {Park, Attraction, Stuff, Admin} = require("../models/models")
 const adminController = require('./adminController')
 
+
 class parkController{
     async create (req, res, next){
         try{
@@ -18,14 +19,25 @@ class parkController{
         }
     }
 
-    async getAll (req, res){
-        let  {limit, page} = req.query
+    async getAll (req, res, next){
+        let  {town, limit, page} = req.query
+        console.log(req.query);
+        limit = Number(limit)
+        page = Number(page)
         page = page || 1
         limit = limit || 5
+        console.log(limit);
         let offset = page * limit - limit
-        let parks = await Park.findAndCountAll({limit, offset}) //пагинация, выдает кол-во всех полей и записи с указанным лимитом
-        return res.json(parks)
+        let parks
+        if (town){
+            parks = await Park.findAndCountAll({ offset, limit, where: {town}}) //пагинация, выдает кол-во всех полей и записи с указанным лимитом
+            return res.json(parks)
+        }
+        if(!town){
+            parks = await Park.findAndCountAll({offset, limit}) //пагинация, выдает кол-во всех полей и записи с указанным лимитом
+            return res.json(parks)
     }
+}
 
     async getOne (req, res){
         const {id} = req.params
@@ -88,14 +100,13 @@ class parkController{
             }
             const park = await Park.findOne({where: {id}})
             if (!park){
-                return res.json(ApiError.badRequest({message:"Тариф не найден"}))
+                return res.json(ApiError.badRequest({message:"Парк не найден"}))
             }
             await Park.destroy({where: {id}})
-            await Admin.dest
 
             return res.status(200).json(park)
         }catch(e){
-            res.json(ApiError.internal({message: "Ошибка сервера"}))
+            res.json(ApiError.internal({message: e}))
         }
     }
 }

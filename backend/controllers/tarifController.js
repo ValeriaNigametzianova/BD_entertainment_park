@@ -2,7 +2,7 @@ const ApiError = require('../error/ApiError')
 const {Tarif, Park} = require("../models/models")
 
 class tarifController{
-    async create (req, res){
+    async create (req, res,next){
         try{
             const {name, cost, description, ParkId} = req.body
             const tarif = await Tarif.create({name, cost, description, ParkId})
@@ -20,7 +20,7 @@ class tarifController{
         // page = page || 1
         // limit = limit || 10
         // let offset = page * limit - limit
-        console.log(park.id)
+        console.log(park);
         let tarif = await Tarif.findAll({where: {parkId: park.id}}) 
         return res.json(tarif)
     }

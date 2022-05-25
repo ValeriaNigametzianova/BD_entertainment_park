@@ -1,6 +1,7 @@
 const ApiError = require('../error/ApiError') 
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken')
+const uuid = require("uuid")
 const {Stuff, Admin, Customer, Ticket} = require("../models/models")
 
 const generateJwt = (id, email) => {
@@ -18,6 +19,7 @@ class CustomerController{
         if (candidate){
             return next(ApiError.badRequest("Пользователь с таким email уже существует"))
         }
+        const activationLink = uuid.v4()
         const customer = await Customer.create({email, phone_number})
         const token = generateJwt(customer.id, customer.email)
         return res.json({token})
