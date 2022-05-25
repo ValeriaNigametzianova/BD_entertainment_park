@@ -7,7 +7,7 @@ const attractionController = require("../controllers/attractionController")
 router.post('/',authStuffMiddleware, attractionController.create)
 router.get('/', attractionController.getAll)
 router.put('/', authStuffMiddleware,attractionController.update)
-router.delete('/id', authStuffMiddleware,attractionController.delete)
+router.delete('/', authStuffMiddleware,attractionController.delete)
 
 
 module.exports = router

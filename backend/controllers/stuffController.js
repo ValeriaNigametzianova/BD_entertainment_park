@@ -1,7 +1,7 @@
 const ApiError = require('../error/ApiError') 
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken')
-const {Stuff, Park, Admin, Customer, Ticket,Tarif} = require("../models/models")
+const {Stuff, Park, Admin, Customer, Ticket,Tarif, Attraction} = require("../models/models")
 
 const generateJwt = (id, login) => {
     return jwt.sign(
@@ -23,7 +23,8 @@ class StuffController{
         }
         const hashPassword = await bcrypt.hash(password, 5)
         const stuff = await Stuff.create({login, password: hashPassword})
-        const admin = await Admin.create({stuffId: stuff.id})
+        const admin = await Admin.create({StuffId: stuff.id})
+        console.log(stuff.id, admin)
         //выводить все билеты, у чела -корзина
         const token = generateJwt(stuff.id, stuff.login)
         return res.json({token})
@@ -48,7 +49,7 @@ class StuffController{
         return res.json({token})   
     }
 
-    async park (req, res, next){
+    async getPark (req, res, next){
         const {id} = req.stuff
         // const stuff = await Stuff.findOne({where: {id}})
         // // const stuffId = stuff.id
@@ -73,17 +74,37 @@ class StuffController{
 
     async getTarif (req, res, next){
         const {id} = req.stuff
-        let findParks
         Stuff.findOne({where: {id}}).
-            then(stuff=>{
+            then( stuff=>{
+                console.log(stuff);
                 if(!stuff) return;
-                stuff.getParks().then(parks=>{
-                        findParks =   parks
+                stuff.getParks().then(async parks=>{
+                    console.log(parks[0].id);
+                    // цикл
+                    const tarifs = await Tarif.findAll({where: {ParkId: parks[0].id}})
+                    
+                    return res.json({tarifs}) 
                 });
-        })
-        const tarifs = Tarif.findAll({where: {ParkId:findParks.id}})
-        return res.json({tarifs})  
-        
+                
+        });
+          
+    }
+    async getAttraction (req, res, next){
+        const {id} = req.stuff
+        Stuff.findOne({where: {id}}).
+            then( stuff=>{
+                console.log(stuff);
+                if(!stuff) return;
+                stuff.getParks().then(async parks=>{
+                    console.log(parks[0].id);
+                    // цикл
+                    const attractions = await Attraction.findAll({where: {ParkId: parks[0].id}})
+                    
+                    return res.json({attractions}) 
+                });
+                
+        });
+          
     }
 }
 

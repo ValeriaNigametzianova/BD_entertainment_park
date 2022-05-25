@@ -4,13 +4,6 @@ const jwt = require('jsonwebtoken')
 const {Stuff, Admin, Customer, Park, Ticket} = require("../models/models")
 const { park } = require('./stuffController')
 
-const generateJwt = (id, login) => {
-    return jwt.sign(
-        {id, login},
-        process.env.SECRET_KEY, 
-        {expiresIn: "6h"}
-    )
-}
 
 class AdminController{
     async create (req, res, next){
@@ -23,7 +16,8 @@ class AdminController{
     async hasPark (park, stuff){
             if(!stuff) return;
             if(!park) return;
-            stuff.addPark(park, {through:{}});
+            const id = park.id
+            await Admin.update({ParkId: id}, {where:{StuffId: stuff.id}});
     }
 
     async getAll (req, res){

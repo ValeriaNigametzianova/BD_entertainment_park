@@ -13,33 +13,45 @@ class tarifController{
 
     }
     async getAll (req, res){
-        const {id} = req.param
+        const {id} = req.params
+        console.log(req.params);
         const park = await Park.findOne({where: {id}})
         // let  {limit, page} = req.query   //пагинация, выдает кол-во всех полей и записи с указанным лимитом
         // page = page || 1
         // limit = limit || 10
         // let offset = page * limit - limit
-        let tarif = await Tarif.findAll({parkId: park.id}) 
+        console.log(park.id)
+        let tarif = await Tarif.findAll({where: {parkId: park.id}}) 
         return res.json(tarif)
     }
 
     async update (req, res){
-        const tarif = req.body
+        let tarif = req.body
         if (!tarif.id){
-            res.json(ApiError.badRequest({message:"Id не указан"}))
+            return  res.json(ApiError.badRequest({message:"Id не указан"}))
         }
-        const updateTarif = await Tarif.findByIdAndUpdate(tarif.id,tarif,{new:true})
-        return res.json(updateTarif)
+        await Tarif.update(tarif,{
+            where: {
+              id: tarif.id
+            }
+        })
+        let updatedTarif = await Tarif.findByPk(tarif.id);
+        return res.json(updatedTarif)
     }
 
     async delete(req,res){
         try{
-            const {id}=req.params
+            const {id}=req.body
             if(!id){
-                res.json(ApiError.badRequest({message: "Id не указан"}))
+                return res.json(ApiError.badRequest({message: "Id не указан"}))
             }
-            const tarif = await Tarif.findByIdAndDelete(id)
-            return res.json(tarif)
+            const tarif = await Tarif.findOne({where: {id}})
+            if (!tarif){
+                return res.json(ApiError.badRequest({message:"Тариф не найден"}))
+            }
+            await Tarif.destroy({where: {id}})
+
+            return res.status(200).json(tarif)
         }catch(e){
             res.json(ApiError.internal({message: "Ошибка сервера"}))
         }

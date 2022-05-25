@@ -8,13 +8,14 @@ const tarifRouter = require('./tarifRouter')
 
 // router.post('/', parkController.create)
 router.get('/', parkController.getAll)
+router.post('/',authStuffMiddleware, parkController.create)
 router.get('/:id', parkController.getOne)
 router.get('/:id/description', parkController.getDescription) // страница с описанием парка
 router.get('/:id/attraction', attrationController.getAll) // страница со списком аттракционов
 router.get('/:id/tarif', tarifController.getAll) // страница со списком тарифов
 
 router.put('/', authStuffMiddleware, parkController.update)
-router.delete('/id', authStuffMiddleware, parkController.delete)
+router.delete('/', authStuffMiddleware, parkController.delete)
 
 // router.delete('/',)
 

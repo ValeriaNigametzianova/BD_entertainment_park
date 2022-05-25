@@ -51,7 +51,7 @@ const Ticket = sequelize.define('Tickets',{
     surname: {type: DataTypes.STRING,   allowNull: false},
     name: {type: DataTypes.STRING,allowNull: false },
     date: {type: DataTypes.DATE, defaultValue: DataTypes.NOW},
-    active: {type: DataTypes.TINYINT, allowNull: false, defaultValue: true},
+    active: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true},
 })
 const Stuff = sequelize.define('Stuff',{
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -60,19 +60,23 @@ const Stuff = sequelize.define('Stuff',{
 })
 const Admin = sequelize.define('Admin',{
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    role:{type: DataTypes.STRING, defaultValue: "stuff"}
 })
 
-Park.hasMany(Attraction);
-Attraction.belongsTo(Park)
+Park.hasMany(Attraction, {onDelete: 'cascade'});
 
-Park.hasMany(GreenZone)
-GreenZone.belongsTo(Park)
+Park.hasMany(GreenZone, {onDelete: 'cascade'})
+GreenZone.belongsTo(Park, { onDelete: 'cascade', 
+foreignKey: { allowNull: false },
+hooks: true})
 
-Park.belongsToMany (Stuff,  {through: Admin})
-Stuff.belongsToMany (Park, {through: Admin})
+Park.belongsToMany (Stuff,  {through: Admin}, { onDelete: 'set null'})
+Stuff.belongsToMany (Park, {through: Admin},{ onDelete: 'set null'})
 
-Park.hasMany(Tarif)
-Tarif.belongsTo (Park)
+Park.hasMany(Tarif,{onDelete: 'cascade'})
+Tarif.belongsTo (Park, { onDelete: 'cascade', 
+foreignKey: { allowNull: false },
+hooks: true})
 
 Tarif.hasMany(Ticket)
 Ticket.belongsTo(Tarif)

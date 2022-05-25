@@ -23,32 +23,34 @@ class attraсtionController{
         let attraсtion = await Attraction.findAll({where: {ParkId: id}}) 
         return res.json(attraсtion)
     }
+
     async update (req, res){
         let attraсtion = req.body
         if (!attraсtion.id){
-            res.json(ApiError.badRequest({message:"Id не указан"}))
+            return  res.json(ApiError.badRequest({message:"Id не указан"}))
         }
-        // const {id} = attraсtion.id
-        console.log(attraсtion)
-        
         await Attraction.update(attraсtion,{
             where: {
               id: attraсtion.id
             }
         })
         let updatedAttraction = await Attraction.findByPk(attraсtion.id);
-        // const updateAttraction = await Attraction.update(attraсtion,{new:true})
         return res.json(updatedAttraction)
     }
 
     async delete(req,res){
         try{
-            const {id}=req.params
+            const {id}=req.body
             if(!id){
-                res.json(ApiError.badRequest({message: "Id не указан"}))
+                return res.json(ApiError.badRequest({message: "Id не указан"}))
             }
-            const attraсtion = await Attraction.findByIdAndDelete(id)
-            return res.json(attraсtion)
+            const attraсtion = await Attraction.findOne({where: {id}})
+            if (!attraсtion){
+                return res.json(ApiError.badRequest({message:"Аттракцион не найден"}))
+            }
+            await Attraction.destroy({where: {id}})
+
+            return res.status(200).json(attraсtion)
         }catch(e){
             res.json(ApiError.internal({message: "Ошибка сервера"}))
         }

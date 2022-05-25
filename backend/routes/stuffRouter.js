@@ -12,11 +12,12 @@ const parkRouter = require("./parkRouter")
 router.post('/registration', stuffController.registration)
 router.post('/login', stuffController.login)
 router.get('/auth',authStuffMiddleware, stuffController.check)
-router.get('/park',authStuffMiddleware,stuffController.park)
-router.post('/park', authStuffMiddleware, parkController.create)
-router.use('/attraction',attractionRouter)
-router.use('/tarif',authStuffMiddleware, tarifRouter)
-router.get('/tarif',authStuffMiddleware, stuffController.getTarif)
+router.use('/park',  parkRouter)
+router.get('/getPark',authStuffMiddleware,stuffController.getPark)
+router.use('/attraction', attractionRouter)
+router.get('/getAttraction',authStuffMiddleware, stuffController.getAttraction)
+router.use('/tarif', tarifRouter)
+router.get('/getTarif',authStuffMiddleware, stuffController.getTarif)
 
 
 module.exports = router
