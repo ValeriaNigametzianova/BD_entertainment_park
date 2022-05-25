@@ -1,18 +1,23 @@
-import {
-    ATTRACTIONS_ADMIN_ROUTE, BASKET_ROUTE,
+ import {
+    ATTRACTIONS_ADMIN_ROUTE, 
+    // BASKET_ROUTE,
     CONFIRMATION_ROUTE,
     EDITING_ATTRACTIONS_ROUTE,
     EDITING_INFO_ROUTE,
     EDITING_MAIN_ROUTE,
+    EDITING_TARIF_ROUTE,
     INFO_ADMIN_ROUTE, LOGIN_ROUTE,
     MAIN_ADMIN_ROUTE, MAIN_ROUTE, ORDER_ROUTE,
     PARK_ATTRACTIONS_ROUTE,
     PARK_INFO_ROUTE,
     PARK_MAIN_ROUTE,
+    PARK_TARIF_ROUTE,
     RECOVERY_BAD_ROUTE,
     RECOVERY_GOOD_ROUTE,
-    RECOVERY_ROUTE, REGISTRATION_ROUTE, TICKETS_ROUTE
+    RECOVERY_ROUTE, REGISTRATION_ROUTE, TICKETS_ROUTE,
+    TARIF_ADMIN_ROUTE
 } from "./utils/Consts";
+
 import Auth_for_admin from "./pages/Auth_for_admin";
 import Park_main_for_admin from "./pages/Park_main_for_admin";
 import Park_attractions_for_admin from "./pages/Park_attractions_for_admin";
@@ -47,6 +52,10 @@ export const authRoutes = [
         Component: Park_info_for_admin
     },
     {
+        path: TARIF_ADMIN_ROUTE,
+        Component: Park_tarif_for_admin
+    },
+    {
         path: EDITING_MAIN_ROUTE,
         Component: Editing_park_main
     },
@@ -57,6 +66,10 @@ export const authRoutes = [
     {
         path: EDITING_ATTRACTIONS_ROUTE,
         Component: Editing_park_attractions
+    },
+    {
+        path: EDITING_TARIF_ROUTE,
+        Component: Editing_park_tarif
     },
 ]
 
@@ -77,10 +90,10 @@ export const publicRoutes = [
         path: ORDER_ROUTE,
         Component: Order
     },
-    {
-        path: BASKET_ROUTE,
-        Component: Basket
-    },
+    // {
+    //     path: BASKET_ROUTE,
+    //     Component: Basket
+    // },
     {
         path: TICKETS_ROUTE,
         Component: Tickets
@@ -106,11 +119,15 @@ export const publicRoutes = [
         Component: Park_main
     },
     {
-        path: PARK_INFO_ROUTE + '/id',
+        path: PARK_MAIN_ROUTE + '/id' + PARK_INFO_ROUTE,
         Component: Park_info
     },
     {
-        path: PARK_ATTRACTIONS_ROUTE + '/id',
+        path: PARK_MAIN_ROUTE + '/id' + PARK_ATTRACTIONS_ROUTE,
         Component: Park_attractions
     },
+    {
+        path: PARK_MAIN_ROUTE + '/id' + PARK_TARIF_ROUTE ,
+        Component: Park_tarifs
+    }
 ]

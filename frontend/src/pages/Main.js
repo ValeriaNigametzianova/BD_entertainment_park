@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import {observer} from "mobx-react-lite";
-import {fetchBrands, fetchDevices, fetchTypes} from "../http/parkAPI";
-import {Col, Container, Row} from "react-bootstrap";
+import {fetchBrands, fetchPark, fetchTypes} from "../http/parkAPI";
+import {Col, Container, Navbar, Row} from "react-bootstrap";
 import {Context} from "../index";
 
 const Main = observer(() => {
@@ -10,14 +10,14 @@ const Main = observer(() => {
     useEffect(() => {
         fetchTypes().then(data => park.setTypes(data))
         fetchBrands().then(data => park.setBrands(data))
-        fetchDevices(null, null, 1, 2).then(data => {
+        fetchPark(null, null, 1, 2).then(data => {
             park.setDevices(data.rows)
             park.setTotalCount(data.count)
         })
     }, [])
 
     useEffect(() => {
-        fetchDevices(park.selectedType.id, park.selectedBrand.id, device.page, 2).then(data => {
+        fetchPark(park.selectedType.id, park.selectedBrand.id, park.page, 2).then(data => {
             park.setDevices(data.rows)
             park.setTotalCount(data.count)
         })
@@ -27,9 +27,11 @@ const Main = observer(() => {
         <Container>
             <Row className="mt-2">
                 <Col md={9}>
-                    <BrandBar/>
-                    <DeviceList/>
-                    <Pages/>
+                    <Navbar/>
+                    vghvuyf
+                    {/* <BrandBar/> */}
+                    {/* <DeviceList/> */}
+                    {/* <Pages/> */}
                 </Col>
             </Row>
         </Container>

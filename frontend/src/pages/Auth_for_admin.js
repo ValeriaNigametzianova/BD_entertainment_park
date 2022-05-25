@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import {Button, Card, Container, Form, NavLink, Row} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
-import {useHistory, useLocation} from "react-router-dom";
+import {useNavigate , useLocation} from "react-router-dom";
 import {LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE} from "../utils/Consts";
 import {Context} from "../index";
 import {login, registration} from "../http/userAPI";
@@ -9,7 +9,7 @@ import {login, registration} from "../http/userAPI";
 const AuthForAdmin = observer(() => {
     const {user} = useContext(Context)
     const location = useLocation()
-    const history = useHistory()
+    const history = useNavigate ()
     const isLogin = location.pathname === LOGIN_ROUTE
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')

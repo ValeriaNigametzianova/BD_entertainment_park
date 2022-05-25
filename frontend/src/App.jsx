@@ -8,6 +8,7 @@ import {observer} from "mobx-react-lite";
 import {check} from "./http/userAPI";
 const App = observer(() => {
     const {user} = useContext(Context)
+    console.log(user);
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -23,7 +24,7 @@ const App = observer(() => {
   return (
     <BrowserRouter>
         <NavBar />
-      <AppRouter/>
+      <AppRouter/> 
     </BrowserRouter>
 
   );
