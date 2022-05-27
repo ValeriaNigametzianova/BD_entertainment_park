@@ -1,4 +1,6 @@
  import {
+    CUSTOMER_ROUTE,
+    STUFF_ROUTE,
     ATTRACTIONS_ADMIN_ROUTE, 
     BASKET_ROUTE,
     CONFIRMATION_ROUTE,
@@ -78,11 +80,11 @@ export const authRoutes = [
 
 export const publicRoutes = [
     {
-        path: LOGIN_ROUTE,
+        path: STUFF_ROUTE + LOGIN_ROUTE,
         Component: Auth_for_admin
     },
     {
-        path: REGISTRATION_ROUTE,
+        path: STUFF_ROUTE + REGISTRATION_ROUTE,
         Component: Auth_for_admin
     },
     {

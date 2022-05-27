@@ -1,4 +1,6 @@
-export const AUTH_ROUTE = '/admin_auth'
+export const CUSTOMER_ROUTE = '/customer'
+export const STUFF_ROUTE = '/stuff'
+export const AUTH_ROUTE = '/auth'
 export const LOGIN_ROUTE = '/login'
 export const REGISTRATION_ROUTE = '/registration'
 export const MAIN_ADMIN_ROUTE = '/park_main_for_admin'

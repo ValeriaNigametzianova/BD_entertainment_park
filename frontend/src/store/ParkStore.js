@@ -3,11 +3,11 @@ import {makeAutoObservable} from "mobx";
 export default class ParkStore {
     constructor() {
         this._park = [
-            {id:1, town:"Москва"},
-            {id:2, town:"Сочи"},
-            {id:3, town:"Москва"},
-            {id:4, town:"Cочи"},
-            {id:5, town:"Владивосток"},
+            {id:1, name:"Солнечные зайчики", town:"Москва", description: "Самый счастливый парк"},
+            {id:2, name:"Шляпа твоей мамы", town:"Сочи", description: "Самый счастливый парк"},
+            {id:3, name:"Самоцвет якутского брадобрея", town:"Москва", description: "Самый счастливый парк"},
+            {id:4, name:"Привет, Антоша", town:"Cочи", description: "Самый счастливый парк"},
+            {id:5, name:"АХАХАХХАХАХАХ", town:"Владивосток", description: "Самый счастливый парк"},
         ]
         this._selectedPark={}
         makeAutoObservable(this)
@@ -23,7 +23,7 @@ export default class ParkStore {
     get park(){
         return this._park
     }
-    get setSelectedPark(){
-        return this._setSelectedPark
+    get SelectedPark(){
+        return this._SelectedPark
     }
 }

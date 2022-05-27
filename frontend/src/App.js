@@ -6,8 +6,10 @@ import NavBar from "./components/NavBar";
 import {Spinner} from "react-bootstrap";
 import {Context} from "./index";
 import {observer} from "mobx-react-lite";
-import {check} from "./http/userAPI";
-const App = () => {
+import {check} from "./http/customerAPI";
+import "./styles/app/app.css"
+
+const App = observer( () => {
     const {user} = useContext(Context)
     const [loading, setLoading] = useState(true)
 
@@ -23,11 +25,10 @@ const App = () => {
     }
   return (
     <BrowserRouter>
-      <p>izda</p>
       <NavBar />
       <AppRouter/> 
     </BrowserRouter>
   );
-};
+});
 
 export default App;

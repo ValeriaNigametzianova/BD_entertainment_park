@@ -2,19 +2,19 @@ import React, {useContext, useState} from 'react';
 import {Button, Card, Container, Form, NavLink, Row} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
 import {useNavigate , useLocation} from "react-router-dom";
-import {LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE} from "../utils/Consts";
+import {LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE, STUFF_ROUTE} from "../utils/Consts";
 import {Context} from "../index";
-import {login, registration} from "../http/userAPI";
+import {login, registration} from "../http/customerAPI";
 
 const AuthForAdmin = observer(() => {
     const {user} = useContext(Context)
     const location = useLocation()
-    const history = useNavigate ()
-    const isLogin = location.pathname === LOGIN_ROUTE
+    const navigate = useNavigate();
+    const isLogin = location.pathname === (STUFF_ROUTE + LOGIN_ROUTE)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    // onClick={() => navigate(DEVICE_ROUTE + "/" + device.id)}
+
 
     const click = async () => {
         try {
@@ -26,7 +26,7 @@ const AuthForAdmin = observer(() => {
             }
             user.setUser(user)
             user.setIsAuth(true)
-            history.push(MAIN_ROUTE)
+            navigate(MAIN_ROUTE)
         } catch (e) {
             alert(e.response.data.message)
         }
@@ -56,11 +56,11 @@ const AuthForAdmin = observer(() => {
                     <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
                         {isLogin ?
                             <div>
-                                Нет аккаунта? <NavLink to={REGISTRATION_ROUTE}>Зарегистрируйся!</NavLink>
+                                Нет аккаунта? <NavLink to={STUFF_ROUTE + REGISTRATION_ROUTE}>Зарегистрируйся!</NavLink>
                             </div>
                             :
                             <div>
-                                Есть аккаунт? <NavLink to={LOGIN_ROUTE}>Войдите!</NavLink>
+                                Есть аккаунт? <NavLink to={STUFF_ROUTE + LOGIN_ROUTE}>Войдите!</NavLink>
                             </div>
                         }
                         <Button

@@ -2,18 +2,23 @@ import React, {useContext} from 'react';
 import {Button, Container, Dropdown, Form, FormControl, Nav, Navbar, NavLink, DropdownButton, DropdownItem, DropdownToggle} from "react-bootstrap";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
-import { MAIN_ROUTE } from '../utils/Consts';
+import { MAIN_ROUTE, AUTH_ROUTE, LOGIN_ROUTE } from '../utils/Consts';
 import Main from "../pages/Main";
 import {Route} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ParkAttractions from '../pages/Park_attractions';
-
+import "../styles/navBar/navbar.css"
+import {useNavigate} from 'react-router-dom'
+import { isObservable } from 'mobx';
 
 const NavBar = observer(() => {
     const {user} = useContext(Context)
     const {park} = useContext(Context)
+    const navigate = useNavigate();
+    console.log(navigate)
+
     return (
-        <Navbar bg="#FEFDEF" expand="lg">
+        <Navbar className='navbar' expand="lg">
             <Container >
                 <Navbar.Brand style={{color:"green"}} href="/main">Эмоциональные качели</Navbar.Brand>
                 {/* <Route path="/" element={<Main/>}/> */}
@@ -69,7 +74,7 @@ const NavBar = observer(() => {
                     <Nav>
                         {user.isAuth ?
                             <Nav className='ml-auto'>
-                                <Button variant="outline-success" onClick={() => user.setIsAuth(false)}>Выйти</Button>
+                                <Button variant="outline-success" onClick={() => navigate(LOGIN_ROUTE)}>Выйти</Button>
                             </Nav>
                             :
                             <Nav className='ml-auto'>
