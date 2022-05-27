@@ -2,23 +2,28 @@ import {makeAutoObservable} from "mobx";
 
 export default class ParkStore {
     constructor() {
-        this._town = [
+        this._park = [
             {id:1, town:"Москва"},
-            {id:2, town:"Сочи"}
+            {id:2, town:"Сочи"},
+            {id:3, town:"Москва"},
+            {id:4, town:"Cочи"},
+            {id:5, town:"Владивосток"},
         ]
+        this._selectedPark={}
         makeAutoObservable(this)
     }
 
-    setIsAuth(bool){
-        this._isAuth = bool
+    setPark(park){
+        this._park = park
     }
-    setUser(user){
-        this._user = user
+    setSelectedPark(park){
+        this._selectedPark=park
     }
-    get isAuth(){
-        return this._isAuth
+    
+    get park(){
+        return this._park
     }
-    get user(){
-        return this._user
+    get setSelectedPark(){
+        return this._setSelectedPark
     }
 }

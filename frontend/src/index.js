@@ -4,20 +4,21 @@ import App from './App';
 import UserStore from "./store/UserStore";
 import ParkStore from "./store/ParkStore";
 import * as ReactDOM from 'react-dom/client';
-import{createRoot} from 'react-dom/client';
+import {createRoot} from 'react-dom/client';
 
 export const Context = createContext(null)
 
 // import { createRoot } from 'react-dom/client';
 const container = document.getElementById('root');
-const root = createRoot(container); 
-root.render(<App/>);
-{/* <Context.Provider value={{
-    user:new UserStore(),
-    park: new ParkStore()
-}}>*/
-    
-/*</Context.Provider> */}
+const root = ReactDOM.createRoot(container); 
+root.render( 
+    <Context.Provider value={{
+        user:new UserStore(),
+        park: new ParkStore()
+    }}>
+        <App/>
+    </Context.Provider> );
+
 // );
 // console.log(root)
 //     <React.StrictMode value={{

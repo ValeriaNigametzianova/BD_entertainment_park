@@ -14,6 +14,8 @@ const AuthForAdmin = observer(() => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    // onClick={() => navigate(DEVICE_ROUTE + "/" + device.id)}
+
     const click = async () => {
         try {
             let data;

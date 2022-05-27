@@ -1,6 +1,6 @@
  import {
     ATTRACTIONS_ADMIN_ROUTE, 
-    // BASKET_ROUTE,
+    BASKET_ROUTE,
     CONFIRMATION_ROUTE,
     EDITING_ATTRACTIONS_ROUTE,
     EDITING_INFO_ROUTE,
@@ -93,10 +93,10 @@ export const publicRoutes = [
         path: ORDER_ROUTE,
         Component: Order
     },
-    // {
-    //     path: BASKET_ROUTE,
-    //     Component: Basket
-    // },
+    {
+        path: BASKET_ROUTE,
+        Component: Basket
+    },
     {
         path: TICKETS_ROUTE,
         Component: Tickets

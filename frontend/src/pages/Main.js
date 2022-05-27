@@ -3,9 +3,13 @@ import {observer} from "mobx-react-lite";
 import {fetchBrands, fetchPark, fetchTypes} from "../http/parkAPI";
 import {Col, Container, Navbar, Row} from "react-bootstrap";
 import {Context} from "../index";
+import ParkMain from './Park_main';
+import {useNavigate , useLocation} from "react-router-dom";
 
 const Main = observer(() => {
     const {park} = useContext(Context)
+    const location = useLocation()
+    console.log(location);
 
     useEffect(() => {
         fetchTypes().then(data => park.setTypes(data))
@@ -29,7 +33,6 @@ const Main = observer(() => {
                 <Col md={9}>
                     <Navbar/>
                     vghvuyf
-                    {/* <BrandBar/> */}
                     {/* <DeviceList/> */}
                     {/* <Pages/> */}
                 </Col>

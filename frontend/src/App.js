@@ -8,24 +8,24 @@ import {Context} from "./index";
 import {observer} from "mobx-react-lite";
 import {check} from "./http/userAPI";
 const App = () => {
-    // const {user} = useContext(Context)
-    // const [loading, setLoading] = useState(true)
+    const {user} = useContext(Context)
+    const [loading, setLoading] = useState(true)
 
-    // useEffect(() => {
-    //     check().then(data => {
-    //         user.setUser(true)
-    //         user.setIsAuth(true)
-    //     }).finally(() => setLoading(false))
-    // }, [])
+    useEffect(() => {
+        check().then(data => {
+            user.setUser(true)
+            user.setIsAuth(true)
+        }).finally(() => setLoading(false))
+    }, [])
 
-    // if (loading) {
-    //     return <Spinner animation={"grow"}/>
-    // }
+    if (loading) {
+        return <Spinner animation={"grow"}/>
+    }
   return (
     <BrowserRouter>
-    <p>izda</p>
-        {/* <NavBar />
-      <AppRouter/>  */}
+      <p>izda</p>
+      <NavBar />
+      <AppRouter/> 
     </BrowserRouter>
   );
 };
