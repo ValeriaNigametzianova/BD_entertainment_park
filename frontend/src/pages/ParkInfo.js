@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Col, Row , Container} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { PARK_MAIN_ROUTE, PARK_INFO_ROUTE,PARK_ATTRACTIONS_ROUTE, PARK_TARIF_ROUTE } from '../utils/Consts';
 
 const ParkInfo = () => {
-    const park = {id:1, name:"Солнечные зайчики", town:"Москва", description: "Самый счастливый парк"}
     const navigate = useNavigate();
 
-    console.log(park)
+    const {park} = useState()
     return (
         <Container md={9}>
             <Row className='d-flex justify-content-between'>

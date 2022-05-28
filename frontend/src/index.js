@@ -8,7 +8,7 @@ import {createRoot} from 'react-dom/client';
 
 export const Context = createContext(null)
 // const APP_API_URL = process.env.REACT_APP_API_URL
-// console.log(APP_API_URL);
+console.log("jdjdjdjdjdjdj", process.env.REACT_APP_API_URL);
 
 // import { createRoot } from 'react-dom/client';
 const container = document.getElementById('root');

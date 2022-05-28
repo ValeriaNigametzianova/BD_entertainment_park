@@ -12,19 +12,20 @@ import "./styles/app/app.css"
 
 const App = observer( () => {
     const {user} = useContext(Context)
+    // const {customer} = useContext(Context)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
       stuffCheck().then(data => {
-            user.setUser(true)
-            user.setIsAuth(true)
+        user.setUser(true)
+        user.setIsAuth(true)
         }).finally(() => setLoading(false))
     }, [])
 
     useEffect(() => {
       customerCheck().then(data => {
-          user.setUser(true)
-          user.setIsAuth(true)
+        user.setUser(true)
+        user.setIsAuth(true)
       }).finally(() => setLoading(false))
   }, [])
 

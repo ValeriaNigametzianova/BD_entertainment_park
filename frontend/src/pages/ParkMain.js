@@ -1,15 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {Col, Container, NavLink, Row} from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import {Context} from "../index";
 import {PARK_MAIN_ROUTE, PARK_INFO_ROUTE, PARK_ATTRACTIONS_ROUTE, PARK_TARIF_ROUTE} from "../utils/Consts"
+import { useParams } from 'react-router-dom';
+import { customerFetchGreenZone, customerFetchOnePark, customerFetchPark } from '../http/parkAPI';
 
 const ParkMain = () => {
-    const park = {id:1, name:"Солнечные зайчики", town:"Москва", description: "Самый счастливый парк"}
-    const greenZone = {id:1, name:"Северная сторона",  description: "Уютное место для вас и ваших деееей", ParkId: 1}
+    
+    const [park, setPark] = useState ()
+    const [greenZone, setGreenZone] = useState()
+    const {id} = useParams()
+    useEffect(()=>{
+        customerFetchOnePark(id).then(data => setPark(data))
+        customerFetchGreenZone(id).then(data=>setGreenZone(data))
+    },[])
     const navigate = useNavigate();
 
-    console.log(park)
     return (
         <Container md={9}>
             <Row className='d-flex justify-content-between'>

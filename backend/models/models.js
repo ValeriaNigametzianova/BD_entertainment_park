@@ -63,18 +63,18 @@ const Admin = sequelize.define('Admin',{
     role:{type: DataTypes.STRING, defaultValue: "stuff"}
 })
 
-Park.hasMany(Attraction, {onDelete: 'cascade'});
+Park.hasMany(Attraction, {onDelete: 'cascade', onUpdate:'no action'});
 
 Park.hasMany(GreenZone, {onDelete: 'cascade'})
-GreenZone.belongsTo(Park, { onDelete: 'cascade', 
+GreenZone.belongsTo(Park, { onDelete: 'cascade', onUpdate:'no action',
 foreignKey: { allowNull: false },
 hooks: true})
 
 Park.belongsToMany (Stuff,  {through: Admin}, { onDelete: 'set null'})
 Stuff.belongsToMany (Park, {through: Admin})
 
-Park.hasMany(Tarif,{onDelete: 'cascade'})
-Tarif.belongsTo (Park, { onDelete: 'cascade', 
+Park.hasMany(Tarif,{onDelete: 'cascade', onUpdate:'no action'})
+Tarif.belongsTo (Park, { onDelete: 'cascade', onUpdate:'no action',
 foreignKey: { allowNull: false },
 hooks: true})
 

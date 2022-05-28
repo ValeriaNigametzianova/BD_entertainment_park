@@ -11,7 +11,6 @@ const NavBar = observer(() => {
     const {user} = useContext(Context)
     const {park} = useContext(Context)
     const navigate = useNavigate();
-    console.log(navigate)
 
     const logOut = () => {
         user.setUser({})

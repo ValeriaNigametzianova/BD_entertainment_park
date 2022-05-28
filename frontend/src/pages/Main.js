@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import {observer} from "mobx-react-lite";
-import {fetchBrands, fetchPark, fetchTypes} from "../http/parkAPI";
+import {customerFetchPark, fetchBrands, fetchPark, fetchTypes} from "../http/parkAPI";
 import {Col, Container, Navbar, Row} from "react-bootstrap";
 import {Context} from "../index";
 // import ParkMain from './Park_main';
@@ -10,14 +10,9 @@ import ParkList from '../components/ParkList'
 const Main = observer(() => {
     const {park} = useContext(Context)
 
-    // useEffect(() => {
-    //     fetchTypes().then(data => park.setTypes(data))
-    //     fetchBrands().then(data => park.setBrands(data))
-    //     fetchPark(null, null, 1, 2).then(data => {
-    //         park.setDevices(data.rows)
-    //         park.setTotalCount(data.count)
-    //     })
-    // }, [])
+    useEffect(() => {
+        customerFetchPark().then(data => park.setPark(data.rows))
+    }, [])
 
     // useEffect(() => {
     //     fetchPark(park.selectedType.id, park.selectedBrand.id, park.page, 2).then(data => {
