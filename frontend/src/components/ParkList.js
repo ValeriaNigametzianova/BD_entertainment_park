@@ -12,7 +12,7 @@ const ParkList = observer(() => {
     const {park} = useContext(Context)
 
     return (
-        <Row classname="d-flex">
+        <Row className="d-flex">
             {park.park.map(park =>
                 <ParkItem key={park.id} park = {park}/>
             )}

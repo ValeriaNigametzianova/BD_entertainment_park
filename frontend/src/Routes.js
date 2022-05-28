@@ -8,19 +8,24 @@
     EDITING_INFO_ROUTE,
     EDITING_MAIN_ROUTE,
     EDITING_TARIF_ROUTE,
-    INFO_ADMIN_ROUTE, LOGIN_ROUTE,
-    MAIN_ADMIN_ROUTE, MAIN_ROUTE, ORDER_ROUTE,
+    INFO_ADMIN_ROUTE,
+    LOGIN_ROUTE,
+    MAIN_ADMIN_ROUTE,
+    MAIN_ROUTE,
+    ORDER_ROUTE,
     PARK_ATTRACTIONS_ROUTE,
     PARK_INFO_ROUTE,
     PARK_MAIN_ROUTE,
     PARK_TARIF_ROUTE,
     RECOVERY_BAD_ROUTE,
     RECOVERY_GOOD_ROUTE,
-    RECOVERY_ROUTE, REGISTRATION_ROUTE, TICKETS_ROUTE,
+    RECOVERY_ROUTE,
+    REGISTRATION_ROUTE,
+    TICKETS_ROUTE,
     TARIF_ADMIN_ROUTE
 } from "./utils/Consts";
 
-import Auth_for_admin from "./pages/Auth_for_admin";
+import Auth from "./pages/Auth";
 import Park_main_for_admin from "./pages/Park_main_for_admin";
 import Park_attractions_for_admin from "./pages/Park_attractions_for_admin";
 import Park_info_for_admin from "./pages/Park_info_for_admin";
@@ -45,47 +50,59 @@ import Main from "./pages/Main";
 
 export const authRoutes = [
     {
-        path: MAIN_ADMIN_ROUTE,
+        path: STUFF_ROUTE + MAIN_ADMIN_ROUTE,
         Component: Park_main_for_admin
     },
     {
-        path: ATTRACTIONS_ADMIN_ROUTE,
+        path: STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE,
         Component: Park_attractions_for_admin
     },
     {
-        path: INFO_ADMIN_ROUTE,
+        path: STUFF_ROUTE + INFO_ADMIN_ROUTE,
         Component: Park_info_for_admin
     },
     {
-        path: TARIF_ADMIN_ROUTE,
+        path: STUFF_ROUTE + TARIF_ADMIN_ROUTE,
         Component: Park_tarif_for_admin
     },
     {
-        path: EDITING_MAIN_ROUTE,
+        path: STUFF_ROUTE + EDITING_MAIN_ROUTE,
         Component: Editing_park_main
     },
     {
-        path: EDITING_INFO_ROUTE,
+        path: STUFF_ROUTE + EDITING_INFO_ROUTE,
         Component: Editing_park_info
     },
     {
-        path: EDITING_ATTRACTIONS_ROUTE,
+        path: STUFF_ROUTE + EDITING_ATTRACTIONS_ROUTE,
         Component: Editing_park_attractions
     },
     {
-        path: EDITING_TARIF_ROUTE,
+        path: STUFF_ROUTE + EDITING_TARIF_ROUTE,
         Component: Editing_park_tarif
+    },
+    {
+        path: CUSTOMER_ROUTE + TICKETS_ROUTE,
+        Component: Tickets
     },
 ]
 
 export const publicRoutes = [
     {
         path: STUFF_ROUTE + LOGIN_ROUTE,
-        Component: Auth_for_admin
+        Component: Auth
     },
     {
         path: STUFF_ROUTE + REGISTRATION_ROUTE,
-        Component: Auth_for_admin
+        Component: Auth
+    },
+    {
+        path: CUSTOMER_ROUTE + LOGIN_ROUTE,
+        Component: Auth
+    },
+    {
+        path: CUSTOMER_ROUTE + REGISTRATION_ROUTE,
+        Component: Auth
     },
     {
         path: MAIN_ROUTE,
@@ -98,10 +115,6 @@ export const publicRoutes = [
     {
         path: BASKET_ROUTE,
         Component: Basket
-    },
-    {
-        path: TICKETS_ROUTE,
-        Component: Tickets
     },
     {
         path: RECOVERY_ROUTE,
@@ -120,19 +133,19 @@ export const publicRoutes = [
         Component: RecoveryBad
     },
     {
-        path: PARK_MAIN_ROUTE + '/id',
+        path: PARK_MAIN_ROUTE + '/:id',
         Component: Park_main
     },
     {
-        path: PARK_MAIN_ROUTE + '/id' + PARK_INFO_ROUTE,
+        path: PARK_MAIN_ROUTE + '/:id' + PARK_INFO_ROUTE,
         Component: Park_info
     },
     {
-        path: PARK_MAIN_ROUTE + '/id' + PARK_ATTRACTIONS_ROUTE,
+        path: PARK_MAIN_ROUTE + '/:id' + PARK_ATTRACTIONS_ROUTE,
         Component: Park_attractions
     },
     {
-        path: PARK_MAIN_ROUTE + '/id' + PARK_TARIF_ROUTE ,
+        path: PARK_MAIN_ROUTE + '/:id' + PARK_TARIF_ROUTE ,
         Component: Park_tarifs
     }
 ]

@@ -1,12 +1,13 @@
 import {useContext, useEffect, useState} from "react";
-import * as React from "react";
+import  React from "react";
 import AppRouter from "./components/AppRouter";
 import {BrowserRouter } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import {Spinner} from "react-bootstrap";
 import {Context} from "./index";
 import {observer} from "mobx-react-lite";
-import {check} from "./http/customerAPI";
+import {stuffCheck} from "./http/stuffAPI";
+import {customerCheck} from "./http/customerAPI";
 import "./styles/app/app.css"
 
 const App = observer( () => {
@@ -14,16 +15,23 @@ const App = observer( () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        check().then(data => {
+      stuffCheck().then(data => {
             user.setUser(true)
             user.setIsAuth(true)
         }).finally(() => setLoading(false))
     }, [])
 
+    useEffect(() => {
+      customerCheck().then(data => {
+          user.setUser(true)
+          user.setIsAuth(true)
+      }).finally(() => setLoading(false))
+  }, [])
+
     if (loading) {
-        return <Spinner animation={"grow"}/>
+        return <Spinner animation={"grow"} className={"text-light"}/>
     }
-  return (
+    return (
     <BrowserRouter>
       <NavBar />
       <AppRouter/> 

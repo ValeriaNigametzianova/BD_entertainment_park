@@ -19,7 +19,8 @@ root.render(
         park: new ParkStore()
     }}>
         <App/>
-    </Context.Provider> );
+    </Context.Provider> 
+);
 
 // );
 // console.log(root)

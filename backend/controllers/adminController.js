@@ -25,10 +25,10 @@ class AdminController{
         return res.json(admin)
     }
     
-    // async check (req, res){
-    //     const token = generateJwt(req.customer.id, req.customer.email)
-    //     return res.json({token})   
-    // }
+    async get_role (stuff){
+        if(!stuff) return;
+        await Admin.update({role: "admin"}, {where:{StuffId: stuff.id}});  
+    }
 }
 
 module.exports = new AdminController()

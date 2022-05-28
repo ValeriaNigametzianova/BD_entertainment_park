@@ -9,8 +9,6 @@ import ParkList from '../components/ParkList'
 
 const Main = observer(() => {
     const {park} = useContext(Context)
-    const location = useLocation()
-    console.log(location);
 
     // useEffect(() => {
     //     fetchTypes().then(data => park.setTypes(data))
@@ -32,7 +30,6 @@ const Main = observer(() => {
         <Container>
             <Row className="mt-9">
                 <Col >
-                    {/* <Navbar/> */}
                     <ParkList/>
                 </Col>
             </Row>

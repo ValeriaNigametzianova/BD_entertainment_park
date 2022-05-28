@@ -5,7 +5,7 @@ import {Context} from "../index";
 const ParkMain = () => {
     const park = {id:1, name:"Солнечные зайчики", town:"Москва", description: "Самый счастливый парк"}
     const greenZone = {id:1, name:"Северная сторона",  description: "Самый счастливый парк", ParkId: 1}
-
+console.log(park)
     return (
         <Container>
             <Row>
