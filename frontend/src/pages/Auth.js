@@ -22,17 +22,17 @@ const Auth = observer(() => {
     const click = async () => {
         try {
             let data;
-            if (isLogin && isLogin===(STUFF_ROUTE + LOGIN_ROUTE)) {
+            if (isLogin && location.pathname===(STUFF_ROUTE + LOGIN_ROUTE)) {
                 data = await stuffLogin(login, password);
             } 
-            else if (isLogin && isLogin===(CUSTOMER_ROUTE + LOGIN_ROUTE)){
+            else if (isLogin && location.pathname===(CUSTOMER_ROUTE + LOGIN_ROUTE)){
                 data = await customerLogin(email);
             }    
-            else if(location.pathname===(STUFF_ROUTE + REGISTRATION_ROUTE))
+            else if(!isLogin &&location.pathname===(STUFF_ROUTE + REGISTRATION_ROUTE))
             {
                 data = await stuffRegistration(login, password);
             }
-            else if(location.pathname===(CUSTOMER_ROUTE + REGISTRATION_ROUTE))
+            else if(!isLogin &&location.pathname===(CUSTOMER_ROUTE + REGISTRATION_ROUTE))
             {
                 data = await customerRegistration(email);
             }
@@ -58,24 +58,24 @@ const Auth = observer(() => {
                 <h2 className="m-auto">{isLogin ? 'Авторизация' : "Регистрация"}</h2>
                 {isLogin ?
                     <Row>
-                        <Col>
-                        <NavLink to={STUFF_ROUTE + LOGIN_ROUTE}>Администратор</NavLink>
+                        <Col className="d-flex justify-content-center">
+                        <div  style={{  cursor:"pointer"}}onClick={() => navigate(STUFF_ROUTE + LOGIN_ROUTE)}>Администратор</div>
                         </Col>
-                        <Col>
-                            <NavLink to={CUSTOMER_ROUTE + LOGIN_ROUTE}>Посетитель</NavLink>
+                        <Col className="d-flex justify-content-center">
+                        <div style={{ cursor:"pointer"}}  onClick={() => navigate(CUSTOMER_ROUTE + LOGIN_ROUTE)}>Посетитель</div>
                         </Col>
                     </Row>
                     :
-                    <Row>
-                        <Col>
-                            <NavLink to={STUFF_ROUTE + REGISTRATION_ROUTE}>Администратор</NavLink>
+                    <Row >
+                        <Col className="d-flex justify-content-center">
+                            <div style={{ cursor:"pointer"}} onClick={() => navigate(STUFF_ROUTE + REGISTRATION_ROUTE)}>Администратор</div>
                         </Col>
-                        <Col>
-                            <NavLink to={CUSTOMER_ROUTE + REGISTRATION_ROUTE}>Посетитель</NavLink>
+                        <Col className="d-flex justify-content-center">
+                            <div style={{ cursor:"pointer"}} onClick={() => navigate(CUSTOMER_ROUTE + REGISTRATION_ROUTE)}>Посетитель</div>
                         </Col>
                     </Row>
                 }
-                {location.pathname===(STUFF_ROUTE + "/*") ?
+                {location.pathname===((STUFF_ROUTE + REGISTRATION_ROUTE)|| (STUFF_ROUTE + LOGIN_ROUTE)) ?
                     <Form className="d-flex flex-column">
                         <Form.Control
                             className="mt-3"
@@ -92,12 +92,12 @@ const Auth = observer(() => {
                         />
                         <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
                             {isLogin ?
-                                <div>
-                                    Нет аккаунта? <NavLink to={STUFF_ROUTE + REGISTRATION_ROUTE}>Зарегистрируйся!</NavLink>
+                                <div >
+                                    Нет аккаунта? <div style={{ cursor:"pointer"}} onClick={() => navigate(STUFF_ROUTE + REGISTRATION_ROUTE)}>Зарегистрируйся!</div>
                                 </div>
                                 :
                                 <div>
-                                    Есть аккаунт? <NavLink to={STUFF_ROUTE + LOGIN_ROUTE}>Войдите!</NavLink>
+                                    Есть аккаунт? <div style={{ cursor:"pointer"}} onClick={() => navigate(STUFF_ROUTE + LOGIN_ROUTE)}>Войдите!</div>
                                 </div>
                             }
                             <Button
@@ -119,11 +119,11 @@ const Auth = observer(() => {
                     <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
                         {isLogin ?
                             <div>
-                                Нет аккаунта? <NavLink to={CUSTOMER_ROUTE + REGISTRATION_ROUTE}>Зарегистрируйся!</NavLink>
+                                Нет аккаунта? <div onClick={() => navigate(CUSTOMER_ROUTE + REGISTRATION_ROUTE)}>Зарегистрируйся!</div>
                             </div>
                             :
                             <div>
-                                Есть аккаунт? <NavLink to={CUSTOMER_ROUTE + LOGIN_ROUTE}>Войдите!</NavLink>
+                                Есть аккаунт? <div onClick={() => navigate(CUSTOMER_ROUTE + LOGIN_ROUTE)}>Войдите!</div>
                             </div>
                         }
                         <Button

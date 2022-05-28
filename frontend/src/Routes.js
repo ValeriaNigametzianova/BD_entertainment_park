@@ -51,101 +51,101 @@ import Main from "./pages/Main";
 export const authRoutes = [
     {
         path: STUFF_ROUTE + MAIN_ADMIN_ROUTE,
-        Component: Park_main_for_admin
+        Component: <Park_main_for_admin/>
     },
     {
         path: STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE,
-        Component: Park_attractions_for_admin
+        Component: <Park_attractions_for_admin/>
     },
     {
         path: STUFF_ROUTE + INFO_ADMIN_ROUTE,
-        Component: Park_info_for_admin
+        Component: <Park_info_for_admin/>
     },
     {
         path: STUFF_ROUTE + TARIF_ADMIN_ROUTE,
-        Component: Park_tarif_for_admin
+        Component: <Park_tarif_for_admin/>
     },
     {
         path: STUFF_ROUTE + EDITING_MAIN_ROUTE,
-        Component: Editing_park_main
+        Component: <Editing_park_main/>
     },
     {
         path: STUFF_ROUTE + EDITING_INFO_ROUTE,
-        Component: Editing_park_info
+        Component: <Editing_park_info/>
     },
     {
         path: STUFF_ROUTE + EDITING_ATTRACTIONS_ROUTE,
-        Component: Editing_park_attractions
+        Component: <Editing_park_attractions/>
     },
     {
         path: STUFF_ROUTE + EDITING_TARIF_ROUTE,
-        Component: Editing_park_tarif
+        Component: <Editing_park_tarif/>
     },
     {
         path: CUSTOMER_ROUTE + TICKETS_ROUTE,
-        Component: Tickets
+        Component: <Tickets/>
     },
 ]
 
 export const publicRoutes = [
     {
         path: STUFF_ROUTE + LOGIN_ROUTE,
-        Component: Auth
+        Component: <Auth/>
     },
     {
         path: STUFF_ROUTE + REGISTRATION_ROUTE,
-        Component: Auth
+        Component: <Auth/>
     },
     {
         path: CUSTOMER_ROUTE + LOGIN_ROUTE,
-        Component: Auth
+        Component: <Auth/>
     },
     {
         path: CUSTOMER_ROUTE + REGISTRATION_ROUTE,
-        Component: Auth
+        Component: <Auth/>
     },
     {
         path: MAIN_ROUTE,
-        Component: Main
+        Component: <Main/>
     },
     {
         path: ORDER_ROUTE,
-        Component: Order
+        Component: <Order/>
     },
     {
         path: BASKET_ROUTE,
-        Component: Basket
+        Component: <Basket/>
     },
     {
         path: RECOVERY_ROUTE,
-        Component: Recovery
+        Component: <Recovery/>
     },
     {
         path: CONFIRMATION_ROUTE,
-        Component: EmailConfirmation
+        Component: <EmailConfirmation/>
     },
     {
         path: RECOVERY_GOOD_ROUTE,
-        Component: RecoveryGood
+        Component: <RecoveryGood/>
     },
     {
         path: RECOVERY_BAD_ROUTE,
-        Component: RecoveryBad
+        Component: <RecoveryBad/>
     },
     {
         path: PARK_MAIN_ROUTE + '/:id',
-        Component: Park_main
+        Component: <Park_main/>
     },
     {
         path: PARK_MAIN_ROUTE + '/:id' + PARK_INFO_ROUTE,
-        Component: Park_info
+        Component: <Park_info/>
     },
     {
         path: PARK_MAIN_ROUTE + '/:id' + PARK_ATTRACTIONS_ROUTE,
-        Component: Park_attractions
+        Component: <Park_attractions/>
     },
     {
         path: PARK_MAIN_ROUTE + '/:id' + PARK_TARIF_ROUTE ,
-        Component: Park_tarifs
+        Component: <Park_tarifs/>
     }
 ]
