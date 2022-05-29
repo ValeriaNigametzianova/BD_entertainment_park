@@ -5,17 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b42534c4-e93c-4db7-b701-97d6c26bf1e2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/http/index,js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/http/parkAPI.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/http/userAPI.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/styles/Dropdown_button/Dropdown_button.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/styles/Dropdown_button/Dropdown_button.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/styles/cont/contr.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/styles/cont/contr.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/styles/container/container.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/styles/container/container.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/styles/fonts/brand_name.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/styles/fonts/brand_name.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/styles/fonts/heading1.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/styles/fonts/heading1.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/styles/search/search.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/styles/search/search.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/NavBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Auth_for_admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Auth_for_admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/ParkItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ParkItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/utils/Consts.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/Consts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles/navBar/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/navBar/navbar.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +57,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "settings.editor.selected.configurable": "watcher.settings",
     "ts.external.directory.path": "D:\\WebStorm 2022.1.1\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   },
@@ -60,6 +67,13 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Шнурь\Documents\GitHub\BD_entertainment_park\frontend\src\styles" />
+      <recent name="C:\Users\Шнурь\Documents\GitHub\BD_entertainment_park\frontend\src\styles\cont" />
+      <recent name="C:\Users\Шнурь\Documents\GitHub\BD_entertainment_park\frontend\src\styles\container" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/backend/package.json" />
@@ -90,6 +104,7 @@
       <workItem from="1652703150788" duration="77000" />
       <workItem from="1652703244846" duration="520000" />
       <workItem from="1652806424342" duration="40812000" />
+      <workItem from="1653753864040" duration="15778000" />
     </task>
     <servers />
   </component>

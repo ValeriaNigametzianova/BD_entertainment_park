@@ -6,6 +6,9 @@ import { MAIN_ROUTE, AUTH_ROUTE, LOGIN_ROUTE, STUFF_ROUTE } from '../utils/Const
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../styles/navBar/navbar.css"
 import {useNavigate} from 'react-router-dom'
+import "../styles/fonts/brand_name.css"
+import "../styles/Dropdown_button/Dropdown_button.css"
+import "../styles/search/search.css"
 
 const NavBar = observer(() => {
     const {user} = useContext(Context)
@@ -21,7 +24,7 @@ const NavBar = observer(() => {
     return (
         <Navbar className='navbar' expand="lg">
             <Container >
-                <Navbar.Brand style={{color:"green", cursor:"pointer"}} onClick={() => navigate(MAIN_ROUTE)}>Эмоциональные качели</Navbar.Brand>
+                <Navbar.Brand className='brand_name' style={{ color:"#79273D", cursor:"pointer"}} onClick={() => navigate(MAIN_ROUTE)}>Эмоциональные качели</Navbar.Brand>
                 {/* <Route path="/" element={<Main/>}/> */}
                 {/* <NavLink style={{color:"green"}} to={MAIN_ROUTE}> </NavLink> */}
                 {/* <Navbar.Toggle aria-controls="navbarScroll" /> */}
@@ -45,14 +48,14 @@ const NavBar = observer(() => {
                             Link
                         </Nav.Link>
                     </Nav> */}
-                    <DropdownButton style={{color:"bs-dark"}}  title="Выберите город">{park.park.map(park =>
+                    <DropdownButton className="Dropdown_button" title="Выберите город">{park.park.map(park =>
                         <Dropdown.Item 
                           className="dropdown-item" key={park.id}
                           onClick ={()=> park.setSelectedTown(park)}> {park.town}
                         </Dropdown.Item>
                     )}
                     </DropdownButton>
-                    <Form className="d-flex">
+                    <Form className="search" className="d-flex">
                         <FormControl
                             type="search"
                             placeholder="Поиск"

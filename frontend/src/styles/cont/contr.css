@@ -1,0 +1,10 @@
+.contr {
+    background: #FEFDEF;
+    max-width: 85%;
+    position: absolute;
+    right:0px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+}
