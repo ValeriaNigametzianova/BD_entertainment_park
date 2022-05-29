@@ -1,7 +1,7 @@
 const ApiError = require('../error/ApiError') 
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken')
-const {Stuff, Park, Admin, Customer, Ticket,Tarif, Attraction} = require("../models/models")
+const {Stuff, Park, Admin, Customer, Ticket,Tarif, Attraction, GreenZone} = require("../models/models")
 
 const generateJwt = (id, login) => {
     return jwt.sign(
@@ -79,9 +79,9 @@ class StuffController{
                 console.log(stuff);
                 if(!stuff) return;
                 stuff.getParks().then(async parks=>{
-                    console.log(parks[0].id);
+                    console.log(parks.id);
                     // цикл
-                    const tarifs = await Tarif.findAll({where: {ParkId: parks[0].id}})
+                    const tarifs = await Tarif.findAll({where: {ParkId: parks.id}})
                     
                     return res.json({tarifs}) 
                 });
@@ -96,11 +96,30 @@ class StuffController{
                 console.log(stuff);
                 if(!stuff) return;
                 stuff.getParks().then(async parks=>{
-                    console.log(parks[0].id);
+                    console.log(parks.id);
                     // цикл
-                    const attractions = await Attraction.findAll({where: {ParkId: parks[0].id}})
+                    const attractions = await Attraction.findAll({where: {ParkId: parks.id}})
                     
                     return res.json({attractions}) 
+                });
+                
+        });
+          
+    }
+
+    
+    async getGreenZone (req, res, next){
+        const {id} = req.stuff
+        Stuff.findOne({where: {id}}).
+            then( stuff=>{
+                console.log(stuff);
+                if(!stuff) return;
+                stuff.getParks().then(async parks=>{
+                    console.log(parks.id);
+                    // цикл
+                    const greenZone = await GreenZone.findAll({where: {ParkId: parks.id}})
+                    
+                    return res.json({greenZone}) 
                 });
                 
         });

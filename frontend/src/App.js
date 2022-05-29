@@ -22,12 +22,12 @@ const App = observer( () => {
         }).finally(() => setLoading(false))
     }, [])
 
-    useEffect(() => {
-      customerCheck().then(data => {
-        user.setUser(true)
-        user.setIsAuth(true)
-      }).finally(() => setLoading(false))
-  }, [])
+  //   useEffect(() => {
+  //     customerCheck().then(data => {
+  //       user.setUser(true)
+  //       user.setIsAuth(true)
+  //     }).finally(() => setLoading(false))
+  // }, [])
 
     if (loading) {
         return <Spinner animation={"grow"} className={"text-light"}/>

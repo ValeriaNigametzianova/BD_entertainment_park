@@ -10,10 +10,10 @@ import { observer } from 'mobx-react-lite';
 
 const ParkList = observer(() => {
     const {park} = useContext(Context)
-
+    console.log('asd', park.parks)
     return (
         <Row className="d-flex">
-            {park.park.map(park =>
+            {park.parks.map(park =>
                 <ParkItem key={park.id} park = {park}/>
             )}
         </Row>

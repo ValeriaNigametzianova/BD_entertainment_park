@@ -3,7 +3,7 @@ const {Ticket, Customer, Tarif} = require("../models/models")
 
 class ticketController{
     async create (req, res){
-        const {number,surname,name, email, phone_number,} = req.body
+        const {number,surname,name, email, phone_number} = req.body
         let customer = await Customer.findOne({where: {email}})
         if (!customer){
             customer = await Customer.create({email, phone_number})

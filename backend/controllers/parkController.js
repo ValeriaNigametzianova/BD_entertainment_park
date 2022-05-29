@@ -29,6 +29,7 @@ class parkController{
         console.log(limit);
         let offset = page * limit - limit
         let parks
+        console.log('town:',town)
         if (town){
             parks = await Park.findAndCountAll({ offset, limit, where: {town}}) //пагинация, выдает кол-во всех полей и записи с указанным лимитом
             return res.json(parks)
@@ -48,7 +49,7 @@ class parkController{
         const park = await Park.findOne(
             {
                 where: {id},
-                attributes:["name","description"]
+                // attributes:["name","description","town"]
                 // include: [{model: Park, as: "name", as: "description"}]
             },
         )

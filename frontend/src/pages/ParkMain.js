@@ -21,27 +21,27 @@ const ParkMain = () => {
         <Container md={9}>
             <Row className='d-flex justify-content-between'>
                 <Col md={1}>
-                    <div style={{color:"green",cursor:"pointer"}} onClick={() => navigate(PARK_MAIN_ROUTE + '/' + park.id)}>О парке</div>
+                    <div style={{color:"green",cursor:"pointer"}} onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id)}>О парке</div>
                 </Col>
                 <Col md={1}>
-                    <div style={{color:"green",cursor:"pointer"}} onClick={() => navigate(PARK_MAIN_ROUTE + '/' + park.id + PARK_INFO_ROUTE)}>Характеристики</div>
+                    <div style={{color:"green",cursor:"pointer"}} onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id + PARK_INFO_ROUTE)}>Характеристики</div>
                 </Col>
                 <Col md={1}>
-                    <div style={{color:"green",cursor:"pointer"}}  onClick={() => navigate(PARK_MAIN_ROUTE + '/' + park.id + PARK_ATTRACTIONS_ROUTE)}>Аттракционы</div>
+                    <div style={{color:"green",cursor:"pointer"}}  onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id + PARK_ATTRACTIONS_ROUTE)}>Аттракционы</div>
                 </Col>
                 <Col md={1}>
-                    <div style={{color:"green", cursor:"pointer"}} onClick={() => navigate(PARK_MAIN_ROUTE + '/' + park.id + PARK_TARIF_ROUTE)}>Купить билет</div>
+                    <div style={{color:"green", cursor:"pointer"}} onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id + PARK_TARIF_ROUTE)}>Купить билет</div>
                 </Col>
             </Row>
             <Row>
-                <h2 style={{color:"white"}}>{park.name}</h2>
+                <h2 style={{color:"white"}}>{park?.name}</h2>
             </Row>
             <Row>
-                <div style={{color:"white"}}>{park.description}</div>
+                <div style={{color:"white"}}>{park?.description}</div>
             </Row>
             <Row mt-5>
-                    <h2 style={{color:"white"}}>{greenZone.name}</h2>
-                    <div style={{color:"white"}}> {greenZone.description}</div>
+                    <h2 style={{color:"white"}}>{greenZone?.name}</h2>
+                    <div style={{color:"white"}}> {greenZone?.description}</div>
             </Row>
         </Container>
     );
