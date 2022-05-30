@@ -3,3 +3,13 @@
   margin-bottom:170px;
   height: 100px;
 }
+
+.Dropdown_button{
+  font-family: system-ui;
+  font-size: 30pt;
+  variant:outline-success;
+}
+.search{
+  height: 15px;
+  flex-wrap: nowrap;
+}

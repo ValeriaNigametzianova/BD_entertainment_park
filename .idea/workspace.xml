@@ -5,24 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b42534c4-e93c-4db7-b701-97d6c26bf1e2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/styles/Dropdown_button/Dropdown_button.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/styles/Dropdown_button/Dropdown_button.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/styles/cont/contr.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/styles/cont/contr.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/styles/container/container.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/styles/container/container.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/styles/fonts/brand_name.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/styles/fonts/brand_name.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/styles/fonts/heading1.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/styles/fonts/heading1.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/styles/search/search.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/styles/search/search.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/NavBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/ParkItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ParkItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles/Dropdown_button/Dropdown_button.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles/Dropdown_button/Dropdown_button.less" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/styles/navBar/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/navBar/navbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles/navBar/navbar.less" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/navBar/navbar.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles/search/search.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles/search/search.less" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +94,7 @@
       <workItem from="1652703150788" duration="77000" />
       <workItem from="1652703244846" duration="520000" />
       <workItem from="1652806424342" duration="40812000" />
-      <workItem from="1653753864040" duration="15778000" />
+      <workItem from="1653753864040" duration="18138000" />
     </task>
     <servers />
   </component>
