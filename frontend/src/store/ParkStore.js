@@ -8,8 +8,8 @@ export default class ParkStore {
     this._attarctions = []
     this._greenZones = []
     this._tarifs = []
-    this._selectedPark = {}
-    this._searchPark = {}
+    this._selectedPark = []
+    this._searchPark = []
     this._page = 1
     this._totalCount = 0
     this._limit = 2
@@ -38,6 +38,7 @@ export default class ParkStore {
     this._selectedPark = park
   }
   setSearchPark(searchPark) {
+    console.log('tuta', this._parks)
     this._searchPark = searchPark
   }
   setPage(page) {
@@ -60,7 +61,7 @@ export default class ParkStore {
     return this._selectedTown
   }
   get searchPark() {
-    return this._selectedTown
+    return this._searchPark
   }
   get attarctions() {
     return this._attarctions

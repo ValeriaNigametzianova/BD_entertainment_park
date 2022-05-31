@@ -12,6 +12,7 @@ import './styles/app/app.css'
 
 const App = observer(() => {
   const { user } = useContext(Context)
+  const { park } = useContext(Context)
   // const {customer} = useContext(Context)
   const [loading, setLoading] = useState(true)
 
@@ -19,7 +20,7 @@ const App = observer(() => {
   //   stuffCheck()
   //     .then((data) => {
   //       user.setUser(true)
-  //       user.setIsAuth(true)
+  //       user.setIsAuth(true)s
   //     })
   //     .finally(() => setLoading(false))
   // }, [])

@@ -37,43 +37,28 @@ const NavBar = observer(() => {
   const location = useLocation()
   const [searchQuery, setSearchQuery] = useState('')
 
-  useEffect(() => {
-    customerFetchPark(null, 1, 3).then((data) => {
-      park.setPark(data.rows)
-      park.setTotalCount(data.count)
-    })
-    customerFetchPark(null, 1, 99999).then((data) => {
-      park.setTown([...new Set(data.rows.map((el) => el.town))])
-      park.setTotalCount(data.count)
-    })
-
-    // searchPark(null,1,3).then((data) => {
-    //   park.setPark(data.rows)
-    //   park.setTotalCount(data.count)
-    // })
-  }, [])
-
-  useEffect(() => {
-    customerFetchPark(park.selectedTown, park.page, 3).then((data) => {
-      park.setPark(data.rows)
-      park.setTotalCount(data.count)
-    })
-    // searchPark(park.searchParks, park.page, 3).then((data) => {
-    //   park.setPark(data.rows)
-    //   park.setTotalCount(data.count)
-    // })
-  }, [park.page, park.selectedTown])
-
   const logOut = () => {
     user.setUser({})
     user.setIsAuth(false)
   }
 
+  // const searchParks = useMemo(() => {
+  //   console.log('working')
+  //   console.log(park.parks)
+  //   if (park.searchPark) {
+  //     console.log('lyamv')
+  //     return park.searchPark.filter((onePark) => {
+  //       console.log(onePark.name.toLowerCase().includes(searchQuery))
+  //       onePark.name.toLowerCase().includes(searchQuery)
+  //     })
+  //   }
+  // }, [searchQuery, park.parks])
+
   const searchParks = useMemo(() => {
-    if (park.searchPark) {
-      return park.filter((onePark) => onePark.name.includes(searchQuery))
-    }
-  }, [searchQuery, park])
+    return park.parks.filter((onePark) =>
+      onePark.name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  }, [searchQuery, park.parks])
 
   return (
     <Navbar className="navbar" expand="lg">
@@ -91,19 +76,20 @@ const NavBar = observer(() => {
                 className="me-2"
                 aria-label="Search"
                 value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
               <Button
                 variant="outline-success"
-                onChange={(e) => {
-                  setSearchQuery(e.target.value)
+                onClick={(e) => {
+                  // setSearchQuery(e.target.value)
                   park.setPark(searchParks)
-                  console.log('park', park)
                 }}
               >
                 Найти
               </Button>
             </Form>
           )}
+
           <Nav>
             <Nav className="ml-auto">
               <Button
@@ -147,8 +133,12 @@ const NavBar = observer(() => {
           >
             Эмоциональные качели
           </Navbar.Brand>
-          <DropdownButton style={{ color: 'bs-dark' }} title="Выберите город">
-            <>
+
+          {park.selectedTown ? (
+            <DropdownButton
+              style={{ color: 'bs-dark' }}
+              title={park.selectedTown}
+            >
               {park.towns.map((town, id) => (
                 <Dropdown.Item
                   className="dropdown-item"
@@ -172,8 +162,34 @@ const NavBar = observer(() => {
               >
                 Сбросить
               </Dropdown.Item>
-            </>
-          </DropdownButton>
+            </DropdownButton>
+          ) : (
+            <DropdownButton style={{ color: 'bs-dark' }} title="Выберите город">
+              {park.towns.map((town, id) => (
+                <Dropdown.Item
+                  className="dropdown-item"
+                  key={id}
+                  //   active={}
+                  href="/"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    park.setSelectedTown(town)
+                  }}
+                >
+                  {town}
+                </Dropdown.Item>
+              ))}
+              <Dropdown.Item
+                className="dropdown-item"
+                onClick={(e) => {
+                  e.preventDefault()
+                  park.setSelectedTown(null)
+                }}
+              >
+                Сбросить
+              </Dropdown.Item>
+            </DropdownButton>
+          )}
 
           {(location.pathname === PARK_MAIN_ROUTE ||
             location.pathname === '/') && (
@@ -186,9 +202,19 @@ const NavBar = observer(() => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <Button variant="outline-success">Найти</Button>
+              <Button
+                variant="outline-success"
+                onClick={(e) => {
+                  // setSearchQuery(e.target.value)
+                  park.setSearchPark(searchParks)
+                }}
+              >
+                Найти``
+              </Button>
             </Form>
           )}
+          {console.log('sP', searchParks)}
+          {console.log('parks', park.parks)}
           <Nav>
             {user.isAuth ? (
               <Nav className="ml-auto">
@@ -213,7 +239,7 @@ const NavBar = observer(() => {
                 </Button>
               </Nav>
             )}
-            {console.log('role', user.role)}
+            {/* {console.log('role', user.role)} */}
             {user.isAuth && user.role === 'stuff' ? (
               <Nav className="ml-auto">
                 <Button

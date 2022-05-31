@@ -11,9 +11,10 @@ export const stuffFetchPark = async () => {
   console.log('iaiaiaiai', data)
   return data
 }
-export const customerFetchPark = async (town, page, limit = 5) => {
+export const customerFetchPark = async (name, town, page, limit = 5) => {
   const { data } = await $host.get('api/park', {
     params: {
+      name,
       town,
       page,
       limit,
@@ -21,16 +22,16 @@ export const customerFetchPark = async (town, page, limit = 5) => {
   })
   return data
 }
-export const searchPark = async (name, page, limit = 5) => {
-  const { data } = await $host.get('api/park', {
-    params: {
-      name,
-      page,
-      limit,
-    },
-  })
-  return data
-}
+// export const searchPark = async (name, page, limit = 5) => {
+//   const { data } = await $host.get('api/park', {
+//     params: {
+//       name,
+//       page,
+//       limit,
+//     },
+//   })
+//   return data
+// }
 export const customerFetchOnePark = async (id) => {
   const { data } = await $host.get('api/park/' + id)
   return data

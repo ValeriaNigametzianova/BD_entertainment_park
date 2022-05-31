@@ -13,7 +13,7 @@ const ParkList = observer(() => {
 
   return (
     <Row className="d-flex">
-      {park.parks.map((park) => (
+      {park.searchPark.map((park) => (
         <ParkItem key={park.id} park={park} />
       ))}
     </Row>
