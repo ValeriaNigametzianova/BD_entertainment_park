@@ -60,15 +60,15 @@ class StuffController {
 
   async getPark(req, res, next) {
     const { id } = req.stuff
-    Stuff.findOne({ where: { id } }).then((stuff) => {
+    Stuff.findOne({ where: id }).then((stuff) => {
       console.log(stuff)
       if (!stuff) return
       stuff.getParks().then(async (parks) => {
-        console.log('parks.id', parks)
-        const greenZone = await GreenZone.findAll({
-          where: { ParkId: parks.id },
-        })
-        return res.json({ parks, greenZone })
+        console.log('parks.id', parks.id)
+        // const greenZone = await GreenZone.findAll({
+        //   where: { ParkId: parks.id },
+        // })
+        return res.json({ parks })
       })
     })
   }
@@ -76,13 +76,15 @@ class StuffController {
   async getTarif(req, res, next) {
     const { id } = req.stuff
     Stuff.findOne({ where: { id } }).then((stuff) => {
-      console.log(stuff)
       if (!stuff) return
+      let tarifs = []
       stuff.getParks().then(async (parks) => {
-        console.log(parks.id)
-        // цикл
-        const tarifs = await Tarif.findAll({ where: { ParkId: parks.id } })
-
+        await Promise.all(
+          parks.map(async (el) => {
+            const tarif = await Tarif.findAll({ where: { ParkId: el?.id } })
+            tarifs.push(tarif)
+          })
+        )
         return res.json({ tarifs })
       })
     })
@@ -91,36 +93,40 @@ class StuffController {
   async getAttraction(req, res, next) {
     const { id } = req.stuff
     Stuff.findOne({ where: { id } }).then((stuff) => {
-      console.log(stuff)
       if (!stuff) return
+      let attractions = []
       stuff.getParks().then(async (parks) => {
-        console.log(parks.id)
-        // цикл
-        const attractions = await Attraction.findAll({
-          where: { ParkId: parks.id },
-        })
-
+        await Promise.all(
+          parks.map(async (el) => {
+            const attraction = await Attraction.findAll({
+              where: { ParkId: el?.id },
+            })
+            attractions.push(attraction)
+          })
+        )
         return res.json({ attractions })
       })
     })
   }
 
-  //   async getGreenZone(req, res, next) {
-  //     const { id } = req.stuff
-  //     Stuff.findOne({ where: { id } }).then((stuff) => {
-  //       console.log(stuff)
-  //       if (!stuff) return
-  //       stuff.getParks().then(async (parks) => {
-  //         console.log(parks.id)
-  //         // цикл
-  //         const greenZone = await GreenZone.findAll({
-  //           where: { ParkId: parks.id },
-  //         })
-
-  //         return res.json({ greenZone })
-  //       })
-  //     })
-  //   }
+  async getGreenZone(req, res, next) {
+    const { id } = req.stuff
+    Stuff.findOne({ where: { id } }).then((stuff) => {
+      if (!stuff) return
+      let greenZones = []
+      stuff.getParks().then(async (parks) => {
+        await Promise.all(
+          parks.map(async (el) => {
+            const greenZone = await GreenZone.findAll({
+              where: { ParkId: el?.id },
+            })
+            greenZones.push(greenZone)
+          })
+        )
+        return res.json({ parks, greenZones })
+      })
+    })
+  }
 }
 
 module.exports = new StuffController()

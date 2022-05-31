@@ -15,17 +15,17 @@ import {
 } from '../utils/Consts'
 
 const ParkMainForAdmin = () => {
-  const { park } = useContext(Context)
-  const { greenZone } = useContext(Context)
-  // const [park, setPark] = useState()
-  // const [greenZone, setGreenZone] = useState()
+  // const { park } = useContext(Context)
+  // const { greenZone } = useContext(Context)
+  const [park, setPark] = useState()
+  const [greenZone, setGreenZone] = useState()
   const { id } = useParams()
   useEffect(() => {
     stuffFetchPark().then((data) => {
-      park.setPark(data.parks)
+      setPark(data.parks)
     })
     stuffFetchPark().then((data) => {
-      greenZone.setPark(data.greenZone)
+      setGreenZone(data.greenZone)
     })
   }, [])
   const navigate = useNavigate()
@@ -33,14 +33,14 @@ const ParkMainForAdmin = () => {
   return (
     <Container md={9}>
       <Row className="d-flex justify-content-between">
-        <Container md={1}>
+        <Col md={1}>
           <div
             style={{ color: 'green', cursor: 'pointer' }}
             onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
           >
             О парке
           </div>
-        </Container>
+        </Col>
         <Col md={1}>
           <div
             style={{ color: 'green', cursor: 'pointer' }}
@@ -58,12 +58,17 @@ const ParkMainForAdmin = () => {
           </div>
         </Col>
       </Row>
-      <Row>
-        <h2 style={{ color: 'white' }}>{park?.name}</h2>
-      </Row>
-      <Row>
-        <div style={{ color: 'white' }}>{park?.description}</div>
-      </Row>
+      {park &&
+        park.map((el) => (
+          <Row>
+            <Row>
+              <h2 style={{ color: 'white' }}>{el?.name}</h2>
+            </Row>
+            <Row>
+              <div style={{ color: 'white' }}>{el?.description}</div>
+            </Row>
+          </Row>
+        ))}
       <Row mt={5}>
         <h2 style={{ color: 'white' }}>{greenZone?.name}</h2>
         <div style={{ color: 'white' }}> {greenZone?.description}</div>

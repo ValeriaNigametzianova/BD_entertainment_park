@@ -21,6 +21,16 @@ export const customerFetchPark = async (town, page, limit = 5) => {
   })
   return data
 }
+export const searchPark = async (name, page, limit = 5) => {
+  const { data } = await $host.get('api/park', {
+    params: {
+      name,
+      page,
+      limit,
+    },
+  })
+  return data
+}
 export const customerFetchOnePark = async (id) => {
   const { data } = await $host.get('api/park/' + id)
   return data
@@ -55,7 +65,7 @@ export const customerFetchAttraction = async (id) => {
   return data
 }
 export const stuffFetchAttraction = async () => {
-  const { data } = await $host.get('api/park/fetAttraction', {
+  const { data } = await $host.get('api/stuff/getAttraction', {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   })
   return data
@@ -70,7 +80,7 @@ export const customerFetchTarif = async (id) => {
   return data
 }
 export const stuffFetchTarif = async () => {
-  const { data } = await $host.get('api/park/tarif', {
+  const { data } = await $host.get('api/stuff/tarif', {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   })
   return data

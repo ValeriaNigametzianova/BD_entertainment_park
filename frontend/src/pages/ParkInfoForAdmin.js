@@ -9,17 +9,10 @@ const ParkInfoForAdmin = () => {
   const { user } = useContext(Context)
 
   useEffect(() => {
-    stuffFetchPark(user.id).then((data) => {
+    stuffFetchPark().then((data) => {
       park.setPark(data.rows)
     })
   }, [])
-
-  // useEffect(() => {
-  //         customerFetchPark(park.selectedTown, park.page, 3).then(data => {
-  //             park.setPark(data.rows)
-  //             park.setTotalCount(data.count)
-  //         })
-  // }, [park.page, park.selectedTown])
 
   return (
     <Container>

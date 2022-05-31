@@ -9,6 +9,7 @@ export default class ParkStore {
     this._greenZones = []
     this._tarifs = []
     this._selectedPark = {}
+    this._searchPark = {}
     this._page = 1
     this._totalCount = 0
     this._limit = 2
@@ -22,7 +23,6 @@ export default class ParkStore {
     this._towns = towns
   }
   setSelectedTown(selectedTown) {
-    console.log('setSelected', selectedTown)
     this._selectedTown = selectedTown
   }
   setAttraction(attarctions) {
@@ -36,6 +36,9 @@ export default class ParkStore {
   }
   setSelectedPark(park) {
     this._selectedPark = park
+  }
+  setSearchPark(searchPark) {
+    this._searchPark = searchPark
   }
   setPage(page) {
     this._page = page
@@ -54,6 +57,9 @@ export default class ParkStore {
     return this._towns
   }
   get selectedTown() {
+    return this._selectedTown
+  }
+  get searchPark() {
     return this._selectedTown
   }
   get attarctions() {

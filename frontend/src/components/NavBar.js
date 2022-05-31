@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import {
   Button,
   Container,
@@ -27,13 +27,15 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/navBar/navbar.css'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { customerFetchPark } from '../http/parkAPI'
+import { customerFetchPark, searchPark } from '../http/parkAPI'
 
 const NavBar = observer(() => {
   const { user } = useContext(Context)
   const { park } = useContext(Context)
+  const sourceParks = park
   const navigate = useNavigate()
   const location = useLocation()
+  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
     customerFetchPark(null, 1, 3).then((data) => {
@@ -44,15 +46,22 @@ const NavBar = observer(() => {
       park.setTown([...new Set(data.rows.map((el) => el.town))])
       park.setTotalCount(data.count)
     })
+
+    // searchPark(null,1,3).then((data) => {
+    //   park.setPark(data.rows)
+    //   park.setTotalCount(data.count)
+    // })
   }, [])
 
   useEffect(() => {
-    // if (park.selectedTown ) {
     customerFetchPark(park.selectedTown, park.page, 3).then((data) => {
       park.setPark(data.rows)
       park.setTotalCount(data.count)
     })
-    // }
+    // searchPark(park.searchParks, park.page, 3).then((data) => {
+    //   park.setPark(data.rows)
+    //   park.setTotalCount(data.count)
+    // })
   }, [park.page, park.selectedTown])
 
   const logOut = () => {
@@ -60,7 +69,12 @@ const NavBar = observer(() => {
     user.setIsAuth(false)
   }
 
-  console.log('parkClass', park.setSelectedTown)
+  const searchParks = useMemo(() => {
+    if (park.searchPark) {
+      return park.filter((onePark) => onePark.name.includes(searchQuery))
+    }
+  }, [searchQuery, park])
+
   return (
     <Navbar className="navbar" expand="lg">
       {user.isAuth ? (
@@ -76,8 +90,18 @@ const NavBar = observer(() => {
                 placeholder="Поиск"
                 className="me-2"
                 aria-label="Search"
+                value={searchQuery}
               />
-              <Button variant="outline-success">Найти</Button>
+              <Button
+                variant="outline-success"
+                onChange={(e) => {
+                  setSearchQuery(e.target.value)
+                  park.setPark(searchParks)
+                  console.log('park', park)
+                }}
+              >
+                Найти
+              </Button>
             </Form>
           )}
           <Nav>
@@ -111,7 +135,6 @@ const NavBar = observer(() => {
                 >
                   Мои билеты
                 </Button>
-                ATTRACTION
               </Nav>
             ) : null}
           </Nav>
@@ -160,6 +183,8 @@ const NavBar = observer(() => {
                 placeholder="Поиск"
                 className="me-2"
                 aria-label="Search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
               <Button variant="outline-success">Найти</Button>
             </Form>
