@@ -42,13 +42,19 @@ const Main = observer(() => {
   }, [])
 
   return (
-    <Container className="contr">
-      <Row className="heading1">Парки развлечений в Москве</Row>
-      <Row className="mt-9">
-        <Col>
-          <ParkList />
-          <Pages />
-        </Col>
+    <Container>
+      <Row>
+        <Container className="contr">
+          <Row className="heading1">Парки развлечений в Москве</Row>
+          <Row className="mt-9">
+            <Col>
+              <ParkList />
+            </Col>
+          </Row>
+        </Container>
+      </Row>
+      <Row>
+        <Pages />
       </Row>
     </Container>
   )
