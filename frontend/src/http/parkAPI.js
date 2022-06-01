@@ -22,36 +22,26 @@ export const customerFetchPark = async (name, town, page, limit = 5) => {
   })
   return data
 }
-// export const searchPark = async (name, page, limit = 5) => {
-//   const { data } = await $host.get('api/park', {
-//     params: {
-//       name,
-//       page,
-//       limit,
-//     },
-//   })
-//   return data
-// }
 export const customerFetchOnePark = async (id) => {
   const { data } = await $host.get('api/park/' + id)
   return data
 }
 
-// export const fetchTown = async (id) => {
-//     const {data} = await $host.get('api/park')
-//     return data
-// }
+export const editInfo = async (park, greenZone) => {
+  const { data } = await $authHost.put('api/stuff/park', (park, greenZone))
+  return data
+}
 
 export const createGreenZone = async (greenZone) => {
   const { data } = await $authHost.post('api/stuff/greenZone', greenZone)
   return data
 }
-// export const customerFetchGreenZone = async (id) => {
-//   const { data } = await $host.get('api/park/' + id, { params: { ParkId } })
-//   return data
-// }
+export const customerFetchGreenZone = async (id) => {
+  const { data } = await $host.get('api/park/' + id)
+  return data
+}
 export const stuffFetchGreenZone = async () => {
-  const { data } = await $host.get('api/stuff/getGreenZone', {
+  const { data } = await $host.get('api/stuff/getPark', {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   })
   return data
@@ -71,12 +61,6 @@ export const stuffFetchAttraction = async () => {
   })
   return data
 }
-export const stuffFetchTarif = async () => {
-  const { data } = await $host.get('api/stuff/getTarif', {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  })
-  return data
-}
 
 export const createTarif = async (tarif) => {
   const { data } = await $authHost.post('api/stuff/tarif', tarif)
@@ -84,5 +68,11 @@ export const createTarif = async (tarif) => {
 }
 export const customerFetchTarif = async (id) => {
   const { data } = await $host.get('api/park/' + id + '/tarif')
+  return data
+}
+export const stuffFetchTarif = async () => {
+  const { data } = await $host.get('api/stuff/getTarif', {
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  })
   return data
 }

@@ -69,7 +69,7 @@ export const authRoutes = [
   //     Component: <EditingParkMain />,
   //   },
   {
-    path: STUFF_ROUTE + PARK_INFO_ROUTE,
+    path: STUFF_ROUTE + PARK_MAIN_ROUTE,
     Component: <EditingParkInfo />,
   },
   {

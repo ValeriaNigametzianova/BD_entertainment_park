@@ -18,13 +18,13 @@ import EditingParkInfo from './EditingParkInfo'
 const ParkMainForAdmin = () => {
   const [park, setPark] = useState()
   const [greenZones, setGreenZones] = useState()
-  const { id } = useParams()
   useEffect(() => {
     stuffFetchPark().then((data) => setPark(data))
     stuffFetchGreenZone().then((data) => setGreenZones(data))
   }, [])
   const navigate = useNavigate()
-
+  console.log('2', park)
+  console.log('4', greenZones)
   return (
     <Container md={9}>
       <Row className="d-flex justify-content-between">
@@ -59,90 +59,77 @@ const ParkMainForAdmin = () => {
               park.parks.map((el) => el.name)
             )} */}
       {park &&
-        park.parks.map((el) => (
-          <Row>
-            <Col md={9}>
-              <Row>
-                <h2 style={{ color: 'white' }}> {el?.name}</h2>
-              </Row>
-              <Row>
-                <div style={{ color: 'white' }}>Площадь: {el?.square}</div>
-              </Row>
-              <Row>
-                <div style={{ color: 'white' }}>
-                  Время открытия: {el?.opening_time}
-                </div>
-              </Row>
-              <Row>
-                <div style={{ color: 'white' }}>
-                  Время закрытия: {el?.closing_time}
-                </div>
-              </Row>
-              <Row>
-                <div style={{ color: 'white' }}>
-                  Описание: {el?.description}
-                </div>
-              </Row>
-            </Col>
-            <Col md={6}>
-              <Row>
-                <div style={{ color: 'white' }}>
-                  Наличие аниматоров: {el?.animators}
-                </div>
-              </Row>
-              <Row>
-                <div style={{ color: 'white' }}>
-                  Наличие водных пространств: {el?.watersafe}
-                </div>
-              </Row>
-              <Row>
-                <div style={{ color: 'white' }}>
-                  Наличие уголка с животными: {el?.zoo}
-                </div>
-              </Row>
-              <Row>
-                <div style={{ color: 'white' }}>
-                  Количетво кафе и ресторанов: {el?.cafe}
-                </div>
-              </Row>
-              <Row>
-                <div style={{ color: 'white' }}>
-                  Количество магазинов и сувенирных лавок: {el?.shops}
-                </div>
-              </Row>
-            </Col>
-          </Row>
-        ))}
-      {park &&
-        park.greenZones.map((el) => (
-          <Row>
-            <Row mt={5}>
-              <h2 style={{ color: 'white' }}>{el?.name}</h2>
-              <div style={{ color: 'white' }}>{el?.description}</div>
+        park.parks.map((el) => {
+          el = el.park
+          return (
+            <Row>
+              <Col md={9}>
+                <Row>
+                  <h2 style={{ color: 'white' }}> {el?.name}</h2>
+                </Row>
+                <Row>
+                  <div style={{ color: 'white' }}>Площадь: {el?.square}</div>
+                </Row>
+                <Row>
+                  <div style={{ color: 'white' }}>
+                    Время открытия: {el?.opening_time}
+                  </div>
+                </Row>
+                <Row>
+                  <div style={{ color: 'white' }}>
+                    Время закрытия: {el?.closing_time}
+                  </div>
+                </Row>
+                <Row>
+                  <div style={{ color: 'white' }}>
+                    Описание: {el?.description}
+                  </div>
+                </Row>
+              </Col>
+              <Col md={6}>
+                <Row>
+                  <div style={{ color: 'white' }}>
+                    Наличие аниматоров: {el?.animators}
+                  </div>
+                </Row>
+                <Row>
+                  <div style={{ color: 'white' }}>
+                    Наличие водных пространств: {el?.watersafe}
+                  </div>
+                </Row>
+                <Row>
+                  <div style={{ color: 'white' }}>
+                    Наличие уголка с животными: {el?.zoo}
+                  </div>
+                </Row>
+                <Row>
+                  <div style={{ color: 'white' }}>
+                    Количетво кафе и ресторанов: {el?.cafe}
+                  </div>
+                </Row>
+                <Row>
+                  <div style={{ color: 'white' }}>
+                    Количество магазинов и сувенирных лавок: {el?.shops}
+                  </div>
+                </Row>
+              </Col>
             </Row>
-            <Row mt={5}>
-              <div style={{ color: 'white' }}>{el?.description}</div>
+          )
+        })}
+      {greenZones &&
+        greenZones.parks.map((el) =>
+          el.greenZones.map((el) => (
+            <Row>
+              <Row mt={5}>
+                <h2 style={{ color: 'white' }}>{el?.name}</h2>
+                <div style={{ color: 'white' }}>{el?.description}</div>
+              </Row>
             </Row>
-            <Row mt={5}>
-              <div style={{ color: 'white' }}>{el?.description}</div>
-            </Row>
-            <Row mt={5}>
-              <div style={{ color: 'white' }}>{el?.description}</div>
-            </Row>
-            <Row mt={5}>
-              <div style={{ color: 'white' }}>{el?.description}</div>
-            </Row>
-            <Row mt={5}>
-              <div style={{ color: 'white' }}>{el?.description}</div>
-            </Row>
-            <Row mt={5}>
-              <div style={{ color: 'white' }}>{el?.description}</div>
-            </Row>
-          </Row>
-        ))}
+          ))
+        )}
       <Row>
         {park ? (
-          <Button onClick={() => navigate(STUFF_ROUTE + EditingParkInfo)}>
+          <Button onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
             Обновить даннные
           </Button>
         ) : (

@@ -113,17 +113,18 @@ class StuffController {
     const { id } = req.stuff
     Stuff.findOne({ where: { id } }).then((stuff) => {
       if (!stuff) return
-      let greenZones = []
-      stuff.getParks().then(async (parks) => {
+      let parks = []
+      stuff.getParks().then(async (_parks) => {
         await Promise.all(
-          parks.map(async (el) => {
+          _parks.map(async (el) => {
             const greenZone = await GreenZone.findAll({
               where: { ParkId: el?.id },
             })
-            greenZones.push(greenZone)
+            // greenZones.push(greenZone)
+            parks.push({ park: el, greenZones: greenZone })
           })
         )
-        return res.json({ parks, greenZones })
+        return res.json({ parks })
       })
     })
   }

@@ -57,19 +57,23 @@ const ParkTarifForAdmin = () => {
       </Row>
       <Row>
         {tarif &&
-          tarif.tarifs.map((el) => (
-            <Col>
-              <Row>
-                <h2 style={{ color: 'white' }}>{el?.name}</h2>
-              </Row>
-              <Row>
-                <div style={{ color: 'white' }}>{el?.cost}</div>
-              </Row>
-              <Row>
-                <div style={{ color: 'white' }}>{el?.description}</div>
-              </Row>
-            </Col>
-          ))}
+          tarif.tarifs.map((el) =>
+            el.map((el) => (
+              <Col>
+                <Row>
+                  <div style={{ color: 'white' }}>Название: "{el?.name}</div>
+                </Row>
+                <Row>
+                  <div style={{ color: 'white' }}>Стоимость: {el?.cost}</div>
+                </Row>
+                <Row>
+                  <div style={{ color: 'white' }}>
+                    Описание: {el?.description}
+                  </div>
+                </Row>
+              </Col>
+            ))
+          )}
       </Row>
     </Container>
   )
