@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Button, Col, Container, Row } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   customerFetchOnePark,
@@ -9,6 +9,7 @@ import {
 import {
   ATTRACTIONS_ADMIN_ROUTE,
   MAIN_ADMIN_ROUTE,
+  PARK_MAIN_ROUTE,
   STUFF_ROUTE,
   TARIF_ADMIN_ROUTE,
 } from '../utils/Consts'
@@ -21,6 +22,7 @@ const ParkAttractionsForAdmin = () => {
     stuffFetchPark().then((data) => setPark(data.park))
     stuffFetchAttraction().then((data) => setAttractions(data))
   }, [])
+  console.log('777', attractions)
   const navigate = useNavigate()
   return (
     <Container>
@@ -95,6 +97,15 @@ const ParkAttractionsForAdmin = () => {
               </Row>
             ))
           )}
+      </Row>
+      <Row>
+        {attractions ? (
+          <Button>Обновить даннные</Button>
+        ) : (
+          <Button onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
+            Создать аттракцион
+          </Button>
+        )}
       </Row>
     </Container>
   )

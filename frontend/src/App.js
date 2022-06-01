@@ -16,14 +16,14 @@ const App = observer(() => {
   // const {customer} = useContext(Context)
   const [loading, setLoading] = useState(true)
 
-  // useEffect(() => {
-  //   stuffCheck()
-  //     .then((data) => {
-  //       user.setUser(true)
-  //       user.setIsAuth(true)s
-  //     })
-  //     .finally(() => setLoading(false))
-  // }, [])
+  useEffect(() => {
+    stuffCheck()
+      .then((data) => {
+        user.setUser(true)
+        user.setIsAuth(true)
+      })
+      .finally(() => setLoading(false))
+  }, [])
 
   useEffect(() => {
     customerCheck()

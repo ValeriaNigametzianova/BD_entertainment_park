@@ -23,6 +23,7 @@ import {
   CUSTOMER_ROUTE,
   TICKETS_ROUTE,
   PARK_MAIN_ROUTE,
+  MAIN_ADMIN_ROUTE,
 } from '../utils/Consts'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/navBar/navbar.css'
@@ -41,7 +42,7 @@ const NavBar = observer(() => {
     user.setUser({})
     user.setIsAuth(false)
   }
-
+  console.log(user.isAuth)
   // const searchParks = useMemo(() => {
   //   console.log('working')
   //   console.log(park.parks)
@@ -103,17 +104,16 @@ const NavBar = observer(() => {
                 Выйти
               </Button>
             </Nav>
-            {console.log('role', user.role)}
             {user.isAuth && user.role === 'stuff' ? (
               <Nav className="ml-auto">
                 <Button
                   variant="outline-success"
-                  onClick={() => navigate(STUFF_ROUTE)}
+                  onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
                 >
-                  Мои подчиненные
+                  Администрирование
                 </Button>
               </Nav>
-            ) : user.role === 'customer' ? (
+            ) : user.isAuth && user.role === 'customer' ? (
               <Nav className="ml-autoATTRACTION">
                 <Button
                   variant="outline-success"
@@ -209,44 +209,26 @@ const NavBar = observer(() => {
                   park.setSearchPark(searchParks)
                 }}
               >
-                Найти``
+                Найти
               </Button>
             </Form>
           )}
-          {console.log('sP', searchParks)}
-          {console.log('parks', park.parks)}
           <Nav>
-            {user.isAuth ? (
+            <Nav className="ml-auto">
+              <Button
+                variant="outline-success"
+                onClick={() => navigate(STUFF_ROUTE + LOGIN_ROUTE)}
+              >
+                Войти
+              </Button>
+            </Nav>
+            {/* {user.isAuth && user.role === 'stuff' ? (
               <Nav className="ml-auto">
                 <Button
                   variant="outline-success"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    logOut()
-                    navigate(PARK_MAIN_ROUTE)
-                  }}
+                  onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
                 >
-                  Выйти
-                </Button>
-              </Nav>
-            ) : (
-              <Nav className="ml-auto">
-                <Button
-                  variant="outline-success"
-                  onClick={() => navigate(STUFF_ROUTE + LOGIN_ROUTE)}
-                >
-                  Войти
-                </Button>
-              </Nav>
-            )}
-            {/* {console.log('role', user.role)} */}
-            {user.isAuth && user.role === 'stuff' ? (
-              <Nav className="ml-auto">
-                <Button
-                  variant="outline-success"
-                  onClick={() => navigate(STUFF_ROUTE)}
-                >
-                  Мои подчиненные
+                  Администрирование
                 </Button>
               </Nav>
             ) : user.role === 'customer' ? (
@@ -258,7 +240,7 @@ const NavBar = observer(() => {
                   Мои билеты
                 </Button>
               </Nav>
-            ) : null}
+            ) : null} */}
           </Nav>
         </Container>
       )}

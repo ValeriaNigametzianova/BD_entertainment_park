@@ -53,19 +53,16 @@ const Auth = observer(() => {
       ) {
         data = await stuffRegistration(login, password)
         role = 'stuff'
-      } else if (
-        !isLogin &&
-        location.pathname === CUSTOMER_ROUTE + REGISTRATION_ROUTE
-      ) {
-        role = 'customer'
-        data = await customerRegistration(email)
       }
       user.setUser(user)
       user.setIsAuth(true)
       user.setRole(role)
       if (location.pathname === CUSTOMER_ROUTE + LOGIN_ROUTE) {
         navigate(CUSTOMER_ROUTE + TICKETS_ROUTE)
-      } else if (location.pathname === STUFF_ROUTE + LOGIN_ROUTE) {
+      } else if (
+        location.pathname === STUFF_ROUTE + LOGIN_ROUTE ||
+        location.pathname === STUFF_ROUTE + REGISTRATION_ROUTE
+      ) {
         navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)
       }
     } catch (e) {
@@ -99,13 +96,7 @@ const Auth = observer(() => {
           <Col className="d-flex justify-content-center">
             <div
               style={{ cursor: 'pointer' }}
-              onClick={() =>
-                navigate(
-                  isLogin
-                    ? CUSTOMER_ROUTE + LOGIN_ROUTE
-                    : CUSTOMER_ROUTE + REGISTRATION_ROUTE
-                )
-              }
+              onClick={() => navigate(CUSTOMER_ROUTE + LOGIN_ROUTE)}
             >
               Посетитель
             </div>
@@ -163,27 +154,8 @@ const Auth = observer(() => {
               onChange={(e) => setEmail(e.target.value)}
             />
             <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
-              {isLogin ? (
-                <div>
-                  Нет аккаунта?{' '}
-                  <div
-                    onClick={() =>
-                      navigate(CUSTOMER_ROUTE + REGISTRATION_ROUTE)
-                    }
-                  >
-                    Зарегистрируйся!
-                  </div>
-                </div>
-              ) : (
-                <div>
-                  Есть аккаунт?{' '}
-                  <div onClick={() => navigate(CUSTOMER_ROUTE + LOGIN_ROUTE)}>
-                    Войдите!
-                  </div>
-                </div>
-              )}
               <Button variant={'outline-success'} onClick={click}>
-                {isLogin ? 'Войти' : 'Регистрация'}
+                {isLogin ? 'Войти' : null}
               </Button>
             </Row>
           </Form>

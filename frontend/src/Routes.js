@@ -68,18 +68,18 @@ export const authRoutes = [
   //     path: STUFF_ROUTE + EDITING_MAIN_ROUTE,
   //     Component: <EditingParkMain />,
   //   },
-  //   {
-  //     path: STUFF_ROUTE + EDITING_INFO_ROUTE,
-  //     Component: <EditingParkInfo />,
-  //   },
-  //   {
-  //     path: STUFF_ROUTE + EDITING_ATTRACTIONS_ROUTE,
-  //     Component: <EditingParkAttractions />,
-  //   },
-  //   {
-  //     path: STUFF_ROUTE + EDITING_TARIF_ROUTE,
-  //     Component: <EditingParkTarif />,
-  //   },
+  {
+    path: STUFF_ROUTE + PARK_INFO_ROUTE,
+    Component: <EditingParkInfo />,
+  },
+  {
+    path: STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE,
+    Component: <EditingParkAttractions />,
+  },
+  {
+    path: STUFF_ROUTE + PARK_TARIF_ROUTE,
+    Component: <EditingParkTarif />,
+  },
   {
     path: CUSTOMER_ROUTE + TICKETS_ROUTE,
     Component: <Tickets />,
@@ -97,10 +97,6 @@ export const publicRoutes = [
   },
   {
     path: CUSTOMER_ROUTE + LOGIN_ROUTE,
-    Component: <Auth />,
-  },
-  {
-    path: CUSTOMER_ROUTE + REGISTRATION_ROUTE,
     Component: <Auth />,
   },
   {

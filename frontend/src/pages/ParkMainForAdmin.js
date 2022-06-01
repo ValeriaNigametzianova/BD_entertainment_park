@@ -13,20 +13,15 @@ import {
   STUFF_ROUTE,
   TARIF_ADMIN_ROUTE,
 } from '../utils/Consts'
+import EditingParkInfo from './EditingParkInfo'
 
 const ParkMainForAdmin = () => {
-  // const { park } = useContext(Context)
-  // const { greenZone } = useContext(Context)
   const [park, setPark] = useState()
-  const [greenZone, setGreenZone] = useState()
+  const [greenZones, setGreenZones] = useState()
   const { id } = useParams()
   useEffect(() => {
-    stuffFetchPark().then((data) => {
-      setPark(data.parks)
-    })
-    stuffFetchPark().then((data) => {
-      setGreenZone(data.greenZone)
-    })
+    stuffFetchPark().then((data) => setPark(data))
+    stuffFetchGreenZone().then((data) => setGreenZones(data))
   }, [])
   const navigate = useNavigate()
 
@@ -58,26 +53,102 @@ const ParkMainForAdmin = () => {
           </div>
         </Col>
       </Row>
+      {console.log('hii', park)}
+      {/* {console.log(
+              'el.name',
+              park.parks.map((el) => el.name)
+            )} */}
       {park &&
-        park.map((el) => (
+        park.parks.map((el) => (
           <Row>
-            <Row>
+            <Col md={9}>
+              <Row>
+                <h2 style={{ color: 'white' }}> {el?.name}</h2>
+              </Row>
+              <Row>
+                <div style={{ color: 'white' }}>Площадь: {el?.square}</div>
+              </Row>
+              <Row>
+                <div style={{ color: 'white' }}>
+                  Время открытия: {el?.opening_time}
+                </div>
+              </Row>
+              <Row>
+                <div style={{ color: 'white' }}>
+                  Время закрытия: {el?.closing_time}
+                </div>
+              </Row>
+              <Row>
+                <div style={{ color: 'white' }}>
+                  Описание: {el?.description}
+                </div>
+              </Row>
+            </Col>
+            <Col md={6}>
+              <Row>
+                <div style={{ color: 'white' }}>
+                  Наличие аниматоров: {el?.animators}
+                </div>
+              </Row>
+              <Row>
+                <div style={{ color: 'white' }}>
+                  Наличие водных пространств: {el?.watersafe}
+                </div>
+              </Row>
+              <Row>
+                <div style={{ color: 'white' }}>
+                  Наличие уголка с животными: {el?.zoo}
+                </div>
+              </Row>
+              <Row>
+                <div style={{ color: 'white' }}>
+                  Количетво кафе и ресторанов: {el?.cafe}
+                </div>
+              </Row>
+              <Row>
+                <div style={{ color: 'white' }}>
+                  Количество магазинов и сувенирных лавок: {el?.shops}
+                </div>
+              </Row>
+            </Col>
+          </Row>
+        ))}
+      {park &&
+        park.greenZones.map((el) => (
+          <Row>
+            <Row mt={5}>
               <h2 style={{ color: 'white' }}>{el?.name}</h2>
+              <div style={{ color: 'white' }}>{el?.description}</div>
             </Row>
-            <Row>
+            <Row mt={5}>
+              <div style={{ color: 'white' }}>{el?.description}</div>
+            </Row>
+            <Row mt={5}>
+              <div style={{ color: 'white' }}>{el?.description}</div>
+            </Row>
+            <Row mt={5}>
+              <div style={{ color: 'white' }}>{el?.description}</div>
+            </Row>
+            <Row mt={5}>
+              <div style={{ color: 'white' }}>{el?.description}</div>
+            </Row>
+            <Row mt={5}>
+              <div style={{ color: 'white' }}>{el?.description}</div>
+            </Row>
+            <Row mt={5}>
               <div style={{ color: 'white' }}>{el?.description}</div>
             </Row>
           </Row>
         ))}
-      <Row mt={5}>
-        <h2 style={{ color: 'white' }}>{greenZone?.name}</h2>
-        <div style={{ color: 'white' }}> {greenZone?.description}</div>
-      </Row>
       <Row>
         {park ? (
-          <Button>Создать парк</Button>
+          <Button onClick={() => navigate(STUFF_ROUTE + EditingParkInfo)}>
+            Обновить даннные
+          </Button>
         ) : (
-          <Button>Обновить даннные</Button>
+          <Button onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
+            Создать парк
+          </Button>
         )}
       </Row>
     </Container>

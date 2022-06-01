@@ -57,10 +57,10 @@ const Stuff = sequelize.define('Stuff', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   login: { type: DataTypes.STRING, unique: true, allowNull: false },
   password: { type: DataTypes.STRING, allowNull: false },
+  role: { type: DataTypes.STRING, defaultValue: 'stuff' },
 })
 const Admin = sequelize.define('Admin', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  role: { type: DataTypes.STRING, defaultValue: 'stuff' },
 })
 
 Park.hasMany(Attraction, { onDelete: 'cascade', onUpdate: 'no action' })
