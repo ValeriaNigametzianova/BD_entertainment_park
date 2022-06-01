@@ -1,38 +1,88 @@
-import {$authHost, $host} from "./index";
+import { $authHost, $host } from './index'
 
-export const createType = async (type) => {
-    const {data} = await $authHost.post('api/type', type)
-    return data
+export const createPark = async (park) => {
+  const { data } = await $authHost.post('api/stuff/park', park)
+  return data
+}
+export const stuffFetchPark = async () => {
+  const { data } = await $host.get('api/stuff/getPark', {
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  })
+  console.log('iaiaiaiai', data)
+  return data
+}
+export const customerFetchPark = async (name, town, page, limit = 5) => {
+  const { data } = await $host.get('api/park', {
+    params: {
+      name,
+      town,
+      page,
+      limit,
+    },
+  })
+  return data
+}
+// export const searchPark = async (name, page, limit = 5) => {
+//   const { data } = await $host.get('api/park', {
+//     params: {
+//       name,
+//       page,
+//       limit,
+//     },
+//   })
+//   return data
+// }
+export const customerFetchOnePark = async (id) => {
+  const { data } = await $host.get('api/park/' + id)
+  return data
 }
 
-export const fetchTypes = async () => {
-    const {data} = await $host.get('api/type')
-    return data
+// export const fetchTown = async (id) => {
+//     const {data} = await $host.get('api/park')
+//     return data
+// }
+
+export const createGreenZone = async (greenZone) => {
+  const { data } = await $authHost.post('api/stuff/greenZone', greenZone)
+  return data
+}
+// export const customerFetchGreenZone = async (id) => {
+//   const { data } = await $host.get('api/park/' + id, { params: { ParkId } })
+//   return data
+// }
+export const stuffFetchGreenZone = async () => {
+  const { data } = await $host.get('api/stuff/getGreenZone', {
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  })
+  return data
 }
 
-export const createBrand = async (brand) => {
-    const {data} = await $authHost.post('api/brand', brand)
-    return data
+export const createAttraction = async (attraction) => {
+  const { data } = await $authHost.post('api/stuff/attraction', attraction)
+  return data
+}
+export const customerFetchAttraction = async (id) => {
+  const { data } = await $host.get('api/park/' + id + '/attraction')
+  return data
+}
+export const stuffFetchAttraction = async () => {
+  const { data } = await $host.get('api/stuff/getAttraction', {
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  })
+  return data
+}
+export const stuffFetchTarif = async () => {
+  const { data } = await $host.get('api/stuff/getTarif', {
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  })
+  return data
 }
 
-export const fetchBrands = async () => {
-    const {data} = await $host.get('api/brand', )
-    return data
+export const createTarif = async (tarif) => {
+  const { data } = await $authHost.post('api/stuff/tarif', tarif)
+  return data
 }
-
-export const createPark = async (device) => {
-    const {data} = await $authHost.post('api/device', device)
-    return data
-}
-
-export const fetchPark = async (typeId, brandId, page, limit= 5) => {
-    const {data} = await $host.get('api/device', {params: {
-            typeId, brandId, page, limit
-        }})
-    return data
-}
-
-export const fetchOneDevice = async (id) => {
-    const {data} = await $host.get('api/device/' + id)
-    return data
+export const customerFetchTarif = async (id) => {
+  const { data } = await $host.get('api/park/' + id + '/tarif')
+  return data
 }

@@ -1,29 +1,84 @@
-import {makeAutoObservable} from "mobx";
+import { makeAutoObservable } from 'mobx'
 
 export default class ParkStore {
-    constructor() {
-        this._park = [
-            {id:1, name:"Солнечные зайчики", town:"Москва", description: "Самый счастливый парк"},
-            {id:2, name:"Шляпа твоей мамы", town:"Сочи", description: "Самый счастливый парк"},
-            {id:3, name:"Самоцвет якутского брадобрея", town:"Москва", description: "Самый счастливый парк"},
-            {id:4, name:"Привет, Антоша", town:"Cочи", description: "Самый счастливый парк"},
-            {id:5, name:"АХАХАХХАХАХАХ", town:"Владивосток", description: "Самый счастливый парк"},
-        ]
-        this._selectedPark={}
-        makeAutoObservable(this)
-    }
+  constructor() {
+    this._parks = []
+    this._towns = []
+    this._selectedTown = ''
+    this._attarctions = []
+    this._greenZones = []
+    this._tarifs = []
+    this._selectedPark = []
+    this._searchPark = []
+    this._page = 1
+    this._totalCount = 0
+    this._limit = 2
+    makeAutoObservable(this)
+  }
 
-    setPark(park){
-        this._park = park
-    }
-    setSelectedPark(park){
-        this._selectedPark=park
-    }
-    
-    get park(){
-        return this._park
-    }
-    get SelectedPark(){
-        return this._SelectedPark
-    }
+  setPark(parks) {
+    this._parks = parks
+  }
+  setTown(towns) {
+    this._towns = towns
+  }
+  setSelectedTown(selectedTown) {
+    this._selectedTown = selectedTown
+  }
+  setAttraction(attarctions) {
+    this._attarctions = attarctions
+  }
+  setGreenZones(greenZones) {
+    this._greenZones = greenZones
+  }
+  setTarif(tarifs) {
+    this._tarifs = tarifs
+  }
+  setSelectedPark(park) {
+    this._selectedPark = park
+  }
+  setSearchPark(searchPark) {
+    console.log('tuta', this._parks)
+    this._searchPark = searchPark
+  }
+  setPage(page) {
+    this._page = page
+  }
+  setTotalCount(totalCount) {
+    this._totalCount = totalCount
+  }
+
+  get parks() {
+    return this._parks
+  }
+  get selectedPark() {
+    return this._selectedPark
+  }
+  get towns() {
+    return this._towns
+  }
+  get selectedTown() {
+    return this._selectedTown
+  }
+  get searchPark() {
+    return this._searchPark
+  }
+  get attarctions() {
+    return this._attarctions
+  }
+  get greenZones() {
+    return this._greenZones
+  }
+  get tarifs() {
+    return this._tarifs
+  }
+  get page() {
+    return this._page
+  }
+  get totalCount() {
+    return this._totalCount
+  }
+  get limit() {
+    return this._limit
+  }
 }

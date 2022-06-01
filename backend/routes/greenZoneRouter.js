@@ -1,13 +1,13 @@
 const { Router } = require('express')
 const router = new Router()
-const customerController = require('../controllers/customerController')
+const greenZoneController = require('../controllers/greenZoneController')
 const ticketController = require('../controllers/ticketController')
 const authCustomerMiddleware = require('../middleware/authCustomerMaddleware')
 
-router.post('/registration', customerController.registration)
-router.post('/login', customerController.login)
-router.get('/auth', authCustomerMiddleware, customerController.check)
-router.get('/ticket', authCustomerMiddleware, ticketController.getAll)
+router.post('/', greenZoneController.create)
+router.put('/', greenZoneController.update)
+router.delete('/', greenZoneController.delete)
+// router.get('/ticket', authCustomerMiddleware, ticketController.getAll)
 // router.get('/basket', ticketController.getAll)
 // router.get('/order', ticketController.getAll)
 
