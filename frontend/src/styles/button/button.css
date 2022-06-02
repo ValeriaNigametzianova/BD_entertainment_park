@@ -1,0 +1,23 @@
+.button2{
+    margin-right: 5px;
+    margin-left: 5px;
+    background: transparent;
+    color: #A66900;
+    border-color: #A66900;
+    font-family: system-ui;
+}
+.button2:hover,
+.button2:active{
+    background: #FFB840;
+    border-color: #FFB840;
+    color: #FEFDEF;
+}
+.button2:focus,
+.button2:visited{
+    background: #A66900;
+    border-color: #A66900;
+    color: #FEFDEF;
+    outline: none;
+    box-shadow: none !important;
+    -webkit-appearance: none;
+}

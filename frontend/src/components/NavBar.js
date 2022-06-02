@@ -207,7 +207,7 @@ const NavBar = observer(() => {
               </Dropdown.Item>
             </NavDropdown>
           ) : (
-            <NavDropdown style={{color:'#6D9DE4'}} variant="outline-success" title="Выберите город">
+            <NavDropdown style={{color:'#6D9DE4'}} className="align-baseline" variant="outline-success" title="Выберите город">
               {park.towns.map((town, id) => (
                 <Dropdown.Item
                   key={id}

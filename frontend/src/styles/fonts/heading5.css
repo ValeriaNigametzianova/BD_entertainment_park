@@ -1,0 +1,13 @@
+.heading5{
+    margin-top: 1px;
+    margin-bottom: 10px;
+    font-family: system-ui;
+    font-size: 12pt;
+    color:#6D9DE4 ;
+}
+.heading5:hover{
+    color: #0A58CA;
+}
+.heading5:active{
+    color: #033783;
+}
