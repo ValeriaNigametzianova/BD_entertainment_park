@@ -39,7 +39,6 @@ class parkController {
         shops,
         adress,
       })
-      console.log(req.stuff.id)
       const stuff = await Stuff.findOne({ where: { id: req.stuff.id } })
       console.log(stuff)
       const admin = adminController.hasPark(park, stuff)

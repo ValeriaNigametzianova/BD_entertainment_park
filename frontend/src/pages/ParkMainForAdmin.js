@@ -53,7 +53,10 @@ const ParkMainForAdmin = () => {
           </div>
         </Col>
       </Row>
-      {console.log('hii', park)}
+      <Row mt={5}>
+        <h2 style={{ color: 'white' }}>Парк </h2>
+      </Row>
+      {console.log('hii', { park })}
       {/* {console.log(
               'el.name',
               park.parks.map((el) => el.name)
@@ -128,7 +131,7 @@ const ParkMainForAdmin = () => {
           ))
         )}
       <Row>
-        {park ? (
+        {park && park.parks.length ? (
           <Button onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
             Обновить даннные
           </Button>

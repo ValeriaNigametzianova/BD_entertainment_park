@@ -9,6 +9,7 @@ import {
 import {
   ATTRACTIONS_ADMIN_ROUTE,
   MAIN_ADMIN_ROUTE,
+  PARK_ATTRACTIONS_ROUTE,
   PARK_MAIN_ROUTE,
   STUFF_ROUTE,
   TARIF_ADMIN_ROUTE,
@@ -100,9 +101,15 @@ const ParkAttractionsForAdmin = () => {
       </Row>
       <Row>
         {attractions ? (
-          <Button>Обновить даннные</Button>
+          <Button
+            onClick={() => navigate(STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE)}
+          >
+            Обновить даннные
+          </Button>
         ) : (
-          <Button onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
+          <Button
+            onClick={() => navigate(STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE)}
+          >
             Создать аттракцион
           </Button>
         )}

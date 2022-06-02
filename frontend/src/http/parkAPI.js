@@ -1,4 +1,5 @@
 import { $authHost, $host } from './index'
+import jwt_decode from 'jwt-decode'
 
 export const createPark = async (park) => {
   const { data } = await $authHost.post('api/stuff/park', park)
@@ -26,9 +27,8 @@ export const customerFetchOnePark = async (id) => {
   const { data } = await $host.get('api/park/' + id)
   return data
 }
-
-export const editInfo = async (park, greenZone) => {
-  const { data } = await $authHost.put('api/stuff/park', (park, greenZone))
+export const editInfo = async (park) => {
+  const { data } = await $authHost.put('api/stuff/park', park)
   return data
 }
 
@@ -46,8 +46,13 @@ export const stuffFetchGreenZone = async () => {
   })
   return data
 }
+export const editGreenZone = async (greenZone) => {
+  const { data } = await $authHost.put('api/stuff/park', greenZone)
+  return data
+}
 
 export const createAttraction = async (attraction) => {
+  console.log('attr', attraction.name)
   const { data } = await $authHost.post('api/stuff/attraction', attraction)
   return data
 }
@@ -56,9 +61,13 @@ export const customerFetchAttraction = async (id) => {
   return data
 }
 export const stuffFetchAttraction = async () => {
-  const { data } = await $host.get('api/stuff/getAttraction', {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  const { data } = await $authHost.get('api/stuff/getAttraction', {
+    // headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   })
+  return data
+}
+export const editAttraction = async (attraction) => {
+  const { data } = await $authHost.put('api/stuff/park', attraction)
   return data
 }
 
@@ -71,7 +80,7 @@ export const customerFetchTarif = async (id) => {
   return data
 }
 export const stuffFetchTarif = async () => {
-  const { data } = await $host.get('api/stuff/getTarif', {
+  const { data } = await $authHost.get('api/stuff/getTarif', {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   })
   return data
