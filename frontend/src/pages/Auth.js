@@ -21,6 +21,8 @@ import {
 import { Context } from '../index'
 import { customerLogin, customerRegistration } from '../http/customerAPI'
 import { stuffLogin, stuffRegistration } from '../http/stuffAPI'
+import '../styles/fonts/heading2.css'
+import '../styles/navBar/navbar.css'
 
 const Auth = observer(() => {
   const { user } = useContext(Context)
@@ -76,7 +78,7 @@ const Auth = observer(() => {
       style={{ height: window.innerHeight - 54 }}
     >
       <Card style={{ width: 600 }} className="p-5">
-        <h2 className="m-auto">{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
+        <h2 className="heading2">{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
 
         <Row>
           <Col className="d-flex justify-content-center">
@@ -140,7 +142,7 @@ const Auth = observer(() => {
                   </div>
                 </div>
               )}
-              <Button variant={'outline-success'} onClick={click}>
+              <Button className="button" variant={'outline-success'} onClick={click}>
                 {isLogin ? 'Войти' : 'Регистрация'}
               </Button>
             </Row>
@@ -154,7 +156,7 @@ const Auth = observer(() => {
               onChange={(e) => setEmail(e.target.value)}
             />
             <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
-              <Button variant={'outline-success'} onClick={click}>
+              <Button className="button" variant={'outline-success'} onClick={click}>
                 {isLogin ? 'Войти' : null}
               </Button>
             </Row>

@@ -3,13 +3,30 @@
   margin-bottom:170px;
   height: 100px;
 }
-
-.Dropdown_button{
-  font-family: system-ui;
-  font-size: 30pt;
-  variant:outline-success;
-}
 .search{
-  height: 15px;
-  flex-wrap: nowrap;
+  font-family: system-ui;
+  margin-right: 5px;
+}
+.button{
+  margin-right: 5px;
+  margin-left: 5px;
+  background: transparent;
+  color: #033783;
+  border-color: #033783;
+  font-family: system-ui;
+}
+.button:hover,
+.button:active{
+  background: #6D9DE4;
+  border-color: #6D9DE4;
+  color: #FEFDEF;
+}
+.button:focus,
+.button:visited{
+  background: #033783;
+  border-color: #033783;
+  color: #FEFDEF;
+  outline: none;
+  box-shadow: none !important;
+  -webkit-appearance: none;
 }

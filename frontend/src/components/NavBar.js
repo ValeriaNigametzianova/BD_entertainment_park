@@ -12,7 +12,7 @@ import {
   DropdownItem,
   DropdownToggle,
   Spinner,
-  Row,
+  Row, NavDropdown, Col,
 } from 'react-bootstrap'
 import { Context } from '../index'
 import { observer } from 'mobx-react-lite'
@@ -28,6 +28,8 @@ import {
 } from '../utils/Consts'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/navBar/navbar.css'
+import '../styles/fonts/brand_name.css'
+import '../styles/container/container.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { customerFetchPark, searchPark } from '../http/parkAPI'
 
@@ -104,7 +106,7 @@ const NavBar = observer(() => {
         <Container>
           <Navbar.Brand
             className="brand_name"
-            style={{ color: '#79273D', cursor: 'pointer' }}
+            style={{ color: '#033782', cursor: 'pointer' }}
           >
             Эмоциональные качели
           </Navbar.Brand>
@@ -114,12 +116,13 @@ const NavBar = observer(() => {
               <FormControl
                 type="search"
                 placeholder="Поиск"
-                className="me-2"
+                className="search"
                 aria-label="Search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               <Button
+                  className="button"
                 variant="outline-success"
                 onClick={(e) => {
                   // setSearchQuery(e.target.value)
@@ -134,6 +137,7 @@ const NavBar = observer(() => {
           <Nav>
             <Nav className="ml-auto">
               <Button
+                  className="button"
                 variant="outline-success"
                 onClick={(e) => {
                   e.preventDefault()
@@ -147,6 +151,7 @@ const NavBar = observer(() => {
             {user.isAuth && user.role === 'stuff' ? (
               <Nav className="ml-auto">
                 <Button
+                    className="button"
                   variant="outline-success"
                   onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
                 >
@@ -156,6 +161,7 @@ const NavBar = observer(() => {
             ) : user.isAuth && user.role === 'customer' ? (
               <Nav className="ml-autoATTRACTION">
                 <Button
+                    className="button"
                   variant="outline-success"
                   onClick={() => navigate(CUSTOMER_ROUTE + TICKETS_ROUTE)}
                 >
@@ -167,19 +173,19 @@ const NavBar = observer(() => {
         </Container>
       ) : (
         <Container>
+          <Col className='d-flex'>
           <Navbar.Brand
             className="brand_name"
-            style={{ color: '#79273D', cursor: 'pointer' }}
+            style={{ color: '#033783', cursor: 'pointer' }}
             onClick={() => navigate(MAIN_ROUTE)}
           >
             Эмоциональные качели
           </Navbar.Brand>
 
           {park.selectedTown ? (
-            <DropdownButton variant="outline-success" title={park.selectedTown}>
+            <NavDropdown style={{color:'#6D9DE4'}} variant="outline-success" title={park.selectedTown}>
               {park.towns.map((town, id) => (
                 <Dropdown.Item
-                  className="dropdown-item"
                   key={id}
                   //   active={}
                   href="/"
@@ -192,7 +198,6 @@ const NavBar = observer(() => {
                 </Dropdown.Item>
               ))}
               <Dropdown.Item
-                className="dropdown-item"
                 onClick={(e) => {
                   e.preventDefault()
                   park.setSelectedTown(null)
@@ -200,12 +205,11 @@ const NavBar = observer(() => {
               >
                 Сбросить
               </Dropdown.Item>
-            </DropdownButton>
+            </NavDropdown>
           ) : (
-            <DropdownButton variant="outline-success" title="Выберите город">
+            <NavDropdown style={{color:'#6D9DE4'}} variant="outline-success" title="Выберите город">
               {park.towns.map((town, id) => (
                 <Dropdown.Item
-                  className="dropdown-item"
                   key={id}
                   //   active={}
                   href="/"
@@ -218,7 +222,6 @@ const NavBar = observer(() => {
                 </Dropdown.Item>
               ))}
               <Dropdown.Item
-                className="dropdown-item"
                 onClick={(e) => {
                   e.preventDefault()
                   park.setSelectedTown(null)
@@ -226,21 +229,22 @@ const NavBar = observer(() => {
               >
                 Сбросить
               </Dropdown.Item>
-            </DropdownButton>
+            </NavDropdown>
           )}
-
+        </Col>
           {(location.pathname === PARK_MAIN_ROUTE ||
             location.pathname === '/') && (
-            <Form className="search">
+            <Form className='d-flex justify-content-center align-items-center'>
               <FormControl
                 type="search"
                 placeholder="Поиск"
-                className="me-2"
+                className="search"
                 aria-label="Search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               <Button
+                  className="button"
                 variant="outline-success"
                 onClick={(e) => {
                   // setSearchQuery(e.target.value)
@@ -254,6 +258,7 @@ const NavBar = observer(() => {
           <Nav>
             <Nav className="ml-auto">
               <Button
+                  className="button"
                 variant="outline-success"
                 onClick={() => navigate(STUFF_ROUTE + LOGIN_ROUTE)}
               >

@@ -5,14 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b42534c4-e93c-4db7-b701-97d6c26bf1e2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/styles/fonts/heading2.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/styles/fonts/heading2.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/NavBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles/Dropdown_button/Dropdown_button.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles/Dropdown_button/Dropdown_button.less" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/ParkList.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ParkList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles/container/container.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/container/container.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles/fonts/brand_name.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/fonts/brand_name.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/styles/navBar/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/navBar/navbar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles/navBar/navbar.less" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles/navBar/navbar.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles/search/search.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles/search/search.less" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,27 +38,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/курсовая",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "watcher.settings",
-    "ts.external.directory.path": "D:\\WebStorm 2022.1.1\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/курсовая&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;watcher.settings&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\WebStorm 2022.1.1\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
-      "directory"
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Шнурь\Documents\GitHub\BD_entertainment_park\frontend\src\styles" />
