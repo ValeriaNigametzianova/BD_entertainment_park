@@ -60,7 +60,7 @@ const ParkAttractionsForAdmin = () => {
         {attractions &&
           attractions.attractions.map((el) =>
             el.map((el) => (
-              <Row>
+              <Row className="mt-4 border border-light rounded-2 px-2 py-2">
                 <Row>
                   <h2 style={{ color: 'white' }}>{el?.name}</h2>
                 </Row>
