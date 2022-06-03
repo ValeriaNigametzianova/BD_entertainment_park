@@ -14,6 +14,8 @@ import { MAIN_ADMIN_ROUTE, STUFF_ROUTE } from '../utils/Consts'
 import '../styles/cont/contr.css'
 import '../styles/navBar/navbar.css'
 import '../styles/fonts/heading3.css'
+import '../styles/fonts/heading4.css'
+import '../styles/fonts/heading3.css'
 
 const EditingParkInfo = () => {
   const [park, setPark] = useState()
@@ -191,21 +193,21 @@ const EditingParkInfo = () => {
                       onChange={(e) => setDescription(e.target.value)}
                     />
                     <Form.Check
-                        className='heading3'
+                        className='heading4'
                       type={'checkbox'}
                       label={`Наличие аниматоров`}
                       value={animator}
                       onChange={(e) => setAnimator(Boolean(e.target.value))}
                     />
                     <Form.Check
-                        className='heading3'
+                        className='heading4'
                       type={'checkbox'}
                       label={`Наличие водных пространств`}
                       value={watersafe}
                       onChange={(e) => setWatersafe(Boolean(e.target.value))}
                     />
                     <Form.Check
-                        className='heading3'
+                        className='heading4'
                       type={'checkbox'}
                       label={`Наличие уголка с животными`}
                       value={zoo}
@@ -342,7 +344,7 @@ const EditingParkInfo = () => {
               ></Form.Control>
 
               <Form.Check
-                  className='heading3'
+                  className='heading4'
                 type={'checkbox'}
                 label={`Наличие аниматоров`}
                 value={animator}
@@ -350,7 +352,7 @@ const EditingParkInfo = () => {
               />
 
               <Form.Check
-                  className='heading3'
+                  className='heading4'
                 type={'checkbox'}
                 label={`Наличие водных пространств`}
                 value={watersafe}
@@ -358,7 +360,7 @@ const EditingParkInfo = () => {
               />
 
               <Form.Check
-                  className='heading3'
+                  className='heading4'
                 type={'checkbox'}
                 label={`Наличие уголка с животными`}
                 value={zoo}

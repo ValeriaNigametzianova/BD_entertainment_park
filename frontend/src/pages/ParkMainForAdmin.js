@@ -35,8 +35,8 @@ const ParkMainForAdmin = () => {
   return (
       <Container className='contr'>
     <Container md={9}>
-      <Row mt={5} className='heading2_1'>
-      <h2 style={{color:"#151E20" }}>Парк </h2>
+      <Row mt={5} className='contr1'>
+      <h2 className='heading2_1' style={{color:"#fcfcee", }}>Парк </h2>
     </Row>
       <Row className="d-flex">
         <Col >
