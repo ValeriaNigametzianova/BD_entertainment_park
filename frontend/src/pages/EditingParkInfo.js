@@ -11,6 +11,8 @@ import {
   createGreenZone,
 } from '../http/parkAPI'
 import { MAIN_ADMIN_ROUTE, STUFF_ROUTE } from '../utils/Consts'
+import '../styles/cont/contr.css'
+import '../styles/navBar/navbar.css'
 
 const EditingParkInfo = () => {
   const [park, setPark] = useState()
@@ -120,6 +122,7 @@ const EditingParkInfo = () => {
   //   }, [searchQuery, park.parks])
 
   return (
+      <Container className="contr">
     <Container className={'d-flex justify-content-center text-light'}>
       <Col xs={6}>
         {park && park.parks.length ? (
@@ -254,6 +257,7 @@ const EditingParkInfo = () => {
                 ))
               )}
             <Button
+                className='button'
               variant="primary"
               onClick={() => (
                 updatePark(),
@@ -385,6 +389,7 @@ const EditingParkInfo = () => {
               ></Form.Control>
             </Form.Group>
             <Button
+                className='button'
               variant="primary"
               onClick={() => (
                 newPark(),
@@ -398,6 +403,7 @@ const EditingParkInfo = () => {
         )}
       </Col>
     </Container>
+      </Container>
   )
 }
 

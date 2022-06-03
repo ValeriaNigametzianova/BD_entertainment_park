@@ -14,6 +14,7 @@ import {
   STUFF_ROUTE,
   TARIF_ADMIN_ROUTE,
 } from '../utils/Consts'
+import '../styles/navBar/navbar.css'
 
 const ParkAttractionsForAdmin = () => {
   const [park, setPark] = useState()
@@ -96,6 +97,7 @@ const ParkAttractionsForAdmin = () => {
                   </Row>
                 </Col>
                 <Button
+                    className='button'
                   onClick={() => navigate(STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE)}
                 >
                   Обновить даннные
@@ -109,6 +111,7 @@ const ParkAttractionsForAdmin = () => {
           {}
         ) : (
           <Button
+              className='button'
             onClick={() => navigate(STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE)}
           >
             Создать аттракцион

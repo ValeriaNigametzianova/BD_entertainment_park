@@ -14,6 +14,9 @@ import {
   TARIF_ADMIN_ROUTE,
 } from '../utils/Consts'
 import EditingParkInfo from './EditingParkInfo'
+import '../styles/navBar/navbar.css'
+import '../styles/cont/contr.css'
+import '../styles/fonts/heading3.css'
 
 const ParkMainForAdmin = () => {
   const [park, setPark] = useState()
@@ -26,27 +29,30 @@ const ParkMainForAdmin = () => {
   console.log('2', park)
   console.log('4', greenZones)
   return (
+      <Container className='contr'>
     <Container md={9}>
-      <Row className="d-flex justify-content-between">
-        <Col md={1}>
+      <Row className="d-flex">
+        <Col >
           <div
-            style={{ color: 'green', cursor: 'pointer' }}
+              className='heading3_2'
+            style={{  cursor: 'pointer' }}
             onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
           >
             О парке
           </div>
         </Col>
-        <Col md={1}>
-          <div
-            style={{ color: 'green', cursor: 'pointer' }}
+        <Col >
+          <div className='heading3_2'
+            style={{ cursor: 'pointer' }}
             onClick={() => navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)}
           >
             Аттракционы
           </div>
         </Col>
-        <Col md={1}>
+        <Col>
           <div
-            style={{ color: 'green', cursor: 'pointer' }}
+              className='heading3_2'
+            style={{ cursor: 'pointer' }}
             onClick={() => navigate(STUFF_ROUTE + TARIF_ADMIN_ROUTE)}
           >
             Тарифы
@@ -130,18 +136,19 @@ const ParkMainForAdmin = () => {
             </Row>
           ))
         )}
-      <Row>
+      <Row className='d-flex'>
         {park && park.parks.length ? (
-          <Button onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
+          <Button className='button' onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
             Обновить даннные
           </Button>
         ) : (
-          <Button onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
+          <Button className='button' onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
             Создать парк
           </Button>
         )}
       </Row>
     </Container>
+      </Container>
   )
 }
 

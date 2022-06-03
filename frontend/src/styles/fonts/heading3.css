@@ -13,3 +13,13 @@
     text-decoration: none;
     color:#FFA100;
 }
+.heading3_2{
+    font-family: system-ui;
+    font-size: 14pt;
+    color:#151E20;
+    text-align: center;
+}
+.heading3_2:hover{
+    text-decoration: none;
+    color:#FFA100;
+}
