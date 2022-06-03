@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col, Container, Row, Button } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
 import TarifList from '../components/TarifList'
 import { stuffFetchPark, stuffFetchTarif } from '../http/parkAPI'
@@ -13,6 +13,7 @@ import {
   STUFF_ROUTE,
   TARIF_ADMIN_ROUTE,
 } from '../utils/Consts'
+import EditingParkTarif from './EditingParkTarif'
 
 const ParkTarifForAdmin = () => {
   const [park, setPark] = useState()
@@ -22,7 +23,7 @@ const ParkTarifForAdmin = () => {
     stuffFetchPark().then((data) => setPark(data.park))
     stuffFetchTarif().then((data) => setTarif(data))
   }, [])
-  console.log('777', tarif)
+  console.log('888', tarif)
   const navigate = useNavigate()
   return (
     <Container md={9}>
@@ -61,19 +62,39 @@ const ParkTarifForAdmin = () => {
             el.map((el) => (
               <Col>
                 <Row>
-                  <div style={{ color: 'white' }}>Название: "{el?.name}</div>
+                  <div style={{ color: 'white' }}>Название: "{el?.name}"</div>
                 </Row>
                 <Row>
-                  <div style={{ color: 'white' }}>Стоимость: {el?.cost}</div>
+                  <div style={{ color: 'white' }}>Стоимость: {el?.cost} р</div>
                 </Row>
                 <Row>
                   <div style={{ color: 'white' }}>
                     Описание: {el?.description}
                   </div>
                 </Row>
+                {console.log('el', el)}
+                <Button
+                  key={el.id}
+                  tarif={el}
+                  onClick={() => navigate(STUFF_ROUTE + PARK_TARIF_ROUTE)}
+                >
+                  Обновить даннные
+                </Button>
               </Col>
             ))
           )}
+      </Row>
+      <Row>
+        {tarif && tarif.tarifs.lenght ? (
+          {}
+        ) : (
+          <Button
+            className="mt-4 mb-5 btn-success"
+            onClick={() => navigate(STUFF_ROUTE + PARK_TARIF_ROUTE)}
+          >
+            Создать тариф
+          </Button>
+        )}
       </Row>
     </Container>
   )

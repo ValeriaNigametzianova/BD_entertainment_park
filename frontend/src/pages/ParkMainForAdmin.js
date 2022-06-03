@@ -27,7 +27,7 @@ const ParkMainForAdmin = () => {
   console.log('4', greenZones)
   return (
     <Container md={9}>
-      <Row className="d-flex justify-content-between">
+      <Row className="mt-5 mb-5 d-flex justify-content-between">
         <Col md={1}>
           <div
             style={{ color: 'green', cursor: 'pointer' }}
@@ -132,11 +132,17 @@ const ParkMainForAdmin = () => {
         )}
       <Row>
         {park && park.parks.length ? (
-          <Button onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
+          <Button
+            className="mt-4 mb-5 btn-success"
+            onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}
+          >
             Обновить даннные
           </Button>
         ) : (
-          <Button onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
+          <Button
+            className="mt-4 mb-5 btn-success"
+            onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}
+          >
             Создать парк
           </Button>
         )}

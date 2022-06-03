@@ -5,7 +5,7 @@ import { PARK_MAIN_ROUTE } from '../utils/Consts'
 
 const ParkItem = ({ park }) => {
   const navigate = useNavigate()
-  // console.log(navigate)
+  console.log('////', park)
   return (
     <Container onClick={() => navigate(PARK_MAIN_ROUTE + '/' + park.id)}>
       <Row

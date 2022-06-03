@@ -27,7 +27,7 @@ const ParkAttractionsForAdmin = () => {
   const navigate = useNavigate()
   return (
     <Container>
-      <Row className="d-flex justify-content-between">
+      <Row className="mt-5 mb-5 d-flex justify-content-between">
         <Col md={1}>
           <div
             style={{ color: 'green', cursor: 'pointer' }}
@@ -65,27 +65,35 @@ const ParkAttractionsForAdmin = () => {
                   <h2 style={{ color: 'white' }}>{el?.name}</h2>
                 </Row>
                 <Row>
-                  <div style={{ color: 'white' }}>{el?.description}</div>
+                  <div style={{ color: 'white' }}>
+                    Описание: {el?.description}
+                  </div>
                 </Row>
                 <Col>
                   <Row>
-                    <div style={{ color: 'white' }}>{el?.hight}</div>
-                  </Row>
-                  <Row>
-                    <div style={{ color: 'white' }}>{el?.age_limitation}</div>
+                    <div style={{ color: 'white' }}>Высота: {el?.hight}</div>
                   </Row>
                   <Row>
                     <div style={{ color: 'white' }}>
+                      Возрастное ограничение: {el?.age_limitation}
+                    </div>
+                  </Row>
+                  <Row>
+                    <div style={{ color: 'white' }}>
+                      Ограничение по весу:
                       {el?.weight_limitation}
                     </div>
                   </Row>
                   <Row>
                     <div style={{ color: 'white' }}>
+                      Ограничение по росту:
                       {el?.height_limitation}
                     </div>
                   </Row>
                   <Row>
                     <div style={{ color: 'white' }}>
+                      {' '}
+                      Максимальное количество человек:
                       {el?.max_quantity_people}
                     </div>
                   </Row>
@@ -109,6 +117,7 @@ const ParkAttractionsForAdmin = () => {
           {}
         ) : (
           <Button
+            className="mt-4 mb-5 btn-success"
             onClick={() => navigate(STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE)}
           >
             Создать аттракцион

@@ -84,7 +84,7 @@ export const stuffFetchAttraction = async () => {
   return data
 }
 export const editAttraction = async (attraction) => {
-  const { data } = await $authHost.put('api/stuff/park', attraction)
+  const { data } = await $authHost.put('api/stuff/attraction', attraction)
   return data
 }
 
@@ -97,8 +97,10 @@ export const customerFetchTarif = async (id) => {
   return data
 }
 export const stuffFetchTarif = async () => {
-  const { data } = await $authHost.get('api/stuff/getTarif', {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  })
+  const { data } = await $authHost.get('api/stuff/getTarif')
+  return data
+}
+export const editTarif = async (tarif) => {
+  const { data } = await $authHost.put('api/stuff/tarif', tarif)
   return data
 }
