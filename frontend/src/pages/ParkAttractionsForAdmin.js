@@ -14,7 +14,15 @@ import {
   STUFF_ROUTE,
   TARIF_ADMIN_ROUTE,
 } from '../utils/Consts'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/navBar/navbar.css'
+import '../styles/cont/contr.css'
+import '../styles/fonts/heading3.css'
+import '../styles/fonts/heading2.css'
+import '../styles/button/button.css'
+import '../styles/fonts/heading4.css'
+import '../styles/button/button.css'
 
 const ParkAttractionsForAdmin = () => {
   const [park, setPark] = useState()
@@ -27,27 +35,35 @@ const ParkAttractionsForAdmin = () => {
   console.log('777', attractions)
   const navigate = useNavigate()
   return (
-    <Container>
+    <Container className='contr'>
+      <Container md={9}>
+        <Row mt={5} className='heading2_1'>
+        <h2 style={{ color: '#151E20' }}>Аттракционы</h2>
+      </Row>
       <Row className="d-flex justify-content-between">
-        <Col md={1}>
+
+        <Col >
           <div
-            style={{ color: 'green', cursor: 'pointer' }}
+              className='heading3_2'
+            style={{ textAlign:"left", cursor: 'pointer' }}
             onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
           >
             О парке
           </div>
         </Col>
-        <Col md={1}>
+        <Col >
           <div
-            style={{ color: 'green', cursor: 'pointer' }}
+              className='heading3_2'
+            style={{ textAlign:"center", cursor: 'pointer' }}
             onClick={() => navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)}
           >
             Аттракционы
           </div>
         </Col>
-        <Col md={1}>
+        <Col >
           <div
-            style={{ color: 'green', cursor: 'pointer' }}
+              className='heading3_2'
+            style={{ textAlign:"right", cursor: 'pointer' }}
             onClick={() => navigate(STUFF_ROUTE + TARIF_ADMIN_ROUTE)}
           >
             Тарифы
@@ -55,9 +71,7 @@ const ParkAttractionsForAdmin = () => {
         </Col>
       </Row>
       <Row className="mt-9">
-        <Row mt={5}>
-          <h2 style={{ color: 'white' }}>Аттракционы</h2>
-        </Row>
+
         {attractions &&
           attractions.attractions.map((el) =>
             el.map((el) => (
@@ -97,7 +111,7 @@ const ParkAttractionsForAdmin = () => {
                   </Row>
                 </Col>
                 <Button
-                    className='button'
+                    className='button2'
                   onClick={() => navigate(STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE)}
                 >
                   Обновить даннные
@@ -111,13 +125,14 @@ const ParkAttractionsForAdmin = () => {
           {}
         ) : (
           <Button
-              className='button'
+              className='button2'
             onClick={() => navigate(STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE)}
           >
             Создать аттракцион
           </Button>
         )}
       </Row>
+    </Container>
     </Container>
   )
 }

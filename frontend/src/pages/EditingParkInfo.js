@@ -13,6 +13,7 @@ import {
 import { MAIN_ADMIN_ROUTE, STUFF_ROUTE } from '../utils/Consts'
 import '../styles/cont/contr.css'
 import '../styles/navBar/navbar.css'
+import '../styles/fonts/heading3.css'
 
 const EditingParkInfo = () => {
   const [park, setPark] = useState()
@@ -128,7 +129,7 @@ const EditingParkInfo = () => {
         {park && park.parks.length ? (
           <Form>
             <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
-              <Form.Label style={{ color: 'green' }}>
+              <Form.Label style={{ color: '#151E20' }}>
                 Редактировать информацию о парке
               </Form.Label>
             </Form.Group>

@@ -14,9 +14,13 @@ import {
   TARIF_ADMIN_ROUTE,
 } from '../utils/Consts'
 import EditingParkInfo from './EditingParkInfo'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/navBar/navbar.css'
 import '../styles/cont/contr.css'
 import '../styles/fonts/heading3.css'
+import '../styles/fonts/heading2.css'
+import '../styles/button/button.css'
+import '../styles/fonts/heading4.css'
 
 const ParkMainForAdmin = () => {
   const [park, setPark] = useState()
@@ -31,11 +35,14 @@ const ParkMainForAdmin = () => {
   return (
       <Container className='contr'>
     <Container md={9}>
+      <Row mt={5} className='heading2_1'>
+      <h2 style={{color:"#151E20" }}>Парк </h2>
+    </Row>
       <Row className="d-flex">
         <Col >
           <div
               className='heading3_2'
-            style={{  cursor: 'pointer' }}
+            style={{ textAlign:"left", cursor: 'pointer' }}
             onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
           >
             О парке
@@ -43,7 +50,7 @@ const ParkMainForAdmin = () => {
         </Col>
         <Col >
           <div className='heading3_2'
-            style={{ cursor: 'pointer' }}
+            style={{ textAlign:"center", cursor: 'pointer' }}
             onClick={() => navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)}
           >
             Аттракционы
@@ -52,16 +59,14 @@ const ParkMainForAdmin = () => {
         <Col>
           <div
               className='heading3_2'
-            style={{ cursor: 'pointer' }}
+            style={{ textAlign:"right", cursor: 'pointer' }}
             onClick={() => navigate(STUFF_ROUTE + TARIF_ADMIN_ROUTE)}
           >
             Тарифы
           </div>
         </Col>
       </Row>
-      <Row mt={5}>
-        <h2 style={{ color: 'white' }}>Парк </h2>
-      </Row>
+
       {console.log('hii', { park })}
       {/* {console.log(
               'el.name',
@@ -73,51 +78,51 @@ const ParkMainForAdmin = () => {
           return (
             <Row>
               <Col md={9}>
-                <Row>
-                  <h2 style={{ color: 'white' }}> {el?.name}</h2>
+                <Row className='heading2_1'>
+                  <h2 > {el?.name}</h2>
                 </Row>
                 <Row>
-                  <div style={{ color: 'white' }}>Площадь: {el?.square}</div>
+                  <div className='heading4'>Площадь: {el?.square}</div>
                 </Row>
-                <Row>
-                  <div style={{ color: 'white' }}>
+                <Row className='heading4'>
+                  <div >
                     Время открытия: {el?.opening_time}
                   </div>
                 </Row>
-                <Row>
-                  <div style={{ color: 'white' }}>
+                <Row className='heading4'>
+                  <div >
                     Время закрытия: {el?.closing_time}
                   </div>
                 </Row>
-                <Row>
-                  <div style={{ color: 'white' }}>
+                <Row className='heading4'>
+                  <div>
                     Описание: {el?.description}
                   </div>
                 </Row>
               </Col>
               <Col md={6}>
-                <Row>
-                  <div style={{ color: 'white' }}>
+                <Row className='heading4'>
+                  <div >
                     Наличие аниматоров: {el?.animators}
                   </div>
                 </Row>
-                <Row>
-                  <div style={{ color: 'white' }}>
+                <Row className='heading4'>
+                  <div>
                     Наличие водных пространств: {el?.watersafe}
                   </div>
                 </Row>
-                <Row>
-                  <div style={{ color: 'white' }}>
+                <Row className='heading4'>
+                  <div>
                     Наличие уголка с животными: {el?.zoo}
                   </div>
                 </Row>
-                <Row>
-                  <div style={{ color: 'white' }}>
+                <Row className='heading4'>
+                  <div>
                     Количетво кафе и ресторанов: {el?.cafe}
                   </div>
                 </Row>
-                <Row>
-                  <div style={{ color: 'white' }}>
+                <Row className='heading4'>
+                  <div>
                     Количество магазинов и сувенирных лавок: {el?.shops}
                   </div>
                 </Row>
@@ -130,19 +135,19 @@ const ParkMainForAdmin = () => {
           el.greenZones.map((el) => (
             <Row>
               <Row mt={5}>
-                <h2 style={{ color: 'white' }}>{el?.name}</h2>
-                <div style={{ color: 'white' }}>{el?.description}</div>
+                <h2 className='heading4'>{el?.name}</h2>
+                <div className='heading4'>{el?.description}</div>
               </Row>
             </Row>
           ))
         )}
       <Row className='d-flex'>
         {park && park.parks.length ? (
-          <Button className='button' onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
+          <Button className='button2' onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
             Обновить даннные
           </Button>
         ) : (
-          <Button className='button' onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
+          <Button className='button2' onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
             Создать парк
           </Button>
         )}

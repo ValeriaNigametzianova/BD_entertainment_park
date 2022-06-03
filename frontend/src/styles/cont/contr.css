@@ -1,6 +1,7 @@
 .contr {
     background: #FEFDEF;
     max-width: 85%;
+    min-height: 450px;
     position: absolute;
     right:0px;
     margin-left: auto;

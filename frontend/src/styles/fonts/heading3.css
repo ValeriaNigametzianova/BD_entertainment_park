@@ -17,7 +17,8 @@
     font-family: system-ui;
     font-size: 14pt;
     color:#151E20;
-    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 .heading3_2:hover{
     text-decoration: none;
