@@ -1,5 +1,4 @@
 import { makeAutoObservable } from 'mobx'
-
 export default class ParkStore {
   constructor() {
     this._parks = []
@@ -15,7 +14,6 @@ export default class ParkStore {
     this._limit = 2
     makeAutoObservable(this)
   }
-
   setPark(parks) {
     this._parks = parks
   }
