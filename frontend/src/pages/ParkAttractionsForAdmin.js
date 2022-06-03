@@ -39,9 +39,8 @@ const ParkAttractionsForAdmin = () => {
       <Container md={9}>
         <Row mt={5} className='heading2_1'>
         <h2 style={{ color: '#151E20' }}>Аттракционы</h2>
-      </Row>
-      <Row className="d-flex justify-content-between">
-
+       </Row>
+       <Row className="d-flex justify-content-between">
         <Col >
           <div
               className='heading3_2'
@@ -69,13 +68,13 @@ const ParkAttractionsForAdmin = () => {
             Тарифы
           </div>
         </Col>
-      </Row>
-      <Row className="mt-9">
+       </Row>
+       <Row className="mt-9">
 
         {attractions &&
           attractions.attractions.map((el) =>
             el.map((el) => (
-              <Row>
+                <Row>
                 <Row>
                   <h2 style={{ color: 'white' }}>{el?.name}</h2>
                 </Row>
@@ -119,8 +118,8 @@ const ParkAttractionsForAdmin = () => {
               </Row>
             ))
           )}
-      </Row>
-      <Row>
+       </Row>
+       <Row>
         {attractions && attractions.attractions.lenght ? (
           {}
         ) : (
@@ -131,8 +130,8 @@ const ParkAttractionsForAdmin = () => {
             Создать аттракцион
           </Button>
         )}
-      </Row>
-    </Container>
+       </Row>
+      </Container>
     </Container>
   )
 }
