@@ -17,12 +17,17 @@ import {
 
 const ParkMain = () => {
   const [park, setPark] = useState()
-  const [greenZone, setGreenZone] = useState()
+  const [greenZones, setGreenZones] = useState()
   const { id } = useParams()
   useEffect(() => {
     customerFetchOnePark(id).then((data) => setPark(data.park))
-    customerFetchOnePark(id).then((data) => setGreenZone(data.greenZone))
+    customerFetchGreenZone(id).then((data) => {
+      setGreenZones(data)
+      console.log('d ', data)
+    })
   }, [])
+  console.log('11', park)
+  console.log('00', greenZones)
   const navigate = useNavigate()
 
   return (
@@ -73,8 +78,8 @@ const ParkMain = () => {
       <Row>
         <div style={{ color: 'white' }}>{park?.description}</div>
       </Row>
-      {greenZone &&
-        greenZone.map((el) => (
+      {greenZones &&
+        greenZones.greenZone.map((el) => (
           <Row>
             <Row mt={5}>
               <h2 style={{ color: 'white' }}>{el?.name}</h2>

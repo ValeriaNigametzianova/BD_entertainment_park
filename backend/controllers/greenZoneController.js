@@ -22,17 +22,21 @@ class greenZoneController {
   }
 
   async update(req, res) {
-    let greenZone = req.body
-    if (!greenZone.id) {
-      return res.json(ApiError.badRequest({ message: 'Id не указан' }))
+    try {
+      let greenZone = req.body
+      if (!greenZone.id) {
+        return res.json(ApiError.badRequest({ message: 'Id не указан' }))
+      }
+      await GreenZone.update(greenZone, {
+        where: {
+          id: greenZone.id,
+        },
+      })
+      let updatedGreenZone = await GreenZone.findByPk(greenZone.id)
+      return res.json(greenZone)
+    } catch (e) {
+      next(ApiError.badRequest(e.message))
     }
-    await GreenZone.update(greenZone, {
-      where: {
-        id: greenZone.id,
-      },
-    })
-    let updatedGreenZone = await GreenZone.findByPk(greenZone.id)
-    return res.json(updatedGreenZone)
   }
 
   async delete(req, res) {

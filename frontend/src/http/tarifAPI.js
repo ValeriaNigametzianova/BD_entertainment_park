@@ -14,3 +14,8 @@ export const fetchTarif = async () => {
   const { data } = await $host.get('api/park/:id/tarif')
   return data
 }
+
+export const editTarif = async (tarif) => {
+  const { data } = await $host.put('api/stuff/tarif', tarif)
+  return data
+}

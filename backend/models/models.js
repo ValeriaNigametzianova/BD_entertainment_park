@@ -9,9 +9,9 @@ const Park = sequelize.define('Park', {
   opening_time: { type: DataTypes.TIME },
   closing_time: { type: DataTypes.TIME },
   description: { type: DataTypes.TEXT },
-  animators: { type: DataTypes.TINYINT },
-  watersafe: { type: DataTypes.TINYINT },
-  zoo: { type: DataTypes.TINYINT },
+  animators: { type: DataTypes.BOOLEAN },
+  watersafe: { type: DataTypes.BOOLEAN },
+  zoo: { type: DataTypes.BOOLEAN },
   cafe: { type: DataTypes.INTEGER },
   shops: { type: DataTypes.INTEGER },
   adress: { type: DataTypes.STRING },
@@ -26,7 +26,7 @@ const Attraction = sequelize.define('Attraction', {
   description: { type: DataTypes.TEXT },
   age_limitation: { type: DataTypes.INTEGER, allowNull: false },
   max_quantity_people: { type: DataTypes.INTEGER },
-  active: { type: DataTypes.TINYINT },
+  active: { type: DataTypes.BOOLEAN },
 })
 
 const GreenZone = sequelize.define('GreenZone', {

@@ -12,7 +12,9 @@ import {
   DropdownItem,
   DropdownToggle,
   Spinner,
-  Row, NavDropdown, Col,
+  Row,
+  NavDropdown,
+  Col,
 } from 'react-bootstrap'
 import { Context } from '../index'
 import { observer } from 'mobx-react-lite'
@@ -58,42 +60,6 @@ const NavBar = observer(() => {
   //   }
   // }, [searchQuery, park.parks])
 
-  //     return (
-  //         <Navbar className='navbar' expand="lg">
-  //             <Container >
-  //                 <Navbar.Brand className='brand_name' style={{ color:"#79273D", cursor:"pointer"}} onClick={() => navigate(MAIN_ROUTE)}>Эмоциональные качели</Navbar.Brand>
-  //                     <DropdownButton variant="outline-success" title="Выберите город">{park.park.map(park =>
-  //                         <Dropdown.Item
-  //                           className="dropdown-item" key={park.id}
-  //                           onClick ={()=> park.setSelectedTown(park)}> {park.town}
-  //                         </Dropdown.Item>
-  //                     )}
-  //                     </DropdownButton>
-  //                     <Form className="search" >
-  //                         <FormControl
-  //                             type="search"
-  //                             placeholder="Поиск"
-  //                             className="me-2"
-  //                             aria-label="Search"/>
-  //                         <Button variant="outline-success">Найти</Button>
-  //                     </Form>
-  //                     <Nav>
-  //                         {user.isAuth ?
-  //                             <Nav className='ml-auto'>
-  //                                 <Button variant="outline-success" onClick={() => logOut()}>Выйти</Button>
-  //                             </Nav>
-  //                             :
-  //                             <Nav className='ml-auto'>
-  //                                 <Button variant="outline-success" onClick={() => navigate(STUFF_ROUTE + LOGIN_ROUTE)}>Войти</Button>
-  //                             </Nav>
-  //                         }
-  //                     </Nav>
-
-  //                 {/* </Navbar.Collapse> */}
-  //             </Container>
-  //         </Navbar>
-  //     );
-  // });
   const searchParks = useMemo(() => {
     return park.parks.filter((onePark) =>
       onePark.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -122,7 +88,7 @@ const NavBar = observer(() => {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               <Button
-                  className="button"
+                className="button"
                 variant="outline-success"
                 onClick={(e) => {
                   // setSearchQuery(e.target.value)
@@ -137,7 +103,7 @@ const NavBar = observer(() => {
           <Nav>
             <Nav className="ml-auto">
               <Button
-                  className="button"
+                className="button"
                 variant="outline-success"
                 onClick={(e) => {
                   e.preventDefault()
@@ -151,7 +117,7 @@ const NavBar = observer(() => {
             {user.isAuth && user.role === 'stuff' ? (
               <Nav className="ml-auto">
                 <Button
-                    className="button"
+                  className="button"
                   variant="outline-success"
                   onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
                 >
@@ -161,7 +127,7 @@ const NavBar = observer(() => {
             ) : user.isAuth && user.role === 'customer' ? (
               <Nav className="ml-autoATTRACTION">
                 <Button
-                    className="button"
+                  className="button"
                   variant="outline-success"
                   onClick={() => navigate(CUSTOMER_ROUTE + TICKETS_ROUTE)}
                 >
@@ -173,68 +139,77 @@ const NavBar = observer(() => {
         </Container>
       ) : (
         <Container>
-          <Col className='d-flex'>
-          <Navbar.Brand
-            className="brand_name"
-            style={{ color: '#033783', cursor: 'pointer' }}
-            onClick={() => navigate(MAIN_ROUTE)}
-          >
-            Эмоциональные качели
-          </Navbar.Brand>
+          <Col className="d-flex">
+            <Navbar.Brand
+              className="brand_name"
+              style={{ color: '#033783', cursor: 'pointer' }}
+              onClick={() => navigate(MAIN_ROUTE)}
+            >
+              Эмоциональные качели
+            </Navbar.Brand>
 
-          {park.selectedTown ? (
-            <NavDropdown style={{color:'#6D9DE4'}} variant="outline-success" title={park.selectedTown}>
-              {park.towns.map((town, id) => (
+            {park.selectedTown ? (
+              <NavDropdown
+                style={{ color: '#6D9DE4' }}
+                variant="outline-success"
+                title={park.selectedTown}
+              >
+                {park.towns.map((town, id) => (
+                  <Dropdown.Item
+                    key={id}
+                    //   active={}
+                    href="/"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      park.setSelectedTown(town)
+                    }}
+                  >
+                    {town}
+                  </Dropdown.Item>
+                ))}
                 <Dropdown.Item
-                  key={id}
-                  //   active={}
-                  href="/"
                   onClick={(e) => {
                     e.preventDefault()
-                    park.setSelectedTown(town)
+                    park.setSelectedTown(null)
                   }}
                 >
-                  {town}
+                  Сбросить
                 </Dropdown.Item>
-              ))}
-              <Dropdown.Item
-                onClick={(e) => {
-                  e.preventDefault()
-                  park.setSelectedTown(null)
-                }}
+              </NavDropdown>
+            ) : (
+              <NavDropdown
+                style={{ color: '#6D9DE4' }}
+                className="align-baseline"
+                variant="outline-success"
+                title="Выберите город"
               >
-                Сбросить
-              </Dropdown.Item>
-            </NavDropdown>
-          ) : (
-            <NavDropdown style={{color:'#6D9DE4'}} className="align-baseline" variant="outline-success" title="Выберите город">
-              {park.towns.map((town, id) => (
+                {park.towns.map((town, id) => (
+                  <Dropdown.Item
+                    key={id}
+                    //   active={}
+                    href="/"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      park.setSelectedTown(town)
+                    }}
+                  >
+                    {town}
+                  </Dropdown.Item>
+                ))}
                 <Dropdown.Item
-                  key={id}
-                  //   active={}
-                  href="/"
                   onClick={(e) => {
                     e.preventDefault()
-                    park.setSelectedTown(town)
+                    park.setSelectedTown(null)
                   }}
                 >
-                  {town}
+                  Сбросить
                 </Dropdown.Item>
-              ))}
-              <Dropdown.Item
-                onClick={(e) => {
-                  e.preventDefault()
-                  park.setSelectedTown(null)
-                }}
-              >
-                Сбросить
-              </Dropdown.Item>
-            </NavDropdown>
-          )}
-        </Col>
+              </NavDropdown>
+            )}
+          </Col>
           {(location.pathname === PARK_MAIN_ROUTE ||
             location.pathname === '/') && (
-            <Form className='d-flex justify-content-center align-items-center'>
+            <Form className="d-flex justify-content-center align-items-center">
               <FormControl
                 type="search"
                 placeholder="Поиск"
@@ -244,7 +219,7 @@ const NavBar = observer(() => {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               <Button
-                  className="button"
+                className="button"
                 variant="outline-success"
                 onClick={(e) => {
                   // setSearchQuery(e.target.value)
@@ -258,7 +233,7 @@ const NavBar = observer(() => {
           <Nav>
             <Nav className="ml-auto">
               <Button
-                  className="button"
+                className="button"
                 variant="outline-success"
                 onClick={() => navigate(STUFF_ROUTE + LOGIN_ROUTE)}
               >

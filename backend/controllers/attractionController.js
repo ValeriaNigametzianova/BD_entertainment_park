@@ -3,8 +3,9 @@ const { Attraction, Park } = require('../models/models')
 
 class attraсtionController {
   async create(req, res, next) {
+    console.log(req.body)
     try {
-      const {
+      let {
         name,
         hight,
         weight_limitation,
@@ -24,6 +25,7 @@ class attraсtionController {
         max_quantity_people,
         ParkId,
       })
+      console.log('at', attraсtion)
       return res.json(attraсtion)
     } catch (e) {
       next(ApiError.badRequest(e.message))
