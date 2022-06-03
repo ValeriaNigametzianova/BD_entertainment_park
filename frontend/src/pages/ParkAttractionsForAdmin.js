@@ -95,17 +95,18 @@ const ParkAttractionsForAdmin = () => {
                     </div>
                   </Row>
                 </Col>
+                <Button
+                  onClick={() => navigate(STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE)}
+                >
+                  Обновить даннные
+                </Button>
               </Row>
             ))
           )}
       </Row>
       <Row>
-        {attractions ? (
-          <Button
-            onClick={() => navigate(STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE)}
-          >
-            Обновить даннные
-          </Button>
+        {attractions && attractions.attractions.lenght ? (
+          {}
         ) : (
           <Button
             onClick={() => navigate(STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE)}

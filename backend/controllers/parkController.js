@@ -11,6 +11,7 @@ const adminController = require('./adminController')
 class parkController {
   async create(req, res, next) {
     try {
+      console.log(req)
       const {
         name,
         town,
@@ -108,17 +109,21 @@ class parkController {
   }
 
   async update(req, res) {
-    const park = req.body
-    if (!park.id) {
-      res.json(ApiError.badRequest({ message: 'Id не указан' }))
+    try {
+      const park = req.body
+      if (!park.id) {
+        return res.json(ApiError.badRequest({ message: 'Id не указан' }))
+      }
+      await Park.update(park, {
+        where: {
+          id: park.id,
+        },
+      })
+      let updatedPark = await Park.findByPk(park.id)
+      return res.json(updatedPark)
+    } catch (e) {
+      return res.json(ApiError.internal({ message: e }))
     }
-    await Park.update(park, {
-      where: {
-        id: park.id,
-      },
-    })
-    let updatedPark = await Park.findByPk(park.id)
-    return res.json(updatedPark)
   }
 
   async delete(req, res) {
@@ -135,7 +140,7 @@ class parkController {
 
       return res.status(200).json(park)
     } catch (e) {
-      res.json(ApiError.internal({ message: e }))
+      return res.json(ApiError.internal({ message: e }))
     }
   }
 }

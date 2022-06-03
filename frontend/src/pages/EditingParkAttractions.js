@@ -27,14 +27,15 @@ const EditingParkAttractions = () => {
   const [weight_limitation, setWLim] = useState()
   const [hight_limitation, setHLim] = useState()
   const [description, setDescription] = useState()
-  const [age_limitation, setALim] = useState()
+  const [age_limitation, setALim] = useState(20)
   const [max_quantity_people, setMaxQuan] = useState()
   const [active, setActive] = useState()
-  const ParkId = ''
+  let ParkId = ''
   park &&
     park.parks.map((el) => {
       el = el.park
       ParkId = el.id
+      console.log('ParkId', ParkId)
     })
 
   const { id } = useParams()
@@ -53,7 +54,7 @@ const EditingParkAttractions = () => {
     formData.append('weight_limitation', `${weight_limitation}`)
     formData.append('hight_limitation', `${hight_limitation}`)
     formData.append('description', description)
-    formData.append('age_limitation', `${age_limitation}`)
+    formData.set('age_limitation', `${age_limitation}`)
     formData.append('max_quantity_people', `${max_quantity_people}`)
     formData.append('active', active)
     formData.append('ParkId', ParkId)
@@ -61,16 +62,26 @@ const EditingParkAttractions = () => {
   }
   const newAttraction = () => {
     const formData = new FormData()
-    formData.append('name', name)
+    formData.set('name', name)
     formData.append('hight', hight)
-    formData.append('weight_limitation', weight_limitation)
+    formData.append('weight_limitation', `${weight_limitation}`)
     formData.append('hight_limitation', hight_limitation)
     formData.append('description', description)
-    formData.append('age_limitation', age_limitation)
+    formData.set('age_limitation', `${age_limitation}`)
     formData.append('max_quantity_people', max_quantity_people)
     formData.append('active', active)
     formData.append('ParkId', ParkId)
-    createAttraction(formData).then((data) => {})
+    console.log('5555555555555555555555555555')
+    createAttraction(
+      name,
+      hight,
+      weight_limitation,
+      hight_limitation,
+      description,
+      age_limitation,
+      max_quantity_people,
+      ParkId
+    ).then((data) => {})
   }
 
   //   const searchParks = useMemo(() => {
@@ -82,7 +93,7 @@ const EditingParkAttractions = () => {
   return (
     <Container className={'d-flex justify-content-center text-light'}>
       <Col xs={6}>
-        {park && park.parks.length ? (
+        {attractions && attractions.attractions.length ? (
           <Form>
             <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
               <Form.Label style={{ color: 'green' }}>
@@ -160,8 +171,7 @@ const EditingParkAttractions = () => {
             <Button
               variant="primary"
               onClick={() => (
-                updateAttraction(),
-                navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)
+                newAttraction(), navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)
               )}
             >
               Обновить

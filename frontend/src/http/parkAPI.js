@@ -51,9 +51,26 @@ export const editGreenZone = async (greenZone) => {
   return data
 }
 
-export const createAttraction = async (attraction) => {
-  console.log('attr', attraction.name)
-  const { data } = await $authHost.post('api/stuff/attraction', attraction)
+export const createAttraction = async (
+  name,
+  hight,
+  weight_limitation,
+  hight_limitation,
+  description,
+  age_limitation,
+  max_quantity_people,
+  ParkId
+) => {
+  const { data } = await $authHost.post('api/stuff/attraction', {
+    name,
+    hight,
+    weight_limitation,
+    hight_limitation,
+    description,
+    age_limitation,
+    max_quantity_people,
+    ParkId,
+  })
   return data
 }
 export const customerFetchAttraction = async (id) => {

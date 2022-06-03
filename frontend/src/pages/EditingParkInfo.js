@@ -18,8 +18,8 @@ const EditingParkInfo = () => {
   const [name, setName] = useState()
   const [town, setTown] = useState()
   const [square, setSquare] = useState()
-  const [opTime, setOpTime] = useState()
-  const [clTime, setClTime] = useState()
+  const [opening_time, setOpTime] = useState()
+  const [closing_time, setClTime] = useState()
   const [description, setDescription] = useState()
   const [animator, setAnimator] = useState()
   const [watersafe, setWatersafe] = useState()
@@ -29,6 +29,7 @@ const EditingParkInfo = () => {
   const [adress, setAdress] = useState()
   const [gzName, setGzName] = useState()
   const [gzDescription, setGzDescription] = useState()
+  let ParkId = ''
 
   useEffect(() => {
     stuffFetchPark().then((data) => setPark(data))
@@ -37,14 +38,20 @@ const EditingParkInfo = () => {
   console.log('el', park)
   console.log('elll', greenZones)
   const navigate = useNavigate()
+  park &&
+    park.parks.map((el) => {
+      el = el.park
+      ParkId = el.id
+      console.log('ParkId', ParkId)
+    })
 
   const updatePark = () => {
     const formData = new FormData()
     formData.append('name', name)
     formData.append('town', town)
     formData.append('square', `${square}`)
-    formData.append('opening_time', opTime)
-    formData.append('closing_time', clTime)
+    formData.append('opening_time', opening_time)
+    formData.append('closing_time', closing_time)
     formData.append('description', description)
     formData.append('animator', animator)
     formData.append('watersafe', watersafe)
@@ -56,13 +63,14 @@ const EditingParkInfo = () => {
     // formData.append('description', gzDescription)
     editInfo(formData).then((data) => {})
   }
-  const newPark = () => {
+  const newPark = async () => {
+    let data
     const formData = new FormData()
     formData.append('name', name)
     formData.append('town', town)
     formData.append('square', `${square}`)
-    formData.append('opening_time', opTime)
-    formData.append('closing_time', clTime)
+    formData.append('opening_time', opening_time)
+    formData.append('closing_time', closing_time)
     formData.append('description', description)
     formData.append('animator', animator)
     formData.append('watersafe', watersafe)
@@ -70,16 +78,32 @@ const EditingParkInfo = () => {
     formData.append('cafe', `${cafe}`)
     formData.append('shop', `${shop}`)
     formData.append('adress', adress)
-    // formData.append('name', gzName)
-    // formData.append('description', gzDescription)
+    formData.append('name', gzName)
+    formData.append('description', gzDescription)
     createPark(formData).then((data) => {})
+    // data = await createPark(
+    //   name,
+    //   town,
+    //   square,
+    //   opening_time,
+    //   closing_time,
+    //   description,
+    //   animator,
+    //   watersafe,
+    //   zoo,
+    //   cafe,
+    //   shop,
+    //   adress
+    // )
   }
 
-  const newGreenZone = () => {
+  const newGreenZone = async () => {
+    let data
     const formData = new FormData()
     formData.append('name', gzName)
     formData.append('description', gzDescription)
     createGreenZone(formData)
+    // data = await createGreenZone(name, gzDescription, ParkId)
   }
 
   const updateGreenZone = () => {
@@ -137,7 +161,7 @@ const EditingParkInfo = () => {
                     <Form.Control
                       placeholder="Время открытия"
                       defaultValue={el?.opening_time}
-                      value={opTime}
+                      value={opening_time}
                       onChange={(e) => setOpTime(Date(e.target.value))}
                     />
                     <Form.Label>Время закрытия</Form.Label>
@@ -145,7 +169,7 @@ const EditingParkInfo = () => {
                       type="dateTime"
                       placeholder="Время закрытия"
                       defaultValue={el?.closing_time}
-                      value={clTime}
+                      value={closing_time}
                       onChange={(e) => setClTime(Date(e.target.value))}
                     />
                     <Form.Label>Описание</Form.Label>
@@ -272,7 +296,7 @@ const EditingParkInfo = () => {
               <Form.Label>Время открытия</Form.Label>
               <Form.Control
                 placeholder="Время открытия"
-                value={opTime}
+                value={opening_time}
                 onChange={(e) => setOpTime(e.target.value)}
               ></Form.Control>
 
@@ -280,7 +304,7 @@ const EditingParkInfo = () => {
               <Form.Control
                 type="dateTime"
                 placeholder="Время закрытия"
-                value={clTime}
+                value={closing_time}
                 onChange={(e) => setClTime(e.target.value)}
               ></Form.Control>
 
