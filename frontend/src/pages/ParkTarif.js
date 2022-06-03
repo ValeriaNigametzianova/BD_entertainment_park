@@ -10,7 +10,7 @@ import {
   PARK_TARIF_ROUTE,
 } from '../utils/Consts'
 
-const ParkAttractions = () => {
+const ParkTarifs = () => {
   const [park, setPark] = useState()
   const [tarif, setTarif] = useState()
   const { id } = useParams()
@@ -35,7 +35,7 @@ const ParkAttractions = () => {
           <div
             style={{ color: 'green', cursor: 'pointer' }}
             onClick={() =>
-              navigate(PARK_MAIN_ROUTE + '/' + park.id + PARK_INFO_ROUTE)
+              navigate(PARK_MAIN_ROUTE + '/' + id + PARK_INFO_ROUTE)
             }
           >
             Характеристики
@@ -45,7 +45,7 @@ const ParkAttractions = () => {
           <div
             style={{ color: 'green', cursor: 'pointer' }}
             onClick={() =>
-              navigate(PARK_MAIN_ROUTE + '/' + park.id + PARK_ATTRACTIONS_ROUTE)
+              navigate(PARK_MAIN_ROUTE + '/' + id + PARK_ATTRACTIONS_ROUTE)
             }
           >
             Аттракционы
@@ -70,4 +70,4 @@ const ParkAttractions = () => {
   )
 }
 
-export default ParkAttractions
+export default ParkTarifs
