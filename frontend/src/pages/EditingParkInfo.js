@@ -11,6 +11,11 @@ import {
   createGreenZone,
 } from '../http/parkAPI'
 import { MAIN_ADMIN_ROUTE, STUFF_ROUTE } from '../utils/Consts'
+import '../styles/cont/contr.css'
+import '../styles/navBar/navbar.css'
+import '../styles/fonts/heading3.css'
+import '../styles/fonts/heading4.css'
+import '../styles/fonts/heading3.css'
 
 const EditingParkInfo = () => {
   const [park, setPark] = useState()
@@ -120,283 +125,327 @@ const EditingParkInfo = () => {
   //   }, [searchQuery, park.parks])
 
   return (
-    <Container className={'d-flex justify-content-center text-light'}>
-      <Col xs={6}>
-        {park && park.parks.length ? (
-          <Form>
-            <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
-              <Form.Label style={{ color: 'green' }}>
-                Редактировать информацию о парке
-              </Form.Label>
-            </Form.Group>
-            {park &&
-              park.parks.map((el) => {
-                el = el.park
-                return (
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
-                    {console.log('el', el)}
-                    <Form.Label>Название</Form.Label>
-                    <Form.Control
-                      placeholder="Название"
-                      defaultValue={el?.name}
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                    <Form.Label>Город</Form.Label>
-                    <Form.Control
-                      placeholder="Город"
-                      defaultValue={el?.town}
-                      value={town}
-                      onChange={(e) => setTown(e.target.value)}
-                    />
-                    <Form.Label>Площадь</Form.Label>
-                    <Form.Control
-                      type="number"
-                      placeholder="Площадь"
-                      defaultValue={el?.square}
-                      value={square}
-                      onChange={(e) => setSquare(Number(e.target.value))}
-                    />
-                    <Form.Label>Время открытия</Form.Label>
-                    <Form.Control
-                      placeholder="Время открытия"
-                      defaultValue={el?.opening_time}
-                      value={opening_time}
-                      onChange={(e) => setOpTime(Date(e.target.value))}
-                    />
-                    <Form.Label>Время закрытия</Form.Label>
-                    <Form.Control
-                      type="dateTime"
-                      placeholder="Время закрытия"
-                      defaultValue={el?.closing_time}
-                      value={closing_time}
-                      onChange={(e) => setClTime(Date(e.target.value))}
-                    />
-                    <Form.Label>Описание</Form.Label>
-                    <Form.Control
-                      as="textarea"
-                      placeholder="Описание"
-                      defaultValue={el?.description}
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                    />
-                    <Form.Check
-                      type={'checkbox'}
-                      label={`Наличие аниматоров`}
-                      value={animator}
-                      onChange={(e) => setAnimator(Boolean(e.target.value))}
-                    />
-                    <Form.Check
-                      type={'checkbox'}
-                      label={`Наличие водных пространств`}
-                      value={watersafe}
-                      onChange={(e) => setWatersafe(Boolean(e.target.value))}
-                    />
-                    <Form.Check
-                      type={'checkbox'}
-                      label={`Наличие уголка с животными`}
-                      value={zoo}
-                      onChange={(e) => setZoo(Boolean(e.target.value))}
-                    />
-                    <Form.Label>Количестов кафе</Form.Label>
-                    <Form.Control
-                      type="number"
-                      placeholder="Количестов кафе"
-                      defaultValue={el?.cafe}
-                      value={cafe}
-                      onChange={(e) => setCafe(Number(e.target.value))}
-                    />
-                    <Form.Label>Количестов сувернирных лавок</Form.Label>
-                    <Form.Control
-                      type="number"
-                      placeholder="Количестов сувернирных лавок"
-                      defaultValue={el?.shop}
-                      value={shop}
-                      onChange={(e) => setShop(Number(e.target.value))}
-                    />
-                    <Form.Label>Адрес</Form.Label>
-                    <Form.Control
-                      placeholder="Адрес"
-                      defaultValue={el?.adress}
-                      value={adress}
-                      onChange={(e) => setAdress(e.target.value)}
-                    />
-                  </Form.Group>
-                )
-              })}
-            <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
-              <Form.Label style={{ color: 'green' }}>
-                Зоны для отдыха и прогулок
-              </Form.Label>
-            </Form.Group>
-            {greenZones &&
-              greenZones.parks.map((el) =>
-                el.greenZones.map((el) => (
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
-                    {console.log('el', el)}
-                    <Form.Label>Название</Form.Label>
-                    <Form.Control
-                      placeholder="Название"
-                      defaultValue={el?.name}
-                      value={gzName}
-                      onChange={(e) => setGzName(e.target.value)}
-                    ></Form.Control>
+    <Container className="contr">
+      <Container className={'d-flex justify-content-center text-light'}>
+        <Col xs={6}>
+          {park && park.parks.length ? (
+            <Form>
+              <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
+                <Form.Label className="heading2_1" style={{ color: '#151E20' }}>
+                  Редактировать информацию о парке
+                </Form.Label>
+              </Form.Group>
+              {park &&
+                park.parks.map((el) => {
+                  el = el.park
+                  return (
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                      {console.log('el', el)}
+                      <Form.Label className="heading3">Название</Form.Label>
+                      <Form.Control
+                        className="heading4"
+                        placeholder="Название"
+                        defaultValue={el?.name}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                      <Form.Label className="heading3">Город</Form.Label>
+                      <Form.Control
+                        className="heading4"
+                        placeholder="Город"
+                        defaultValue={el?.town}
+                        value={town}
+                        onChange={(e) => setTown(e.target.value)}
+                      />
+                      <Form.Label className="heading3">Площадь</Form.Label>
+                      <Form.Control
+                        className="heading4"
+                        type="number"
+                        placeholder="Площадь"
+                        defaultValue={el?.square}
+                        value={square}
+                        onChange={(e) => setSquare(Number(e.target.value))}
+                      />
+                      <Form.Label className="heading3">
+                        Время открытия
+                      </Form.Label>
+                      <Form.Control
+                        className="heading4"
+                        placeholder="Время открытия"
+                        defaultValue={el?.opening_time}
+                        value={opening_time}
+                        onChange={(e) => setOpTime(Date(e.target.value))}
+                      />
+                      <Form.Label className="heading3">
+                        Время закрытия
+                      </Form.Label>
+                      <Form.Control
+                        className="heading4"
+                        type="dateTime"
+                        placeholder="Время закрытия"
+                        defaultValue={el?.closing_time}
+                        value={closing_time}
+                        onChange={(e) => setClTime(Date(e.target.value))}
+                      />
+                      <Form.Label className="heading3">Описание</Form.Label>
+                      <Form.Control
+                        className="heading4"
+                        as="textarea"
+                        placeholder="Описание"
+                        defaultValue={el?.description}
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                      />
+                      <Form.Check
+                        className="heading4"
+                        type={'checkbox'}
+                        label={`Наличие аниматоров`}
+                        value={animator}
+                        onChange={(e) => setAnimator(Boolean(e.target.value))}
+                      />
+                      <Form.Check
+                        className="heading4"
+                        type={'checkbox'}
+                        label={`Наличие водных пространств`}
+                        value={watersafe}
+                        onChange={(e) => setWatersafe(Boolean(e.target.value))}
+                      />
+                      <Form.Check
+                        className="heading4"
+                        type={'checkbox'}
+                        label={`Наличие уголка с животными`}
+                        value={zoo}
+                        onChange={(e) => setZoo(Boolean(e.target.value))}
+                      />
+                      <Form.Label className="heading3">
+                        Количестов кафе
+                      </Form.Label>
+                      <Form.Control
+                        className="heading4"
+                        type="number"
+                        placeholder="Количестов кафе"
+                        defaultValue={el?.cafe}
+                        value={cafe}
+                        onChange={(e) => setCafe(Number(e.target.value))}
+                      />
+                      <Form.Label className="heading3">
+                        Количестов сувернирных лавок
+                      </Form.Label>
+                      <Form.Control
+                        className="heading4"
+                        type="number"
+                        placeholder="Количестов сувернирных лавок"
+                        defaultValue={el?.shop}
+                        value={shop}
+                        onChange={(e) => setShop(Number(e.target.value))}
+                      />
+                      <Form.Label className="heading3">Адрес</Form.Label>
+                      <Form.Control
+                        className="heading4"
+                        placeholder="Адрес"
+                        defaultValue={el?.adress}
+                        value={adress}
+                        onChange={(e) => setAdress(e.target.value)}
+                      />
+                    </Form.Group>
+                  )
+                })}
+              <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
+                <Form.Label className="heading2_1" style={{ color: '#151E20' }}>
+                  Зоны для отдыха и прогулок
+                </Form.Label>
+              </Form.Group>
+              {greenZones &&
+                greenZones.parks.map((el) =>
+                  el.greenZones.map((el) => (
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                      {console.log('el', el)}
+                      <Form.Label className="heading3">Название</Form.Label>
+                      <Form.Control
+                        className="heading4"
+                        placeholder="Название"
+                        defaultValue={el?.name}
+                        value={gzName}
+                        onChange={(e) => setGzName(e.target.value)}
+                      ></Form.Control>
 
-                    <Form.Label>Описание</Form.Label>
-                    <Form.Control
-                      as="textarea"
-                      placeholder="Описание"
-                      defaultValue={el?.description}
-                      value={gzDescription}
-                      onChange={(e) => setGzDescription(e.target.value)}
-                    ></Form.Control>
-                  </Form.Group>
-                ))
-              )}
-            <Button
-              variant="primary"
-              onClick={() => (
-                updatePark(),
-                updateGreenZone(),
-                navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)
-              )}
-            >
-              Обновить
-            </Button>
-          </Form>
-        ) : (
-          <Form>
-            <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
-              <Form.Label style={{ color: 'green' }}>Создать парк</Form.Label>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              {/* {console.log('el', el)} */}
-              <Form.Label>Название</Form.Label>
-              <Form.Control
-                placeholder="Название"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              ></Form.Control>
+                      <Form.Label className="heading3">Описание</Form.Label>
+                      <Form.Control
+                        className="heading4"
+                        as="textarea"
+                        placeholder="Описание"
+                        defaultValue={el?.description}
+                        value={gzDescription}
+                        onChange={(e) => setGzDescription(e.target.value)}
+                      ></Form.Control>
+                    </Form.Group>
+                  ))
+                )}
+              <Button
+                className="button"
+                variant="primary"
+                onClick={() => (
+                  updatePark(),
+                  updateGreenZone(),
+                  navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)
+                )}
+              >
+                Обновить
+              </Button>
+            </Form>
+          ) : (
+            <Form>
+              <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
+                <Form.Label className="heading2_1" style={{ color: '#151E20' }}>
+                  Создать парк
+                </Form.Label>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                {/* {console.log('el', el)} */}
+                <Form.Label className="heading3">Название</Form.Label>
+                <Form.Control
+                  className="heading4"
+                  placeholder="Название"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                ></Form.Control>
 
-              <Form.Label>Город</Form.Label>
-              <Form.Control
-                placeholder="Город"
-                value={town}
-                onChange={(e) => setTown(e.target.value)}
-              ></Form.Control>
+                <Form.Label className="heading3">Город</Form.Label>
+                <Form.Control
+                  className="heading4"
+                  placeholder="Город"
+                  value={town}
+                  onChange={(e) => setTown(e.target.value)}
+                ></Form.Control>
 
-              <Form.Label>Площадь</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Площадь"
-                value={square}
-                onChange={(e) => setSquare(e.target.value)}
-              ></Form.Control>
+                <Form.Label className="heading3">Площадь</Form.Label>
+                <Form.Control
+                  className="heading4"
+                  type="number"
+                  placeholder="Площадь"
+                  value={square}
+                  onChange={(e) => setSquare(e.target.value)}
+                ></Form.Control>
 
-              <Form.Label>Время открытия</Form.Label>
-              <Form.Control
-                placeholder="Время открытия"
-                value={opening_time}
-                onChange={(e) => setOpTime(e.target.value)}
-              ></Form.Control>
+                <Form.Label className="heading3">Время открытия</Form.Label>
+                <Form.Control
+                  className="heading4"
+                  placeholder="Время открытия"
+                  value={opening_time}
+                  onChange={(e) => setOpTime(e.target.value)}
+                ></Form.Control>
 
-              <Form.Label>Время закрытия</Form.Label>
-              <Form.Control
-                type="dateTime"
-                placeholder="Время закрытия"
-                value={closing_time}
-                onChange={(e) => setClTime(e.target.value)}
-              ></Form.Control>
+                <Form.Label className="heading3">Время закрытия</Form.Label>
+                <Form.Control
+                  className="heading4"
+                  type="dateTime"
+                  placeholder="Время закрытия"
+                  value={closing_time}
+                  onChange={(e) => setClTime(e.target.value)}
+                ></Form.Control>
 
-              <Form.Label>Описание</Form.Label>
-              <Form.Control
-                as="textarea"
-                placeholder="Описание"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              ></Form.Control>
+                <Form.Label className="heading3">Описание</Form.Label>
+                <Form.Control
+                  className="heading4"
+                  as="textarea"
+                  placeholder="Описание"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></Form.Control>
 
-              <Form.Check
-                type={'checkbox'}
-                label={`Наличие аниматоров`}
-                value={animator}
-                onChange={(e) => setAnimator(e.target.value)}
-              />
+                <Form.Check
+                  className="heading4"
+                  type={'checkbox'}
+                  label={`Наличие аниматоров`}
+                  value={animator}
+                  onChange={(e) => setAnimator(e.target.value)}
+                />
 
-              <Form.Check
-                type={'checkbox'}
-                label={`Наличие водных пространств`}
-                value={watersafe}
-                onChange={(e) => setWatersafe(e.target.value)}
-              />
+                <Form.Check
+                  className="heading4"
+                  type={'checkbox'}
+                  label={`Наличие водных пространств`}
+                  value={watersafe}
+                  onChange={(e) => setWatersafe(e.target.value)}
+                />
 
-              <Form.Check
-                type={'checkbox'}
-                label={`Наличие уголка с животными`}
-                value={zoo}
-                onChange={(e) => setZoo(e.target.value)}
-              />
+                <Form.Check
+                  className="heading4"
+                  type={'checkbox'}
+                  label={`Наличие уголка с животными`}
+                  value={zoo}
+                  onChange={(e) => setZoo(e.target.value)}
+                />
 
-              <Form.Label>Количестов кафе</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Количестов кафе"
-                value={cafe}
-                onChange={(e) => setCafe(e.target.value)}
-              ></Form.Control>
+                <Form.Label className="heading3">Количестов кафе</Form.Label>
+                <Form.Control
+                  className="heading4"
+                  type="number"
+                  placeholder="Количестов кафе"
+                  value={cafe}
+                  onChange={(e) => setCafe(e.target.value)}
+                ></Form.Control>
 
-              <Form.Label>Количестов сувернирных лавок</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Количестов сувернирных лавок"
-                value={shop}
-                onChange={(e) => setShop(e.target.value)}
-              ></Form.Control>
+                <Form.Label className="heading3">
+                  Количестов сувернирных лавок
+                </Form.Label>
+                <Form.Control
+                  className="heading4"
+                  type="number"
+                  placeholder="Количестов сувернирных лавок"
+                  value={shop}
+                  onChange={(e) => setShop(e.target.value)}
+                ></Form.Control>
 
-              <Form.Label>Адрес</Form.Label>
-              <Form.Control
-                placeholder="Адрес"
-                value={adress}
-                onChange={(e) => setAdress(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
+                <Form.Label className="heading3">Адрес</Form.Label>
+                <Form.Control
+                  className="heading4"
+                  placeholder="Адрес"
+                  value={adress}
+                  onChange={(e) => setAdress(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
 
-            <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
-              <Form.Label style={{ color: 'green' }}>
-                Зоны для отдыха и прогулок
-              </Form.Label>
-            </Form.Group>
+              <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
+                <Form.Label className="heading2_1" style={{ color: '#151E20' }}>
+                  Зоны для отдыха и прогулок
+                </Form.Label>
+              </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              {/* {console.log('el', el)} */}
-              <Form.Label>Название</Form.Label>
-              <Form.Control
-                placeholder="Название"
-                value={gzName}
-                onChange={(e) => setGzName(e.target.value)}
-              ></Form.Control>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                {/* {console.log('el', el)} */}
+                <Form.Label className="heading3">Название</Form.Label>
+                <Form.Control
+                  className="heading4"
+                  placeholder="Название"
+                  value={gzName}
+                  onChange={(e) => setGzName(e.target.value)}
+                ></Form.Control>
 
-              <Form.Label>Описание</Form.Label>
-              <Form.Control
-                as="textarea"
-                placeholder="Описание"
-                value={gzDescription}
-                onChange={(e) => setGzDescription(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Button
-              variant="primary"
-              onClick={() => (
-                newPark(),
-                newGreenZone(),
-                navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)
-              )}
-            >
-              Создать
-            </Button>
-          </Form>
-        )}
-      </Col>
+                <Form.Label className="heading3">Описание</Form.Label>
+                <Form.Control
+                  className="heading4"
+                  as="textarea"
+                  placeholder="Описание"
+                  value={gzDescription}
+                  onChange={(e) => setGzDescription(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Button
+                className="button"
+                variant="primary"
+                onClick={() => (
+                  newPark(),
+                  newGreenZone(),
+                  navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)
+                )}
+              >
+                Создать
+              </Button>
+            </Form>
+          )}
+        </Col>
+      </Container>
     </Container>
   )
 }

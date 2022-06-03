@@ -21,6 +21,13 @@ import {
 import { Context } from '../index'
 import { customerLogin, customerRegistration } from '../http/customerAPI'
 import { stuffLogin, stuffRegistration } from '../http/stuffAPI'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '../styles/fonts/heading2.css'
+import '../styles/navBar/navbar.css'
+import '../styles/fonts/heading4.css'
+import '../styles/fonts/heading3.css'
+import '../styles/fonts/heading5.css'
+import '../styles/button/button.css'
 
 const Auth = observer(() => {
   const { user } = useContext(Context)
@@ -73,14 +80,15 @@ const Auth = observer(() => {
   return (
     <Container
       className="d-flex justify-content-center align-items-center"
-      style={{ height: window.innerHeight - 54 }}
+      //style={{ height: window.innerHeight - 54 }}
     >
       <Card style={{ width: 600 }} className="p-5">
-        <h2 className="m-auto">{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
+        <h2 className="heading2">{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
 
         <Row>
           <Col className="d-flex justify-content-center">
             <div
+              className="heading3_1"
               style={{ cursor: 'pointer' }}
               onClick={() =>
                 navigate(
@@ -95,6 +103,7 @@ const Auth = observer(() => {
           </Col>
           <Col className="d-flex justify-content-center">
             <div
+              className="heading3_1"
               style={{ cursor: 'pointer' }}
               onClick={() => navigate(CUSTOMER_ROUTE + LOGIN_ROUTE)}
             >
@@ -120,9 +129,10 @@ const Auth = observer(() => {
             />
             <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
               {isLogin ? (
-                <div>
+                <div className="heading4">
                   Нет аккаунта?{' '}
                   <div
+                    className="heading5"
                     style={{ cursor: 'pointer' }}
                     onClick={() => navigate(STUFF_ROUTE + REGISTRATION_ROUTE)}
                   >
@@ -130,9 +140,10 @@ const Auth = observer(() => {
                   </div>
                 </div>
               ) : (
-                <div>
+                <div className="heading4">
                   Есть аккаунт?{' '}
                   <div
+                    className="heading5"
                     style={{ cursor: 'pointer' }}
                     onClick={() => navigate(STUFF_ROUTE + LOGIN_ROUTE)}
                   >
@@ -140,7 +151,11 @@ const Auth = observer(() => {
                   </div>
                 </div>
               )}
-              <Button variant={'outline-success'} onClick={click}>
+              <Button
+                className="button2"
+                variant={'outline-success'}
+                onClick={click}
+              >
                 {isLogin ? 'Войти' : 'Регистрация'}
               </Button>
             </Row>
@@ -154,7 +169,11 @@ const Auth = observer(() => {
               onChange={(e) => setEmail(e.target.value)}
             />
             <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
-              <Button variant={'outline-success'} onClick={click}>
+              <Button
+                className="button2"
+                variant={'outline-success'}
+                onClick={click}
+              >
                 {isLogin ? 'Войти' : null}
               </Button>
             </Row>

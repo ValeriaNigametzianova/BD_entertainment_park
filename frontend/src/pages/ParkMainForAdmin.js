@@ -14,6 +14,13 @@ import {
   TARIF_ADMIN_ROUTE,
 } from '../utils/Consts'
 import EditingParkInfo from './EditingParkInfo'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '../styles/navBar/navbar.css'
+import '../styles/cont/contr.css'
+import '../styles/fonts/heading3.css'
+import '../styles/fonts/heading2.css'
+import '../styles/button/button.css'
+import '../styles/fonts/heading4.css'
 
 const ParkMainForAdmin = () => {
   const [park, setPark] = useState()
@@ -26,127 +33,120 @@ const ParkMainForAdmin = () => {
   console.log('2', park)
   console.log('4', greenZones)
   return (
-    <Container md={9}>
-      <Row className="mt-5 mb-5 d-flex justify-content-between">
-        <Col md={1}>
-          <div
-            style={{ color: 'green', cursor: 'pointer' }}
-            onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
-          >
-            О парке
-          </div>
-        </Col>
-        <Col md={1}>
-          <div
-            style={{ color: 'green', cursor: 'pointer' }}
-            onClick={() => navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)}
-          >
-            Аттракционы
-          </div>
-        </Col>
-        <Col md={1}>
-          <div
-            style={{ color: 'green', cursor: 'pointer' }}
-            onClick={() => navigate(STUFF_ROUTE + TARIF_ADMIN_ROUTE)}
-          >
-            Тарифы
-          </div>
-        </Col>
-      </Row>
-      <Row mt={5}>
-        <h2 style={{ color: 'white' }}>Парк </h2>
-      </Row>
-      {console.log('hii', { park })}
-      {/* {console.log(
+    <Container className="contr">
+      <Container md={9}>
+        <Row mt={5} className="contr1">
+          <h2 className="heading2_1" style={{ color: '#fcfcee' }}>
+            Парк{' '}
+          </h2>
+        </Row>
+        <Row className="d-flex">
+          <Col>
+            <div
+              className="heading3_2"
+              style={{ textAlign: 'left', cursor: 'pointer' }}
+              onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
+            >
+              О парке
+            </div>
+          </Col>
+          <Col>
+            <div
+              className="heading3_2"
+              style={{ textAlign: 'center', cursor: 'pointer' }}
+              onClick={() => navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)}
+            >
+              Аттракционы
+            </div>
+          </Col>
+          <Col>
+            <div
+              className="heading3_2"
+              style={{ textAlign: 'right', cursor: 'pointer' }}
+              onClick={() => navigate(STUFF_ROUTE + TARIF_ADMIN_ROUTE)}
+            >
+              Тарифы
+            </div>
+          </Col>
+        </Row>
+        {console.log('hii', { park })}
+        {/* {console.log(
               'el.name',
               park.parks.map((el) => el.name)
             )} */}
-      {park &&
-        park.parks.map((el) => {
-          el = el.park
-          return (
-            <Row>
-              <Col md={9}>
-                <Row>
-                  <h2 style={{ color: 'white' }}> {el?.name}</h2>
-                </Row>
-                <Row>
-                  <div style={{ color: 'white' }}>Площадь: {el?.square}</div>
-                </Row>
-                <Row>
-                  <div style={{ color: 'white' }}>
-                    Время открытия: {el?.opening_time}
-                  </div>
-                </Row>
-                <Row>
-                  <div style={{ color: 'white' }}>
-                    Время закрытия: {el?.closing_time}
-                  </div>
-                </Row>
-                <Row>
-                  <div style={{ color: 'white' }}>
-                    Описание: {el?.description}
-                  </div>
-                </Row>
-              </Col>
-              <Col md={6}>
-                <Row>
-                  <div style={{ color: 'white' }}>
-                    Наличие аниматоров: {el?.animators}
-                  </div>
-                </Row>
-                <Row>
-                  <div style={{ color: 'white' }}>
-                    Наличие водных пространств: {el?.watersafe}
-                  </div>
-                </Row>
-                <Row>
-                  <div style={{ color: 'white' }}>
-                    Наличие уголка с животными: {el?.zoo}
-                  </div>
-                </Row>
-                <Row>
-                  <div style={{ color: 'white' }}>
-                    Количетво кафе и ресторанов: {el?.cafe}
-                  </div>
-                </Row>
-                <Row>
-                  <div style={{ color: 'white' }}>
-                    Количество магазинов и сувенирных лавок: {el?.shops}
-                  </div>
-                </Row>
-              </Col>
-            </Row>
-          )
-        })}
-      {greenZones &&
-        greenZones.parks.map((el) =>
-          el.greenZones.map((el) => (
-            <Row>
-              <Row mt={5}>
-                <h2 style={{ color: 'white' }}>{el?.name}</h2>
-                <div style={{ color: 'white' }}>{el?.description}</div>
+        {park &&
+          park.parks.map((el) => {
+            el = el.park
+            return (
+              <Row>
+                <Col md={9}>
+                  <Row className="heading2_1">
+                    <h2> {el?.name}</h2>
+                  </Row>
+                  <Row>
+                    <div className="heading4">Площадь: {el?.square}</div>
+                  </Row>
+                  <Row className="heading4">
+                    <div>Время открытия: {el?.opening_time}</div>
+                  </Row>
+                  <Row className="heading4">
+                    <div>Время закрытия: {el?.closing_time}</div>
+                  </Row>
+                  <Row className="heading4">
+                    <div>Описание: {el?.description}</div>
+                  </Row>
+                </Col>
+                <Col md={6}>
+                  <Row className="heading4">
+                    <div>Наличие аниматоров: {el?.animators}</div>
+                  </Row>
+                  <Row className="heading4">
+                    <div>Наличие водных пространств: {el?.watersafe}</div>
+                  </Row>
+                  <Row className="heading4">
+                    <div>Наличие уголка с животными: {el?.zoo}</div>
+                  </Row>
+                  <Row className="heading4">
+                    <div>Количетво кафе и ресторанов: {el?.cafe}</div>
+                  </Row>
+                  <Row className="heading4">
+                    <div>
+                      Количество магазинов и сувенирных лавок: {el?.shops}
+                    </div>
+                  </Row>
+                </Col>
               </Row>
-            </Row>
-          ))
-        )}
-      <Row>
-        {park && park.parks.length ? (
-          <Button
-            className="mt-4 mb-5 btn-success"
-            onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}
-          >
-            Обновить даннные
-          </Button>
-        ) : (
-          <Button
-            className="mt-4 mb-5 btn-success"
-            onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}
-          >
-            Создать парк
-          </Button>
-        )}
-      </Row>
+            )
+          })}
+        {greenZones &&
+          greenZones.parks.map((el) =>
+            el.greenZones.map((el) => (
+              <Row>
+                <Row mt={5}>
+                  <h2 className="heading4">{el?.name}</h2>
+                  <div className="heading4">{el?.description}</div>
+                </Row>
+              </Row>
+            ))
+          )}
+        <Row className="d-flex">
+          {park && park.parks.length ? (
+            <Button
+              className="button2"
+              onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}
+            >
+              Обновить даннные
+            </Button>
+          ) : (
+            <Button
+              className="button2"
+              onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}
+            >
+              Создать парк
+            </Button>
+          )}
+        </Row>
+      </Container>
     </Container>
   )
 }

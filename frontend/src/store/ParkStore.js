@@ -1,5 +1,4 @@
 import { makeAutoObservable } from 'mobx'
-
 export default class ParkStore {
   constructor() {
     this._parks = []

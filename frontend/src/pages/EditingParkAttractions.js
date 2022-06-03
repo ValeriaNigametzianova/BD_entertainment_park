@@ -18,6 +18,7 @@ import {
   MAIN_ADMIN_ROUTE,
   STUFF_ROUTE,
 } from '../utils/Consts'
+import '../styles/navBar/navbar.css'
 
 const EditingParkAttractions = () => {
   const [park, setPark] = useState()
@@ -169,6 +170,7 @@ const EditingParkAttractions = () => {
               ))}
 
             <Button
+              className="button"
               variant="primary"
               onClick={() => (
                 newAttraction(), navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)
@@ -242,6 +244,7 @@ const EditingParkAttractions = () => {
               />
             </Form.Group>
             <Button
+              className="button"
               variant="primary"
               onClick={() => (
                 newAttraction(), navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)

@@ -19,7 +19,7 @@ const Park = sequelize.define('Park', {
 
 const Attraction = sequelize.define('Attraction', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: DataTypes.INTEGER, allowNull: false },
+  name: { type: DataTypes.STRING, allowNull: false },
   hight: { type: DataTypes.INTEGER },
   weight_limitation: { type: DataTypes.INTEGER },
   hight_limitation: { type: DataTypes.INTEGER },

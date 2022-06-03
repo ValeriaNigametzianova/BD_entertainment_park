@@ -14,6 +14,7 @@ import {
   TARIF_ADMIN_ROUTE,
 } from '../utils/Consts'
 import EditingParkTarif from './EditingParkTarif'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const ParkTarifForAdmin = () => {
   const [park, setPark] = useState()
@@ -23,30 +24,36 @@ const ParkTarifForAdmin = () => {
     stuffFetchPark().then((data) => setPark(data.park))
     stuffFetchTarif().then((data) => setTarif(data))
   }, [])
-  console.log('888', tarif)
+  console.log('777', tarif)
   const navigate = useNavigate()
   return (
-    <Container md={9}>
+    <Container className="contr">
+      <Row mt-5 className="heading2_1">
+        <h2 style={{ color: '#151E20' }}>Тариф</h2>
+      </Row>
       <Row className="d-flex justify-content-between">
-        <Col md={1}>
+        <Col>
           <div
-            style={{ color: 'green', cursor: 'pointer' }}
+            className="heading3_2"
+            style={{ textAlign: 'left', cursor: 'pointer' }}
             onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
           >
             О парке
           </div>
         </Col>
-        <Col md={1}>
+        <Col>
           <div
-            style={{ color: 'green', cursor: 'pointer' }}
+            className="heading3_2"
+            style={{ textAlign: 'center', cursor: 'pointer' }}
             onClick={() => navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)}
           >
             Аттракционы
           </div>
         </Col>
-        <Col md={1}>
+        <Col>
           <div
-            style={{ color: 'green', cursor: 'pointer' }}
+            className="heading3_2"
+            style={{ textAlign: 'right', cursor: 'pointer' }}
             onClick={() => navigate(STUFF_ROUTE + TARIF_ADMIN_ROUTE)}
           >
             Тарифы

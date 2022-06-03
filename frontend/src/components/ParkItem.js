@@ -2,16 +2,21 @@ import React from 'react'
 import { Col, Card, Image, Row, Container } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { PARK_MAIN_ROUTE } from '../utils/Consts'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '../styles/container/container.css'
 
 const ParkItem = ({ park }) => {
   const navigate = useNavigate()
-  console.log('////', park)
+  // console.log(navigate)
   return (
-    <Container onClick={() => navigate(PARK_MAIN_ROUTE + '/' + park.id)}>
+    <Container
+      className="container"
+      onClick={() => navigate(PARK_MAIN_ROUTE + '/' + park.id)}
+    >
       <Row
         className="mt-2 px-2"
         style={{
-          background: 'lightgrey',
+          background: '#FEFDEF',
           cursor: 'pointer',
           aligne: 'centre',
           borderRadius: '3px',

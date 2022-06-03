@@ -1,0 +1,10 @@
+.heading1 {
+    font-family: system-ui;
+    font-size: 30pt;
+    font-style: normal;
+    font-weight: 100;
+    font-stretch: semi-expanded;
+    margin-left: 10%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}

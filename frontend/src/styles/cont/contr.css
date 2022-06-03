@@ -1,0 +1,23 @@
+.contr {
+    background: #FEFDEF;
+    max-width: 85%;
+    min-height: 450px;
+    position: absolute;
+    right:0px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 20px;
+    padding-top:20px;
+}
+.contr1 {
+    background: transparent;
+    max-width: 100%;
+    min-height: 450px;
+    position: absolute;
+    top: -100px;
+    left: -7px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 20px;
+    padding-top:20px;
+}
