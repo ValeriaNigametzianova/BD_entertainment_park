@@ -110,7 +110,20 @@ class parkController {
 
   async update(req, res) {
     try {
-      const park = req.body
+      const {
+        name,
+        town,
+        square,
+        opening_time,
+        closing_time,
+        description,
+        animators,
+        watersafe,
+        zoo,
+        cafe,
+        shops,
+        adress,
+      } = req.body
       if (!park.id) {
         return res.json(ApiError.badRequest({ message: 'Id не указан' }))
       }

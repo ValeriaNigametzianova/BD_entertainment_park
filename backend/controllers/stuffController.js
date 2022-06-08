@@ -12,8 +12,8 @@ const {
   GreenZone,
 } = require('../models/models')
 
-const generateJwt = (id, login) => {
-  return jwt.sign({ id, login }, process.env.SECRET_KEY, {
+const generateJwt = (id, login, role) => {
+  return jwt.sign({ id, login, role }, process.env.SECRET_KEY, {
     expiresIn: '6h',
   })
 }
@@ -49,13 +49,13 @@ class StuffController {
     if (!comparePassword) {
       return next(ApiError.internal('Указан неверный пароль'))
     }
-    const token = generateJwt(stuff.id, stuff.login)
+    const token = generateJwt(stuff.id, stuff.login, 'stuff')
     return res.json({ token })
   }
 
   async check(req, res, next) {
-    const token = generateJwt(req.stuff.id, req.stuff.login)
-    return res.json({ token })
+    const token = generateJwt(req.stuff.id, req.stuff.login, 'stuff')
+    return res.json({ token, stuff: req.stuff })
   }
 
   async getPark(req, res, next) {

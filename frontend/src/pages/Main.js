@@ -13,13 +13,14 @@ import Pages from '../components/Pages'
 
 const Main = observer(() => {
   const { park } = useContext(Context)
-  console.log(park.searchPark)
+  const { user } = useContext(Context)
+  console.log('sP', park.searchPark)
   useEffect(() => {
-    customerFetchPark(null, null, 1, 3).then((data) => {
+    customerFetchPark(null, null, 1, 2).then((data) => {
       park.setPark(data.rows)
       park.setTotalCount(data.count)
     })
-    customerFetchPark(null, null, 1, 99999).then((data) => {
+    customerFetchPark(null, null, 1, 2).then((data) => {
       // park.setPark(data.rows)
       park.setTown([...new Set(data.rows.map((el) => el.town))])
       park.setTotalCount(data.count)

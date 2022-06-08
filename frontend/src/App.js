@@ -19,8 +19,9 @@ const App = observer(() => {
   useEffect(() => {
     stuffCheck()
       .then((data) => {
-        user.setUser(true)
+        user.setUser(data)
         user.setIsAuth(true)
+        user.setRole(data.role)
       })
       .finally(() => setLoading(false))
   }, [])
@@ -28,8 +29,9 @@ const App = observer(() => {
   useEffect(() => {
     customerCheck()
       .then((data) => {
-        user.setUser(true)
+        user.setUser(data)
         user.setIsAuth(true)
+        user.setRole(data.role)
       })
       .finally(() => setLoading(false))
   }, [])

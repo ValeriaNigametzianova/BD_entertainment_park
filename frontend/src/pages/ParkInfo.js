@@ -68,38 +68,47 @@ const ParkInfo = () => {
             <div style={{ color: 'white' }}>Площадь: {park?.square}</div>
           </Row>
           <Row>
-            <div style={{ color: 'white' }}>{park?.opening_time}</div>
+            <div style={{ color: 'white' }}>
+              Время открытия: {park?.opening_time}
+            </div>
           </Row>
           <Row>
-            <div style={{ color: 'white' }}>{park?.closing_time}</div>
+            <div style={{ color: 'white' }}>
+              Время закрытия: {park?.closing_time}
+            </div>
           </Row>
           <Row>
-            <div style={{ color: 'white' }}>{park?.description}</div>
+            <div style={{ color: 'white' }}>Описание: {park?.description}</div>
           </Row>
         </Col>
         <Col md={6}>
           <Row>
-            <div style={{ color: 'white' }}>{park?.animators}</div>
+            <div style={{ color: 'white' }}>
+              Наличие аниматоров: {park?.animators}
+            </div>
           </Row>
           <Row>
-            <div style={{ color: 'white' }}>{park?.watersafe}</div>
+            <div style={{ color: 'white' }}>
+              Наличие водоемов: {park?.watersafe}
+            </div>
           </Row>
           <Row>
-            <div style={{ color: 'white' }}>{park?.zoo}</div>
+            <div style={{ color: 'white' }}>
+              Наличие зооуголков: {park?.zoo}
+            </div>
           </Row>
           <Row>
-            <div style={{ color: 'white' }}>{park?.cafe}</div>
+            <div style={{ color: 'white' }}>Количество кафе: {park?.cafe}</div>
           </Row>
           <Row>
-            <div style={{ color: 'white' }}>{park?.shops}</div>
+            <div style={{ color: 'white' }}>
+              Количество магазинов: {park?.shops}
+            </div>
           </Row>
         </Col>
       </Row>
       <Row>
-        <h2 style={{ color: 'white' }}>Адрес</h2>
-      </Row>
-      <Row>
-        <div style={{ color: 'white' }}>{park?.adress}</div>
+        <div style={{ color: 'white' }}>Адрес: {park?.adress}</div>
       </Row>
     </Container>
   )

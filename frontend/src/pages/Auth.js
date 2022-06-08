@@ -32,7 +32,6 @@ import '../styles/button/button.css'
 const Auth = observer(() => {
   const { user } = useContext(Context)
   const location = useLocation()
-  console.log(location)
   const navigate = useNavigate()
   const isLogin =
     location.pathname === STUFF_ROUTE + LOGIN_ROUTE ||
@@ -47,23 +46,24 @@ const Auth = observer(() => {
       let role
       if (isLogin && location.pathname === STUFF_ROUTE + LOGIN_ROUTE) {
         data = await stuffLogin(login, password)
-        role = 'stuff'
+        // role = 'stuff'
       } else if (
         isLogin &&
         location.pathname === CUSTOMER_ROUTE + LOGIN_ROUTE
       ) {
-        role = 'customer'
+        // role = 'customer'
         data = await customerLogin(email)
       } else if (
         !isLogin &&
         location.pathname === STUFF_ROUTE + REGISTRATION_ROUTE
       ) {
         data = await stuffRegistration(login, password)
-        role = 'stuff'
+        // role = 'stuff'
       }
-      user.setUser(user)
+      console.log('data', user)
+      user.setUser(data)
       user.setIsAuth(true)
-      user.setRole(role)
+      user.setRole(data.role)
       if (location.pathname === CUSTOMER_ROUTE + LOGIN_ROUTE) {
         navigate(CUSTOMER_ROUTE + TICKETS_ROUTE)
       } else if (

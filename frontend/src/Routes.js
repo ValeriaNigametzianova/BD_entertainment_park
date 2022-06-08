@@ -47,7 +47,7 @@ import ParkAttractions from './pages/ParkAttractions'
 import Recovery from './pages/Recovery'
 import Main from './pages/Main'
 
-export const authRoutes = [
+export const authStuffRoutes = [
   {
     path: STUFF_ROUTE + MAIN_ADMIN_ROUTE,
     Component: <ParkMainForAdmin />,
@@ -73,6 +73,10 @@ export const authRoutes = [
     Component: <EditingParkInfo />,
   },
   {
+    path: STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE + '/:id',
+    Component: <EditingParkAttractions />,
+  },
+  {
     path: STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE,
     Component: <EditingParkAttractions />,
   },
@@ -80,6 +84,9 @@ export const authRoutes = [
     path: STUFF_ROUTE + PARK_TARIF_ROUTE,
     Component: <EditingParkTarif />,
   },
+]
+
+export const authCustomerRoutes = [
   {
     path: CUSTOMER_ROUTE + TICKETS_ROUTE,
     Component: <Tickets />,

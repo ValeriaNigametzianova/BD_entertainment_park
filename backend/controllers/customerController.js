@@ -4,8 +4,10 @@ const jwt = require('jsonwebtoken')
 const uuid = require('uuid')
 const { Stuff, Admin, Customer, Ticket } = require('../models/models')
 
-const generateJwt = (id, email) => {
-  return jwt.sign({ id, email }, process.env.SECRET_KEY, { expiresIn: '6h' })
+const generateJwt = (id, email, role) => {
+  return jwt.sign({ id, email, role }, process.env.SECRET_KEY, {
+    expiresIn: '6h',
+  })
 }
 
 class CustomerController {
@@ -38,13 +40,13 @@ class CustomerController {
     // if (!comparePassword){
     //     return next (ApiError.internal("Указан неверный пароль"))
     // }
-    const token = generateJwt(customer.id, customer.email)
+    const token = generateJwt(customer.id, customer.email, 'customer')
     return res.json({ token })
   }
 
   async check(req, res) {
-    const token = generateJwt(req.customer.id, req.customer.email)
-    return res.json({ token })
+    const token = generateJwt(req.customer.id, req.customer.email, 'customer')
+    return res.json({ token, customer: req.customer })
   }
 }
 

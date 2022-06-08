@@ -37,6 +37,21 @@ class attraсtionController {
     return res.json(attraсtion)
   }
 
+  async getOne(req, res) {
+    const { id } = req.params
+    if (!id) {
+      return next(ApiError.badRequest('Такого парка не существует'))
+    }
+    console.log(id)
+    const attraсtion = await Attraction.findOne({
+      where: { id },
+      // attributes:["name","description","town"]
+      // include: [{model: Park, as: "name", as: "description"}]
+    })
+    console.log('getOneAttr', attraсtion)
+    return res.json({ attraсtion })
+  }
+
   async update(req, res) {
     let attraсtion = req.body
     if (!attraсtion.id) {

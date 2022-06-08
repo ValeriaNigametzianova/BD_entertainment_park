@@ -69,23 +69,36 @@ const EditingParkInfo = () => {
     editInfo(formData).then((data) => {})
   }
   const newPark = async () => {
-    let data
-    const formData = new FormData()
-    formData.append('name', name)
-    formData.append('town', town)
-    formData.append('square', `${square}`)
-    formData.append('opening_time', opening_time)
-    formData.append('closing_time', closing_time)
-    formData.append('description', description)
-    formData.append('animator', animator)
-    formData.append('watersafe', watersafe)
-    formData.append('zoo', zoo)
-    formData.append('cafe', `${cafe}`)
-    formData.append('shop', `${shop}`)
-    formData.append('adress', adress)
-    formData.append('name', gzName)
-    formData.append('description', gzDescription)
-    createPark(formData).then((data) => {})
+    // let data
+    // const formData = new FormData()
+    // formData.append('name', name)
+    // formData.append('town', town)
+    // formData.append('square', `${square}`)
+    // formData.append('opening_time', opening_time)
+    // formData.append('closing_time', closing_time)
+    // formData.append('description', description)
+    // formData.append('animator', animator)
+    // formData.append('watersafe', watersafe)
+    // formData.append('zoo', zoo)
+    // formData.append('cafe', `${cafe}`)
+    // formData.append('shop', `${shop}`)
+    // formData.append('adress', adress)
+    // formData.append('name', gzName)
+    // formData.append('description', gzDescription)
+    createPark(
+      name,
+      town,
+      square,
+      opening_time,
+      closing_time,
+      description,
+      animator,
+      watersafe,
+      zoo,
+      cafe,
+      shop,
+      adress
+    ).then((data) => {})
     // data = await createPark(
     //   name,
     //   town,

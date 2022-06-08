@@ -78,7 +78,7 @@ const ParkMainForAdmin = () => {
           park.parks.map((el) => {
             el = el.park
             return (
-              <Row>
+              <Row key={el.id} park={el}>
                 <Col md={9}>
                   <Row className="heading2_1">
                     <h2> {el?.name}</h2>

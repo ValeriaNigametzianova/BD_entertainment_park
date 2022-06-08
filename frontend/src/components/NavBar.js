@@ -46,8 +46,10 @@ const NavBar = observer(() => {
   const logOut = () => {
     user.setUser({})
     user.setIsAuth(false)
+    user.setRole('')
+    localStorage.removeItem('token')
   }
-  console.log(user.isAuth)
+  console.log('userIsAuth', user.isAuth)
   // const searchParks = useMemo(() => {
   //   console.log('working')
   //   console.log(park.parks)
@@ -73,6 +75,7 @@ const NavBar = observer(() => {
           <Navbar.Brand
             className="brand_name"
             style={{ color: '#033782', cursor: 'pointer' }}
+            onClick={() => navigate(MAIN_ROUTE)}
           >
             Эмоциональные качели
           </Navbar.Brand>
@@ -102,6 +105,7 @@ const NavBar = observer(() => {
 
           <Nav>
             <Nav className="ml-auto">
+              <div>{user.user.login}</div>
               <Button
                 className="button"
                 variant="outline-success"

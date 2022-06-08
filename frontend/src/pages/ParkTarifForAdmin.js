@@ -60,24 +60,22 @@ const ParkTarifForAdmin = () => {
           </div>
         </Col>
       </Row>
-      <Row mt-5>
-        <h2 style={{ color: 'white' }}>Тариф</h2>
+      <Row mt-5 className="heading4">
+        <h2>Тариф</h2>
       </Row>
       <Row>
         {tarif &&
           tarif.tarifs.map((el) =>
             el.map((el) => (
               <Col>
-                <Row>
-                  <div style={{ color: 'white' }}>Название: "{el?.name}"</div>
+                <Row className="heading4">
+                  <div>Название: "{el?.name}"</div>
                 </Row>
-                <Row>
-                  <div style={{ color: 'white' }}>Стоимость: {el?.cost} р</div>
+                <Row className="heading4">
+                  <div>Стоимость: {el?.cost} р</div>
                 </Row>
-                <Row>
-                  <div style={{ color: 'white' }}>
-                    Описание: {el?.description}
-                  </div>
+                <Row className="heading4">
+                  <div>Описание: {el?.description}</div>
                 </Row>
                 {console.log('el', el)}
                 <Button

@@ -23,16 +23,19 @@ import '../styles/fonts/heading2.css'
 import '../styles/button/button.css'
 import '../styles/fonts/heading4.css'
 import '../styles/button/button.css'
+import AttractionList from '../components/AttractionList'
 
 const ParkAttractionsForAdmin = () => {
   const [park, setPark] = useState()
   const [attractions, setAttractions] = useState()
   const { id } = useParams()
   useEffect(() => {
-    stuffFetchPark().then((data) => setPark(data.park))
-    stuffFetchAttraction().then((data) => setAttractions(data))
+    console.log('ddddddddddd')
+    stuffFetchPark().then((data) => setPark(data.parks))
+    // stuffFetchAttraction().then((data) => setAttractions(data))
   }, [])
-  console.log('777', attractions)
+  console.log('2', park)
+  console.log('5', attractions)
   const navigate = useNavigate()
   return (
     <Container className="contr">
@@ -69,46 +72,43 @@ const ParkAttractionsForAdmin = () => {
             </div>
           </Col>
         </Row>
-        <Row className="mt-9">
+        <AttractionList></AttractionList>
+        {/* <Row className="mt-9">
           {attractions &&
             attractions.attractions.map((el) =>
               el.map((el) => (
-                <Row>
-                  <Row>
-                    <h2 style={{ color: 'white' }}>{el?.name}</h2>
+                <Row mt={5}>
+                  <Row className="heading4">
+                    <h2>Название: {el?.name}</h2>
                   </Row>
-                  <Row>
-                    <div style={{ color: 'white' }}>{el?.description}</div>
+                  <Row className="heading4">
+                    <div>Описание: {el?.description}</div>
                   </Row>
                   <Col>
-                    <Row>
-                      <div style={{ color: 'white' }}>{el?.hight}</div>
+                    <Row className="heading4">
+                      <div>Высота: {el?.hight}</div>
                     </Row>
-                    <Row>
-                      <div style={{ color: 'white' }}>{el?.age_limitation}</div>
+                    <Row className="heading4">
+                      <div>Ограничение по возрасту: {el?.age_limitation}</div>
                     </Row>
-                    <Row>
-                      <div style={{ color: 'white' }}>
-                        {el?.weight_limitation}
-                      </div>
+                    <Row className="heading4">
+                      <div>Ограничение по весу: {el?.weight_limitation}</div>
                     </Row>
-                    <Row>
-                      <div style={{ color: 'white' }}>
+                    <Row className="heading4">
+                      <div>
                         Ограничение по росту:
                         {el?.height_limitation}
                       </div>
                     </Row>
-                    <Row>
-                      <div style={{ color: 'white' }}>
+                    <Row className="heading4">
+                      <div>
                         {' '}
                         Максимальное количество человек:
                         {el?.max_quantity_people}
                       </div>
                     </Row>
-                    <Row>
-                      <div style={{ color: 'white' }}>
-                        {el?.active ?? 'Сейчас недоступен'}
-                      </div>
+                    <Row className="heading4">
+                      <div>{el?.active ?? 'Сейчас недоступен'}</div>
                     </Row>
                   </Col>
                   <Button
@@ -122,7 +122,7 @@ const ParkAttractionsForAdmin = () => {
                 </Row>
               ))
             )}
-        </Row>
+        </Row> */}
         <Row>
           {attractions && attractions.attractions.lenght ? (
             {}

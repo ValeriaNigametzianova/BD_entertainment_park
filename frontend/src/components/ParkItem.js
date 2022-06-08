@@ -14,18 +14,18 @@ const ParkItem = ({ park }) => {
       onClick={() => navigate(PARK_MAIN_ROUTE + '/' + park.id)}
     >
       <Row
-        className="mt-2 px-2"
-        style={{
-          background: '#FEFDEF',
-          cursor: 'pointer',
-          aligne: 'centre',
-          borderRadius: '3px',
-        }}
+        // className="mt-2 px-2"
+        // style={{
+        //   background: '#FEFDEF',
+        //   cursor: 'pointer',
+        //   aligne: 'centre',
+        //   borderRadius: '3px',
+        // }}
         border={'light'}
       >
         {/* <Card  style = {{background:"lightgrey", cursor: "pointer"}} border={"light"}> */}
-        <Col md={6} className={'mt-3'}>
-          <div>{park.name}</div>
+        <Col md={6}>
+          <div className={'heading2'}>{park.name}</div>
           <div> {park.description} </div>
         </Col>
         <Col md={3}>
