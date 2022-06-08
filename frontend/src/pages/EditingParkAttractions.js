@@ -31,7 +31,7 @@ const EditingParkAttractions = () => {
   const [description, setDescription] = useState()
   const [age_limitation, setALim] = useState()
   const [max_quantity_people, setMaxQuan] = useState()
-  const [active, setActive] = useState()
+  const [active, setActive] = useState(false)
   let ParkId = ''
   park &&
     park.parks.map((el) => {
@@ -57,7 +57,7 @@ const EditingParkAttractions = () => {
   const updateAttraction = () => {
     const formData = new FormData()
 
-    formData.append('id', `${attraction.id}`)
+    formData.append('Id', `${id}`)
     formData.append('name', name)
     formData.append('hight', `${hight}`)
     formData.append('weight_limitation', `${weight_limitation}`)
@@ -89,6 +89,7 @@ const EditingParkAttractions = () => {
       description,
       age_limitation,
       max_quantity_people,
+      active,
       ParkId
     ).then((data) => {})
   }
@@ -111,13 +112,15 @@ const EditingParkAttractions = () => {
             </Form.Group>
             {attraction && (
               <Form.Group className="mb-3" controlId="formBasicPassword">
-                {console.log('el', attraction.name)}
+                {console.log('attrname', attraction.name)}
                 <Form.Label>Название</Form.Label>
                 <Form.Control
                   placeholder="Название"
                   defaultValue={attraction?.name}
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) =>
+                    setName(console.log('tagret valuie', e.target.value))
+                  }
                 />
                 <Form.Label>Высота аттракциона</Form.Label>
                 <Form.Control
@@ -157,7 +160,7 @@ const EditingParkAttractions = () => {
                   placeholder="Ограничение по фозрасту посетителя"
                   defaultValue={attraction?.age_limitation}
                   value={age_limitation}
-                  onChange={(e) => setALim(Number(e.target.value))}
+                  onChange={(e) => setALim(e.target.value)}
                 />
                 <Form.Label>Максимальное количество человек</Form.Label>
                 <Form.Control
@@ -167,12 +170,14 @@ const EditingParkAttractions = () => {
                   value={max_quantity_people}
                   onChange={(e) => setMaxQuan(Number(e.target.value))}
                 />
-                <Form.Check
-                  type={'checkbox'}
-                  label={`Активный?`}
-                  value={active}
-                  onChange={(e) => setActive(Boolean(e.target.value))}
-                />
+                <Form.Group controlId="formBasicCheckbox">
+                  <Form.Check
+                    type={'checkbox'}
+                    label={`Активный?`}
+                    chacked={active}
+                    onChange={(e) => setActive(!active)}
+                  />
+                </Form.Group>
               </Form.Group>
             )}
 
@@ -247,8 +252,8 @@ const EditingParkAttractions = () => {
               <Form.Check
                 type={'checkbox'}
                 label={`Активный?`}
-                value={active}
-                onChange={(e) => setActive(Boolean(e.target.value))}
+                checked={active}
+                onChange={(e) => setActive(!active)}
               />
             </Form.Group>
             <Button

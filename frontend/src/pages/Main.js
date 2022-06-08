@@ -46,7 +46,13 @@ const Main = observer(() => {
     <Container className="contr">
       <Row>
         <Container>
-          <Row className="heading1">Парки развлечений в Москве</Row>
+          {park.selectedTown ? (
+            <Row className="heading1">
+              Парки развлечений в городе {park.selectedTown}
+            </Row>
+          ) : (
+            <Row className="heading1">Парки развлечений России</Row>
+          )}
           <Row className="mt-9">
             <Col>
               <ParkList />

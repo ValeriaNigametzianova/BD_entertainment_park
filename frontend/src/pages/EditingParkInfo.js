@@ -26,11 +26,11 @@ const EditingParkInfo = () => {
   const [opening_time, setOpTime] = useState()
   const [closing_time, setClTime] = useState()
   const [description, setDescription] = useState()
-  const [animator, setAnimator] = useState()
-  const [watersafe, setWatersafe] = useState()
-  const [zoo, setZoo] = useState()
-  const [cafe, setCafe] = useState(0)
-  const [shop, setShop] = useState(0)
+  const [animator, setAnimator] = useState(false)
+  const [watersafe, setWatersafe] = useState(false)
+  const [zoo, setZoo] = useState(false)
+  const [cafe, setCafe] = useState()
+  const [shop, setShop] = useState()
   const [adress, setAdress] = useState()
   const [gzName, setGzName] = useState()
   const [gzDescription, setGzDescription] = useState()
@@ -52,11 +52,12 @@ const EditingParkInfo = () => {
 
   const updatePark = () => {
     const formData = new FormData()
+    formData.append('id', ParkId)
     formData.append('name', name)
     formData.append('town', town)
     formData.append('square', `${square}`)
-    formData.append('opening_time', opening_time)
-    formData.append('closing_time', closing_time)
+    formData.append('opening_time', `${opening_time}`)
+    formData.append('closing_time', `${closing_time}`)
     formData.append('description', description)
     formData.append('animator', animator)
     formData.append('watersafe', watersafe)
@@ -120,7 +121,7 @@ const EditingParkInfo = () => {
     const formData = new FormData()
     formData.append('name', gzName)
     formData.append('description', gzDescription)
-    createGreenZone(formData)
+    createGreenZone(formData).then((data) => {})
     // data = await createGreenZone(name, gzDescription, ParkId)
   }
 
@@ -128,7 +129,7 @@ const EditingParkInfo = () => {
     const formData = new FormData()
     formData.append('name', gzName)
     formData.append('description', gzDescription)
-    editGreenZone(formData)
+    editGreenZone(formData).then((data) => {})
   }
 
   //   const searchParks = useMemo(() => {
@@ -209,27 +210,33 @@ const EditingParkInfo = () => {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                       />
-                      <Form.Check
-                        className="heading4"
-                        type={'checkbox'}
-                        label={`Наличие аниматоров`}
-                        value={animator}
-                        onChange={(e) => setAnimator(Boolean(e.target.value))}
-                      />
-                      <Form.Check
-                        className="heading4"
-                        type={'checkbox'}
-                        label={`Наличие водных пространств`}
-                        value={watersafe}
-                        onChange={(e) => setWatersafe(Boolean(e.target.value))}
-                      />
-                      <Form.Check
-                        className="heading4"
-                        type={'checkbox'}
-                        label={`Наличие уголка с животными`}
-                        value={zoo}
-                        onChange={(e) => setZoo(Boolean(e.target.value))}
-                      />
+                      <Form.Group controlId="formBasicCheckbox">
+                        <Form.Check
+                          className="heading4"
+                          type={'checkbox'}
+                          label={`Наличие аниматоров`}
+                          chacked={animator}
+                          onChange={(e) => setAnimator(!animator)}
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="formBasicCheckbox">
+                        <Form.Check
+                          className="heading4"
+                          type={'checkbox'}
+                          label={`Наличие водных пространств`}
+                          chacked={watersafe}
+                          onChange={(e) => setWatersafe(!watersafe)}
+                        />
+                      </Form.Group>
+                      <Form.Group controlId="formBasicCheckbox">
+                        <Form.Check
+                          className="heading4"
+                          type={'checkbox'}
+                          label={`Наличие уголка с животными`}
+                          chacked={zoo}
+                          onChange={(e) => setZoo(!zoo)}
+                        />
+                      </Form.Group>
                       <Form.Label className="heading3">
                         Количестов кафе
                       </Form.Label>
@@ -366,29 +373,33 @@ const EditingParkInfo = () => {
                   onChange={(e) => setDescription(e.target.value)}
                 ></Form.Control>
 
-                <Form.Check
-                  className="heading4"
-                  type={'checkbox'}
-                  label={`Наличие аниматоров`}
-                  value={animator}
-                  onChange={(e) => setAnimator(e.target.value)}
-                />
-
-                <Form.Check
-                  className="heading4"
-                  type={'checkbox'}
-                  label={`Наличие водных пространств`}
-                  value={watersafe}
-                  onChange={(e) => setWatersafe(e.target.value)}
-                />
-
-                <Form.Check
-                  className="heading4"
-                  type={'checkbox'}
-                  label={`Наличие уголка с животными`}
-                  value={zoo}
-                  onChange={(e) => setZoo(e.target.value)}
-                />
+                <Form.Group controlId="formBasicCheckbox">
+                  <Form.Check
+                    className="heading4"
+                    type={'checkbox'}
+                    label={`Наличие аниматоров`}
+                    chacked={animator}
+                    onChange={(e) => setAnimator(!animator)}
+                  />
+                </Form.Group>
+                <Form.Group controlId="formBasicCheckbox">
+                  <Form.Check
+                    className="heading4"
+                    type={'checkbox'}
+                    label={`Наличие водных пространств`}
+                    chacked={watersafe}
+                    onChange={(e) => setWatersafe(!watersafe)}
+                  />
+                </Form.Group>
+                <Form.Group controlId="formBasicCheckbox">
+                  <Form.Check
+                    className="heading4"
+                    type={'checkbox'}
+                    label={`Наличие уголка с животными`}
+                    chacked={zoo}
+                    onChange={(e) => setZoo(!zoo)}
+                  />
+                </Form.Group>
 
                 <Form.Label className="heading3">Количестов кафе</Form.Label>
                 <Form.Control

@@ -12,18 +12,21 @@ import { useParams } from 'react-router-dom'
 
 const TarifList = () => {
   const [park, setPark] = useState()
-  const [tarif, setTarif] = useState()
+  const [tarifs, setTarifs] = useState()
   const { id } = useParams()
   useEffect(() => {
     stuffFetchPark().then((data) => setPark(data.park))
-    stuffFetchTarif().then((data) => setTarif(data))
+    stuffFetchTarif().then((data) => setTarifs(data.tarifs))
   }, [])
+  console.log('777', tarifs)
 
   return (
     <Row className="d-flex">
-      {tarif.tarif.map((tarif) => (
-        <TarifItem key={tarif.id} tarif={tarif} />
-      ))}
+      {console.log('tarif.id', tarifs)}
+      {tarifs &&
+        tarifs.map((el) =>
+          el.map((tarif) => <TarifItem key={tarif.id} tarif={tarif} />)
+        )}
     </Row>
   )
 }

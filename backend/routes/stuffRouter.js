@@ -19,8 +19,8 @@ router.get('/getPark', authStuffMiddleware, stuffController.getGreenZone)
 router.use('/attraction', attractionRouter)
 router.get('/getAttraction', authStuffMiddleware, stuffController.getAttraction)
 router.use('/tarif', tarifRouter)
+router.get('/getTarif', authStuffMiddleware, stuffController.getTarif)
 // router.get('/getGreenZone', greenZoneController.getGreenZone)
 router.use('/greenZone', greenZoneRouter)
-router.get('/getTarif', authStuffMiddleware, stuffController.getTarif)
 
 module.exports = router

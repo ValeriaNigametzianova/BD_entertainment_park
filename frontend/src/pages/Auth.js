@@ -114,19 +114,25 @@ const Auth = observer(() => {
         {location.pathname === STUFF_ROUTE + REGISTRATION_ROUTE ||
         location.pathname === STUFF_ROUTE + LOGIN_ROUTE ? (
           <Form className="d-flex flex-column">
-            <Form.Control
-              className="mt-3"
-              placeholder="Введите ваш login..."
-              value={login}
-              onChange={(e) => setLogin(e.target.value)}
-            />
-            <Form.Control
-              className="mt-3"
-              placeholder="Введите ваш пароль..."
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-            />
+            <Form.Group controlId="formBasicLogin">
+              <Form.Control
+                className="mt-3"
+                placeholder="Введите ваш login..."
+                autocomplete="on"
+                value={login}
+                onChange={(e) => setLogin(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Control
+                className="mt-3"
+                placeholder="Введите ваш пароль..."
+                autocomplete="on"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+              />
+            </Form.Group>
             <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
               {isLogin ? (
                 <div className="heading4">
@@ -162,12 +168,15 @@ const Auth = observer(() => {
           </Form>
         ) : (
           <Form className="d-flex flex-column">
-            <Form.Control
-              className="mt-3"
-              placeholder="Введите ваш email..."
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+            <Form.Group controlId="formBasicEmail">
+              <Form.Control
+                className="mt-3"
+                placeholder="Введите ваш email..."
+                // autocomplete="on"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
             <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
               <Button
                 className="button2"

@@ -1,7 +1,10 @@
 import React from 'react'
-import { Col, Row, Container } from 'react-bootstrap'
+import { Col, Row, Container, Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+import { PARK_TARIF_ROUTE, STUFF_ROUTE } from '../utils/Consts'
 
 const TarifItem = ({ tarif }) => {
+  const navigate = useNavigate()
   return (
     <Container>
       <Row
@@ -14,16 +17,25 @@ const TarifItem = ({ tarif }) => {
         }}
         border={'light'}
       >
-        <Col md={4}>
+        <Row md={4}>
           <div>{tarif.name}</div>
-        </Col>
-        <Col md={4}>
+        </Row>
+        <Row md={4}>
           <div> {tarif.cost} </div>
-        </Col>
-        <Col md={4}>
+        </Row>
+        <Row md={4}>
           <div> {tarif.description} </div>
-        </Col>
+        </Row>
       </Row>
+      <Button
+        key={tarif.id}
+        tarif={tarif}
+        onClick={() =>
+          navigate(STUFF_ROUTE + PARK_TARIF_ROUTE + '/' + tarif.id)
+        }
+      >
+        Обновить даннные
+      </Button>
     </Container>
   )
 }

@@ -13,7 +13,6 @@ class tarifController {
   }
   async getAll(req, res) {
     const { id } = req.params
-    console.log(req.params)
     const park = await Park.findOne({ where: { id } })
     // let  {limit, page} = req.query   //пагинация, выдает кол-во всех полей и записи с указанным лимитом
     // page = page || 1
@@ -24,8 +23,24 @@ class tarifController {
     return res.json(tarif)
   }
 
+  async getOne(req, res) {
+    const { id } = req.params
+    if (!id) {
+      return next(ApiError.badRequest('Такого парка не существует'))
+    }
+    console.log(id)
+    const tarif = await Tarif.findOne({
+      where: { id },
+      // attributes:["name","description","town"]
+      // include: [{model: Park, as: "name", as: "description"}]
+    })
+    console.log('getOneTarif', tarif)
+    return res.json({ tarif })
+  }
+
   async update(req, res) {
     let tarif = req.body
+    console.log('tarif is update', tarif)
     if (!tarif.id) {
       return res.json(ApiError.badRequest({ message: 'Id не указан' }))
     }
@@ -35,6 +50,7 @@ class tarifController {
       },
     })
     let updatedTarif = await Tarif.findByPk(tarif.id)
+    console.log('tarif is update')
     return res.json(updatedTarif)
   }
 

@@ -57,6 +57,7 @@ export const createAttraction = async (
   description,
   age_limitation,
   max_quantity_people,
+  active,
   ParkId
 ) => {
   const { data } = await $authHost.post('api/stuff/attraction', {
@@ -67,6 +68,7 @@ export const createAttraction = async (
     description,
     age_limitation,
     max_quantity_people,
+    active,
     ParkId,
   })
   return data
@@ -93,8 +95,13 @@ export const editAttraction = async (attraction) => {
   return data
 }
 
-export const createTarif = async (tarif) => {
-  const { data } = await $authHost.post('api/stuff/tarif', tarif)
+export const createTarif = async (name, cost, description, ParkId) => {
+  const { data } = await $authHost.post('api/stuff/tarif', {
+    name,
+    cost,
+    description,
+    ParkId,
+  })
   return data
 }
 export const customerFetchTarif = async (id) => {
@@ -103,6 +110,12 @@ export const customerFetchTarif = async (id) => {
 }
 export const stuffFetchTarif = async () => {
   const { data } = await $authHost.get('api/stuff/getTarif')
+  return data
+}
+export const stuffFetchOneTarif = async (id) => {
+  const { data } = await $authHost.get('api/stuff/tarif/' + id, {
+    // headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  })
   return data
 }
 export const editTarif = async (tarif) => {

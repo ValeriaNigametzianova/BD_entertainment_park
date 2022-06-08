@@ -11,7 +11,6 @@ import '../styles/container/container.css'
 
 const AttractionItem = ({ attraction }) => {
   const navigate = useNavigate()
-  // console.log(navigate)
   const el = attraction
   return (
     <Container
@@ -53,7 +52,9 @@ const AttractionItem = ({ attraction }) => {
                   </div>
                 </Row>
                 <Row className="heading4">
-                  <div>{el?.active ?? 'Сейчас недоступен'}</div>
+                  <div>
+                    {el?.active ? 'Открыт к посещению' : 'Сейчас недоступен'}
+                  </div>
                 </Row>
               </Col>
               <Button

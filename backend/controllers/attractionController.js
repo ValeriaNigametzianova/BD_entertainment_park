@@ -13,6 +13,7 @@ class attraсtionController {
         description,
         age_limitation,
         max_quantity_people,
+        active,
         ParkId,
       } = req.body
       const attraсtion = await Attraction.create({
@@ -23,6 +24,7 @@ class attraсtionController {
         description,
         age_limitation,
         max_quantity_people,
+        active,
         ParkId,
       })
       console.log('at', attraсtion)

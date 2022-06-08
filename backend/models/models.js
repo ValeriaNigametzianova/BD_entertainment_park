@@ -26,7 +26,7 @@ const Attraction = sequelize.define('Attraction', {
   description: { type: DataTypes.TEXT },
   age_limitation: { type: DataTypes.INTEGER, allowNull: false },
   max_quantity_people: { type: DataTypes.INTEGER },
-  active: { type: DataTypes.BOOLEAN },
+  active: { type: DataTypes.BOOLEAN, defaultValue: false },
 })
 
 const GreenZone = sequelize.define('GreenZone', {

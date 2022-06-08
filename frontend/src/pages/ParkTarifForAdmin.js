@@ -22,15 +22,11 @@ const ParkTarifForAdmin = () => {
   const { id } = useParams()
   useEffect(() => {
     stuffFetchPark().then((data) => setPark(data.park))
-    stuffFetchTarif().then((data) => setTarif(data))
+    // stuffFetchTarif().then((data) => setTarif(data))
   }, [])
-  console.log('777', tarif)
   const navigate = useNavigate()
   return (
     <Container className="contr">
-      <Row mt-5 className="heading2_1">
-        <h2 style={{ color: '#151E20' }}>Тариф</h2>
-      </Row>
       <Row className="d-flex justify-content-between">
         <Col>
           <div
@@ -61,9 +57,10 @@ const ParkTarifForAdmin = () => {
         </Col>
       </Row>
       <Row mt-5 className="heading4">
-        <h2>Тариф</h2>
+        <h2>Тарифы</h2>
       </Row>
-      <Row>
+      <TarifList></TarifList>
+      {/* <Row>
         {tarif &&
           tarif.tarifs.map((el) =>
             el.map((el) => (
@@ -88,7 +85,7 @@ const ParkTarifForAdmin = () => {
               </Col>
             ))
           )}
-      </Row>
+      </Row> */}
       <Row>
         {tarif && tarif.tarifs.lenght ? (
           {}
