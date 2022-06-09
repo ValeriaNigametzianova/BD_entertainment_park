@@ -1,11 +1,9 @@
-import React from 'react';
+import { observer } from 'mobx-react-lite'
+import React, { useState } from 'react'
 
-const Basket = () => {
-    return (
-        <div>
+const Basket = observer(() => {
+  const [tarifs, setTarifs] = useState()
+  return
+})
 
-        </div>
-    );
-};
-
-export default Basket;
+export default Basket

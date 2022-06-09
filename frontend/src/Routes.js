@@ -115,11 +115,11 @@ export const publicRoutes = [
     Component: <Main />,
   },
   {
-    path: ORDER_ROUTE,
+    path: PARK_MAIN_ROUTE,
     Component: <Order />,
   },
   {
-    path: BASKET_ROUTE,
+    path: BASKET_ROUTE + TICKETS_ROUTE,
     Component: <Basket />,
   },
   {

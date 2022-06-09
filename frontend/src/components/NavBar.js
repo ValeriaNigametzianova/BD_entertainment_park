@@ -72,6 +72,7 @@ const NavBar = observer(() => {
     <Navbar className="navbar" expand="lg">
       {user.isAuth ? (
         <Container>
+          <Button onClick={() => navigate(-1)}>Назад</Button>
           <Navbar.Brand
             className="brand_name"
             style={{ color: '#033782', cursor: 'pointer' }}
@@ -143,6 +144,9 @@ const NavBar = observer(() => {
         </Container>
       ) : (
         <Container>
+          <Col>
+            <Button onClick={() => navigate(-1)}>Назад</Button>
+          </Col>
           <Col className="d-flex">
             <Navbar.Brand
               className="brand_name"
