@@ -41,7 +41,7 @@ const AttractionItem = ({ attraction }) => {
                 <Row className="heading4">
                   <div>
                     Ограничение по росту:
-                    {el?.height_limitation}
+                    {el?.hight_limitation}
                   </div>
                 </Row>
                 <Row className="heading4">

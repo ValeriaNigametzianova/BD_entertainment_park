@@ -14,7 +14,7 @@
     border-collapse: separate;
     border-spacing: 0;
     margin: auto;
-    background-color: rgba(163, 23, 232, 0.2);
+    /* background-color: rgba(163, 23, 232, 0.2); */
     color: #eaeaea;
 }
 
@@ -37,12 +37,12 @@
 }
 
 .calendar .day.selected {
-    border: 2px solid dodgerblue;
+    background-color: dodgerblue;
+    color: white;
 }
 
 .calendar .day.today {
-    background-color: dodgerblue;
-    color: white;
+    border: 2px solid dodgerblue;
 }
 
 .calendar .day.today:hover {

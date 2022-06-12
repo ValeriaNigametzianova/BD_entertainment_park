@@ -63,9 +63,15 @@ const NavBar = observer(() => {
   // }, [searchQuery, park.parks])
 
   const searchParks = useMemo(() => {
-    return park.parks.filter((onePark) =>
-      onePark.name.toLowerCase().includes(searchQuery.toLowerCase())
-    )
+    console.log(searchQuery)
+    return park.parks.filter((onePark) => {
+      console.log(
+        'perk',
+        onePark.name.toLowerCase(),
+        onePark.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+      return onePark.name.toLowerCase().includes(searchQuery.toLowerCase())
+    })
   }, [searchQuery, park.parks])
 
   return (
@@ -81,7 +87,7 @@ const NavBar = observer(() => {
             Эмоциональные качели
           </Navbar.Brand>
 
-          {location.pathname === STUFF_ROUTE + PARK_MAIN_ROUTE && (
+          {location.pathname === PARK_MAIN_ROUTE && (
             <Form className="d-flex">
               <FormControl
                 type="search"
@@ -89,14 +95,16 @@ const NavBar = observer(() => {
                 className="search"
                 aria-label="Search"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value)
+                }}
               />
               <Button
                 className="button"
                 variant="outline-success"
                 onClick={(e) => {
-                  // setSearchQuery(e.target.value)
-                  park.setPark(searchParks)
+                  setSearchQuery(e.target.value)
+                  park.setSearchPark(searchParks)
                 }}
               >
                 Найти
@@ -119,7 +127,7 @@ const NavBar = observer(() => {
                 Выйти
               </Button>
             </Nav>
-            {user.isAuth && user.role === 'stuff' ? (
+            {user.role === 'stuff' ? (
               <Nav className="ml-auto">
                 <Button
                   className="button"
@@ -129,7 +137,7 @@ const NavBar = observer(() => {
                   Администрирование
                 </Button>
               </Nav>
-            ) : user.isAuth && user.role === 'customer' ? (
+            ) : user.role === 'customer' ? (
               <Nav className="ml-autoATTRACTION">
                 <Button
                   className="button"
@@ -217,20 +225,28 @@ const NavBar = observer(() => {
           </Col>
           {(location.pathname === PARK_MAIN_ROUTE ||
             location.pathname === '/') && (
-            <Form className="d-flex justify-content-center align-items-center">
+            <Form
+              className="d-flex justify-content-center align-items-center"
+              onSubmit={(event) => {
+                event.preventDefault()
+                park.setSearchPark(searchParks)
+              }}
+            >
               <FormControl
                 type="search"
                 placeholder="Поиск"
                 className="search"
                 aria-label="Search"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value)
+                }}
               />
               <Button
                 className="button"
                 variant="outline-success"
                 onClick={(e) => {
-                  // setSearchQuery(e.target.value)
+                  setSearchQuery(e.target.value)
                   park.setSearchPark(searchParks)
                 }}
               >

@@ -40,6 +40,7 @@ class tarifController {
 
   async update(req, res) {
     let tarif = req.body
+    console.log(req.body)
     console.log('tarif is update', tarif)
     if (!tarif.id) {
       return res.json(ApiError.badRequest({ message: 'Id не указан' }))

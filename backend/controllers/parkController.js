@@ -11,7 +11,7 @@ const adminController = require('./adminController')
 class parkController {
   async create(req, res, next) {
     try {
-      console.log(req)
+      console.log('req', req.body)
       const {
         name,
         town,
@@ -42,8 +42,7 @@ class parkController {
       })
       const stuff = await Stuff.findOne({ where: { id: req.stuff.id } })
       console.log(stuff)
-      const admin = adminController.hasPark(park, stuff)
-      console.log(admin)
+      adminController.hasPark(park, stuff)
       return res.json(park)
     } catch (e) {
       return next(ApiError.badRequest(e.message))
@@ -110,20 +109,8 @@ class parkController {
 
   async update(req, res) {
     try {
-      const {
-        name,
-        town,
-        square,
-        opening_time,
-        closing_time,
-        description,
-        animators,
-        watersafe,
-        zoo,
-        cafe,
-        shops,
-        adress,
-      } = req.body
+      console.log(req.body)
+      const park = req.body
       if (!park.id) {
         return res.json(ApiError.badRequest({ message: 'Id не указан' }))
       }
@@ -135,7 +122,7 @@ class parkController {
       let updatedPark = await Park.findByPk(park.id)
       return res.json(updatedPark)
     } catch (e) {
-      return res.json(ApiError.internal({ message: e }))
+      return res.json(ApiError.internal({ message: e.message }))
     }
   }
 

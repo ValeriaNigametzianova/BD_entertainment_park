@@ -23,6 +23,7 @@ class greenZoneController {
 
   async update(req, res) {
     try {
+      console.log('hello', req.body)
       let greenZone = req.body
       if (!greenZone.id) {
         return res.json(ApiError.badRequest({ message: 'Id не указан' }))

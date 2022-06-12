@@ -6,7 +6,7 @@ export const createAttraction = async (attraction) => {
 }
 
 export const stuffFetchAttraction = async () => {
-  const { data } = await $host.get('api/stuff/getAttraction')
+  const { data } = await $authHost.get('api/stuff/getAttraction')
   return data
 }
 export const customerFetchAttraction = async () => {
@@ -15,6 +15,6 @@ export const customerFetchAttraction = async () => {
 }
 
 export const editAttraction = async (attraction) => {
-  const { data } = await $host.put('api/stuff/attraction', attraction)
+  const { data } = await $authHost.put('api/stuff/attraction', attraction)
   return data
 }

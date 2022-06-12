@@ -23,3 +23,8 @@ export const customerCheck = async () => {
   console.log('token4', localStorage.getItem('token'))
   return jwt_decode(data.token)
 }
+
+export const customerFetchTickets = async () => {
+  const { data } = await $authHost.get('api/customer/ticket')
+  return data
+}

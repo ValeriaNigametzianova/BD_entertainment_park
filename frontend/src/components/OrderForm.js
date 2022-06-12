@@ -18,8 +18,7 @@ const OrderForm = ({ createOrder }) => {
   const [phone_number, setPhoneNumber] = useState()
   const navigate = useNavigate()
 
-  const createForm = (e) => {
-    e.preventDefault()
+  const createForm = () => {
     const customer = {
       surname: surname,
       name: name,
@@ -50,6 +49,7 @@ const OrderForm = ({ createOrder }) => {
           />
           <Form.Label>Электронная почта</Form.Label>
           <Form.Control
+            controlId="formBasicLogin"
             type="email"
             placeholder="Введите email"
             value={email}
@@ -62,14 +62,13 @@ const OrderForm = ({ createOrder }) => {
             defaultValue={'+7'}
             placeholder="Введите номер"
             value={phone_number}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            onChange={(e) => setPhoneNumber(Number(e.target.value))}
           />
         </Form.Group>
 
         <Button
           variant="primary"
           onClick={() => {
-            navigate()
             createForm()
           }}
         >

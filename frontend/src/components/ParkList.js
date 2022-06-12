@@ -16,7 +16,7 @@ const ParkList = observer(() => {
   return (
     <Container className="contr">
       <Row className="d-flex " style={{ cursor: 'pointer' }}>
-        {park.parks.map((park) => (
+        {park.searchPark.map((park) => (
           <ParkItem key={park.id} park={park} />
         ))}
       </Row>

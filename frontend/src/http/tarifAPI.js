@@ -6,7 +6,7 @@ export const createTarif = async (tarif) => {
 }
 
 export const stuffFetchTarif = async () => {
-  const { data } = await $host.get('api/stuff/getTarif')
+  const { data } = await $authHost.get('api/stuff/getTarif')
   return data
 }
 
@@ -16,6 +16,6 @@ export const fetchTarif = async () => {
 }
 
 export const editTarif = async (tarif) => {
-  const { data } = await $host.put('api/stuff/tarif', tarif)
+  const { data } = await $authHost.put('api/stuff/tarif', tarif)
   return data
 }

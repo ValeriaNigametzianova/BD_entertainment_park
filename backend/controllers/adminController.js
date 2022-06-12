@@ -16,7 +16,10 @@ class AdminController {
     if (!stuff) return
     if (!park) return
     const id = park.id
-    await Admin.update({ ParkId: id }, { where: { StuffId: stuff.id } })
+    const admin = await Admin.update(
+      { ParkId: id },
+      { where: { StuffId: stuff.id } }
+    )
   }
 
   async getAll(req, res) {

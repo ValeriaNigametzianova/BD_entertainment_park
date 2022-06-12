@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Col, Row, Container, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -10,10 +10,23 @@ import {
 } from '../utils/Consts'
 import { Context } from '../index'
 
-const TarifItem = ({ tarif }) => {
+const TarifItem = ({ tarif, addTarifs }) => {
   const { user } = useContext(Context)
   const [counter, setCounter] = useState(0)
   const navigate = useNavigate()
+
+  const createTarifs = () => {
+    let key = tarif.id
+    const tarifs = {
+      [key]: { tarif: tarif, counter: counter },
+    }
+    addTarifs(tarifs)
+  }
+
+  useEffect(() => {
+    if (addTarifs !== undefined) createTarifs()
+  }, [counter])
+
   return (
     <Container>
       <Row
@@ -53,13 +66,7 @@ const TarifItem = ({ tarif }) => {
               </Button>
             ) : (
               <div>
-                {counter ? (
-                  <div>
-                    <Button onClick={() => setCounter(counter - 1)}>-</Button>
-                    {counter}
-                    <Button onClick={() => setCounter(counter + 1)}>+</Button>
-                  </div>
-                ) : (
+                {counter === 0 ? (
                   <Button
                     key={tarif.id}
                     tarif={tarif}
@@ -67,6 +74,12 @@ const TarifItem = ({ tarif }) => {
                   >
                     Добавить
                   </Button>
+                ) : (
+                  <div>
+                    <Button onClick={() => setCounter(counter - 1)}>-</Button>
+                    {counter}
+                    <Button onClick={() => setCounter(counter + 1)}>+</Button>
+                  </div>
                 )}
               </div>
             )}

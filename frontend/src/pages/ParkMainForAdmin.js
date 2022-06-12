@@ -35,7 +35,8 @@ const ParkMainForAdmin = () => {
   return (
     <Container className="contr">
       <Container md={9}>
-        <Row mt={5} className="contr1">
+        <Row mt={5}>
+          {/*className="contr1"*/}
           <h2 className="heading2_1" style={{ color: '#fcfcee' }}>
             Парк{' '}
           </h2>
@@ -79,6 +80,7 @@ const ParkMainForAdmin = () => {
             el = el.park
             return (
               <Row key={el.id} park={el}>
+                {console.log('park', park)}
                 <Col md={9}>
                   <Row className="heading2_1">
                     <h2> {el?.name}</h2>

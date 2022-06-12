@@ -43,22 +43,18 @@ const Auth = observer(() => {
   const click = async () => {
     try {
       let data
-      let role
       if (isLogin && location.pathname === STUFF_ROUTE + LOGIN_ROUTE) {
         data = await stuffLogin(login, password)
-        // role = 'stuff'
       } else if (
         isLogin &&
         location.pathname === CUSTOMER_ROUTE + LOGIN_ROUTE
       ) {
-        // role = 'customer'
         data = await customerLogin(email)
       } else if (
         !isLogin &&
         location.pathname === STUFF_ROUTE + REGISTRATION_ROUTE
       ) {
         data = await stuffRegistration(login, password)
-        // role = 'stuff'
       }
       console.log('data', user)
       user.setUser(data)

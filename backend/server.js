@@ -14,9 +14,9 @@ const PORT = process.env.PORT || 8000
 const app = express()
 app.use(cors())
 app.use(express.json())
-app.use('/api', router)
 app.use(paginate.middleware(10, 50))
 app.use(fileUpload({}))
+app.use('/api', router)
 app.use(ErrorHandler)
 
 app.get('/', (req, res) => {

@@ -22,7 +22,7 @@ class CustomerController {
       }
       const activationLink = uuid.v4()
       const customer = await Customer.create({ email, phone_number })
-      const token = generateJwt(customer.id, customer.email)
+      const token = generateJwt(customer.id, customer.email, 'customer')
       return res.json({ token })
     } catch (e) {
       return next(ApiError.badRequest({ error: e }))

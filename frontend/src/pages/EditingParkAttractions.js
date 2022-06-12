@@ -23,41 +23,51 @@ import '../styles/navBar/navbar.css'
 
 const EditingParkAttractions = () => {
   const [park, setPark] = useState()
+  const [ParkId, setParkId] = useState(0)
   const [attraction, setAttraction] = useState()
-  const [name, setName] = useState()
-  const [hight, setHight] = useState()
-  const [weight_limitation, setWLim] = useState()
-  const [hight_limitation, setHLim] = useState()
-  const [description, setDescription] = useState()
-  const [age_limitation, setALim] = useState()
-  const [max_quantity_people, setMaxQuan] = useState()
+  const [AttractionId, setAttractionId] = useState(0)
+  const [name, setName] = useState('')
+  const [hight, setHight] = useState(0)
+  const [weight_limitation, setWLim] = useState(0)
+  const [hight_limitation, setHLim] = useState(0)
+  const [description, setDescription] = useState('')
+  const [age_limitation, setALim] = useState(0)
+  const [max_quantity_people, setMaxQuan] = useState(0)
   const [active, setActive] = useState(false)
-  let ParkId = ''
-  park &&
-    park.parks.map((el) => {
-      el = el.park
-      ParkId = el.id
-      console.log('ParkId', ParkId)
-    })
 
   const { id } = useParams()
   useEffect(() => {
-    stuffFetchPark().then((data) => setPark(data))
+    stuffFetchPark().then((data) => {
+      setPark(data)
+      data.parks.map((data) => {
+        let park = data.park
+        setParkId(park.id)
+      })
+    })
     stuffFetchOneAttraction(id).then((data) => {
-      setAttraction(data.attraсtion)
+      {
+        console.log('data.attraction', data.attraсtion)
+        let attraction = data.attraсtion
+        setAttraction(attraction)
+        setAttractionId(attraction.id)
+        setName(attraction.name)
+        setHight(attraction.hight)
+        setWLim(attraction.weight_limitation)
+        setHLim(attraction.hight_limitation)
+        setDescription(attraction.description)
+        setMaxQuan(attraction.max_quantity_people)
+        setActive(attraction.active)
+      }
       if (!data.attraction.age_limitation) {
         setALim(20)
       }
     })
   }, [])
-  console.log('el', park)
-  console.log('elll', attraction)
   const navigate = useNavigate()
 
-  const updateAttraction = () => {
+  const updateAttraction = async () => {
     const formData = new FormData()
-
-    formData.append('Id', `${id}`)
+    formData.append('id', `${AttractionId}`)
     formData.append('name', name)
     formData.append('hight', `${hight}`)
     formData.append('weight_limitation', `${weight_limitation}`)
@@ -67,31 +77,22 @@ const EditingParkAttractions = () => {
     formData.append('max_quantity_people', `${max_quantity_people}`)
     formData.append('active', active)
     formData.append('ParkId', `${ParkId}`)
-    editAttraction(formData).then((data) => {})
+    const data = await editAttraction(formData)
+    return data
   }
-  const newAttraction = () => {
+  const newAttraction = async () => {
     const formData = new FormData()
-    formData.set('name', name)
+    formData.append('name', name)
     formData.append('hight', `${hight}`)
     formData.append('weight_limitation', `${weight_limitation}`)
     formData.append('hight_limitation', `${hight_limitation}`)
     formData.append('description', description)
-    formData.set('age_limitation', `${age_limitation}`)
+    formData.append('age_limitation', `${age_limitation}`)
     formData.append('max_quantity_people', max_quantity_people)
     formData.append('active', active)
     formData.append('ParkId', `${ParkId}`)
-    console.log('5555555555555555555555555555')
-    createAttraction(
-      name,
-      hight,
-      weight_limitation,
-      hight_limitation,
-      description,
-      age_limitation,
-      max_quantity_people,
-      active,
-      ParkId
-    ).then((data) => {})
+    const data = await createAttraction(formData)
+    return data
   }
 
   //   const searchParks = useMemo(() => {
@@ -103,6 +104,7 @@ const EditingParkAttractions = () => {
   return (
     <Container className={'d-flex justify-content-center text-light'}>
       <Col xs={6}>
+        {console.log('attraction', attraction)}
         {attraction ? (
           <Form>
             <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
@@ -112,15 +114,12 @@ const EditingParkAttractions = () => {
             </Form.Group>
             {attraction && (
               <Form.Group className="mb-3" controlId="formBasicPassword">
-                {console.log('attrname', attraction.name)}
                 <Form.Label>Название</Form.Label>
                 <Form.Control
                   placeholder="Название"
                   defaultValue={attraction?.name}
                   value={name}
-                  onChange={(e) =>
-                    setName(console.log('tagret valuie', e.target.value))
-                  }
+                  onChange={(e) => setName(e.target.value)}
                 />
                 <Form.Label>Высота аттракциона</Form.Label>
                 <Form.Control
@@ -143,24 +142,25 @@ const EditingParkAttractions = () => {
                   placeholder="Огранчиение по росту посетителя"
                   defaultValue={attraction?.hight_limitation}
                   value={hight_limitation}
-                  onChange={(e) => setHLim(Number(e.target.value))}
+                  onChange={(e) => setHLim(e.target.value.replace(/\D/, ''))}
                 />
                 <Form.Label>Описание</Form.Label>
                 <Form.Control
                   as="textarea"
+                  rows={7}
                   placeholder="Описание"
                   defaultValue={attraction?.description}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
 
-                <Form.Label>Ограничение по фозрасту посетителя</Form.Label>
+                <Form.Label>Ограничение по возрасту посетителя</Form.Label>
                 <Form.Control
                   type="number"
-                  placeholder="Ограничение по фозрасту посетителя"
+                  placeholder="Ограничение по возрасту посетителя"
                   defaultValue={attraction?.age_limitation}
                   value={age_limitation}
-                  onChange={(e) => setALim(e.target.value)}
+                  onChange={(e) => setALim(Number(e.target.value))}
                 />
                 <Form.Label>Максимальное количество человек</Form.Label>
                 <Form.Control
@@ -230,15 +230,16 @@ const EditingParkAttractions = () => {
               <Form.Label>Описание</Form.Label>
               <Form.Control
                 as="textarea"
+                rows={7}
                 placeholder="Описание"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
 
-              <Form.Label>Ограничение по фозрасту посетителя</Form.Label>
+              <Form.Label>Ограничение по возрасту посетителя</Form.Label>
               <Form.Control
                 type="number"
-                placeholder="Ограничение по фозрасту посетителя"
+                placeholder="Ограничение по возрасту посетителя"
                 value={age_limitation}
                 onChange={(e) => setALim(Number(e.target.value))}
               />

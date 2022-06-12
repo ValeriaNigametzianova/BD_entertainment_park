@@ -35,7 +35,7 @@ class StuffController {
     const admin = await Admin.create({ StuffId: stuff.id })
     console.log(stuff.id, admin)
     //выводить все билеты, у чела -корзина
-    const token = generateJwt(stuff.id, stuff.login)
+    const token = generateJwt(stuff.id, stuff.login, 'stuff')
     return res.json({ token })
   }
 

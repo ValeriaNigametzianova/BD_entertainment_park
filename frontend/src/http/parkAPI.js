@@ -39,38 +39,18 @@ export const customerFetchGreenZone = async (id) => {
   return data
 }
 export const stuffFetchGreenZone = async () => {
-  const { data } = await $host.get('api/stuff/getPark', {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  const { data } = await $authHost.get('api/stuff/getPark', {
+    // headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   })
   return data
 }
 export const editGreenZone = async (greenZone) => {
-  const { data } = await $authHost.put('api/stuff/park', greenZone)
+  const { data } = await $authHost.put('api/stuff/park/gz', greenZone)
   return data
 }
 
-export const createAttraction = async (
-  name,
-  hight,
-  weight_limitation,
-  hight_limitation,
-  description,
-  age_limitation,
-  max_quantity_people,
-  active,
-  ParkId
-) => {
-  const { data } = await $authHost.post('api/stuff/attraction', {
-    name,
-    hight,
-    weight_limitation,
-    hight_limitation,
-    description,
-    age_limitation,
-    max_quantity_people,
-    active,
-    ParkId,
-  })
+export const createAttraction = async (attraction) => {
+  const { data } = await $authHost.post('api/stuff/attraction', attraction)
   return data
 }
 export const customerFetchAttraction = async (id) => {
@@ -95,13 +75,8 @@ export const editAttraction = async (attraction) => {
   return data
 }
 
-export const createTarif = async (name, cost, description, ParkId) => {
-  const { data } = await $authHost.post('api/stuff/tarif', {
-    name,
-    cost,
-    description,
-    ParkId,
-  })
+export const createTarif = async (tarif) => {
+  const { data } = await $authHost.post('api/stuff/tarif', tarif)
   return data
 }
 export const customerFetchTarif = async (id) => {
