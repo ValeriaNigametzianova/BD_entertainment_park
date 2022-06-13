@@ -4,14 +4,16 @@ export default class ParkStore {
     this._parks = []
     this._towns = []
     this._selectedTown = ''
+    this._searchQuery = ''
     this._attarctions = []
     this._greenZones = []
     this._tarifs = []
     this._selectedPark = []
+    this._tempQuery = ''
     this._searchPark = []
     this._page = 1
     this._totalCount = 0
-    this._limit = 2
+    this._limit = 3
     makeAutoObservable(this)
   }
 
@@ -23,6 +25,12 @@ export default class ParkStore {
   }
   setSelectedTown(selectedTown) {
     this._selectedTown = selectedTown
+  }
+  setSearchQuery(searchQuery) {
+    this._searchQuery = searchQuery
+  }
+  setTempQuery(tempQuery) {
+    this._tempQuery = tempQuery
   }
   setAttraction(attarctions) {
     this._attarctions = attarctions
@@ -37,7 +45,6 @@ export default class ParkStore {
     this._selectedPark = park
   }
   setSearchPark(searchPark) {
-    console.log('tuta', this._parks)
     this._searchPark = searchPark
   }
   setPage(page) {
@@ -58,6 +65,12 @@ export default class ParkStore {
   }
   get selectedTown() {
     return this._selectedTown
+  }
+  get searchQuery() {
+    return this._searchQuery
+  }
+  get tempQuery() {
+    return this._tempQuery
   }
   get searchPark() {
     return this._searchPark

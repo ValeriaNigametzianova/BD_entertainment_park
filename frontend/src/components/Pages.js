@@ -5,7 +5,7 @@ import { Context } from '../index'
 
 const Pages = observer(() => {
   const { park } = useContext(Context)
-  const pageCount = Math.floor(park.totalCount / park.limit)
+  const pageCount = Math.ceil(park.totalCount / park.limit)
   const pages = []
 
   for (let i = 0; i < pageCount; i++) {

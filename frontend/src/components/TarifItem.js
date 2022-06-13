@@ -9,6 +9,8 @@ import {
   TICKETS_ROUTE,
 } from '../utils/Consts'
 import { Context } from '../index'
+import { deleteAttraction } from '../http/attractionAPI'
+import { deleteTarif } from '../http/tarifAPI'
 
 const TarifItem = ({ tarif, addTarifs }) => {
   const { user } = useContext(Context)
@@ -26,6 +28,12 @@ const TarifItem = ({ tarif, addTarifs }) => {
   useEffect(() => {
     if (addTarifs !== undefined) createTarifs()
   }, [counter])
+
+  const destroyTarif = (deletedTarif) => {
+    // setAttractions(attractions.filter((p) => p.id != deletedAttraction.id))
+    deleteTarif(deletedTarif.id).then((data) => {})
+    window.location.reload()
+  }
 
   return (
     <Container>
@@ -55,15 +63,30 @@ const TarifItem = ({ tarif, addTarifs }) => {
         <Col md="auto">
           <Row>
             {user.role === 'stuff' ? (
-              <Button
-                key={tarif.id}
-                tarif={tarif}
-                onClick={() =>
-                  navigate(STUFF_ROUTE + PARK_TARIF_ROUTE + '/' + tarif.id)
-                }
-              >
-                Обновить даннные
-              </Button>
+              <Row>
+                <Col>
+                  <Button
+                    className="button2"
+                    onClick={() => {
+                      destroyTarif(tarif)
+                    }}
+                  >
+                    Удалить тариф
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className="button2"
+                    key={tarif.id}
+                    tarif={tarif}
+                    onClick={() =>
+                      navigate(STUFF_ROUTE + PARK_TARIF_ROUTE + '/' + tarif.id)
+                    }
+                  >
+                    Обновить даннные
+                  </Button>
+                </Col>
+              </Row>
             ) : (
               <div>
                 {counter === 0 ? (

@@ -1,9 +1,10 @@
 const ticketController = require('../controllers/ticketController')
 const { Tarif } = require('../models/models')
 
-module.exports = ({ ticket }) => {
+module.exports = async ({ ticket }) => {
   //  const today = new Date();
-  const tarif = Tarif.findOne({ where: ticket.TarifId })
+  console.log('ticket', ticket)
+  const tarif = await Tarif.findOne({ where: { id: ticket.TarifId } })
   return `
     <!doctype html>
     <html>
@@ -99,13 +100,13 @@ module.exports = ({ ticket }) => {
                 </tr>
                 <tr class="information">
                     <tr>
-                        Customer name: ${ticket?.surname}
+                        Фамилия: ${ticket?.surname}
                      </tr>
                      <tr>
-                         Customer name: ${ticket?.name}
+                         Имя: ${ticket?.name}
                       </tr>
                       <tr>
-                          Customer name: ${tarif?.cost}
+                          Стоимость: ${tarif?.cost}
                        </tr>
                        <tr>
                           Дата: ${ticket?.date}

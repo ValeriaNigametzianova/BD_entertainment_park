@@ -6,10 +6,13 @@ const Tickets = () => {
   const [tickets, setTickets] = useState([])
   useEffect(() => {
     customerFetchTickets().then((data) => {
-      setTickets(data)
-      data.forEach((element) => {
-        element.date = new Date(element.date)
-      })
+      {
+        console.log('data', data)
+        setTickets(data)
+        // data.forEach((element) => {
+        //   element.date = new Date(element.date)
+        // })
+      }
     })
   }, [])
   console.log('ticketssss', tickets)
@@ -21,14 +24,14 @@ const Tickets = () => {
       {tickets.map((el) => (
         <Row>
           <Row>
-            <Col>
+            {/* <Col>
               <Row>Фамилия</Row>
-            </Col>
+            </Col> */}
             <Col>
-              <Row>{el?.surname}</Row>
+              <Row>{el}</Row>
             </Col>
           </Row>
-          <Row>
+          {/* <Row>
             <Col>
               <Row>Имя</Row>
             </Col>
@@ -43,7 +46,7 @@ const Tickets = () => {
             <Col>
               <Row>{el?.date.toLocaleDateString()}</Row>
             </Col>
-          </Row>
+          </Row> */}
         </Row>
       ))}
     </Container>

@@ -12,13 +12,22 @@ import '../styles/cont/contr.css'
 
 const ParkList = observer(() => {
   const { park } = useContext(Context)
+  console.log('olo', park?.parks)
+  console.log('lll', park?.searchPark)
 
   return (
     <Container className="contr">
       <Row className="d-flex " style={{ cursor: 'pointer' }}>
-        {park.searchPark.map((park) => (
-          <ParkItem key={park.id} park={park} />
-        ))}
+        {/* {park.searchPark.length */}
+        {/* ?  */}
+        {park?.searchPark.map((park) => {
+          return <ParkItem key={park.id} park={park} />
+        })}
+        {/* :  */}
+        {/* park.parks.map((park) => {
+              console.log('2')
+              return <ParkItem key={park.id} park={park} />
+            })} */}
       </Row>
     </Container>
   )

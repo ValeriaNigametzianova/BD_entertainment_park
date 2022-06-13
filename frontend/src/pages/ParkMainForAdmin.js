@@ -2,7 +2,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Col, Container, Row, Button } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Context } from '..'
-import { stuffFetchGreenZone, stuffFetchPark } from '../http/parkAPI'
+import {
+  deletePark,
+  stuffFetchGreenZone,
+  stuffFetchPark,
+} from '../http/parkAPI'
 import {
   ATTRACTIONS_ADMIN_ROUTE,
   MAIN_ADMIN_ROUTE,
@@ -23,22 +27,27 @@ import '../styles/button/button.css'
 import '../styles/fonts/heading4.css'
 
 const ParkMainForAdmin = () => {
-  const [park, setPark] = useState()
+  const [parks, setParks] = useState()
   const [greenZones, setGreenZones] = useState()
   useEffect(() => {
-    stuffFetchPark().then((data) => setPark(data))
+    console.log('UE')
+    stuffFetchPark().then((data) => setParks(data))
     stuffFetchGreenZone().then((data) => setGreenZones(data))
   }, [])
   const navigate = useNavigate()
-  console.log('2', park)
-  console.log('4', greenZones)
+
+  const destroyPark = (deletedPark) => {
+    setParks({ parks: parks.parks.filter((p) => p.park.id != deletedPark.id) })
+    deletePark(deletedPark.id).then((data) => {})
+  }
+
   return (
     <Container className="contr">
       <Container md={9}>
         <Row mt={5}>
           {/*className="contr1"*/}
-          <h2 className="heading2_1" style={{ color: '#fcfcee' }}>
-            Парк{' '}
+          <h2 className="heading2_1" style={{ color: 'black' }}>
+            Парк
           </h2>
         </Row>
         <Row className="d-flex">
@@ -70,17 +79,17 @@ const ParkMainForAdmin = () => {
             </div>
           </Col>
         </Row>
-        {console.log('hii', { park })}
+        {console.log('hii', parks)}
         {/* {console.log(
               'el.name',
               park.parks.map((el) => el.name)
             )} */}
-        {park &&
-          park.parks.map((el) => {
+        {parks &&
+          parks?.parks.map((el) => {
             el = el.park
             return (
               <Row key={el.id} park={el}>
-                {console.log('park', park)}
+                {console.log('park', parks)}
                 <Col md={9}>
                   <Row className="heading2_1">
                     <h2> {el?.name}</h2>
@@ -120,10 +129,13 @@ const ParkMainForAdmin = () => {
               </Row>
             )
           })}
+        <h2 className="heading2_1 mt={5}" style={{ color: 'black' }}>
+          Зоны отдыха в парке развлечений
+        </h2>
         {greenZones &&
           greenZones.parks.map((el) =>
             el.greenZones.map((el) => (
-              <Row>
+              <Row key={el.id}>
                 <Row mt={5}>
                   <h2 className="heading4">{el?.name}</h2>
                   <div className="heading4">{el?.description}</div>
@@ -132,13 +144,31 @@ const ParkMainForAdmin = () => {
             ))
           )}
         <Row className="d-flex">
-          {park && park.parks.length ? (
-            <Button
-              className="button2"
-              onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}
-            >
-              Обновить даннные
-            </Button>
+          {parks && parks.parks.length ? (
+            <Row>
+              <Col>
+                {parks.parks.map((el) => {
+                  el = el.park
+                  return (
+                    <Button
+                      key={el.id}
+                      className="button2"
+                      onClick={() => destroyPark(el)}
+                    >
+                      Удалить парк
+                    </Button>
+                  )
+                })}
+              </Col>
+              <Col>
+                <Button
+                  className="button2"
+                  onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}
+                >
+                  Обновить даннные
+                </Button>
+              </Col>
+            </Row>
           ) : (
             <Button
               className="button2"

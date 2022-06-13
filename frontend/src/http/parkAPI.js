@@ -29,6 +29,10 @@ export const editInfo = async (park) => {
   const { data } = await $authHost.put('api/stuff/park', park)
   return data
 }
+export const deletePark = async (id) => {
+  const { data } = await $authHost.delete('api/stuff/park/' + id)
+  return data
+}
 
 export const createGreenZone = async (greenZone) => {
   const { data } = await $authHost.post('api/stuff/greenZone', greenZone)

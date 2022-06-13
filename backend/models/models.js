@@ -73,7 +73,7 @@ GreenZone.belongsTo(Park, {
 })
 
 Park.belongsToMany(Stuff, { through: Admin }, { onDelete: 'set null' })
-Stuff.belongsToMany(Park, { through: Admin })
+Stuff.belongsToMany(Park, { through: Admin }, { onDelete: 'set null' })
 
 Park.hasMany(Tarif, { onDelete: 'cascade', onUpdate: 'no action' })
 Tarif.belongsTo(Park, {

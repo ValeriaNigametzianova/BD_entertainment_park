@@ -20,7 +20,7 @@ router.post('/:id/tarif', ticketController.create) // страница со сп
 
 router.put('/', authStuffMiddleware, parkController.update)
 router.put('/gz', authStuffMiddleware, greenZoneController.update)
-router.delete('/', authStuffMiddleware, parkController.delete)
+router.delete('/:id', authStuffMiddleware, parkController.delete)
 
 // router.delete('/',)
 

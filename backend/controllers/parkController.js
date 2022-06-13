@@ -1,3 +1,4 @@
+const sequelize = require('sequelize')
 const ApiError = require('../error/ApiError')
 const {
   Park,
@@ -11,7 +12,6 @@ const adminController = require('./adminController')
 class parkController {
   async create(req, res, next) {
     try {
-      console.log('req', req.body)
       const {
         name,
         town,
@@ -41,8 +41,8 @@ class parkController {
         adress,
       })
       const stuff = await Stuff.findOne({ where: { id: req.stuff.id } })
-      console.log(stuff)
-      adminController.hasPark(park, stuff)
+      // const admin = await Admin.create({ StuffId: stuff.id, ParkId: park.id })
+      await stuff.setParks(park)
       return res.json(park)
     } catch (e) {
       return next(ApiError.badRequest(e.message))
@@ -50,23 +50,52 @@ class parkController {
   }
 
   async getAll(req, res, next) {
-    let { town, limit, page } = req.query
-    console.log(req.query)
+    let parks = await Park.findAll()
+    let { name, town, limit, page } = req.query
+    // const names = [...new Set(parks.map((el) => el.name))]
+    const towns = [...new Set(parks.map((el) => el.town))]
+    console.log('req.query', req.query)
     limit = Number(limit)
     page = Number(page)
     page = page || 1
     limit = limit || 5
     console.log(limit)
     let offset = page * limit - limit
-    let parks
     console.log('town:', town)
-    if (town) {
-      parks = await Park.findAndCountAll({ offset, limit, where: { town } }) //пагинация, выдает кол-во всех полей и записи с указанным лимитом
-      return res.json(parks)
+    if (name && town) {
+      parks = await Park.findAndCountAll({
+        offset,
+        limit,
+        where: {
+          [sequelize.Op.and]: [
+            { town },
+            { name: { [sequelize.Op.like]: '%' + name + '%' } },
+          ],
+        },
+      }) //пагинация, выдает кол-во всех полей и записи с указанным лимитом
+      return res.json({ parks, towns })
     }
-    if (!town) {
+    if (!name && town) {
+      parks = await Park.findAndCountAll({
+        offset,
+        limit,
+        where: { town },
+      }) //пагинация, выдает кол-во всех полей и записи с указанным лимитом
+      return res.json({ parks, towns })
+    }
+    if (name && !town) {
+      parks = await Park.findAndCountAll({
+        offset,
+        limit,
+        where: {
+          name: { [sequelize.Op.like]: '%' + name + '%' },
+        },
+      }) //пагинация, выдает кол-во всех полей и записи с указанным лимитом
+      return res.json({ parks, towns })
+    }
+    if (!name && !town) {
       parks = await Park.findAndCountAll({ offset, limit }) //пагинация, выдает кол-во всех полей и записи с указанным лимитом
-      return res.json(parks)
+      return res.json({ parks, towns })
     }
   }
 
@@ -128,7 +157,8 @@ class parkController {
 
   async delete(req, res) {
     try {
-      const { id } = req.body
+      const { id } = req.params
+      console.log('park00000', id)
       if (!id) {
         return res.json(ApiError.badRequest({ message: 'Id не указан' }))
       }
@@ -136,7 +166,7 @@ class parkController {
       if (!park) {
         return res.json(ApiError.badRequest({ message: 'Парк не найден' }))
       }
-      await Park.destroy({ where: { id } })
+      await Park.destroy({ where: { id: park.id } })
 
       return res.status(200).json(park)
     } catch (e) {

@@ -127,7 +127,7 @@ const EditingParkInfo = () => {
     formData.append('name', gzName)
     formData.append('description', gzDescription)
     formData.append('ParkId', id)
-    createGreenZone(formData).then((data) => {})
+    createGreenZone(formData).then((data) => data)
     // data = await createGreenZone(name, gzDescription, ParkId)
   }
 
@@ -137,7 +137,7 @@ const EditingParkInfo = () => {
     formData.append('name', gzName)
     formData.append('description', gzDescription)
     formData.append('ParkId', ParkId)
-    editGreenZone(formData).then((data) => {})
+    editGreenZone(formData).then((data) => data)
   }
 
   //   const searchParks = useMemo(() => {
@@ -332,11 +332,11 @@ const EditingParkInfo = () => {
               <Button
                 className="button"
                 variant="primary"
-                onClick={() => (
-                  updatePark(),
-                  updateGreenZone(),
+                onClick={async () => {
+                  await updatePark()
+                  updateGreenZone()
                   navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)
-                )}
+                }}
               >
                 Обновить
               </Button>
@@ -489,8 +489,9 @@ const EditingParkInfo = () => {
                 className="button"
                 variant="primary"
                 onClick={() => {
-                  newPark().then((data) => newGreenZone(data.id))
-                  navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)
+                  newPark()
+                    .then((data) => newGreenZone(data.id))
+                    .then(() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE))
                 }}
               >
                 Создать

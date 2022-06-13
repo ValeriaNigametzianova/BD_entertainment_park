@@ -41,7 +41,10 @@ const NavBar = observer(() => {
   const sourceParks = park
   const navigate = useNavigate()
   const location = useLocation()
-  const [searchQuery, setSearchQuery] = useState('')
+  const [tempQuery, setTempQuery] = useState('')
+
+  console.log('tempQuery', tempQuery)
+  // const tempQuery = () => {}
 
   const logOut = () => {
     user.setUser({})
@@ -49,7 +52,6 @@ const NavBar = observer(() => {
     user.setRole('')
     localStorage.removeItem('token')
   }
-  console.log('userIsAuth', user.isAuth)
   // const searchParks = useMemo(() => {
   //   console.log('working')
   //   console.log(park.parks)
@@ -62,17 +64,17 @@ const NavBar = observer(() => {
   //   }
   // }, [searchQuery, park.parks])
 
-  const searchParks = useMemo(() => {
-    console.log(searchQuery)
-    return park.parks.filter((onePark) => {
-      console.log(
-        'perk',
-        onePark.name.toLowerCase(),
-        onePark.name.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-      return onePark.name.toLowerCase().includes(searchQuery.toLowerCase())
-    })
-  }, [searchQuery, park.parks])
+  // const searchParks = useMemo(() => {
+  //   console.log('searchQuery', park.searchQuery)
+  //   return park.parks.filter((onePark) => {
+  //     console.log(
+  //       'perk',
+  //       onePark.name.toLowerCase(),
+  //       onePark.name.toLowerCase().includes(park.searchQuery.toLowerCase())
+  //     )
+  //     return onePark.name.toLowerCase().includes(park.searchQuery.toLowerCase())
+  //   })
+  // }, [park.searchQuery, park.parks])
 
   return (
     <Navbar className="navbar" expand="lg">
@@ -88,23 +90,32 @@ const NavBar = observer(() => {
           </Navbar.Brand>
 
           {location.pathname === PARK_MAIN_ROUTE && (
-            <Form className="d-flex">
+            <Form
+              className="d-flex"
+              onSubmit={(event) => {
+                event.preventDefault()
+                // park.setSearchQuery(event.target.value)
+                // park.setSearchPark(searchParks)
+              }}
+            >
               <FormControl
                 type="search"
                 placeholder="Поиск"
                 className="search"
                 aria-label="Search"
-                value={searchQuery}
+                value={park.searchQuery}
                 onChange={(e) => {
-                  setSearchQuery(e.target.value)
+                  setTempQuery(e.target.value)
+                  park.setPage(1)
                 }}
               />
               <Button
                 className="button"
                 variant="outline-success"
                 onClick={(e) => {
-                  setSearchQuery(e.target.value)
-                  park.setSearchPark(searchParks)
+                  park.setSearchQuery(e.target.tempQuery)
+                  park.setPage(1)
+                  // park.setSearchPark(searchParks)
                 }}
               >
                 Найти
@@ -178,6 +189,7 @@ const NavBar = observer(() => {
                     onClick={(e) => {
                       e.preventDefault()
                       park.setSelectedTown(town)
+                      park.setPage(1)
                     }}
                   >
                     {town}
@@ -187,6 +199,7 @@ const NavBar = observer(() => {
                   onClick={(e) => {
                     e.preventDefault()
                     park.setSelectedTown(null)
+                    park.setPage(1)
                   }}
                 >
                   Сбросить
@@ -207,6 +220,7 @@ const NavBar = observer(() => {
                     onClick={(e) => {
                       e.preventDefault()
                       park.setSelectedTown(town)
+                      park.setPage(1)
                     }}
                   >
                     {town}
@@ -216,6 +230,7 @@ const NavBar = observer(() => {
                   onClick={(e) => {
                     e.preventDefault()
                     park.setSelectedTown(null)
+                    park.setPage(1)
                   }}
                 >
                   Сбросить
@@ -227,27 +242,37 @@ const NavBar = observer(() => {
             location.pathname === '/') && (
             <Form
               className="d-flex justify-content-center align-items-center"
-              onSubmit={(event) => {
-                event.preventDefault()
-                park.setSearchPark(searchParks)
-              }}
+              // onSubmit={(e) => {
+              //   e.preventDefault()
+              // park.setSearchPark(searchParks)
+              // }}
             >
               <FormControl
                 type="search"
                 placeholder="Поиск"
                 className="search"
                 aria-label="Search"
-                value={searchQuery}
+                value={tempQuery}
+                // onSubmit={(e) => {
+                //   e.preventDefault()
+                // setTempQuery(e.target.value)
+                // park.setSearchQuery(e.target.value)
+                // park.setPage(1)
+                // park.setSearchPark(searchParks)
+                // }}
                 onChange={(e) => {
-                  setSearchQuery(e.target.value)
+                  setTempQuery(e.target.value)
+                  park.setSearchQuery(e.target.value)
+                  park.setPage(1)
                 }}
               />
               <Button
                 className="button"
                 variant="outline-success"
                 onClick={(e) => {
-                  setSearchQuery(e.target.value)
-                  park.setSearchPark(searchParks)
+                  park.setSearchQuery(e.target.value)
+                  park.setPage(1)
+                  // park.setSearchPark(searchParks)
                 }}
               >
                 Найти

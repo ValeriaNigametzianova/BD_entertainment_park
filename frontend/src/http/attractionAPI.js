@@ -18,3 +18,8 @@ export const editAttraction = async (attraction) => {
   const { data } = await $authHost.put('api/stuff/attraction', attraction)
   return data
 }
+
+export const deleteAttraction = async (id) => {
+  const { data } = await $authHost.delete('api/stuff/attraction/' + id)
+  return data
+}

@@ -27,7 +27,6 @@ class ticketController {
       const { email, phone_number, surname, name } = req.body.customer
       const date = req.body.date
       let tickets = []
-      const files = []
       let counter = 0
       let TarifId = Object.getOwnPropertyNames(req.body.tarifs).map(
         (el) => req.body.tarifs[`${el}`]
@@ -42,7 +41,7 @@ class ticketController {
           const tarif = await Tarif.findOne({ where: { id: element.tarif.id } })
           let counter = []
           for (let i = 0; i < element.counter; i++) counter.push(element.tarif)
-          console.log('counter', counter)
+          console.log('tarif.id', tarif.id)
           await Promise.all(
             counter.map(async (uf) => {
               const ticket = await Ticket.create({
@@ -53,15 +52,6 @@ class ticketController {
                 CustomerId: customer.id,
               })
               tickets.push(ticket)
-              const file = pdf
-                .create(pdfTemplate(ticket), {})
-                .toFile('result.pdf', (err) => {
-                  if (err) {
-                    return res.send(Promise.reject())
-                  }
-                  // return res.send(Promise.resolve())
-                })
-              files.push(file)
             })
           )
         })
@@ -80,19 +70,31 @@ class ticketController {
     // return res.json(tickets)
     try {
       const { id } = req.customer
+      const files = []
       console.log('id', id)
       await Customer.findOne({ where: { id } }).then(async (customer) => {
         console.log('customer', customer)
         if (!customer) return
         await customer.getTickets().then((tickets) => {
           console.log('tickets', tickets)
-          //    for(park of parks){
-          //        console.log(park);
-          //     }
-          return res.json(tickets)
+
+          tickets.map(async (ticket) => {
+            const file = pdf
+              .create(pdfTemplate(ticket), {})
+              .toFile('result.pdf', (err) => {
+                if (err) {
+                  return res.send(Promise.reject())
+                }
+                // return res.send(Promise.resolve())
+              })
+            files.push(file)
+          })
+          // res.sendFile(`${__dirname}/result.pdf`)
+          res.send(files)
+
+          // return res.json(tickets)
         })
       })
-      // res.sendFile(`${__dirname}/result.pdf`)
     } catch (error) {
       console.log(error.message)
       return res.json({ message: error.message })

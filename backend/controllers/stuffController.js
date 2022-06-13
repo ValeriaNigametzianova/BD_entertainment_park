@@ -32,8 +32,8 @@ class StuffController {
     }
     const hashPassword = await bcrypt.hash(password, 5)
     const stuff = await Stuff.create({ login, password: hashPassword })
-    const admin = await Admin.create({ StuffId: stuff.id })
-    console.log(stuff.id, admin)
+    // const admin = await Admin.create({ StuffId: stuff.id })
+    // console.log(stuff.id, admin)
     //выводить все билеты, у чела -корзина
     const token = generateJwt(stuff.id, stuff.login, 'stuff')
     return res.json({ token })
