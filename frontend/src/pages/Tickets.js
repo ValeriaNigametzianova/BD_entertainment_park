@@ -1,21 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
-import { customerFetchTickets } from '../http/customerAPI'
+import { Button, Col, Container, Row } from 'react-bootstrap'
+import { customerFetchPDF, customerFetchTickets } from '../http/customerAPI'
+import { saveAs } from 'file-saver'
 
 const Tickets = () => {
   const [tickets, setTickets] = useState([])
+  const baseLink = 'result'
+  console.log('baseLink', baseLink)
+  let link = ''
+  const format = '.pdf'
   useEffect(() => {
-    customerFetchTickets().then((data) => {
-      {
-        console.log('data', data)
-        setTickets(data)
-        // data.forEach((element) => {
-        //   element.date = new Date(element.date)
-        // })
-      }
-    })
+    customerFetchPDF()
+    customerFetchTickets().then((data) => setTickets(data))
   }, [])
   console.log('ticketssss', tickets)
+
   return (
     <Container style={{ color: 'white' }}>
       <Row>
@@ -23,30 +22,24 @@ const Tickets = () => {
       </Row>
       {tickets.map((el) => (
         <Row>
-          <Row>
-            {/* <Col>
-              <Row>Фамилия</Row>
-            </Col> */}
-            <Col>
-              <Row>{el}</Row>
-            </Col>
-          </Row>
-          {/* <Row>
-            <Col>
-              <Row>Имя</Row>
-            </Col>
-            <Col>
-              <Row>{el?.name}</Row>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Row>Дата</Row>
-            </Col>
-            <Col>
-              <Row>{el?.date.toLocaleDateString()}</Row>
-            </Col>
-          </Row> */}
+          <Col>
+            <Row>
+              <object>
+                <embed
+                  src={
+                    process.env.REACT_APP_API_URL +
+                    baseLink +
+                    `${el?.id}` +
+                    format
+                  }
+                  type="application/pdf"
+                  width="700"
+                  height="500"
+                />
+              </object>
+            </Row>
+          </Col>
+          {/* <Button onClick={() => saveAs(el, 'newPdf.pdf')}>Скачать</Button> */}
         </Row>
       ))}
     </Container>

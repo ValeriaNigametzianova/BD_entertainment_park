@@ -70,7 +70,8 @@ class ticketController {
     // return res.json(tickets)
     try {
       const { id } = req.customer
-      const files = []
+      let files = []
+      let pathes = []
       console.log('id', id)
       await Customer.findOne({ where: { id } }).then(async (customer) => {
         console.log('customer', customer)
@@ -80,29 +81,67 @@ class ticketController {
 
           tickets.map(async (ticket) => {
             const tarif = await Tarif.findOne({ where: { id: ticket.TarifId } })
-            console.log('ticket', ticket)
+            console.log('ticket', ticket.id)
             const file = pdf
               // pdfTemplate({ ticket, tarif })
               .create(pdfTemplate({ ticket, tarif }), { format: 'A5' })
-              .toFile('../result.pdf', (err) => {
-                if (err) {
-                  console.log('err')
-                  return res.send(Promise.reject())
-                }
-                files.push(file)
-                console.log('file', file)
-                // return res.send(Promise.resolve())
-              })
-          })
-          // res.sendFile(`${__dirname}/result.pdf`)
-          console.log('files', files)
-          res.send(files)
+              .toFile(
+                `../PDFTickets/result${ticket.id}.pdf`,
+                // __dirname,
+                // '..',
+                // 'PDFTickets',
+                // `result${ticket.id}.pdf`,
 
+                (err, ress) => {
+                  if (err) {
+                    console.log('err')
+                    return res.send(Promise.reject())
+                  }
+                  // return res.send(Promise.resolve())
+                }
+              )
+            files.push(`/PDFTickets/result${ticket.id}.pdf`)
+            let path = `/PDFTickets/result${ticket.id}.pdf`
+            pathes.push(path)
+            console.log('file', file)
+          })
+          // return res.json(files)
+          return res.json(pathes)
+          // return res.sendFile(__dirname + '/result.pdf')
           // return res.json(tickets)
         })
       })
     } catch (error) {
       console.log(error.message)
+      return res.json({ message: error.message })
+    }
+  }
+
+  async getTickets(req, res) {
+    try {
+      const { id } = req.customer
+      let files = []
+
+      const tickets = await Ticket.findAll({ where: { CustomerId: id } })
+      console.log('sss', tickets)
+      return res.json(tickets)
+
+      // console.log('id', id)
+      // await Customer.findOne({ where: { id } }).then(async (customer) => {
+      //   console.log('customer', customer)
+      //   if (!customer) return
+      //   await customer.getTickets().then((tickets) => {
+      //     // console.log('tickets', tickets)
+
+      //     tickets.map(async (ticket) => {
+      //       const tarif = await Tarif.findOne({ where: { id: ticket.TarifId } })
+      //       console.log('ticket', ticket.id)
+      //     })
+      //     console.log('files', files)
+      //     return res.json(files)
+      //   })
+      // })
+    } catch (error) {
       return res.json({ message: error.message })
     }
   }

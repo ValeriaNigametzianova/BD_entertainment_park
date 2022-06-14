@@ -18,7 +18,6 @@ const TarifList = () => {
     stuffFetchPark().then((data) => setPark(data.park))
     stuffFetchTarif().then((data) => setTarifs(data.tarifs))
   }, [])
-  console.log('777', tarifs)
 
   return (
     <Row className="d-flex">

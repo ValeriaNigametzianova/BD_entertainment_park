@@ -1,4 +1,4 @@
-module.exports = async ({ ticket, tarif }) => {
+module.exports = ({ ticket, tarif }) => {
   //  const today = new Date();
   console.log('ticketPDF', tarif)
   //   const tarif = await Tarif.findOne({ where: { id: ticket.TarifId } })

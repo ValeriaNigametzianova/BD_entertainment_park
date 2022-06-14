@@ -23,17 +23,29 @@ export const customerCheck = async () => {
   return jwt_decode(data.token)
 }
 
+export const customerFetchPDF = async () => {
+  const { data } = await $authHost.get('api/customer/ticket')
+  // console.log('res', res)
+  let array = []
+  data.map(async (file) => {
+    const pdfBlob = new Blob([file], { type: 'application/pdf' })
+    console.log('pdfBlob', pdfBlob)
+    array.push(pdfBlob)
+    // saveAs(pdfBlob, 'newPdf.pdf')
+  })
+  console.log('array', array)
+  return array
+  // return data
+}
 export const customerFetchTickets = async () => {
-  const { data } = await $authHost
-    .get('api/customer/ticket', { responseType: 'Blob' })
-    .then((res) => {
-      console.log('res', res.data)
-      const array = []
-      res.data.map(async (file) => {
-        const pdfBlob = new Blob([file], { type: 'application/pdf' })
-        array.push(pdfBlob)
-        saveAs(pdfBlob, 'newPdf.pdf')
-      })
-      return array
-    })
+  const { data } = await $authHost.get('api/customer/tickets')
+  // console.log('res', data)
+  // const array = []
+  // data.map(async (file) => {
+  //   const pdfBlob = new Blob([file], { type: 'application/pdf' })
+  //   array.push(pdfBlob)
+  //   saveAs(pdfBlob, 'newPdf.pdf')
+  // })
+  // return array
+  return data
 }

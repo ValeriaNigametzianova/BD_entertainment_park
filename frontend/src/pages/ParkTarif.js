@@ -35,6 +35,7 @@ const ParkTarifs = () => {
     user.setUser(data)
     user.setIsAuth(true)
     user.setRole(data.role)
+    return data
   }
 
   useEffect(() => {
@@ -67,9 +68,9 @@ const ParkTarifs = () => {
     setSumm(tsumm)
   }
 
-  const newTicket = () => {
-    createTicket(order).then((data) => {})
-    console.log(order)
+  const newTicket = async () => {
+    const data = await createTicket(order)
+    return data
   }
 
   // const createAndDownloadPdf = () => {
@@ -142,7 +143,7 @@ const ParkTarifs = () => {
 
           <Button
             onClick={async () => {
-              newTicket(order)
+              await newTicket(order)
               await lk()
               navigate(CUSTOMER_ROUTE + TICKETS_ROUTE)
             }}

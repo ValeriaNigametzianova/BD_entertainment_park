@@ -43,9 +43,6 @@ const NavBar = observer(() => {
   const location = useLocation()
   const [tempQuery, setTempQuery] = useState('')
 
-  console.log('tempQuery', tempQuery)
-  // const tempQuery = () => {}
-
   const logOut = () => {
     user.setUser({})
     user.setIsAuth(false)
@@ -94,6 +91,7 @@ const NavBar = observer(() => {
               className="d-flex"
               onSubmit={(event) => {
                 event.preventDefault()
+                park.setPage(1)
                 // park.setSearchQuery(event.target.value)
                 // park.setSearchPark(searchParks)
               }}
@@ -113,7 +111,7 @@ const NavBar = observer(() => {
                 className="button"
                 variant="outline-success"
                 onClick={(e) => {
-                  park.setSearchQuery(e.target.tempQuery)
+                  // park.setSearchQuery(e.target.tempQuery)
                   park.setPage(1)
                   // park.setSearchPark(searchParks)
                 }}
@@ -242,10 +240,11 @@ const NavBar = observer(() => {
             location.pathname === '/') && (
             <Form
               className="d-flex justify-content-center align-items-center"
-              // onSubmit={(e) => {
-              //   e.preventDefault()
-              // park.setSearchPark(searchParks)
-              // }}
+              onSubmit={(e) => {
+                e.preventDefault()
+                park.setPage(1)
+                // park.setSearchPark(searchParks)
+              }}
             >
               <FormControl
                 type="search"
@@ -270,7 +269,7 @@ const NavBar = observer(() => {
                 className="button"
                 variant="outline-success"
                 onClick={(e) => {
-                  park.setSearchQuery(e.target.value)
+                  // park.setSearchQuery(e.target.value)
                   park.setPage(1)
                   // park.setSearchPark(searchParks)
                 }}
