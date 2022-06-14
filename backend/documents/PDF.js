@@ -1,10 +1,7 @@
-const ticketController = require('../controllers/ticketController')
-const { Tarif } = require('../models/models')
-
-module.exports = async ({ ticket }) => {
+module.exports = async ({ ticket, tarif }) => {
   //  const today = new Date();
-  console.log('ticket', ticket)
-  const tarif = await Tarif.findOne({ where: { id: ticket.TarifId } })
+  console.log('ticketPDF', tarif)
+  //   const tarif = await Tarif.findOne({ where: { id: ticket.TarifId } })
   return `
     <!doctype html>
     <html>

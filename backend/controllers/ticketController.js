@@ -76,20 +76,26 @@ class ticketController {
         console.log('customer', customer)
         if (!customer) return
         await customer.getTickets().then((tickets) => {
-          console.log('tickets', tickets)
+          // console.log('tickets', tickets)
 
           tickets.map(async (ticket) => {
+            const tarif = await Tarif.findOne({ where: { id: ticket.TarifId } })
+            console.log('ticket', ticket)
             const file = pdf
-              .create(pdfTemplate(ticket), {})
-              .toFile('result.pdf', (err) => {
+              // pdfTemplate({ ticket, tarif })
+              .create(pdfTemplate({ ticket, tarif }), { format: 'A5' })
+              .toFile('../result.pdf', (err) => {
                 if (err) {
+                  console.log('err')
                   return res.send(Promise.reject())
                 }
+                files.push(file)
+                console.log('file', file)
                 // return res.send(Promise.resolve())
               })
-            files.push(file)
           })
           // res.sendFile(`${__dirname}/result.pdf`)
+          console.log('files', files)
           res.send(files)
 
           // return res.json(tickets)
