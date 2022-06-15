@@ -36,7 +36,11 @@ const EditingParkInfo = () => {
   const [gzDescription, setGzDescription] = useState('')
   const [ParkId, setParkId] = useState(0)
   const [GreenZoneId, setGreenZoneId] = useState(0)
-  let keke
+  const [file, setFile] = useState(null)
+
+  const selectFile = (e) => {
+    setFile(e.target.files[0])
+  }
   useEffect(() => {
     stuffFetchPark().then((data) => {
       setPark(data)
@@ -97,6 +101,7 @@ const EditingParkInfo = () => {
     formData.append('cafe', `${cafe}`)
     formData.append('shop', `${shop}`)
     formData.append('adress', adress)
+    formData.append('img', file)
     // formData.append('name', gzName)
     // formData.append('description', gzDescription)
     const data = await editInfo(formData)
@@ -116,6 +121,7 @@ const EditingParkInfo = () => {
     formData.append('cafe', `${cafe}`)
     formData.append('shop', `${shop}`)
     formData.append('adress', adress)
+    formData.append('img', file)
     const data = await createPark(formData)
     return data
   }
@@ -162,7 +168,6 @@ const EditingParkInfo = () => {
                 el = el.park
                 return (
                   <Form.Group className="mb-3" controlId="formBasicPassword">
-                    {console.log('el', el)}
                     <Form.Label className="heading3">Название</Form.Label>
                     <Form.Control
                       className="heading4 mb-3"
@@ -272,6 +277,12 @@ const EditingParkInfo = () => {
                       value={adress}
                       onChange={(e) => setAdress(e.target.value)}
                     />
+                    <Form.Label className="heading3">Добавьте фото</Form.Label>
+                    <Form.Control
+                      className="heading4 mb-3"
+                      type="file"
+                      onChange={selectFile}
+                    />
                   </Form.Group>
                 )
               })}
@@ -309,7 +320,6 @@ const EditingParkInfo = () => {
                 )
               ) : (
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                  {/* {console.log('el', el)} */}
                   <Form.Label className="heading3">Название</Form.Label>
                   <Form.Control
                     className="heading4"
@@ -349,7 +359,6 @@ const EditingParkInfo = () => {
                 </Form.Label>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPassword">
-                {/* {console.log('el', el)} */}
                 <Form.Label className="heading3">Название</Form.Label>
                 <Form.Control
                   className="heading4"
@@ -457,6 +466,12 @@ const EditingParkInfo = () => {
                   value={adress}
                   onChange={(e) => setAdress(e.target.value)}
                 ></Form.Control>
+                <Form.Label className="heading3">Добавьте фото</Form.Label>
+                <Form.Control
+                  className="heading4 mb-3"
+                  type="file"
+                  onChange={selectFile}
+                />
               </Form.Group>
 
               <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">

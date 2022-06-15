@@ -4,36 +4,32 @@ import { useNavigate } from 'react-router-dom'
 import { PARK_MAIN_ROUTE } from '../utils/Consts'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/container/container.css'
+import '../styles/cont/contr.css'
+import '../styles/parkItem.css'
 
 const ParkItem = ({ park }) => {
   const navigate = useNavigate()
-  // console.log(navigate)
+  const path = `${park.id}.jpg`
   return (
-    <Container
-      className="container"
+    // <Container
+    // className="parkItem"
+    // style={{ cursor: 'pointer' }}
+    //   onClick={() => navigate(PARK_MAIN_ROUTE + '/' + park.id)}
+    // >
+    <Row
+      className="parkItem"
+      style={{ cursor: 'pointer' }}
       onClick={() => navigate(PARK_MAIN_ROUTE + '/' + park.id)}
     >
-      <Row
-        // className="mt-2 px-2"
-        // style={{
-        //   background: '#FEFDEF',
-        //   cursor: 'pointer',
-        //   aligne: 'centre',
-        //   borderRadius: '3px',
-        // }}
-        border={'light'}
-      >
-        {/* <Card  style = {{background:"lightgrey", cursor: "pointer"}} border={"light"}> */}
-        <Col md={6}>
-          <div className={'heading2'}>{park.name}</div>
-          <div> {park.description} </div>
-        </Col>
-        <Col md={3}>
-          <Image width="100%" height={150} src={park.img} />
-        </Col>
-        {/* </Card> */}
-      </Row>
-    </Container>
+      <Col>
+        <Row className="heading2 colonka_desc">{park.name}</Row>
+        <Row className="colonka_desc"> {park.description} </Row>
+      </Col>
+      <Col>
+        <Image width="100%" src={process.env.REACT_APP_API_URL + path} />
+      </Col>
+    </Row>
+    // </Container>
   )
 }
 export default ParkItem

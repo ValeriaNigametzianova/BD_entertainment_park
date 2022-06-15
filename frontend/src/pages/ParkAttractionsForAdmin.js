@@ -30,19 +30,13 @@ const ParkAttractionsForAdmin = () => {
   const [attractions, setAttractions] = useState()
   const { id } = useParams()
   useEffect(() => {
-    console.log('ddddddddddd')
     stuffFetchPark().then((data) => setPark(data.parks))
     // stuffFetchAttraction().then((data) => setAttractions(data))
   }, [])
-  console.log('2', park)
-  console.log('5', attractions)
   const navigate = useNavigate()
   return (
     <Container className="contr">
       <Container md={9}>
-        <Row mt={5} className="heading2_1">
-          <h2 style={{ color: '#151E20' }}>Аттракционы</h2>
-        </Row>
         <Row className="d-flex justify-content-between">
           <Col>
             <div

@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 // import {MAIN_ROUTE} from "../utils/Consts";
 import { Context } from '../index'
 // import Main from "../pages/Main"
-import { Row } from 'react-bootstrap'
+import { Col, Row } from 'react-bootstrap'
 import TarifItem from '../components/TarifItem'
 import { observer } from 'mobx-react-lite'
 import { stuffFetchPark, stuffFetchTarif } from '../http/parkAPI'
@@ -20,13 +20,13 @@ const TarifList = () => {
   }, [])
 
   return (
-    <Row className="d-flex">
+    <Col>
       {console.log('tarif.id', tarifs)}
       {tarifs &&
         tarifs.map((el) =>
           el.map((tarif) => <TarifItem key={tarif.id} tarif={tarif} />)
         )}
-    </Row>
+    </Col>
   )
 }
 

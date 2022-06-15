@@ -12,8 +12,6 @@ import '../styles/fonts/heading1.css'
 const Main = observer(() => {
   const { park } = useContext(Context)
   const { user } = useContext(Context)
-  console.log('sP', park.searchPark)
-  console.log('park.parks', park.parks)
 
   // useEffect(() => {
   //   customerFetchPark(null, null, 1, 2).then((data) => {
@@ -27,15 +25,12 @@ const Main = observer(() => {
   // }, [])
 
   useEffect(() => {
-    console.log('parksearchQuery', park.searchQuery)
-    console.log('park.towns', park.towns)
     customerFetchPark(park.searchQuery, park.selectedTown, park.page, 3).then(
       (data) => {
         park.setTown(data.towns)
         data = data.parks
         park.setPark(data.rows)
         park.setSearchPark(data.rows)
-        console.log('data.count', data.rows)
         park.setTotalCount(data.count)
       }
     )
@@ -64,22 +59,14 @@ const Main = observer(() => {
 
   return (
     <Container className="contr">
-      <Row>
-        <Container>
-          {park.selectedTown ? (
-            <Row className="heading1">
-              Парки развлечений в городе {park.selectedTown}
-            </Row>
-          ) : (
-            <Row className="heading1">Парки развлечений России</Row>
-          )}
-          <Row className="mt-9">
-            <Col>
-              <ParkList />
-            </Col>
-          </Row>
-        </Container>
-      </Row>
+      {park.selectedTown ? (
+        <Row className="heading1">
+          Парки развлечений в городе {park.selectedTown}
+        </Row>
+      ) : (
+        <Row className="heading1">Парки развлечений России</Row>
+      )}
+      <ParkList />
       <Row>
         <Pages />
       </Row>

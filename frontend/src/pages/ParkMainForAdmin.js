@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Col, Container, Row, Button } from 'react-bootstrap'
+import { Col, Container, Row, Button, Image } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Context } from '..'
 import {
   deletePark,
   stuffFetchGreenZone,
@@ -10,10 +9,7 @@ import {
 import {
   ATTRACTIONS_ADMIN_ROUTE,
   MAIN_ADMIN_ROUTE,
-  PARK_ATTRACTIONS_ROUTE,
-  PARK_INFO_ROUTE,
   PARK_MAIN_ROUTE,
-  PARK_TARIF_ROUTE,
   STUFF_ROUTE,
   TARIF_ADMIN_ROUTE,
 } from '../utils/Consts'
@@ -30,7 +26,6 @@ const ParkMainForAdmin = () => {
   const [parks, setParks] = useState()
   const [greenZones, setGreenZones] = useState()
   useEffect(() => {
-    console.log('UE')
     stuffFetchPark().then((data) => setParks(data))
     stuffFetchGreenZone().then((data) => setGreenZones(data))
   }, [])
@@ -44,12 +39,6 @@ const ParkMainForAdmin = () => {
   return (
     <Container className="contr">
       <Container md={9}>
-        <Row mt={5}>
-          {/*className="contr1"*/}
-          <h2 className="heading2_1" style={{ color: 'black' }}>
-            Парк
-          </h2>
-        </Row>
         <Row className="d-flex">
           <Col>
             <div
@@ -57,7 +46,7 @@ const ParkMainForAdmin = () => {
               style={{ textAlign: 'left', cursor: 'pointer' }}
               onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
             >
-              О парке
+              Парк
             </div>
           </Col>
           <Col>
@@ -79,20 +68,18 @@ const ParkMainForAdmin = () => {
             </div>
           </Col>
         </Row>
-        {console.log('hii', parks)}
-        {/* {console.log(
-              'el.name',
-              park.parks.map((el) => el.name)
-            )} */}
         {parks &&
           parks?.parks.map((el) => {
             el = el.park
             return (
               <Row key={el.id} park={el}>
-                {console.log('park', parks)}
+                <Image
+                  width="100%"
+                  src={process.env.REACT_APP_API_URL + `${el.id}.jpg`}
+                />
                 <Col md={9}>
                   <Row className="heading2_1">
-                    <h2> {el?.name}</h2>
+                    <div> {el?.name}</div>
                   </Row>
                   <Row>
                     <div className="heading4">Площадь: {el?.square}</div>
@@ -129,21 +116,21 @@ const ParkMainForAdmin = () => {
               </Row>
             )
           })}
-        <h2 className="heading2_1 mt={5}" style={{ color: 'black' }}>
+        <div className="heading2_1 mt={5}" style={{ color: 'black' }}>
           Зоны отдыха в парке развлечений
-        </h2>
+        </div>
         {greenZones &&
           greenZones.parks.map((el) =>
             el.greenZones.map((el) => (
               <Row key={el.id}>
                 <Row mt={5}>
-                  <h2 className="heading4">{el?.name}</h2>
+                  <div className="heading4">{el?.name}</div>
                   <div className="heading4">{el?.description}</div>
                 </Row>
               </Row>
             ))
           )}
-        <Row className="d-flex">
+        <Row className="d-flex my-5">
           {parks && parks.parks.length ? (
             <Row>
               <Col>
@@ -152,7 +139,7 @@ const ParkMainForAdmin = () => {
                   return (
                     <Button
                       key={el.id}
-                      className="button2"
+                      className="button-warning"
                       onClick={() => destroyPark(el)}
                     >
                       Удалить парк

@@ -1,7 +1,9 @@
 .calendar header {
     display: flex;
+    margin-top: 100px;
     justify-content: center;
     margin-bottom: 8px;
+    color: #4b3a3a;
 }
 
 .calendar header button,
@@ -14,8 +16,7 @@
     border-collapse: separate;
     border-spacing: 0;
     margin: auto;
-    /* background-color: rgba(163, 23, 232, 0.2); */
-    color: #eaeaea;
+    color: #4b3a3a;
 }
 
 .calendar th {
@@ -32,23 +33,23 @@
 }
 
 .calendar .day:hover {
-    background-color: #eaeaea;
+    background-color: #fcd593;
     cursor: pointer;
 }
 
 .calendar .day.selected {
-    background-color: dodgerblue;
+    background-color: #A66900;
     color: white;
 }
 
 .calendar .day.today {
-    border: 2px solid dodgerblue;
+    border: 2px solid #A66900;
 }
 
 .calendar .day.today:hover {
-    background-color: #0081ff;
+    background-color: #A66900;
 }
 
 .calendar .day.today.selected {
-    border: 2px solid lightgray;
+    border: 2px solid #A66900;
 }

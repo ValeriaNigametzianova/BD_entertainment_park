@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Row } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import AttractionItem from '../components/AttractionItem'
 import { observer } from 'mobx-react-lite'
 import { stuffFetchAttraction, stuffFetchPark } from '../http/parkAPI'
@@ -17,14 +17,12 @@ const AttractionList = observer(() => {
   }, [])
 
   return (
-    <Container className="contr">
-      <Row className="d-flex">
-        {attractions.length &&
-          attractions.map((el) =>
-            el.map((el) => <AttractionItem key={el.id} attraction={el} />)
-          )}
-      </Row>
-    </Container>
+    <Col>
+      {attractions.length &&
+        attractions.map((el) =>
+          el.map((el) => <AttractionItem key={el.id} attraction={el} />)
+        )}
+    </Col>
   )
 })
 

@@ -83,7 +83,12 @@ export default class CalendarStore extends React.Component {
       <Form className="calendar">
         <Row className="justify-content-md-center">
           <Col md="auto">
-            <Button onClick={this.handlePrevMonthButtonClick}>{'<'}</Button>
+            <Button
+              className="button2"
+              onClick={this.handlePrevMonthButtonClick}
+            >
+              {'<'}
+            </Button>
           </Col>
           <Col md="auto">
             <Form.Select
@@ -112,7 +117,12 @@ export default class CalendarStore extends React.Component {
             </Form.Select>
           </Col>
           <Col md="auto">
-            <Button onClick={this.handleNextMonthButtonClick}>{'>'}</Button>
+            <Button
+              className="button2"
+              onClick={this.handleNextMonthButtonClick}
+            >
+              {'>'}
+            </Button>
           </Col>
         </Row>
 

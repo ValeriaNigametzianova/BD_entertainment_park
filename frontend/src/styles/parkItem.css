@@ -1,0 +1,35 @@
+.parkItem {
+  width: 100%;
+  margin: 2% 1%;
+  padding: 1%;
+  border: solid 1px;
+  border-color: lightgrey;
+  border-radius: 10px;
+  /* background-color: aqua; */
+}
+.parkItem:hover{
+  background-color: #e7bd4a;
+  width: 100%;
+  margin: 2% 1%;
+  padding: 1%;
+  border: solid 1px;
+  border-color: lightgrey;
+  border-radius: 10px;
+  /* background-color: aqua; */
+}
+.colonka_desc{
+  margin: 1% 2%;
+}
+.page-item.active .page-link{
+  z-index: 3;
+  color: #fff;
+  border-color: #e7bd4a;
+  background-color: #e7bd4a;
+}
+.page-link:hover{
+  z-index: 3;
+  color: #fff;
+}
+.page-link{
+  color: black;
+}

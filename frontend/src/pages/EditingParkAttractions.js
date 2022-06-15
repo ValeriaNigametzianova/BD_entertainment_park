@@ -102,173 +102,210 @@ const EditingParkAttractions = () => {
   //   }, [searchQuery, park.parks])
   const el = attraction
   return (
-    <Container className={'d-flex justify-content-center text-light'}>
-      <Col xs={6}>
-        {console.log('attraction', attraction)}
-        {attraction ? (
-          <Form>
-            <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
-              <Form.Label style={{ color: 'green' }}>
-                Редактировать информацию об аттракционе
-              </Form.Label>
-            </Form.Group>
-            {attraction && (
+    <Container className="contr">
+      <Container className={'d-flex justify-content-center text-light'}>
+        <Col style={{ color: '#151E20' }}>
+          {console.log('attraction', attraction)}
+          {attraction ? (
+            <Form>
+              <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
+                <Form.Label className="heading2_1" style={{ color: '#151E20' }}>
+                  Редактировать информацию об аттракционе
+                </Form.Label>
+              </Form.Group>
+              {attraction && (
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label className="heading3">Название</Form.Label>
+                  <Form.Control
+                    className="heading4 mb-3"
+                    placeholder="Название"
+                    defaultValue={attraction?.name}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                  <Form.Label className="heading3">
+                    Высота аттракциона
+                  </Form.Label>
+                  <Form.Control
+                    className="heading4 mb-3"
+                    type="number"
+                    placeholder="Высота аттракциона"
+                    defaultValue={attraction?.hight}
+                    value={hight}
+                    onChange={(e) => setHight(e.target.value)}
+                  />
+                  <Form.Label className="heading3">
+                    Ограничение по весу посетителя
+                  </Form.Label>
+                  <Form.Control
+                    className="heading4 mb-3"
+                    type="number"
+                    placeholder="Ограничение по весу посетителя"
+                    defaultValue={attraction?.weight_limitation}
+                    value={weight_limitation}
+                    onChange={(e) => setWLim(Number(e.target.value))}
+                  />
+                  <Form.Label className="heading3">
+                    Огранчиение по росту посетителя
+                  </Form.Label>
+                  <Form.Control
+                    className="heading4 mb-3"
+                    placeholder="Огранчиение по росту посетителя"
+                    defaultValue={attraction?.hight_limitation}
+                    value={hight_limitation}
+                    onChange={(e) => setHLim(e.target.value.replace(/\D/, ''))}
+                  />
+                  <Form.Label className="heading3">Описание</Form.Label>
+                  <Form.Control
+                    className="heading4 mb-3"
+                    as="textarea"
+                    rows={7}
+                    placeholder="Описание"
+                    defaultValue={attraction?.description}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+
+                  <Form.Label className="heading3">
+                    Ограничение по возрасту посетителя
+                  </Form.Label>
+                  <Form.Control
+                    className="heading4 mb-3"
+                    type="number"
+                    placeholder="Ограничение по возрасту посетителя"
+                    defaultValue={attraction?.age_limitation}
+                    value={age_limitation}
+                    onChange={(e) => setALim(Number(e.target.value))}
+                  />
+                  <Form.Label className="heading3">
+                    Максимальное количество человек
+                  </Form.Label>
+                  <Form.Control
+                    className="heading4 mb-3"
+                    type="number"
+                    placeholder="Максимальное количество человек"
+                    defaultValue={attraction?.max_quantity_people}
+                    value={max_quantity_people}
+                    onChange={(e) => setMaxQuan(Number(e.target.value))}
+                  />
+                  <Form.Group controlId="formBasicCheckbox">
+                    <Form.Check
+                      className="heading3"
+                      type={'checkbox'}
+                      label={`Активный?`}
+                      chacked={attraction?.active}
+                      onChange={(e) => setActive(!attraction?.active)}
+                    />
+                  </Form.Group>
+                </Form.Group>
+              )}
+
+              <Button
+                className="button"
+                variant="primary"
+                onClick={() => (
+                  updateAttraction(),
+                  navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)
+                )}
+              >
+                Обновить
+              </Button>
+            </Form>
+          ) : (
+            <Form>
+              <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
+                <Form.Label className="heading2_1" style={{ color: 'green' }}>
+                  Создать аттракцион
+                </Form.Label>
+              </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Название</Form.Label>
+                {/* {console.log('el', el)} */}
+                <Form.Label className="heading3">Название</Form.Label>
                 <Form.Control
+                  className="heading4"
                   placeholder="Название"
-                  defaultValue={attraction?.name}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
-                <Form.Label>Высота аттракциона</Form.Label>
+                <Form.Label className="heading3">Высота аттракциона</Form.Label>
                 <Form.Control
+                  className="heading4"
                   type="number"
                   placeholder="Высота аттракциона"
-                  defaultValue={attraction?.hight}
                   value={hight}
                   onChange={(e) => setHight(e.target.value)}
                 />
-                <Form.Label>Ограничение по весу посетителя</Form.Label>
+                <Form.Label className="heading3">
+                  Ограничение по весу посетителя
+                </Form.Label>
                 <Form.Control
+                  className="heading4"
                   type="number"
                   placeholder="Ограничение по весу посетителя"
-                  defaultValue={attraction?.weight_limitation}
                   value={weight_limitation}
                   onChange={(e) => setWLim(Number(e.target.value))}
                 />
-                <Form.Label>Огранчиение по росту посетителя</Form.Label>
+                <Form.Label className="heading3">
+                  Огранчиение по росту посетителя
+                </Form.Label>
                 <Form.Control
+                  className="heading4"
                   placeholder="Огранчиение по росту посетителя"
-                  defaultValue={attraction?.hight_limitation}
                   value={hight_limitation}
-                  onChange={(e) => setHLim(e.target.value.replace(/\D/, ''))}
+                  onChange={(e) => setHLim(Number(e.target.value))}
                 />
-                <Form.Label>Описание</Form.Label>
+                <Form.Label className="heading3">Описание</Form.Label>
                 <Form.Control
+                  className="heading4"
                   as="textarea"
                   rows={7}
                   placeholder="Описание"
-                  defaultValue={attraction?.description}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
 
-                <Form.Label>Ограничение по возрасту посетителя</Form.Label>
+                <Form.Label className="heading3">
+                  Ограничение по возрасту посетителя
+                </Form.Label>
                 <Form.Control
+                  className="heading4"
                   type="number"
                   placeholder="Ограничение по возрасту посетителя"
-                  defaultValue={attraction?.age_limitation}
                   value={age_limitation}
                   onChange={(e) => setALim(Number(e.target.value))}
                 />
-                <Form.Label>Максимальное количество человек</Form.Label>
+                <Form.Label className="heading3">
+                  Максимальное количество человек
+                </Form.Label>
                 <Form.Control
+                  className="heading4"
                   type="number"
                   placeholder="Максимальное количество человек"
-                  defaultValue={attraction?.max_quantity_people}
                   value={max_quantity_people}
                   onChange={(e) => setMaxQuan(Number(e.target.value))}
                 />
-                <Form.Group controlId="formBasicCheckbox">
-                  <Form.Check
-                    type={'checkbox'}
-                    label={`Активный?`}
-                    chacked={active}
-                    onChange={(e) => setActive(!active)}
-                  />
-                </Form.Group>
+                <Form.Check
+                  className="heading3"
+                  type={'checkbox'}
+                  label={`Активный?`}
+                  checked={active}
+                  onChange={(e) => setActive(!active)}
+                />
               </Form.Group>
-            )}
-
-            <Button
-              className="button"
-              variant="primary"
-              onClick={() => (
-                updateAttraction(),
-                navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)
-              )}
-            >
-              Обновить
-            </Button>
-          </Form>
-        ) : (
-          <Form>
-            <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
-              <Form.Label style={{ color: 'green' }}>
-                Создать аттракцион
-              </Form.Label>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              {/* {console.log('el', el)} */}
-              <Form.Label>Название</Form.Label>
-              <Form.Control
-                placeholder="Название"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <Form.Label>Высота аттракциона</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Высота аттракциона"
-                value={hight}
-                onChange={(e) => setHight(e.target.value)}
-              />
-              <Form.Label>Ограничение по весу посетителя</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Ограничение по весу посетителя"
-                value={weight_limitation}
-                onChange={(e) => setWLim(Number(e.target.value))}
-              />
-              <Form.Label>Огранчиение по росту посетителя</Form.Label>
-              <Form.Control
-                placeholder="Огранчиение по росту посетителя"
-                value={hight_limitation}
-                onChange={(e) => setHLim(Number(e.target.value))}
-              />
-              <Form.Label>Описание</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={7}
-                placeholder="Описание"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-
-              <Form.Label>Ограничение по возрасту посетителя</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Ограничение по возрасту посетителя"
-                value={age_limitation}
-                onChange={(e) => setALim(Number(e.target.value))}
-              />
-              <Form.Label>Максимальное количество человек</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Максимальное количество человек"
-                value={max_quantity_people}
-                onChange={(e) => setMaxQuan(Number(e.target.value))}
-              />
-              <Form.Check
-                type={'checkbox'}
-                label={`Активный?`}
-                checked={active}
-                onChange={(e) => setActive(!active)}
-              />
-            </Form.Group>
-            <Button
-              className="button"
-              variant="primary"
-              onClick={() => (
-                newAttraction(), navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)
-              )}
-            >
-              Создать
-            </Button>
-          </Form>
-        )}
-      </Col>
+              <Button
+                className="button"
+                variant="primary"
+                onClick={() => (
+                  newAttraction(),
+                  navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)
+                )}
+              >
+                Создать
+              </Button>
+            </Form>
+          )}
+        </Col>
+      </Container>
     </Container>
   )
 }

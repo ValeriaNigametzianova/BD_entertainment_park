@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {
   Button,
   Container,
@@ -7,12 +7,6 @@ import {
   FormControl,
   Nav,
   Navbar,
-  NavLink,
-  DropdownButton,
-  DropdownItem,
-  DropdownToggle,
-  Spinner,
-  Row,
   NavDropdown,
   Col,
 } from 'react-bootstrap'
@@ -33,7 +27,6 @@ import '../styles/navBar/navbar.css'
 import '../styles/fonts/brand_name.css'
 import '../styles/container/container.css'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { customerFetchPark, searchPark } from '../http/parkAPI'
 
 const NavBar = observer(() => {
   const { user } = useContext(Context)
@@ -74,115 +67,33 @@ const NavBar = observer(() => {
   // }, [park.searchQuery, park.parks])
 
   return (
-    <Navbar className="navbar" expand="lg">
-      {user.isAuth ? (
-        <Container>
-          <Button onClick={() => navigate(-1)}>Назад</Button>
-          <Navbar.Brand
-            className="brand_name"
-            style={{ color: '#033782', cursor: 'pointer' }}
-            onClick={() => navigate(MAIN_ROUTE)}
+    <Navbar className="navbar">
+      <Container>
+        <Nav className="justify-content-center z-index:1">
+          <Button
+            className="button"
+            variant="outline-success"
+            onClick={() => navigate(-1)}
           >
-            Эмоциональные качели
-          </Navbar.Brand>
+            Назад
+          </Button>
+        </Nav>
+        <Navbar.Brand
+          className="brand_name"
+          style={{ color: '#033782', cursor: 'pointer' }}
+          onClick={() => navigate(MAIN_ROUTE)}
+        >
+          Эмоциональные качели
+        </Navbar.Brand>
 
-          {location.pathname === PARK_MAIN_ROUTE && (
-            <Form
-              className="d-flex"
-              onSubmit={(event) => {
-                event.preventDefault()
-                park.setPage(1)
-                // park.setSearchQuery(event.target.value)
-                // park.setSearchPark(searchParks)
-              }}
-            >
-              <FormControl
-                type="search"
-                placeholder="Поиск"
-                className="search"
-                aria-label="Search"
-                value={park.searchQuery}
-                onChange={(e) => {
-                  setTempQuery(e.target.value)
-                  park.setPage(1)
-                }}
-              />
-              <Button
-                className="button"
-                variant="outline-success"
-                onClick={(e) => {
-                  // park.setSearchQuery(e.target.tempQuery)
-                  park.setPage(1)
-                  // park.setSearchPark(searchParks)
-                }}
-              >
-                Найти
-              </Button>
-            </Form>
-          )}
-
+        {(location.pathname === PARK_MAIN_ROUTE ||
+          location.pathname === '/') && (
           <Nav>
-            <Nav className="ml-auto">
-              <div>{user.user.login}</div>
-              <Button
-                className="button"
-                variant="outline-success"
-                onClick={(e) => {
-                  e.preventDefault()
-                  logOut()
-                  navigate(PARK_MAIN_ROUTE)
-                }}
-              >
-                Выйти
-              </Button>
-            </Nav>
-            {user.role === 'stuff' ? (
-              <Nav className="ml-auto">
-                <Button
-                  className="button"
-                  variant="outline-success"
-                  onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
-                >
-                  Администрирование
-                </Button>
-              </Nav>
-            ) : user.role === 'customer' ? (
-              <Nav className="ml-autoATTRACTION">
-                <Button
-                  className="button"
-                  variant="outline-success"
-                  onClick={() => navigate(CUSTOMER_ROUTE + TICKETS_ROUTE)}
-                >
-                  Мои билеты
-                </Button>
-              </Nav>
-            ) : null}
-          </Nav>
-        </Container>
-      ) : (
-        <Container>
-          <Col>
-            <Button onClick={() => navigate(-1)}>Назад</Button>
-          </Col>
-          <Col className="d-flex">
-            <Navbar.Brand
-              className="brand_name"
-              style={{ color: '#033783', cursor: 'pointer' }}
-              onClick={() => navigate(MAIN_ROUTE)}
-            >
-              Эмоциональные качели
-            </Navbar.Brand>
-
             {park.selectedTown ? (
-              <NavDropdown
-                style={{ color: '#6D9DE4' }}
-                variant="outline-success"
-                title={park.selectedTown}
-              >
+              <NavDropdown className="dropdown" title={park.selectedTown}>
                 {park.towns.map((town, id) => (
                   <Dropdown.Item
                     key={id}
-                    //   active={}
                     href="/"
                     onClick={(e) => {
                       e.preventDefault()
@@ -194,6 +105,7 @@ const NavBar = observer(() => {
                   </Dropdown.Item>
                 ))}
                 <Dropdown.Item
+                  style={{ color: '#6D9DE4' }}
                   onClick={(e) => {
                     e.preventDefault()
                     park.setSelectedTown(null)
@@ -205,8 +117,7 @@ const NavBar = observer(() => {
               </NavDropdown>
             ) : (
               <NavDropdown
-                style={{ color: '#6D9DE4' }}
-                className="align-baseline"
+                className="dropdown"
                 variant="outline-success"
                 title="Выберите город"
               >
@@ -225,6 +136,7 @@ const NavBar = observer(() => {
                   </Dropdown.Item>
                 ))}
                 <Dropdown.Item
+                  style={{ color: '#6D9DE4' }}
                   onClick={(e) => {
                     e.preventDefault()
                     park.setSelectedTown(null)
@@ -235,14 +147,12 @@ const NavBar = observer(() => {
                 </Dropdown.Item>
               </NavDropdown>
             )}
-          </Col>
-          {(location.pathname === PARK_MAIN_ROUTE ||
-            location.pathname === '/') && (
             <Form
-              className="d-flex justify-content-center align-items-center"
+              className="d-flex"
               onSubmit={(e) => {
                 e.preventDefault()
                 park.setPage(1)
+                // park.setSearchQuery(event.target.value)
                 // park.setSearchPark(searchParks)
               }}
             >
@@ -252,13 +162,6 @@ const NavBar = observer(() => {
                 className="search"
                 aria-label="Search"
                 value={tempQuery}
-                // onSubmit={(e) => {
-                //   e.preventDefault()
-                // setTempQuery(e.target.value)
-                // park.setSearchQuery(e.target.value)
-                // park.setPage(1)
-                // park.setSearchPark(searchParks)
-                // }}
                 onChange={(e) => {
                   setTempQuery(e.target.value)
                   park.setSearchQuery(e.target.value)
@@ -269,7 +172,7 @@ const NavBar = observer(() => {
                 className="button"
                 variant="outline-success"
                 onClick={(e) => {
-                  // park.setSearchQuery(e.target.value)
+                  park.setSearchQuery(e.target.tempQuery)
                   park.setPage(1)
                   // park.setSearchPark(searchParks)
                 }}
@@ -277,8 +180,46 @@ const NavBar = observer(() => {
                 Найти
               </Button>
             </Form>
-          )}
-          <Nav>
+          </Nav>
+        )}
+
+        <Nav>
+          {user.role === 'stuff' ? (
+            <Nav className="ml-auto">
+              <Button
+                className="button"
+                variant="outline-success"
+                onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
+              >
+                Администрирование
+              </Button>
+            </Nav>
+          ) : user.role === 'customer' ? (
+            <Nav className="ml-autoATTRACTION">
+              <Button
+                className="button"
+                variant="outline-success"
+                onClick={() => navigate(CUSTOMER_ROUTE + TICKETS_ROUTE)}
+              >
+                Мои билеты
+              </Button>
+            </Nav>
+          ) : null}
+          {user.isAuth ? (
+            <Nav className="ml-auto">
+              <Button
+                className="button"
+                variant="outline-success"
+                onClick={(e) => {
+                  e.preventDefault()
+                  logOut()
+                  navigate(PARK_MAIN_ROUTE)
+                }}
+              >
+                Выйти
+              </Button>
+            </Nav>
+          ) : (
             <Nav className="ml-auto">
               <Button
                 className="button"
@@ -288,28 +229,9 @@ const NavBar = observer(() => {
                 Войти
               </Button>
             </Nav>
-            {/* {user.isAuth && user.role === 'stuff' ? (
-              <Nav className="ml-auto">
-                <Button
-                  variant="outline-success"
-                  onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
-                >
-                  Администрирование
-                </Button>
-              </Nav>
-            ) : user.role === 'customer' ? (
-              <Nav className="ml-auto">
-                <Button
-                  variant="outline-success"
-                  onClick={() => navigate(CUSTOMER_ROUTE + TICKETS_ROUTE)}
-                >
-                  Мои билеты
-                </Button>
-              </Nav>
-            ) : null} */}
-          </Nav>
-        </Container>
-      )}
+          )}
+        </Nav>
+      </Container>
     </Navbar>
   )
 })

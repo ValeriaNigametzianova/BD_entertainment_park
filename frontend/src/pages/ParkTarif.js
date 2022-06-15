@@ -87,149 +87,143 @@ const ParkTarifs = () => {
   return (
     <div>
       {total ? (
-        <Container md={8} style={{ color: 'white' }}>
-          <h2>Итог</h2>
-          <Row>
-            <Col>
-              <div>Фамилия</div>
-            </Col>
-            <Col>
-              <div>{order.customer?.surname}</div>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <div>Имя</div>
-            </Col>
-            <Col>
-              <div>{order.customer?.name}</div>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <div>Почта</div>
-            </Col>
-            <Col>
-              <div>{order.customer?.email}</div>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <div>Номер телефона</div>
-            </Col>
-            <Col>
-              <div>{order.customer?.phone_number}</div>
-            </Col>
-          </Row>
+        <Container className="contr">
+          <Container fluid>
+            <h2 style={{ color: '#151E20' }}>Итог</h2>
+            <Row>
+              <Col md={4}>
+                <div style={{ color: '#151E20' }}>Фамилия</div>
 
-          <Row>
-            <Col>
-              <div>Билеты</div>
-            </Col>
-            <Col>
-              {Object.getOwnPropertyNames(order.tarifs).map((el) => (
-                <div>{order.tarifs[`${el}`].tarif?.name}</div>
-              ))}
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <div>Сумма: </div>
-            </Col>
-            <Col>
-              <div>{summ}</div>
-            </Col>
-          </Row>
+                <div style={{ color: '#151E20' }}>Имя</div>
+                <div style={{ color: '#151E20' }}>Почта</div>
+                <div style={{ color: '#151E20' }}>Номер телефона</div>
+                <div style={{ color: '#151E20' }}>Билеты</div>
+              </Col>
+              <Col md={4}>
+                <div style={{ color: '#151E20' }}>
+                  {order.customer?.surname}
+                </div>
+                <div style={{ color: '#151E20' }}>{order.customer?.name}</div>
+                <div style={{ color: '#151E20' }}>{order.customer?.email}</div>
 
-          <Button
-            onClick={async () => {
-              await newTicket(order)
-              await lk()
-              navigate(CUSTOMER_ROUTE + TICKETS_ROUTE)
-            }}
-          >
-            Подтвердить покупку
-          </Button>
+                <div style={{ color: '#151E20' }}>
+                  {order.customer?.phone_number}
+                </div>
+                <div>
+                  {Object.getOwnPropertyNames(order.tarifs).map((el) => (
+                    <div style={{ color: '#151E20' }}>
+                      {order.tarifs[`${el}`].tarif?.name}
+                    </div>
+                  ))}
+                </div>
+              </Col>
+            </Row>
+
+            <Row className="mt-4">
+              <Col md={4}>
+                <div style={{ color: '#151E20' }}>Сумма: </div>
+              </Col>
+              <Col md={4}>
+                <div style={{ color: '#151E20' }}>{summ}</div>
+              </Col>
+            </Row>
+            <Button
+              className="button2"
+              style={{ position: 'absolute', bottom: '10%' }}
+              onClick={async () => {
+                await newTicket(order)
+                await lk()
+                navigate(CUSTOMER_ROUTE + TICKETS_ROUTE)
+              }}
+            >
+              Подтвердить покупку
+            </Button>
+          </Container>
         </Container>
       ) : (
-        <Container md={8}>
-          <Row className="d-flex justify-content-between">
-            <Col md={2}>
-              <div
-                style={{ color: 'green', cursor: 'pointer' }}
-                onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id)}
-              >
-                О парке
-              </div>
-            </Col>
-            <Col md={2}>
-              <div
-                style={{ color: 'green', cursor: 'pointer' }}
-                onClick={() =>
-                  navigate(PARK_MAIN_ROUTE + '/' + id + PARK_INFO_ROUTE)
-                }
-              >
-                Характеристики
-              </div>
-            </Col>
-            <Col md={2}>
-              <div
-                style={{ color: 'green', cursor: 'pointer' }}
-                onClick={() =>
-                  navigate(PARK_MAIN_ROUTE + '/' + id + PARK_ATTRACTIONS_ROUTE)
-                }
-              >
-                Аттракционы
-              </div>
-            </Col>
-            <Col md={2}>
-              <div
-                style={{ color: 'green', cursor: 'pointer' }}
-                onClick={() =>
-                  navigate(PARK_MAIN_ROUTE + '/' + id + PARK_TARIF_ROUTE)
-                }
-              >
-                Купить билет
-              </div>
-            </Col>
-          </Row>
-          <Row mt-5 mb-5>
-            <h2 style={{ color: 'white' }}>Тарифы</h2>
-          </Row>
-          <Row lassName="align-center">
-            <Col>
-              <div>
+        <Container className="contr">
+          <Container fluid>
+            <Row className="d-flex justify-content-between">
+              <Col>
+                <div
+                  className="heading3_2 text-center"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id)}
+                >
+                  О парке
+                </div>
+              </Col>
+              <Col>
+                <div
+                  className="heading3_2 text-center"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() =>
+                    navigate(PARK_MAIN_ROUTE + '/' + id + PARK_INFO_ROUTE)
+                  }
+                >
+                  Характеристики
+                </div>
+              </Col>
+              <Col>
+                <div
+                  className="heading3_2 text-center"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() =>
+                    navigate(
+                      PARK_MAIN_ROUTE + '/' + id + PARK_ATTRACTIONS_ROUTE
+                    )
+                  }
+                >
+                  Аттракционы
+                </div>
+              </Col>
+              <Col>
+                <div
+                  className="heading3_2 text-center"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() =>
+                    navigate(PARK_MAIN_ROUTE + '/' + id + PARK_TARIF_ROUTE)
+                  }
+                >
+                  Купить билет
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="mt-5 text-center">
                 {order?.date && (
                   <p>Выбранная дата: {order?.date.toLocaleDateString()}</p>
                 )}
-
                 <CalendarStore
                   value={order?.date}
                   onChange={(date) => setOrder({ ...order, date })}
                 />
-              </div>
-            </Col>
-            <Col>
-              {tarifs &&
-                tarifs.map((el) => (
-                  <TarifItem
-                    key={el.id}
-                    tarif={el}
-                    addTarifs={(tarifs) => {
-                      setOrder({
-                        ...order,
-                        tarifs: { ...order?.tarifs, ...tarifs },
-                      })
-                    }}
-                  ></TarifItem>
-                ))}
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <OrderForm createOrder={createOrder}></OrderForm>
-            </Col>
-          </Row>
+              </Col>
+              <Col>
+                <Row className="mt-5 text-center">
+                  <div style={{ color: '#151E20' }}>Тарифы</div>
+                </Row>
+                {tarifs &&
+                  tarifs.map((el) => (
+                    <TarifItem
+                      key={el.id}
+                      tarif={el}
+                      addTarifs={(tarifs) => {
+                        setOrder({
+                          ...order,
+                          tarifs: { ...order?.tarifs, ...tarifs },
+                        })
+                      }}
+                    ></TarifItem>
+                  ))}
+              </Col>
+            </Row>
+            <Row>
+              <Col className="mt-5">
+                <OrderForm createOrder={createOrder}></OrderForm>
+              </Col>
+            </Row>
+          </Container>
         </Container>
       )}
     </div>

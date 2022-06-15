@@ -24,21 +24,18 @@ const ParkMain = () => {
     customerFetchOnePark(id).then((data) => setPark(data.park))
     customerFetchGreenZone(id).then((data) => {
       setGreenZones(data)
-      console.log('d ', data)
     })
   }, [])
-  console.log('11', park)
-  console.log('00', greenZones)
   const navigate = useNavigate()
 
   return (
     <Container className="contr">
-      <Container md={9}>
-        <Row className="d-flex justify-content-between">
+      <Container fluid>
+        <Row className="d-flex justify-content-between ">
           <Col>
             <div
-              className="heading3_2"
-              style={{ textAlign: 'left', cursor: 'pointer' }}
+              className="heading3_2 text-center"
+              style={{ cursor: 'pointer' }}
               onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id)}
             >
               О парке
@@ -46,8 +43,8 @@ const ParkMain = () => {
           </Col>
           <Col>
             <div
-              className="heading3_2"
-              style={{ textAlign: 'center', cursor: 'pointer' }}
+              className="heading3_2 text-center"
+              style={{ cursor: 'pointer' }}
               onClick={() =>
                 navigate(PARK_MAIN_ROUTE + '/' + id + PARK_INFO_ROUTE)
               }
@@ -57,8 +54,8 @@ const ParkMain = () => {
           </Col>
           <Col>
             <div
-              className="heading3_2"
-              style={{ textAlign: 'center', cursor: 'pointer' }}
+              className="heading3_2 text-center"
+              style={{ cursor: 'pointer' }}
               onClick={() =>
                 navigate(PARK_MAIN_ROUTE + '/' + id + PARK_ATTRACTIONS_ROUTE)
               }
@@ -68,7 +65,8 @@ const ParkMain = () => {
           </Col>
           <Col>
             <div
-              style={{ textAlign: 'right', cursor: 'pointer' }}
+              className="heading3_2 text-center"
+              style={{ cursor: 'pointer' }}
               onClick={() =>
                 navigate(PARK_MAIN_ROUTE + '/' + id + PARK_TARIF_ROUTE)
               }
@@ -78,17 +76,29 @@ const ParkMain = () => {
           </Col>
         </Row>
         <Row>
-          <h2 style={{ color: '#151E20' }}>{park?.name}</h2>
-        </Row>
-        <Row>
-          <div style={{ color: '#151E20' }}>{park?.description}</div>
+          <Row className=" px-5">
+            <h2 className="text-start" style={{ color: '#151E20' }}>
+              {park?.name}
+            </h2>
+          </Row>
+          <Row className="mt-3 px-5">
+            <div className="text-start" style={{ color: '#151E20' }}>
+              {park?.description}
+            </div>
+          </Row>
         </Row>
         {greenZones &&
           greenZones.greenZone.map((el) => (
             <Row>
-              <Row mt={5}>
-                <h2 style={{ color: '#151E20' }}>{el?.name}</h2>
-                <div style={{ color: '#151E20' }}> {el?.description}</div>
+              <Row className="mt-5 px-5">
+                <h2 className="text-start" style={{ color: '#151E20' }}>
+                  {el?.name}
+                </h2>
+              </Row>
+              <Row className="mt-3 px-5">
+                <div className="text-start" style={{ color: '#151E20' }}>
+                  {el?.description}
+                </div>
               </Row>
             </Row>
           ))}

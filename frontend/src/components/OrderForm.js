@@ -32,7 +32,9 @@ const OrderForm = ({ createOrder }) => {
     <Container>
       <Form md={8}>
         <Form.Group className="mb-3 fs-3">
-          <Form.Label style={{ color: 'green' }}>Данные покупателя</Form.Label>
+          <Form.Label style={{ color: '#151E20' }}>
+            Данные покупателя
+          </Form.Label>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Фамилия</Form.Label>
@@ -67,6 +69,7 @@ const OrderForm = ({ createOrder }) => {
         </Form.Group>
 
         <Button
+          className="button2"
           variant="primary"
           onClick={() => {
             createForm()

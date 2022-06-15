@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite'
 import React, { useContext } from 'react'
 import { Pagination } from 'react-bootstrap'
 import { Context } from '../index'
+import '../styles/parkItem.css'
 
 const Pages = observer(() => {
   const { park } = useContext(Context)
@@ -15,6 +16,8 @@ const Pages = observer(() => {
     <Pagination className="mt-5">
       {pages.map((page) => (
         <Pagination.Item
+          className="page-item.active .page-link "
+          // style={{ background: '#e7bd4a' }}
           key={page}
           active={park.page === page}
           onClick={() => park.setPage(page)}

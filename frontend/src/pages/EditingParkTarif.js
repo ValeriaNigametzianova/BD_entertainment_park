@@ -34,65 +34,73 @@ const EditingParkTarif = () => {
   }
 
   return (
-    <Container className={'d-flex justify-content-center text-light'}>
-      <Col xs={6}>
-        <Form>
-          <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
+    <Container className="contr">
+      <Container className={'d-flex justify-content-center text-light'}>
+        <Col style={{ color: '#151E20' }}>
+          <Form>
+            <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
+              {tarif?.id ? (
+                <Form.Label className="heading2_1" style={{ color: '#151E20' }}>
+                  Редактировать информацию о тарифах
+                </Form.Label>
+              ) : (
+                <Form.Label className="heading2_1" style={{ color: '#151E20' }}>
+                  Создать тариф
+                </Form.Label>
+              )}
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label className="heading3">Название</Form.Label>
+              <Form.Control
+                placeholder="Название"
+                value={tarif?.name}
+                onChange={(e) => setTarif({ ...tarif, name: e.target.value })}
+              />
+              <Form.Label className="heading3">Стоимость</Form.Label>
+              <Form.Control
+                className="heading4 mb-3"
+                placeholder="Стоимость"
+                value={tarif?.cost}
+                onChange={(e) =>
+                  setTarif({ ...tarif, cost: e.target.value.replace(/\D/, '') })
+                }
+              />
+              <Form.Label className="heading3">Описание</Form.Label>
+              <Form.Control
+                className="heading4 mb-3"
+                as="textarea"
+                rows={7}
+                placeholder="Описание"
+                value={tarif?.description}
+                onChange={(e) =>
+                  setTarif({ ...tarif, description: e.target.value })
+                }
+              />
+            </Form.Group>
             {tarif?.id ? (
-              <Form.Label style={{ color: 'green' }}>
-                Редактировать информацию о тарифах
-              </Form.Label>
+              <Button
+                className="button"
+                variant="primary"
+                onClick={() => (
+                  updateTarif(), navigate(STUFF_ROUTE + TARIF_ADMIN_ROUTE)
+                )}
+              >
+                Обновить
+              </Button>
             ) : (
-              <Form.Label style={{ color: 'green' }}>Создать тариф</Form.Label>
+              <Button
+                className="button"
+                variant="primary"
+                onClick={() => (
+                  newTarif(), navigate(STUFF_ROUTE + TARIF_ADMIN_ROUTE)
+                )}
+              >
+                Создать
+              </Button>
             )}
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Название</Form.Label>
-            <Form.Control
-              placeholder="Название"
-              value={tarif?.name}
-              onChange={(e) => setTarif({ ...tarif, name: e.target.value })}
-            />
-            <Form.Label>Стоимость</Form.Label>
-            <Form.Control
-              placeholder="Стоимость"
-              value={tarif?.cost}
-              onChange={(e) =>
-                setTarif({ ...tarif, cost: e.target.value.replace(/\D/, '') })
-              }
-            />
-            <Form.Label>Описание</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={7}
-              placeholder="Описание"
-              value={tarif?.description}
-              onChange={(e) =>
-                setTarif({ ...tarif, description: e.target.value })
-              }
-            />
-          </Form.Group>
-          {tarif?.id ? (
-            <Button
-              variant="primary"
-              onClick={() => (
-                updateTarif(), navigate(STUFF_ROUTE + TARIF_ADMIN_ROUTE)
-              )}
-            >
-              Обновить
-            </Button>
-          ) : (
-            <Button
-              variant="primary"
-              onClick={() => (
-                newTarif(), navigate(STUFF_ROUTE + TARIF_ADMIN_ROUTE)
-              )}
-            >
-              Создать
-            </Button>
-          )}
-        </Form>
-      </Col>
+          </Form>
+        </Col>
+      </Container>
     </Container>
   )
 }

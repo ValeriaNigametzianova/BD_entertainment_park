@@ -1,6 +1,6 @@
 .button2{
-    margin-right: 5px;
-    margin-left: 5px;
+    /* margin-right: 5px; */
+    /* margin-left: 5px; */
     background: transparent;
     color: #A66900;
     border-color: #A66900;
@@ -16,6 +16,31 @@
 .button2:visited{
     background: #A66900;
     border-color: #A66900;
+    color: #FEFDEF;
+    outline: none;
+    box-shadow: none !important;
+    -webkit-appearance: none;
+}
+.counter{
+    margin-right: 10px; 
+    margin-left: 10px;
+}
+.button-warning{
+    background: transparent;
+    color: #93001b;
+    border-color: #93001b;
+    font-family: system-ui;
+}
+.button-warning:hover,
+.button-warning:active{
+    background: #c20628;
+    border-color: #c20628;
+    color: #FEFDEF;
+}
+.button-warning:focus,
+.button-warning:visited{
+    background: #93001b;
+    border-color: #93001b;
     color: #FEFDEF;
     outline: none;
     box-shadow: none !important;

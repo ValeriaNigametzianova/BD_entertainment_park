@@ -13,34 +13,28 @@ const Tickets = () => {
     customerFetchPDF()
     customerFetchTickets().then((data) => setTickets(data))
   }, [])
-  console.log('ticketssss', tickets)
 
   return (
-    <Container style={{ color: 'white' }}>
+    <Container>
       <Row>
         <div>Ваши билеты: </div>
       </Row>
       {tickets.map((el) => (
-        <Row>
-          <Col>
-            <Row>
-              <object>
-                <embed
-                  src={
-                    process.env.REACT_APP_API_URL +
-                    baseLink +
-                    `${el?.id}` +
-                    format
-                  }
-                  type="application/pdf"
-                  width="700"
-                  height="500"
-                />
-              </object>
-            </Row>
-          </Col>
-          {/* <Button onClick={() => saveAs(el, 'newPdf.pdf')}>Скачать</Button> */}
-        </Row>
+        <Container fluid className="d-flex justify-content-center">
+          <iframe
+            src={
+              process.env.REACT_APP_API_URL +
+              baseLink +
+              `${el?.id}` +
+              format +
+              '#toolbar=0'
+            }
+            type="application/pdf"
+            width="600"
+            height="400"
+          ></iframe>
+        </Container>
+        /* <Button onClick={() => saveAs(el, 'newPdf.pdf')}>Скачать</Button>  */
       ))}
     </Container>
   )

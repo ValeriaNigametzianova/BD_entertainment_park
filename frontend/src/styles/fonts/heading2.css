@@ -1,7 +1,8 @@
 .heading2{
     font-family: system-ui;
-    font-size: 28pt;
+    font-size: 24pt;
     text-align: center;
+    font-weight: 100;
     margin-bottom: 20px;
     color: #151E20;
 }

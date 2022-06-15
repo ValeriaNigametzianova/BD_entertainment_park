@@ -1,3 +1,4 @@
+const path = require('path')
 const sequelize = require('sequelize')
 const ApiError = require('../error/ApiError')
 const {
@@ -26,6 +27,7 @@ class parkController {
         shops,
         adress,
       } = req.body
+      const { img } = req.files
       const park = await Park.create({
         name,
         town,
@@ -43,6 +45,8 @@ class parkController {
       const stuff = await Stuff.findOne({ where: { id: req.stuff.id } })
       // const admin = await Admin.create({ StuffId: stuff.id, ParkId: park.id })
       await stuff.setParks(park)
+      let fileName = `${park.id}.jpg`
+      img.mv(path.resolve(__dirname, '..', 'PDFTickets', fileName))
       return res.json(park)
     } catch (e) {
       return next(ApiError.badRequest(e.message))
@@ -139,6 +143,7 @@ class parkController {
   async update(req, res) {
     try {
       console.log(req.body)
+      const { img } = req.files
       const park = req.body
       if (!park.id) {
         return res.json(ApiError.badRequest({ message: 'Id не указан' }))
@@ -149,6 +154,8 @@ class parkController {
         },
       })
       let updatedPark = await Park.findByPk(park.id)
+      let fileName = `${park.id}.jpg`
+      img.mv(path.resolve(__dirname, '../..', 'PDFTickets', fileName))
       return res.json(updatedPark)
     } catch (e) {
       return res.json(ApiError.internal({ message: e.message }))

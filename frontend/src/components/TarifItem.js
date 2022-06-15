@@ -1,15 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Col, Row, Container, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import {
-  MAIN_ROUTE,
-  PARK_MAIN_ROUTE,
-  PARK_TARIF_ROUTE,
-  STUFF_ROUTE,
-  TICKETS_ROUTE,
-} from '../utils/Consts'
+import { PARK_TARIF_ROUTE, STUFF_ROUTE } from '../utils/Consts'
 import { Context } from '../index'
-import { deleteAttraction } from '../http/attractionAPI'
 import { deleteTarif } from '../http/tarifAPI'
 
 const TarifItem = ({ tarif, addTarifs }) => {
@@ -36,80 +29,90 @@ const TarifItem = ({ tarif, addTarifs }) => {
   }
 
   return (
-    <Container>
-      <Row
-        md={4}
-        // className="justify-content-md-center"
-        style={{
-          background: 'lightgrey',
-          cursor: 'pointer',
-          aligne: 'centre',
-          borderRadius: '3px',
-        }}
-      >
-        <Col md="auto">
-          <Row className="mt-2 px-2" border={'light'}>
-            <Row>
-              <div>{tarif.name}</div>
-            </Row>
-            <Row>
-              <div> {tarif.cost} </div>
-            </Row>
-            <Row>
-              <div> {tarif.description} </div>
-            </Row>
+    // <Container
+    //   className="my-2 py-2 justify-content-md-center"
+    //   style={{
+    //     background: 'lightgrey',
+    //     cursor: 'pointer',
+    //     aligne: 'centre',
+    //     borderRadius: '3px',
+    //   }}
+    // >
+    <Row className="mt-9">
+      <Col>
+        <Row className="px-2" border={'light'}>
+          <Row className="heading2 text-start">
+            <div>{tarif.name}</div>
           </Row>
-        </Col>
-        <Col md="auto">
-          <Row>
-            {user.role === 'stuff' ? (
-              <Row>
-                <Col>
-                  <Button
-                    className="button2"
-                    onClick={() => {
-                      destroyTarif(tarif)
-                    }}
-                  >
-                    Удалить тариф
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    className="button2"
-                    key={tarif.id}
-                    tarif={tarif}
-                    onClick={() =>
-                      navigate(STUFF_ROUTE + PARK_TARIF_ROUTE + '/' + tarif.id)
-                    }
-                  >
-                    Обновить даннные
-                  </Button>
-                </Col>
-              </Row>
+          <Row className="heading4">
+            <div>Стоимость: {tarif.cost} </div>
+          </Row>
+          <Row className="heading4">
+            <div>Описание: {tarif.description} </div>
+          </Row>
+        </Row>
+      </Col>
+      <Row>
+        {user.role === 'stuff' ? (
+          <Row className="d-flex my-5">
+            <Col>
+              <Button
+                className="button-warning"
+                onClick={() => {
+                  destroyTarif(tarif)
+                }}
+              >
+                Удалить тариф
+              </Button>
+            </Col>
+            <Col>
+              <Button
+                className="button2"
+                key={tarif.id}
+                tarif={tarif}
+                onClick={() =>
+                  navigate(STUFF_ROUTE + PARK_TARIF_ROUTE + '/' + tarif.id)
+                }
+              >
+                Обновить даннные
+              </Button>
+            </Col>
+          </Row>
+        ) : (
+          <div className="mt-1 align-center justify-content-center">
+            {counter === 0 ? (
+              <div>
+                <Button
+                  className="button2"
+                  key={tarif.id}
+                  tarif={tarif}
+                  onClick={() => setCounter(counter + 1)}
+                >
+                  Добавить
+                </Button>
+              </div>
             ) : (
               <div>
-                {counter === 0 ? (
-                  <Button
-                    key={tarif.id}
-                    tarif={tarif}
-                    onClick={() => setCounter(counter + 1)}
-                  >
-                    Добавить
-                  </Button>
-                ) : (
-                  <div>
-                    <Button onClick={() => setCounter(counter - 1)}>-</Button>
-                    {counter}
-                    <Button onClick={() => setCounter(counter + 1)}>+</Button>
-                  </div>
-                )}
+                <Button
+                  className="button2 counter"
+                  onClick={() => setCounter(counter - 1)}
+                >
+                  -
+                </Button>
+                {counter}
+                <Button
+                  className="button2 counter"
+                  onClick={() => setCounter(counter + 1)}
+                >
+                  +
+                </Button>
               </div>
             )}
-          </Row>
-        </Col>
+          </div>
+        )}
       </Row>
-    </Container>
+    </Row>
+    // </Container>
   )
 }
 export default TarifItem
