@@ -5,10 +5,11 @@
   border: solid 1px;
   border-color: lightgrey;
   border-radius: 10px;
-  /* background-color: aqua; */
+  background-color: #fffee660;
+  color: rgb(0, 0, 0);
 }
 .parkItem:hover{
-  background-color: #e7bd4a;
+  background-color: #ea7b19;
   width: 100%;
   margin: 2% 1%;
   padding: 1%;

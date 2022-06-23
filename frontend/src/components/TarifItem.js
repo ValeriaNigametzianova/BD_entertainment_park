@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Col, Row, Container, Button } from 'react-bootstrap'
+import { Col, Row, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { PARK_TARIF_ROUTE, STUFF_ROUTE } from '../utils/Consts'
 import { Context } from '../index'
@@ -23,21 +23,11 @@ const TarifItem = ({ tarif, addTarifs }) => {
   }, [counter])
 
   const destroyTarif = (deletedTarif) => {
-    // setAttractions(attractions.filter((p) => p.id != deletedAttraction.id))
     deleteTarif(deletedTarif.id).then((data) => {})
     window.location.reload()
   }
 
   return (
-    // <Container
-    //   className="my-2 py-2 justify-content-md-center"
-    //   style={{
-    //     background: 'lightgrey',
-    //     cursor: 'pointer',
-    //     aligne: 'centre',
-    //     borderRadius: '3px',
-    //   }}
-    // >
     <Row className="mt-9">
       <Col>
         <Row className="px-2" border={'light'}>
@@ -112,7 +102,6 @@ const TarifItem = ({ tarif, addTarifs }) => {
         )}
       </Row>
     </Row>
-    // </Container>
   )
 }
 export default TarifItem

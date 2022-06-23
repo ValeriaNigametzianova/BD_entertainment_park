@@ -4,15 +4,9 @@ import {
   ATTRACTIONS_ADMIN_ROUTE,
   BASKET_ROUTE,
   CONFIRMATION_ROUTE,
-  EDITING_ATTRACTIONS_ROUTE,
-  EDITING_INFO_ROUTE,
-  EDITING_MAIN_ROUTE,
-  EDITING_TARIF_ROUTE,
-  INFO_ADMIN_ROUTE,
   LOGIN_ROUTE,
   MAIN_ADMIN_ROUTE,
   MAIN_ROUTE,
-  ORDER_ROUTE,
   PARK_ATTRACTIONS_ROUTE,
   PARK_INFO_ROUTE,
   PARK_MAIN_ROUTE,
@@ -28,9 +22,7 @@ import {
 import Auth from './pages/Auth'
 import ParkMainForAdmin from './pages/ParkMainForAdmin'
 import ParkAttractionsForAdmin from './pages/ParkAttractionsForAdmin'
-import ParkInfoForAdmin from './pages/ParkInfoForAdmin'
 import ParkTarifForAdmin from './pages/ParkTarifForAdmin'
-import EditingParkMain from './pages/EditingParkMain'
 import EditingParkInfo from './pages/EditingParkInfo'
 import EditingParkAttractions from './pages/EditingParkAttractions'
 import EditingParkTarif from './pages/EditingParkTarif'
@@ -56,18 +48,10 @@ export const authStuffRoutes = [
     path: STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE,
     Component: <ParkAttractionsForAdmin />,
   },
-  //   {
-  //     path: STUFF_ROUTE + INFO_ADMIN_ROUTE,
-  //     Component: <ParkInfoForAdmin />,
-  //   },
   {
     path: STUFF_ROUTE + TARIF_ADMIN_ROUTE,
     Component: <ParkTarifForAdmin />,
   },
-  //   {
-  //     path: STUFF_ROUTE + EDITING_MAIN_ROUTE,
-  //     Component: <EditingParkMain />,
-  //   },
   {
     path: STUFF_ROUTE + PARK_MAIN_ROUTE,
     Component: <EditingParkInfo />,

@@ -3,7 +3,6 @@ const { Attraction, Park } = require('../models/models')
 
 class attraсtionController {
   async create(req, res, next) {
-    console.log(req.body)
     try {
       let {
         name,
@@ -27,45 +26,52 @@ class attraсtionController {
         active,
         ParkId,
       })
-      console.log('at', attraсtion)
       return res.json(attraсtion)
     } catch (e) {
       next(ApiError.badRequest(e.message))
     }
   }
   async getAll(req, res) {
-    const { id } = req.params
-    let attraсtion = await Attraction.findAll({ where: { ParkId: id } })
-    return res.json(attraсtion)
+    try {
+      const { id } = req.params
+      let attraсtion = await Attraction.findAll({ where: { ParkId: id } })
+      return res.status(200).json(attraсtion)
+    } catch (error) {
+      return res.json(ApiError.internal({ message: 'Ошибка сервера' }))
+    }
   }
 
   async getOne(req, res) {
-    const { id } = req.params
-    if (!id) {
-      return next(ApiError.badRequest('Такого парка не существует'))
+    try {
+      const { id } = req.params
+      if (!id) {
+        return next(ApiError.badRequest('Такого парка не существует'))
+      }
+      const attraсtion = await Attraction.findOne({
+        where: { id },
+      })
+      return res.status(200).json(attraсtion)
+    } catch (error) {
+      return res.json(ApiError.internal({ message: 'Ошибка сервера' }))
     }
-    console.log(id)
-    const attraсtion = await Attraction.findOne({
-      where: { id },
-      // attributes:["name","description","town"]
-      // include: [{model: Park, as: "name", as: "description"}]
-    })
-    console.log('getOneAttr', attraсtion)
-    return res.json({ attraсtion })
   }
 
   async update(req, res) {
-    let attraсtion = req.body
-    if (!attraсtion.id) {
-      return res.json(ApiError.badRequest({ message: 'Id не указан' }))
+    try {
+      let attraсtion = req.body
+      if (!attraсtion.id) {
+        return res.json(ApiError.badRequest({ message: 'Id не указан' }))
+      }
+      await Attraction.update(attraсtion, {
+        where: {
+          id: attraсtion.id,
+        },
+      })
+      let updatedAttraction = await Attraction.findByPk(attraсtion.id)
+      return res.status(200).json(updatedAttraction)
+    } catch (error) {
+      return res.json(ApiError.internal({ message: 'Ошибка сервера' }))
     }
-    await Attraction.update(attraсtion, {
-      where: {
-        id: attraсtion.id,
-      },
-    })
-    let updatedAttraction = await Attraction.findByPk(attraсtion.id)
-    return res.json(updatedAttraction)
   }
 
   async delete(req, res) {

@@ -25,7 +25,6 @@ export const customerCheck = async () => {
 
 export const customerFetchPDF = async () => {
   const { data } = await $authHost.get('api/customer/ticket')
-  // console.log('res', res)
   let array = []
   data.map(async (file) => {
     const pdfBlob = new Blob([file], { type: 'application/pdf' })
@@ -35,7 +34,6 @@ export const customerFetchPDF = async () => {
   })
   console.log('array', array)
   return array
-  // return data
 }
 export const customerFetchTickets = async () => {
   const { data } = await $authHost.get('api/customer/tickets')

@@ -1,22 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react'
-// import {Routes, Route, Redirect} from 'react-router-dom'
-// import {authRoutes, publicRoutes} from "../Routes";
-// import {MAIN_ROUTE} from "../utils/Consts";
-import { Context } from '../index'
-// import Main from "../pages/Main"
-import { Button, Container, Form, Row } from 'react-bootstrap'
-import TarifItem from '../components/TarifItem'
-import { observer } from 'mobx-react-lite'
-import { stuffFetchPark, stuffFetchTarif } from '../http/parkAPI'
-import { useNavigate, useParams } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Button, Container, Form } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 const OrderForm = ({ createOrder }) => {
-  const [park, setPark] = useState()
   const [surname, setSername] = useState()
   const [name, setName] = useState()
   const [email, setEmail] = useState()
   const [phone_number, setPhoneNumber] = useState()
-  const navigate = useNavigate()
 
   const createForm = () => {
     const customer = {

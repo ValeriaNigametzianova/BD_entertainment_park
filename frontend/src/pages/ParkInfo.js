@@ -16,7 +16,6 @@ const ParkInfo = () => {
   useEffect(() => {
     customerFetchOnePark(id).then((data) => setPark(data.park))
   }, [])
-  console.log(park)
   return (
     <Container className="contr">
       <Container fluid>

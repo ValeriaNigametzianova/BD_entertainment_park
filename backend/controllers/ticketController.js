@@ -9,7 +9,6 @@ class ticketController {
       const { email, phone_number, surname, name } = req.body.customer
       const date = req.body.date
       let tickets = []
-      let counter = 0
       let TarifId = Object.getOwnPropertyNames(req.body.tarifs).map(
         (el) => req.body.tarifs[`${el}`]
       )
@@ -47,36 +46,24 @@ class ticketController {
     try {
       const { id } = req.customer
       let files = []
-      let pathes = []
-      console.log('id', id)
       await Customer.findOne({ where: { id } }).then(async (customer) => {
         if (!customer) return
         await customer.getTickets().then((tickets) => {
           tickets.map(async (ticket) => {
             const tarif = await Tarif.findOne({ where: { id: ticket.TarifId } }) //хотела в pdfTemplate передавать тариф, чтобы внутри сразу брать id
-            console.log('tarif', tarif)
             const file = pdf
               .create(pdfTemplate({ ticket, tarif: ticket.TarifId }), {
                 height: '10cm',
                 width: '15cm',
               })
-              .toFile(
-                `../PDFTickets/result${ticket.id}.pdf`,
-                // __dirname,
-                // '..',
-                (err, ress) => {
-                  if (err) {
-                    return res.send(Promise.reject())
-                  }
+              .toFile(`../PDFTickets/result${ticket.id}.pdf`, (err, ress) => {
+                if (err) {
+                  return res.send(Promise.reject())
                 }
-              )
+              })
             files.push(`/PDFTickets/result${ticket.id}.pdf`)
-            // let path = `/PDFTickets/result${ticket.id}.pdf`
-            // pathes.push(path)
-            console.log('file', file)
           })
           return res.json(files)
-          // return res.json(pathes)
         })
       })
     } catch (error) {
@@ -87,26 +74,8 @@ class ticketController {
   async getTickets(req, res) {
     try {
       const { id } = req.customer
-      let files = []
       const tickets = await Ticket.findAll({ where: { CustomerId: id } })
-      console.log('sss', tickets)
       return res.json(tickets)
-
-      // console.log('id', id)
-      // await Customer.findOne({ where: { id } }).then(async (customer) => {
-      //   console.log('customer', customer)
-      //   if (!customer) return
-      //   await customer.getTickets().then((tickets) => {
-      //     // console.log('tickets', tickets)
-
-      //     tickets.map(async (ticket) => {
-      //       const tarif = await Tarif.findOne({ where: { id: ticket.TarifId } })
-      //       console.log('ticket', ticket.id)
-      //     })
-      //     console.log('files', files)
-      //     return res.json(files)
-      //   })
-      // })
     } catch (error) {
       return res.json({ message: error.message })
     }

@@ -1,13 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Button, Col, Container, Row } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Container, Row } from 'react-bootstrap'
 import { customerFetchPDF, customerFetchTickets } from '../http/customerAPI'
-import { saveAs } from 'file-saver'
 
 const Tickets = () => {
   const [tickets, setTickets] = useState([])
   const baseLink = 'result'
-  console.log('baseLink', baseLink)
-  let link = ''
   const format = '.pdf'
   useEffect(() => {
     customerFetchPDF()
@@ -34,7 +31,6 @@ const Tickets = () => {
             height="400"
           ></iframe>
         </Container>
-        /* <Button onClick={() => saveAs(el, 'newPdf.pdf')}>Скачать</Button>  */
       ))}
     </Container>
   )

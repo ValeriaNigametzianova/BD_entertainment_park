@@ -1,13 +1,5 @@
 import React, { useContext, useState } from 'react'
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Form,
-  NavLink,
-  Row,
-} from 'react-bootstrap'
+import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap'
 import { observer } from 'mobx-react-lite'
 import { useNavigate, useLocation } from 'react-router-dom'
 import {
@@ -19,14 +11,11 @@ import {
   TICKETS_ROUTE,
 } from '../utils/Consts'
 import { Context } from '../index'
-import { customerLogin, customerRegistration } from '../http/customerAPI'
+import { customerLogin } from '../http/customerAPI'
 import { stuffLogin, stuffRegistration } from '../http/stuffAPI'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import '../styles/fonts/heading2.css'
+import '../styles/fonts/fonts.css'
 import '../styles/navBar/navbar.css'
-import '../styles/fonts/heading4.css'
-import '../styles/fonts/heading3.css'
-import '../styles/fonts/heading5.css'
 import '../styles/button/button.css'
 
 const Auth = observer(() => {
@@ -56,7 +45,6 @@ const Auth = observer(() => {
       ) {
         data = await stuffRegistration(login, password)
       }
-      console.log('data', user)
       user.setUser(data)
       user.setIsAuth(true)
       user.setRole(data.role)
@@ -74,10 +62,7 @@ const Auth = observer(() => {
   }
 
   return (
-    <Container
-      className="d-flex justify-content-center align-items-center"
-      //style={{ height: window.innerHeight - 54 }}
-    >
+    <Container className="d-flex justify-content-center align-items-center">
       <Card style={{ width: 600 }} className="p-5">
         <h2 className="heading2">{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
 

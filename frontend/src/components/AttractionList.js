@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col } from 'react-bootstrap'
 import AttractionItem from '../components/AttractionItem'
 import { observer } from 'mobx-react-lite'
 import { stuffFetchAttraction, stuffFetchPark } from '../http/parkAPI'

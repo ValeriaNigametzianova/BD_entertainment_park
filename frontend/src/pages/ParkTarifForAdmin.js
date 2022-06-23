@@ -15,7 +15,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 const ParkTarifForAdmin = () => {
   const [park, setPark] = useState()
   const [tarif, setTarif] = useState()
-  const { id } = useParams()
   useEffect(() => {
     stuffFetchPark().then((data) => setPark(data.park))
   }, [])
@@ -53,32 +52,6 @@ const ParkTarifForAdmin = () => {
           </Col>
         </Row>
         <TarifList></TarifList>
-        {/* <Row>
-        {tarif &&
-          tarif.tarifs.map((el) =>
-            el.map((el) => (
-              <Col>
-                <Row className="heading4">
-                  <div>Название: "{el?.name}"</div>
-                </Row>
-                <Row className="heading4">
-                  <div>Стоимость: {el?.cost} р</div>
-                </Row>
-                <Row className="heading4">
-                  <div>Описание: {el?.description}</div>
-                </Row>
-                {console.log('el', el)}
-                <Button
-                  key={el.id}
-                  tarif={el}
-                  onClick={() => navigate(STUFF_ROUTE + PARK_TARIF_ROUTE)}
-                >
-                  Обновить даннные
-                </Button>
-              </Col>
-            ))
-          )}
-      </Row> */}
         <Row>
           {tarif && tarif.tarifs.lenght ? (
             {}

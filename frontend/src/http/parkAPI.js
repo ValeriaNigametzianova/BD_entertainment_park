@@ -1,5 +1,4 @@
 import { $authHost, $host } from './index'
-import jwt_decode from 'jwt-decode'
 
 export const createPark = async (park) => {
   const { data } = await $authHost.post('api/stuff/park', park)
@@ -7,7 +6,6 @@ export const createPark = async (park) => {
 }
 export const stuffFetchPark = async () => {
   const { data } = await $authHost.get('api/stuff/getPark')
-  console.log('iaiaiaiai', data)
   return data
 }
 export const customerFetchPark = async (name, town, page, limit = 2) => {
@@ -43,9 +41,7 @@ export const customerFetchGreenZone = async (id) => {
   return data
 }
 export const stuffFetchGreenZone = async () => {
-  const { data } = await $authHost.get('api/stuff/getPark', {
-    // headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  })
+  const { data } = await $authHost.get('api/stuff/getPark', {})
   return data
 }
 export const editGreenZone = async (greenZone) => {
@@ -59,19 +55,14 @@ export const createAttraction = async (attraction) => {
 }
 export const customerFetchAttraction = async (id) => {
   const { data } = await $host.get('api/park/' + id + '/attraction')
-  console.log('ieieieieie', data)
   return data
 }
 export const stuffFetchAttraction = async () => {
-  const { data } = await $authHost.get('api/stuff/getAttraction', {
-    // headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  })
+  const { data } = await $authHost.get('api/stuff/getAttraction', {})
   return data
 }
 export const stuffFetchOneAttraction = async (id) => {
-  const { data } = await $authHost.get('api/stuff/attraction/' + id, {
-    // headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  })
+  const { data } = await $authHost.get('api/stuff/attraction/' + id, {})
   return data
 }
 export const editAttraction = async (attraction) => {
@@ -92,9 +83,7 @@ export const stuffFetchTarif = async () => {
   return data
 }
 export const stuffFetchOneTarif = async (id) => {
-  const { data } = await $authHost.get('api/stuff/tarif/' + id, {
-    // headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  })
+  const { data } = await $authHost.get('api/stuff/tarif/' + id, {})
   return data
 }
 export const editTarif = async (tarif) => {

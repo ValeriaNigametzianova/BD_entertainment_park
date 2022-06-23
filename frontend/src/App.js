@@ -14,7 +14,6 @@ import './styles/app/app.css'
 const App = observer(() => {
   const { user } = useContext(Context)
   const { park } = useContext(Context)
-  // const {customer} = useContext(Context)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

@@ -1,24 +1,13 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
-import { Form, FormControl, Button, Container, Col } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Form, Button, Container, Col } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Context } from '..'
 import {
-  editInfo,
-  stuffFetchGreenZone,
   stuffFetchPark,
-  createPark,
-  editGreenZone,
-  createGreenZone,
-  stuffFetchAttraction,
   createAttraction,
   editAttraction,
   stuffFetchOneAttraction,
 } from '../http/parkAPI'
-import {
-  ATTRACTIONS_ADMIN_ROUTE,
-  MAIN_ADMIN_ROUTE,
-  STUFF_ROUTE,
-} from '../utils/Consts'
+import { ATTRACTIONS_ADMIN_ROUTE, STUFF_ROUTE } from '../utils/Consts'
 import '../styles/navBar/navbar.css'
 
 const EditingParkAttractions = () => {
@@ -46,7 +35,6 @@ const EditingParkAttractions = () => {
     })
     stuffFetchOneAttraction(id).then((data) => {
       {
-        console.log('data.attraction', data.attraсtion)
         let attraction = data.attraсtion
         setAttraction(attraction)
         setAttractionId(attraction.id)
@@ -95,17 +83,10 @@ const EditingParkAttractions = () => {
     return data
   }
 
-  //   const searchParks = useMemo(() => {
-  //     return park.parks.filter((onePark) =>
-  //       onePark.name.toLowerCase().includes(searchQuery.toLowerCase())
-  //     )
-  //   }, [searchQuery, park.parks])
-  const el = attraction
   return (
     <Container className="contr">
       <Container className={'d-flex justify-content-center text-light'}>
         <Col style={{ color: '#151E20' }}>
-          {console.log('attraction', attraction)}
           {attraction ? (
             <Form>
               <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
@@ -219,7 +200,6 @@ const EditingParkAttractions = () => {
                 </Form.Label>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPassword">
-                {/* {console.log('el', el)} */}
                 <Form.Label className="heading3">Название</Form.Label>
                 <Form.Control
                   className="heading4"

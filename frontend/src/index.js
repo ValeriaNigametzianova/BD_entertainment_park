@@ -4,13 +4,9 @@ import App from './App'
 import UserStore from './store/UserStore'
 import ParkStore from './store/ParkStore'
 import ReactDOM from 'react-dom/client'
-import { createRoot } from 'react-dom/client'
 
 export const Context = createContext(null)
-// const APP_API_URL = process.env.REACT_APP_API_URL
-console.log('jdjdjdjdjdjdj', process.env.REACT_APP_API_URL)
 
-// import { createRoot } from 'react-dom/client';
 const container = document.getElementById('root')
 const root = ReactDOM.createRoot(container)
 root.render(
@@ -23,15 +19,3 @@ root.render(
     <App />
   </Context.Provider>
 )
-
-// );
-// console.log(root)
-//     <React.StrictMode value={{
-//         user:new UserStore()
-//     }}>
-//     <App />,
-//     </React.StrictMode>
-//     );
-
-// const Context=createContext(null)
-// ReactDOM.render(

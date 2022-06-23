@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
-import { Form, FormControl, Button, Container, Col } from 'react-bootstrap'
-import { useNavigate, useParams } from 'react-router-dom'
-import { Context } from '..'
+import React, { useEffect, useState } from 'react'
+import { Form, Button, Container, Col } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 import {
   editInfo,
   stuffFetchGreenZone,
@@ -13,9 +12,7 @@ import {
 import { MAIN_ADMIN_ROUTE, STUFF_ROUTE } from '../utils/Consts'
 import '../styles/cont/contr.css'
 import '../styles/navBar/navbar.css'
-import '../styles/fonts/heading3.css'
-import '../styles/fonts/heading4.css'
-import '../styles/fonts/heading3.css'
+import '../styles/fonts/fonts.css'
 
 const EditingParkInfo = () => {
   const [park, setPark] = useState()
@@ -72,20 +69,6 @@ const EditingParkInfo = () => {
     })
   }, [])
   const navigate = useNavigate()
-  // park &&
-  //   park.parks.map((el) => {
-  //     el = el.park
-  //     setParkId(el.id)
-  //     console.log('ParkId', ParkId)
-  //   })
-
-  // park &&
-  //   park.parks.map((el) => {
-  //     el = el.greenZones
-  //     setGreenZoneId()
-  //     console.log('GreenZoneId', GreenZoneId)
-  //   })
-
   const updatePark = async () => {
     const formData = new FormData()
     formData.append('id', ParkId)
@@ -102,8 +85,6 @@ const EditingParkInfo = () => {
     formData.append('shop', `${shop}`)
     formData.append('adress', adress)
     formData.append('img', file)
-    // formData.append('name', gzName)
-    // formData.append('description', gzDescription)
     const data = await editInfo(formData)
     return data
   }
@@ -127,7 +108,6 @@ const EditingParkInfo = () => {
   }
 
   const newGreenZone = async (id) => {
-    console.log('id', id)
     let data
     const formData = new FormData()
     formData.append('name', gzName)
@@ -146,17 +126,10 @@ const EditingParkInfo = () => {
     editGreenZone(formData).then((data) => data)
   }
 
-  //   const searchParks = useMemo(() => {
-  //     return park.parks.filter((onePark) =>
-  //       onePark.name.toLowerCase().includes(searchQuery.toLowerCase())
-  //     )
-  //   }, [searchQuery, park.parks])
-
   return (
     <Container className="contr">
       <Container className={'d-flex justify-content-center text-light'}>
         <Col style={{ color: '#151E20' }}>
-          {console.log('park', park)}
           {park && park?.parks?.length ? (
             <Form>
               <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
@@ -291,7 +264,6 @@ const EditingParkInfo = () => {
                   Зоны для отдыха и прогулок
                 </Form.Label>
               </Form.Group>
-              {console.log('greenZones', gzName)}
               {greenZones?.parks[0]?.greenZones?.length ? (
                 greenZones.parks.map((el) =>
                   el.greenZones.map((el) => (
@@ -481,7 +453,6 @@ const EditingParkInfo = () => {
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
-                {/* {console.log('el', el)} */}
                 <Form.Label className="heading3">Название</Form.Label>
                 <Form.Control
                   className="heading4"

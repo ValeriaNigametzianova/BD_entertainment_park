@@ -1,10 +1,6 @@
 import React, { useContext } from 'react'
-// import {Routes, Route, Redirect} from 'react-router-dom'
-// import {authRoutes, publicRoutes} from "../Routes";
-// import {MAIN_ROUTE} from "../utils/Consts";
 import { Context } from '../index'
-// import Main from "../pages/Main"
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col } from 'react-bootstrap'
 import ParkItem from '../components/ParkItem'
 import { observer } from 'mobx-react-lite'
 import 'bootstrap/dist/css/bootstrap.min.css'

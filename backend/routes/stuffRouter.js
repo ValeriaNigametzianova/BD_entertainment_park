@@ -1,14 +1,10 @@
 const { Router } = require('express')
-const stuffController = require('../controllers/stuffController')
-const parkController = require('../controllers/parkController')
-const attractionController = require('../controllers/attractionController')
-const tarifController = require('../controllers/tarifController')
 const router = new Router()
+const stuffController = require('../controllers/stuffController')
 const authStuffMiddleware = require('../middleware/authStuffMiddleware')
 const tarifRouter = require('./tarifRouter')
 const attractionRouter = require('./attractionRouter')
 const parkRouter = require('./parkRouter')
-const greenZoneController = require('../controllers/greenZoneController')
 const greenZoneRouter = require('./greenZoneRouter')
 
 router.post('/registration', stuffController.registration)
@@ -20,7 +16,6 @@ router.use('/attraction', attractionRouter)
 router.get('/getAttraction', authStuffMiddleware, stuffController.getAttraction)
 router.use('/tarif', tarifRouter)
 router.get('/getTarif', authStuffMiddleware, stuffController.getTarif)
-// router.get('/getGreenZone', greenZoneController.getGreenZone)
 router.use('/greenZone', greenZoneRouter)
 
 module.exports = router

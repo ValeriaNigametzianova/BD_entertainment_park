@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Container, Row, Button, Image } from 'react-bootstrap'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   deletePark,
   stuffFetchGreenZone,
@@ -14,13 +14,10 @@ import {
   TARIF_ADMIN_ROUTE,
 } from '../utils/Consts'
 import EditingParkInfo from './EditingParkInfo'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/navBar/navbar.css'
 import '../styles/cont/contr.css'
-import '../styles/fonts/heading3.css'
-import '../styles/fonts/heading2.css'
 import '../styles/button/button.css'
-import '../styles/fonts/heading4.css'
+import '../styles/fonts/fonts.css'
 
 const ParkMainForAdmin = () => {
   const [parks, setParks] = useState()
@@ -73,16 +70,12 @@ const ParkMainForAdmin = () => {
             el = el.park
             return (
               <Row key={el.id} park={el}>
-                <Image
-                  width="100%"
-                  src={process.env.REACT_APP_API_URL + `${el.id}.jpg`}
-                />
                 <Col md={9}>
                   <Row className="heading2_1">
                     <div> {el?.name}</div>
                   </Row>
-                  <Row>
-                    <div className="heading4">Площадь: {el?.square}</div>
+                  <Row className="heading4">
+                    <div>Площадь: {el?.square}</div>
                   </Row>
                   <Row className="heading4">
                     <div>Время открытия: {el?.opening_time}</div>
@@ -113,6 +106,11 @@ const ParkMainForAdmin = () => {
                     </div>
                   </Row>
                 </Col>
+                <Image
+                  className="my-5"
+                  width="100%"
+                  src={process.env.REACT_APP_API_URL + `${el.id}.jpg`}
+                />
               </Row>
             )
           })}

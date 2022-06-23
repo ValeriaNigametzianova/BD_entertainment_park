@@ -1,13 +1,16 @@
 const ApiError = require('../error/ApiError')
-const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const uuid = require('uuid')
-const { Stuff, Admin, Customer, Ticket } = require('../models/models')
+const { Customer } = require('../models/models')
 
-const generateJwt = (id, email, role) => {
-  return jwt.sign({ id, email, role }, process.env.SECRET_KEY, {
-    expiresIn: '6h',
-  })
+const generateJwt = (id, email, role, next) => {
+  try {
+    return jwt.sign({ id, email, role }, process.env.SECRET_KEY, {
+      expiresIn: '6h',
+    })
+  } catch (error) {
+    return next(ApiError.badRequest({ error: error }))
+  }
 }
 
 class CustomerController {
@@ -23,30 +26,34 @@ class CustomerController {
       const activationLink = uuid.v4()
       const customer = await Customer.create({ email, phone_number })
       const token = generateJwt(customer.id, customer.email, 'customer')
-      return res.json({ token })
+      return res.status(200).json({ token })
     } catch (e) {
       return next(ApiError.badRequest({ error: e }))
     }
   }
 
   async login(req, res, next) {
-    const { email } = req.body
-    const customer = await Customer.findOne({ where: { email } })
-    console.log(email)
-    if (!customer) {
-      return next(ApiError.internal('Пользователь не найден'))
+    try {
+      const { email } = req.body
+      const customer = await Customer.findOne({ where: { email } })
+      console.log(email)
+      if (!customer) {
+        return next(ApiError.internal('Пользователь не найден'))
+      }
+      const token = generateJwt(customer.id, customer.email, 'customer')
+      return res.status(200).json({ token })
+    } catch (error) {
+      return next(ApiError.badRequest({ error: error }))
     }
-    // let comparePassword = bcrypt.compareSync(password, customer.password)
-    // if (!comparePassword){
-    //     return next (ApiError.internal("Указан неверный пароль"))
-    // }
-    const token = generateJwt(customer.id, customer.email, 'customer')
-    return res.json({ token })
   }
 
-  async check(req, res) {
-    const token = generateJwt(req.customer.id, req.customer.email, 'customer')
-    return res.json({ token, customer: req.customer })
+  async check(req, res, next) {
+    try {
+      const token = generateJwt(req.customer.id, req.customer.email, 'customer')
+      return res.status(200).json({ token, customer: req.customer })
+    } catch (error) {
+      return next(ApiError.badRequest({ error: error }))
+    }
   }
 }
 

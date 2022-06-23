@@ -3,7 +3,6 @@ import { Button, Col, Container, Row } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
 import OrderForm from '../components/OrderForm'
 import TarifItem from '../components/TarifItem'
-import TarifList from '../components/TarifList'
 import CalendarStore from '../store/CalendarStore'
 import { customerFetchOnePark, customerFetchTarif } from '../http/parkAPI'
 import {
@@ -17,12 +16,11 @@ import {
 import { createTicket } from '../http/ticketApi'
 import { customerLogin } from '../http/customerAPI'
 import { Context } from '..'
-import axios from 'axios'
 import { saveAs } from 'file-saver'
 
 const ParkTarifs = () => {
-  const { user } = useContext(Context)
   const [park, setPark] = useState()
+  const { user } = useContext(Context)
   const [tarifs, setTarifs] = useState()
   const [order, setOrder] = useState()
   const { id } = useParams()
@@ -43,8 +41,6 @@ const ParkTarifs = () => {
     customerFetchTarif(id).then((data) => setTarifs(data))
   }, [])
   const navigate = useNavigate()
-  console.log('tarif', tarifs)
-  console.log('order', order)
 
   const createOrder = (customer) => {
     if (!order?.date || !order?.tarifs) return console.log('not work')
@@ -53,16 +49,8 @@ const ParkTarifs = () => {
     let TarifId = Object.getOwnPropertyNames(order.tarifs).map(
       (el) => order.tarifs[`${el}`]
     )
-    console.log(' TarifId', TarifId)
     let tsumm = summ
     TarifId.map((element) => {
-      console.log('element.tarif?.cost', element.tarif?.cost)
-      console.log(' element?.counter', element?.counter)
-      console.log('summ', tsumm)
-      console.log(
-        'summ + element.tarif?.cost * element?.counter',
-        tsumm + element.tarif?.cost * element?.counter
-      )
       return (tsumm += element.tarif?.cost * element?.counter)
     })
     setSumm(tsumm)

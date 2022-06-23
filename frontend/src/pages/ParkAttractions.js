@@ -18,7 +18,6 @@ const ParkAttractions = () => {
     customerFetchAttraction(id).then((data) => setAttractions(data))
   }, [])
   const navigate = useNavigate()
-  console.log('attractions', attractions)
   return (
     <Container className="contr">
       <Container fluid>

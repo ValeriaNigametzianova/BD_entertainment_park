@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
-import {
-  customerFetchOnePark,
-  stuffFetchAttraction,
-  stuffFetchPark,
-} from '../http/parkAPI'
+import { stuffFetchPark } from '../http/parkAPI'
 import {
   ATTRACTIONS_ADMIN_ROUTE,
   MAIN_ADMIN_ROUTE,
   PARK_ATTRACTIONS_ROUTE,
-  PARK_MAIN_ROUTE,
   STUFF_ROUTE,
   TARIF_ADMIN_ROUTE,
 } from '../utils/Consts'
@@ -18,10 +13,8 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/navBar/navbar.css'
 import '../styles/cont/contr.css'
-import '../styles/fonts/heading3.css'
-import '../styles/fonts/heading2.css'
+import '../styles/fonts/fonts.css'
 import '../styles/button/button.css'
-import '../styles/fonts/heading4.css'
 import '../styles/button/button.css'
 import AttractionList from '../components/AttractionList'
 
@@ -67,56 +60,6 @@ const ParkAttractionsForAdmin = () => {
           </Col>
         </Row>
         <AttractionList></AttractionList>
-        {/* <Row className="mt-9">
-          {attractions &&
-            attractions.attractions.map((el) =>
-              el.map((el) => (
-                <Row mt={5}>
-                  <Row className="heading4">
-                    <h2>Название: {el?.name}</h2>
-                  </Row>
-                  <Row className="heading4">
-                    <div>Описание: {el?.description}</div>
-                  </Row>
-                  <Col>
-                    <Row className="heading4">
-                      <div>Высота: {el?.hight}</div>
-                    </Row>
-                    <Row className="heading4">
-                      <div>Ограничение по возрасту: {el?.age_limitation}</div>
-                    </Row>
-                    <Row className="heading4">
-                      <div>Ограничение по весу: {el?.weight_limitation}</div>
-                    </Row>
-                    <Row className="heading4">
-                      <div>
-                        Ограничение по росту:
-                        {el?.height_limitation}
-                      </div>
-                    </Row>
-                    <Row className="heading4">
-                      <div>
-                        {' '}
-                        Максимальное количество человек:
-                        {el?.max_quantity_people}
-                      </div>
-                    </Row>
-                    <Row className="heading4">
-                      <div>{el?.active ?? 'Сейчас недоступен'}</div>
-                    </Row>
-                  </Col>
-                  <Button
-                    className="button2"
-                    onClick={() =>
-                      navigate(STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE)
-                    }
-                  >
-                    Обновить даннные
-                  </Button>
-                </Row>
-              ))
-            )}
-        </Row> */}
         <Row>
           {attractions && attractions.attractions.lenght ? (
             {}

@@ -1,5 +1,6 @@
-.brand_name{
+.navbar-light .navbar-brand{
     font-family:"Vivaldi";
     font-size: 23pt;
-    margin-right: 10px;
+    margin-right: 10px; 
+    color: #dae9ff;
 }

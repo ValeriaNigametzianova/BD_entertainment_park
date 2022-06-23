@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Container, NavLink, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import { Context } from '../index'
 import {
   PARK_MAIN_ROUTE,
   PARK_INFO_ROUTE,
@@ -9,11 +8,7 @@ import {
   PARK_TARIF_ROUTE,
 } from '../utils/Consts'
 import { useParams } from 'react-router-dom'
-import {
-  customerFetchGreenZone,
-  customerFetchOnePark,
-  customerFetchPark,
-} from '../http/parkAPI'
+import { customerFetchGreenZone, customerFetchOnePark } from '../http/parkAPI'
 import '../styles/cont/contr.css'
 
 const ParkMain = () => {

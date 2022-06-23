@@ -6,7 +6,6 @@ import { stuffFetchGreenZone, stuffFetchPark } from '../http/parkAPI'
 
 const ParkInfoForAdmin = () => {
   const { park } = useContext(Context)
-  const { user } = useContext(Context)
   const [greenZones, setGreenZones] = useState()
 
   useEffect(() => {
@@ -23,12 +22,6 @@ const ParkInfoForAdmin = () => {
           <ParkList />
         </Col>
       </Row>
-      {/* <Row>
-      {greenZones.parks.map((el) =>
-                  el.greenZones.map((el) => (
-
-                  )))}
-      </Row> */}
     </Container>
   )
 }

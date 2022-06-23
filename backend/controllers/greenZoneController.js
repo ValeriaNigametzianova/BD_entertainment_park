@@ -1,5 +1,5 @@
 const ApiError = require('../error/ApiError')
-const { Attraction, Park, GreenZone } = require('../models/models')
+const { GreenZone } = require('../models/models')
 
 class greenZoneController {
   async create(req, res, next) {
@@ -15,15 +15,19 @@ class greenZoneController {
       next(ApiError.badRequest(e.message))
     }
   }
+
   async getAll(req, res) {
-    const { id } = req.params
-    let greenZone = await GreenZone.findAll({ where: { ParkId: id } })
-    return res.json(greenZone)
+    try {
+      const { id } = req.params
+      let greenZone = await GreenZone.findAll({ where: { ParkId: id } })
+      return res.json(greenZone)
+    } catch (error) {
+      next(ApiError.badRequest(error.message))
+    }
   }
 
   async update(req, res) {
     try {
-      console.log('hello', req.body)
       let greenZone = req.body
       if (!greenZone.id) {
         return res.json(ApiError.badRequest({ message: 'Id не указан' }))
@@ -53,7 +57,6 @@ class greenZoneController {
         )
       }
       await GreenZone.destroy({ where: { id } })
-
       return res.status(200).json(greenZone)
     } catch (e) {
       res.json(ApiError.internal({ message: 'Ошибка сервера' }))

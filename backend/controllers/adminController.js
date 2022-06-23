@@ -6,10 +6,14 @@ const { park } = require('./stuffController')
 
 class AdminController {
   async create(req, res, next) {
-    const { login } = req.body
-    const stuff = await Stuff.findOne({ where: { login } })
-    const admin = await Admin.create({ StuffId: stuff.id })
-    return res.json(admin)
+    try {
+      const { login } = req.body
+      const stuff = await Stuff.findOne({ where: { login } })
+      const admin = await Admin.create({ StuffId: stuff.id })
+      return res.status(200).json(admin)
+    } catch (error) {
+      res.json(ApiError.internal({ message: 'Ошибка сервера' }))
+    }
   }
 
   async hasPark(park, stuff) {
@@ -27,8 +31,12 @@ class AdminController {
   }
 
   async getAll(req, res) {
-    let admin = await Admin.findAll()
-    return res.json(admin)
+    try {
+      let admin = await Admin.findAll()
+      return res.status(200).json(admin)
+    } catch (error) {
+      return new Error(error.message)
+    }
   }
 
   // async get_role (stuff){

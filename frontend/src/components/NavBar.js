@@ -8,13 +8,11 @@ import {
   Nav,
   Navbar,
   NavDropdown,
-  Col,
 } from 'react-bootstrap'
 import { Context } from '../index'
 import { observer } from 'mobx-react-lite'
 import {
   MAIN_ROUTE,
-  AUTH_ROUTE,
   LOGIN_ROUTE,
   STUFF_ROUTE,
   CUSTOMER_ROUTE,
@@ -24,14 +22,13 @@ import {
 } from '../utils/Consts'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/navBar/navbar.css'
-import '../styles/fonts/brand_name.css'
+import '../styles/fonts/fonts.css'
 import '../styles/container/container.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const NavBar = observer(() => {
   const { user } = useContext(Context)
   const { park } = useContext(Context)
-  const sourceParks = park
   const navigate = useNavigate()
   const location = useLocation()
   const [tempQuery, setTempQuery] = useState('')
@@ -42,29 +39,6 @@ const NavBar = observer(() => {
     user.setRole('')
     localStorage.removeItem('token')
   }
-  // const searchParks = useMemo(() => {
-  //   console.log('working')
-  //   console.log(park.parks)
-  //   if (park.searchPark) {
-  //     console.log('lyamv')
-  //     return park.searchPark.filter((onePark) => {
-  //       console.log(onePark.name.toLowerCase().includes(searchQuery))
-  //       onePark.name.toLowerCase().includes(searchQuery)
-  //     })
-  //   }
-  // }, [searchQuery, park.parks])
-
-  // const searchParks = useMemo(() => {
-  //   console.log('searchQuery', park.searchQuery)
-  //   return park.parks.filter((onePark) => {
-  //     console.log(
-  //       'perk',
-  //       onePark.name.toLowerCase(),
-  //       onePark.name.toLowerCase().includes(park.searchQuery.toLowerCase())
-  //     )
-  //     return onePark.name.toLowerCase().includes(park.searchQuery.toLowerCase())
-  //   })
-  // }, [park.searchQuery, park.parks])
 
   return (
     <Navbar className="navbar">
@@ -79,9 +53,11 @@ const NavBar = observer(() => {
           </Button>
         </Nav>
         <Navbar.Brand
-          className="brand_name"
-          style={{ color: '#033782', cursor: 'pointer' }}
-          onClick={() => navigate(MAIN_ROUTE)}
+          className="navbar-light navbar-brand"
+          style={{ cursor: 'pointer' }}
+          onClick={() => {
+            navigate(MAIN_ROUTE)
+          }}
         >
           Эмоциональные качели
         </Navbar.Brand>
@@ -124,7 +100,6 @@ const NavBar = observer(() => {
                 {park.towns.map((town, id) => (
                   <Dropdown.Item
                     key={id}
-                    //   active={}
                     href="/"
                     onClick={(e) => {
                       e.preventDefault()
@@ -152,8 +127,6 @@ const NavBar = observer(() => {
               onSubmit={(e) => {
                 e.preventDefault()
                 park.setPage(1)
-                // park.setSearchQuery(event.target.value)
-                // park.setSearchPark(searchParks)
               }}
             >
               <FormControl
@@ -174,7 +147,6 @@ const NavBar = observer(() => {
                 onClick={(e) => {
                   park.setSearchQuery(e.target.tempQuery)
                   park.setPage(1)
-                  // park.setSearchPark(searchParks)
                 }}
               >
                 Найти
