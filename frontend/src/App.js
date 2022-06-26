@@ -15,7 +15,6 @@ const App = observer(() => {
   const { user } = useContext(Context)
   const { park } = useContext(Context)
   const [loading, setLoading] = useState(true)
-
   useEffect(() => {
     stuffCheck()
       .then((data) => {
@@ -25,7 +24,6 @@ const App = observer(() => {
       })
       .finally(() => setLoading(false))
   }, [])
-
   useEffect(() => {
     customerCheck()
       .then((data) => {
@@ -35,7 +33,6 @@ const App = observer(() => {
       })
       .finally(() => setLoading(false))
   }, [])
-
   if (loading) {
     return <Spinner animation={'grow'} className={'text-light'} />
   }
@@ -47,5 +44,4 @@ const App = observer(() => {
     </BrowserRouter>
   )
 })
-
 export default App

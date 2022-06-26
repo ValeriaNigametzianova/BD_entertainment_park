@@ -26,9 +26,11 @@ const start = async () => {
   try {
     await sequelize.authenticate()
     await sequelize.sync()
-    app.listen(PORT, () => {})
-  } catch (error) {
-    return res.json({ message: error.message })
+    app.listen(PORT, () => {
+      console.log('working on the port ', PORT)
+    })
+  } catch (e) {
+    console.log(e)
   }
 }
 

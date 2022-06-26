@@ -30,13 +30,10 @@ import Order from './pages/Order'
 import Basket from './pages/Basket'
 import Tickets from './pages/Tickets'
 import EmailConfirmation from './pages/EmailConfirmation'
-import RecoveryGood from './pages/Recovery good'
-import RecoveryBad from './pages/Recovery bad'
 import ParkMain from './pages/ParkMain'
 import ParkInfo from './pages/ParkInfo'
 import ParkTarif from './pages/ParkTarif'
 import ParkAttractions from './pages/ParkAttractions'
-import Recovery from './pages/Recovery'
 import Main from './pages/Main'
 
 export const authStuffRoutes = [
@@ -107,20 +104,8 @@ export const publicRoutes = [
     Component: <Basket />,
   },
   {
-    path: RECOVERY_ROUTE,
-    Component: <Recovery />,
-  },
-  {
     path: CONFIRMATION_ROUTE,
     Component: <EmailConfirmation />,
-  },
-  {
-    path: RECOVERY_GOOD_ROUTE,
-    Component: <RecoveryGood />,
-  },
-  {
-    path: RECOVERY_BAD_ROUTE,
-    Component: <RecoveryBad />,
   },
   {
     path: PARK_MAIN_ROUTE + '/:id',

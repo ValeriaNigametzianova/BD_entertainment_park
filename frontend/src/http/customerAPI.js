@@ -28,11 +28,9 @@ export const customerFetchPDF = async () => {
   let array = []
   data.map(async (file) => {
     const pdfBlob = new Blob([file], { type: 'application/pdf' })
-    console.log('pdfBlob', pdfBlob)
     array.push(pdfBlob)
     // saveAs(pdfBlob, 'newPdf.pdf')
   })
-  console.log('array', array)
   return array
 }
 export const customerFetchTickets = async () => {

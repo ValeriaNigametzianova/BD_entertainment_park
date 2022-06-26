@@ -4,9 +4,7 @@ import App from './App'
 import UserStore from './store/UserStore'
 import ParkStore from './store/ParkStore'
 import ReactDOM from 'react-dom/client'
-
 export const Context = createContext(null)
-
 const container = document.getElementById('root')
 const root = ReactDOM.createRoot(container)
 root.render(
