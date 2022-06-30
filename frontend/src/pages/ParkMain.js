@@ -9,7 +9,8 @@ import {
 } from '../utils/Consts'
 import { useParams } from 'react-router-dom'
 import { customerFetchGreenZone, customerFetchOnePark } from '../http/parkAPI'
-import '../styles/cont/contr.css'
+import '../styles/container/container.css'
+import '../styles/fonts/fonts.css'
 
 const ParkMain = () => {
   const [park, setPark] = useState()
@@ -29,7 +30,7 @@ const ParkMain = () => {
         <Row className="d-flex justify-content-between ">
           <Col>
             <div
-              className="heading3_2 text-center"
+              className="heading3_2 text-center active-page"
               style={{ cursor: 'pointer' }}
               onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id)}
             >
@@ -72,28 +73,20 @@ const ParkMain = () => {
         </Row>
         <Row>
           <Row className=" px-5">
-            <h2 className="text-start" style={{ color: '#151E20' }}>
-              {park?.name}
-            </h2>
+            <h2 className="text-start heading2 description">{park?.name}</h2>
           </Row>
           <Row className="mt-3 px-5">
-            <div className="text-start" style={{ color: '#151E20' }}>
-              {park?.description}
-            </div>
+            <div className="text-start description">{park?.description}</div>
           </Row>
         </Row>
         {greenZones &&
           greenZones.greenZone.map((el) => (
             <Row>
               <Row className="mt-5 px-5">
-                <h2 className="text-start" style={{ color: '#151E20' }}>
-                  {el?.name}
-                </h2>
+                <h2 className="text-start heading2 description">{el?.name}</h2>
               </Row>
               <Row className="mt-3 px-5">
-                <div className="text-start" style={{ color: '#151E20' }}>
-                  {el?.description}
-                </div>
+                <div className="text-start description">{el?.description}</div>
               </Row>
             </Row>
           ))}

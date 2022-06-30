@@ -167,7 +167,7 @@ const ParkTarifs = () => {
               </Col>
               <Col>
                 <div
-                  className="heading3_2 text-center"
+                  className="heading3_2 text-center active-page"
                   style={{ cursor: 'pointer' }}
                   onClick={() =>
                     navigate(PARK_MAIN_ROUTE + '/' + id + PARK_TARIF_ROUTE)
@@ -179,18 +179,18 @@ const ParkTarifs = () => {
             </Row>
             <Row>
               <Col className="mt-5 text-center">
-                {order?.date && (
+                {/* {order?.date && (
                   <p>Выбранная дата: {order?.date.toLocaleDateString()}</p>
-                )}
+                )} */}
                 <CalendarStore
                   value={order?.date}
                   onChange={(date) => setOrder({ ...order, date })}
                 />
               </Col>
               <Col>
-                <Row className="mt-5 text-center">
+                {/* <Row className="mt-5 text-center">
                   <div style={{ color: '#151E20' }}>Тарифы</div>
-                </Row>
+                </Row> */}
                 {tarifs &&
                   tarifs.map((el) => (
                     <TarifItem

@@ -5,28 +5,16 @@ import { MAIN_ROUTE } from '../utils/Consts'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/footer/footer.css'
 import '../styles/fonts/fonts.css'
-import '../styles/container/container.css'
 import { useNavigate } from 'react-router-dom'
+import Logo from '../assets/logo_black.svg'
 
 const Footer = observer(() => {
   const navigate = useNavigate()
   return (
-    <Navbar className="footer">
-      <Container>
-        <Nav>
-          <Image
-            width="100px"
-            object-fit="contain"
-            src={process.env.REACT_APP_API_URL + 'logoParkk.png'}
-          />
-        </Nav>
-        <Navbar.Brand
-          className="brand_name"
-          style={{ color: '#033782', cursor: 'pointer' }}
-          onClick={() => navigate(MAIN_ROUTE)}
-        >
-          Эмоциональные качели
-        </Navbar.Brand>
+    <Navbar className="footer container-fluid ">
+      <Container className="d-flex px-0">
+        <img src={Logo} className=" mx-3 start-0" alt="logo_img" width={70} />
+        <div className="brand_name start-50">© Эмоциональные качели, 2022</div>
       </Container>
     </Navbar>
   )

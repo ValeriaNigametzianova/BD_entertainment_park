@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { customerFetchPark } from '../http/parkAPI'
-import { Container, Row } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import { Context } from '../index'
 import ParkList from '../components/ParkList'
 import Pages from '../components/Pages'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import '../styles/cont/contr.css'
+import '../styles/container/container.css'
 import '../styles/fonts/fonts.css'
 
 const Main = observer(() => {
@@ -27,16 +27,18 @@ const Main = observer(() => {
   return (
     <Container className="contr">
       {park.selectedTown ? (
-        <Row className="heading1">
+        <Row className="heading1 description">
           Парки развлечений в городе {park.selectedTown}
         </Row>
       ) : (
-        <Row className="heading1">Парки развлечений России</Row>
+        <Row className="heading1 description">Парки развлечений России</Row>
       )}
       <ParkList />
-      <Row>
+      <Col className="mx-2">
+        {/* <Row> */}
         <Pages />
-      </Row>
+        {/* </Row> */}
+      </Col>
     </Container>
   )
 })

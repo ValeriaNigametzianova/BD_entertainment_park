@@ -8,6 +8,7 @@ import {
   PARK_MAIN_ROUTE,
   PARK_TARIF_ROUTE,
 } from '../utils/Consts'
+import '../styles/fonts/fonts.css'
 
 const ParkAttractions = () => {
   const [park, setPark] = useState()
@@ -44,7 +45,7 @@ const ParkAttractions = () => {
           </Col>
           <Col>
             <div
-              className="heading3_2 text-center"
+              className="heading3_2 text-center active-page"
               style={{ cursor: 'pointer' }}
               onClick={() =>
                 navigate(PARK_MAIN_ROUTE + '/' + id + PARK_ATTRACTIONS_ROUTE)
@@ -65,47 +66,42 @@ const ParkAttractions = () => {
             </div>
           </Col>
         </Row>
-        <Row mt-5 className=" px-5">
-          <h2 style={{ color: '#151E20' }}>Аттракционы</h2>
-        </Row>
         {attractions &&
           attractions.map((el) => (
-            <Row className=" px-5">
+            <Row className="mb-5 px-5">
               <Row>
-                <h2 className="heading3_2" style={{ color: '#151E20' }}>
-                  {el?.name}
-                </h2>
+                <h2 className="heading3 description">{el?.name}</h2>
               </Row>
               <Row>
-                <div style={{ color: '#151E20' }}>{el?.description}</div>
+                <div className="description">{el?.description}</div>
               </Row>
               <Col>
                 <Row>
-                  <div style={{ color: '#151E20' }}>Высота: {el?.hight}</div>
+                  <div className="description">Высота: {el?.hight}</div>
                 </Row>
                 <Row>
-                  <div style={{ color: '#151E20' }}>
+                  <div className="description">
                     Возрастное ограничение: {el?.age_limitation}
                   </div>
                 </Row>
                 <Row>
-                  <div style={{ color: '#151E20' }}>
+                  <div className="description">
                     Ограничение по весу: {el?.weight_limitation}
                   </div>
                 </Row>
                 <Row>
-                  <div style={{ color: '#151E20' }}>
+                  <div className="description">
                     Ограничение по росту: {el?.height_limitation}
                   </div>
                 </Row>
                 <Row>
-                  <div style={{ color: '#151E20' }}>
-                    Максимальное количество посетителей:{' '}
+                  <div className="description">
+                    Максимальное количество посетителей:
                     {el?.max_quantity_people}
                   </div>
                 </Row>
                 <Row>
-                  <div style={{ color: 'white' }}>
+                  <div className="description">
                     {el?.active ?? 'Сейчас недоступен'}
                   </div>
                 </Row>

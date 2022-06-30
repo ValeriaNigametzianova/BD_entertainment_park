@@ -14,7 +14,7 @@ const Tickets = () => {
   return (
     <Container>
       <Row>
-        <div>Ваши билеты: </div>
+        <div className="heading2_1 description">Ваши билеты: </div>
       </Row>
       {tickets.map((el) => (
         <Container fluid className="d-flex justify-content-center">

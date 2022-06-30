@@ -15,7 +15,7 @@ import {
 } from '../utils/Consts'
 import EditingParkInfo from './EditingParkInfo'
 import '../styles/navBar/navbar.css'
-import '../styles/cont/contr.css'
+import '../styles/container/container.css'
 import '../styles/button/button.css'
 import '../styles/fonts/fonts.css'
 
@@ -39,7 +39,7 @@ const ParkMainForAdmin = () => {
         <Row className="d-flex">
           <Col>
             <div
-              className="heading3_2"
+              className="heading3_2 active-page"
               style={{ textAlign: 'left', cursor: 'pointer' }}
               onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
             >
@@ -71,36 +71,39 @@ const ParkMainForAdmin = () => {
             return (
               <Row key={el.id} park={el}>
                 <Col md={9}>
-                  <Row className="heading2_1">
+                  <Row className="heading2_1 description">
                     <div> {el?.name}</div>
                   </Row>
-                  <Row className="heading4">
+                  <Row className="description">
+                    <div>Город: {el?.town}</div>
+                  </Row>
+                  <Row className="description">
                     <div>Площадь: {el?.square}</div>
                   </Row>
-                  <Row className="heading4">
+                  <Row className="description">
                     <div>Время открытия: {el?.opening_time}</div>
                   </Row>
-                  <Row className="heading4">
+                  <Row className="description">
                     <div>Время закрытия: {el?.closing_time}</div>
                   </Row>
-                  <Row className="heading4">
+                  <Row className="description">
                     <div>Описание: {el?.description}</div>
                   </Row>
                 </Col>
                 <Col md={6}>
-                  <Row className="heading4">
+                  <Row className="description">
                     <div>Наличие аниматоров: {el?.animators}</div>
                   </Row>
-                  <Row className="heading4">
+                  <Row className="description">
                     <div>Наличие водных пространств: {el?.watersafe}</div>
                   </Row>
-                  <Row className="heading4">
+                  <Row className="description">
                     <div>Наличие уголка с животными: {el?.zoo}</div>
                   </Row>
-                  <Row className="heading4">
+                  <Row className="description">
                     <div>Количетво кафе и ресторанов: {el?.cafe}</div>
                   </Row>
-                  <Row className="heading4">
+                  <Row className="description">
                     <div>
                       Количество магазинов и сувенирных лавок: {el?.shops}
                     </div>
@@ -114,7 +117,7 @@ const ParkMainForAdmin = () => {
               </Row>
             )
           })}
-        <div className="heading2_1 mt={5}" style={{ color: 'black' }}>
+        <div className="heading2_1 description mt={5}">
           Зоны отдыха в парке развлечений
         </div>
         {greenZones &&
@@ -122,8 +125,8 @@ const ParkMainForAdmin = () => {
             el.greenZones.map((el) => (
               <Row key={el.id}>
                 <Row mt={5}>
-                  <div className="heading4">{el?.name}</div>
-                  <div className="heading4">{el?.description}</div>
+                  <div className="heading3_2 description">{el?.name}</div>
+                  <div className="description">{el?.description}</div>
                 </Row>
               </Row>
             ))

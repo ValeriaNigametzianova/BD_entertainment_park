@@ -43,7 +43,7 @@ const ParkTarifForAdmin = () => {
           </Col>
           <Col>
             <div
-              className="heading3_2"
+              className="heading3_2 active-page"
               style={{ textAlign: 'right', cursor: 'pointer' }}
               onClick={() => navigate(STUFF_ROUTE + TARIF_ADMIN_ROUTE)}
             >
@@ -51,19 +51,21 @@ const ParkTarifForAdmin = () => {
             </div>
           </Col>
         </Row>
-        <TarifList></TarifList>
-        <Row>
+        <Row className="justify-content-center">
           {tarif && tarif.tarifs.lenght ? (
             {}
           ) : (
-            <Button
-              className="button2"
-              onClick={() => navigate(STUFF_ROUTE + PARK_TARIF_ROUTE)}
-            >
-              Создать тариф
-            </Button>
+            <Col className="justify-content-center">
+              <Button
+                className="button2 "
+                onClick={() => navigate(STUFF_ROUTE + PARK_TARIF_ROUTE)}
+              >
+                Создать тариф
+              </Button>
+            </Col>
           )}
         </Row>
+        <TarifList></TarifList>
       </Container>
     </Container>
   )

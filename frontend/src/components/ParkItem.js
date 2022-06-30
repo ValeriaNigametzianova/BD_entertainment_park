@@ -3,9 +3,7 @@ import { Col, Image, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { PARK_MAIN_ROUTE } from '../utils/Consts'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import '../styles/container/container.css'
-import '../styles/cont/contr.css'
-import '../styles/parkItem.css'
+import '../styles/parkItem/parkItem.css'
 
 const ParkItem = ({ park }) => {
   const navigate = useNavigate()

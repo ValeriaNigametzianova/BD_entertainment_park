@@ -26,7 +26,6 @@ import ParkTarifForAdmin from './pages/ParkTarifForAdmin'
 import EditingParkInfo from './pages/EditingParkInfo'
 import EditingParkAttractions from './pages/EditingParkAttractions'
 import EditingParkTarif from './pages/EditingParkTarif'
-import Order from './pages/Order'
 import Basket from './pages/Basket'
 import Tickets from './pages/Tickets'
 import EmailConfirmation from './pages/EmailConfirmation'
@@ -94,10 +93,6 @@ export const publicRoutes = [
   {
     path: PARK_MAIN_ROUTE,
     Component: <Main />,
-  },
-  {
-    path: PARK_MAIN_ROUTE,
-    Component: <Order />,
   },
   {
     path: BASKET_ROUTE + TICKETS_ROUTE,

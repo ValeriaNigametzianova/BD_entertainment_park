@@ -8,6 +8,7 @@ import {
   PARK_ATTRACTIONS_ROUTE,
   PARK_TARIF_ROUTE,
 } from '../utils/Consts'
+import '../styles/fonts/fonts.css'
 
 const ParkInfo = () => {
   const navigate = useNavigate()
@@ -31,7 +32,7 @@ const ParkInfo = () => {
           </Col>
           <Col>
             <div
-              className="heading3_2 text-center"
+              className="heading3_2 text-center active-page"
               style={{ cursor: 'pointer' }}
               onClick={() =>
                 navigate(PARK_MAIN_ROUTE + '/' + id + PARK_INFO_ROUTE)
@@ -64,59 +65,69 @@ const ParkInfo = () => {
           </Col>
         </Row>
         <Row className=" px-5">
-          <h2 style={{ color: '#151E20' }}>Информация</h2>
+          <h2 className="text-start heading2 description">Информация</h2>
         </Row>
-        <Row>
+        <Row className=" px-5">
           <Col>
-            <Row>
-              <div style={{ color: '#151E20' }}>Площадь: {park?.square}</div>
-            </Row>
-            <Row>
-              <div style={{ color: '#151E20' }}>
-                Время открытия: {park?.opening_time}
-              </div>
-            </Row>
-            <Row>
-              <div style={{ color: '#151E20' }}>
-                Время закрытия: {park?.closing_time}
-              </div>
-            </Row>
+            {park?.square && (
+              <Row>
+                <div className="description">Площадь: {park?.square}</div>
+              </Row>
+            )}
+            {park?.opening_time && (
+              <Row>
+                <div className="description">
+                  Время открытия: {park?.opening_time}
+                </div>
+              </Row>
+            )}
+            {park?.closing_time && (
+              <Row>
+                <div className="description">
+                  Время закрытия: {park?.closing_time}
+                </div>
+              </Row>
+            )}
           </Col>
           <Col>
-            <Row>
-              <div style={{ color: '#151E20' }}>
-                Наличие аниматоров: {park?.animators}
-              </div>
-            </Row>
-            <Row>
-              <div style={{ color: '#151E20' }}>
-                Наличие водоемов: {park?.watersafe}
-              </div>
-            </Row>
-            <Row>
-              <div style={{ color: '#151E20' }}>
-                Наличие зооуголков: {park?.zoo}
-              </div>
-            </Row>
+            {park?.animators && (
+              <Row>
+                <div className="description">
+                  Наличие аниматоров: {park?.animators}
+                </div>
+              </Row>
+            )}
+            {park?.watersafe && (
+              <Row>
+                <div className="description">Есть водные пространства</div>
+              </Row>
+            )}
+            {park?.zoo && (
+              <Row>
+                <div className="description">Есть зооуголки</div>
+              </Row>
+            )}
           </Col>
           <Col>
-            <Row>
-              <div style={{ color: '#151E20' }}>
-                Количество кафе: {park?.cafe}
-              </div>
-            </Row>
-            <Row>
-              <div style={{ color: '#151E20' }}>
-                Количество магазинов: {park?.shops}
-              </div>
-            </Row>
+            {park?.cafe && (
+              <Row>
+                <div className="description">Количество кафе: {park?.cafe}</div>
+              </Row>
+            )}
+            {park?.shops && (
+              <Row>
+                <div className="description">
+                  Количество магазинов: {park?.shops}
+                </div>
+              </Row>
+            )}
           </Col>
         </Row>
-        <Row>
-          <div className="pt-5" style={{ color: '#151E20' }}>
-            Адрес: {park?.adress}
-          </div>
-        </Row>
+        {park?.adress && (
+          <Row className=" px-5">
+            <div className="pt-5 description">Адрес: {park?.adress}</div>
+          </Row>
+        )}
       </Container>
     </Container>
   )

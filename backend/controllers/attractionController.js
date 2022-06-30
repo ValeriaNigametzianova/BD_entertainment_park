@@ -45,12 +45,12 @@ class attraсtionController {
     try {
       const { id } = req.params
       if (!id) {
-        return next(ApiError.badRequest('Такого парка не существует'))
+        return next(ApiError.badRequest('Такого аттракциона не существует'))
       }
       const attraсtion = await Attraction.findOne({
         where: { id },
       })
-      return res.status(200).json(attraсtion)
+      return res.status(200).json({ attraсtion })
     } catch (error) {
       return res.json(ApiError.internal({ message: 'Ошибка сервера' }))
     }

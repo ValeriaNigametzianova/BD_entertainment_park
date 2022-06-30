@@ -1,6 +1,15 @@
-.footer{
-        background-color: #fefdef;
-        margin-top:30px;
-        margin-bottom:0px;
-        height: 100px;
+.footer {
+  bottom: 0;
+  background-color: #fefdef;
+  margin-top: 40px;
+  margin-bottom: 0px;
+  height: 100px;
+  justify-content: end;
+}
+.ff{
+  
+  font-family: 'Vivaldi';
+  font-size: 23pt;
+  margin-right: 10px;
+  color: #000000;
 }

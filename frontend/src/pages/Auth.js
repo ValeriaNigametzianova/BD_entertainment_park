@@ -17,6 +17,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/fonts/fonts.css'
 import '../styles/navBar/navbar.css'
 import '../styles/button/button.css'
+import '../styles/auth/auth.css'
 
 const Auth = observer(() => {
   const { user } = useContext(Context)
@@ -62,14 +63,24 @@ const Auth = observer(() => {
   }
 
   return (
-    <Container className="d-flex justify-content-center align-items-center">
+    <Container
+      className="d-flex justify-content-center align-items-center"
+      style={{ minHeight: '62.5vh' }}
+    >
       <Card style={{ width: 600 }} className="p-5">
-        <h2 className="heading2">{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
+        <h2 className="authForm_title">
+          {isLogin ? 'Авторизация' : 'Регистрация'}
+        </h2>
 
         <Row>
           <Col className="d-flex justify-content-center">
             <div
-              className="heading3_1"
+              className={
+                location.pathname === STUFF_ROUTE + LOGIN_ROUTE ||
+                location.pathname === STUFF_ROUTE + REGISTRATION_ROUTE
+                  ? 'heading3_1 active-page'
+                  : 'heading3_1'
+              }
               style={{ cursor: 'pointer' }}
               onClick={() =>
                 navigate(
@@ -84,7 +95,11 @@ const Auth = observer(() => {
           </Col>
           <Col className="d-flex justify-content-center">
             <div
-              className="heading3_1"
+              className={
+                location.pathname === CUSTOMER_ROUTE + LOGIN_ROUTE
+                  ? 'heading3_1 active-page'
+                  : 'heading3_1'
+              }
               style={{ cursor: 'pointer' }}
               onClick={() => navigate(CUSTOMER_ROUTE + LOGIN_ROUTE)}
             >

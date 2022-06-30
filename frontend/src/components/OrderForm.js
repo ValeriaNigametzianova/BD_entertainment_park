@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
+import '../styles/fonts/fonts.css'
 
 const OrderForm = ({ createOrder }) => {
   const [surname, setSername] = useState()
@@ -20,26 +20,26 @@ const OrderForm = ({ createOrder }) => {
 
   return (
     <Container>
-      <Form md={8}>
-        <Form.Group className="mb-3 fs-3">
-          <Form.Label style={{ color: '#151E20' }}>
-            Данные покупателя
-          </Form.Label>
+      <Form className="mt-4">
+        <Form.Group className="mb-2">
+          <Form.Label className="heading2">Данные покупателя</Form.Label>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Фамилия</Form.Label>
+          <Form.Label className=" description">Фамилия</Form.Label>
           <Form.Control
             placeholder="Фамилия"
             value={surname}
             onChange={(e) => setSername(e.target.value)}
           />
-          <Form.Label>Имя</Form.Label>
+          <Form.Label className="mt-3 description">Имя</Form.Label>
           <Form.Control
             placeholder="Имя"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <Form.Label>Электронная почта</Form.Label>
+          <Form.Label className="mt-3 description">
+            Электронная почта
+          </Form.Label>
           <Form.Control
             controlId="formBasicLogin"
             type="email"
@@ -47,7 +47,7 @@ const OrderForm = ({ createOrder }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Form.Label>Номер телефона</Form.Label>
+          <Form.Label className="mt-3 description">Номер телефона</Form.Label>
           <Form.Control
             type="tel"
             pattern="[+7]-[0-9]{3}-[0-9]{3}-[0-9]{4}"
@@ -59,7 +59,7 @@ const OrderForm = ({ createOrder }) => {
         </Form.Group>
 
         <Button
-          className="button2"
+          className="button2 mt-3"
           variant="primary"
           onClick={() => {
             createForm()

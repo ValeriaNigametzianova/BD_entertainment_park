@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import { PARK_TARIF_ROUTE, STUFF_ROUTE } from '../utils/Consts'
 import { Context } from '../index'
 import { deleteTarif } from '../http/tarifAPI'
+import '../styles/fonts/fonts.css'
+import '../styles/tarifItem/tarifItem.css'
 
 const TarifItem = ({ tarif, addTarifs }) => {
   const { user } = useContext(Context)
@@ -28,61 +30,57 @@ const TarifItem = ({ tarif, addTarifs }) => {
   }
 
   return (
-    <Row className="mt-9">
-      <Col>
-        <Row className="px-2" border={'light'}>
-          <Row className="heading2 text-start">
-            <div>{tarif.name}</div>
-          </Row>
-          <Row className="heading4">
-            <div>Стоимость: {tarif.cost} </div>
-          </Row>
-          <Row className="heading4">
-            <div>Описание: {tarif.description} </div>
-          </Row>
+    <Row className="mt-3 tarifItem">
+      <Row className="px-2">
+        <Row className="heading2 text-start">
+          <div>{tarif.name}</div>
         </Row>
-      </Col>
-      <Row>
-        {user.role === 'stuff' ? (
-          <Row className="d-flex my-5">
-            <Col>
+        <Row className="description">
+          <div>Стоимость: {tarif.cost} </div>
+        </Row>
+        <Row className="description">
+          <div>Описание: {tarif.description} </div>
+        </Row>
+      </Row>
+      {user.role === 'stuff' ? (
+        <Row className="d-flex my-4 align-items-center">
+          <Col className="d-flex justify-content-center">
+            <Button
+              className="button-warning"
+              onClick={() => {
+                destroyTarif(tarif)
+              }}
+            >
+              Удалить тариф
+            </Button>
+          </Col>
+          <Col className="d-flex justify-content-center">
+            <Button
+              className="button-green"
+              key={tarif.id}
+              tarif={tarif}
+              onClick={() =>
+                navigate(STUFF_ROUTE + PARK_TARIF_ROUTE + '/' + tarif.id)
+              }
+            >
+              Обновить даннные
+            </Button>
+          </Col>
+        </Row>
+      ) : (
+        <Row className="d-flex my-4 align-items-center">
+          <Col className="d-flex justify-content-center">
+            {counter === 0 ? (
               <Button
-                className="button-warning"
-                onClick={() => {
-                  destroyTarif(tarif)
-                }}
-              >
-                Удалить тариф
-              </Button>
-            </Col>
-            <Col>
-              <Button
-                className="button2"
+                className="button2 mt-2"
                 key={tarif.id}
                 tarif={tarif}
-                onClick={() =>
-                  navigate(STUFF_ROUTE + PARK_TARIF_ROUTE + '/' + tarif.id)
-                }
+                onClick={() => setCounter(counter + 1)}
               >
-                Обновить даннные
+                Добавить
               </Button>
-            </Col>
-          </Row>
-        ) : (
-          <div className="mt-1 align-center justify-content-center">
-            {counter === 0 ? (
-              <div>
-                <Button
-                  className="button2"
-                  key={tarif.id}
-                  tarif={tarif}
-                  onClick={() => setCounter(counter + 1)}
-                >
-                  Добавить
-                </Button>
-              </div>
             ) : (
-              <div>
+              <div className="description">
                 <Button
                   className="button2 counter"
                   onClick={() => setCounter(counter - 1)}
@@ -98,9 +96,9 @@ const TarifItem = ({ tarif, addTarifs }) => {
                 </Button>
               </div>
             )}
-          </div>
-        )}
-      </Row>
+          </Col>
+        </Row>
+      )}
     </Row>
   )
 }

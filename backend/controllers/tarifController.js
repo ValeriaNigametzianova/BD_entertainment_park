@@ -27,7 +27,7 @@ class tarifController {
     try {
       const { id } = req.params
       if (!id) {
-        return next(ApiError.badRequest('Такого парка не существует'))
+        return next(ApiError.badRequest('Такого тарифа не существует'))
       }
       const tarif = await Tarif.findOne({
         where: { id },

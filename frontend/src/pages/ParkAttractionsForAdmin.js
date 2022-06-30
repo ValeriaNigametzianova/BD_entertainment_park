@@ -12,9 +12,8 @@ import {
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/navBar/navbar.css'
-import '../styles/cont/contr.css'
+import '../styles/container/container.css'
 import '../styles/fonts/fonts.css'
-import '../styles/button/button.css'
 import '../styles/button/button.css'
 import AttractionList from '../components/AttractionList'
 
@@ -24,7 +23,6 @@ const ParkAttractionsForAdmin = () => {
   const { id } = useParams()
   useEffect(() => {
     stuffFetchPark().then((data) => setPark(data.parks))
-    // stuffFetchAttraction().then((data) => setAttractions(data))
   }, [])
   const navigate = useNavigate()
   return (
@@ -42,7 +40,7 @@ const ParkAttractionsForAdmin = () => {
           </Col>
           <Col>
             <div
-              className="heading3_2"
+              className="heading3_2 active-page"
               style={{ textAlign: 'center', cursor: 'pointer' }}
               onClick={() => navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)}
             >
@@ -59,19 +57,19 @@ const ParkAttractionsForAdmin = () => {
             </div>
           </Col>
         </Row>
-        <AttractionList></AttractionList>
         <Row>
           {attractions && attractions.attractions.lenght ? (
             {}
           ) : (
             <Button
-              className="button2"
+              className="button2 my-3"
               onClick={() => navigate(STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE)}
             >
               Создать аттракцион
             </Button>
           )}
         </Row>
+        <AttractionList></AttractionList>
       </Container>
     </Container>
   )

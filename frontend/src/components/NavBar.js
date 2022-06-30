@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import {
   Button,
+  Col,
   Container,
   Dropdown,
   Form,
@@ -20,11 +21,10 @@ import {
   PARK_MAIN_ROUTE,
   MAIN_ADMIN_ROUTE,
 } from '../utils/Consts'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/navBar/navbar.css'
 import '../styles/fonts/fonts.css'
-import '../styles/container/container.css'
 import { useLocation, useNavigate } from 'react-router-dom'
+import Logo from '../assets/logo.svg'
 
 const NavBar = observer(() => {
   const { user } = useContext(Context)
@@ -41,32 +41,29 @@ const NavBar = observer(() => {
   }
 
   return (
-    <Navbar className="navbar">
-      <Container>
-        <Nav className="justify-content-center z-index:1">
-          <Button
-            className="button"
-            variant="outline-success"
-            onClick={() => navigate(-1)}
-          >
-            Назад
-          </Button>
-        </Nav>
+    <Navbar className="navbar px-5 container-fluid ">
+      <div className="container-fluid p-5">
         <Navbar.Brand
-          className="navbar-light navbar-brand"
+          className="d-flex start-0 navbar-light navbar-brand align-items-center"
           style={{ cursor: 'pointer' }}
           onClick={() => {
             navigate(MAIN_ROUTE)
           }}
+          href="#"
         >
-          Эмоциональные качели
+          <img src={Logo} className=" mx-3 pb-3" alt="logo_img" width={80} />
+          <span>Эмоциональные качели</span>
         </Navbar.Brand>
 
         {(location.pathname === PARK_MAIN_ROUTE ||
           location.pathname === '/') && (
           <Nav>
             {park.selectedTown ? (
-              <NavDropdown className="dropdown" title={park.selectedTown}>
+              <NavDropdown
+                className="d-flex navbar-light navbar-nav nav-link align-items-center"
+                variant="outline-success"
+                title={park.selectedTown}
+              >
                 {park.towns.map((town, id) => (
                   <Dropdown.Item
                     key={id}
@@ -81,7 +78,7 @@ const NavBar = observer(() => {
                   </Dropdown.Item>
                 ))}
                 <Dropdown.Item
-                  style={{ color: '#6D9DE4' }}
+                  style={{ color: '#ffa100' }}
                   onClick={(e) => {
                     e.preventDefault()
                     park.setSelectedTown(null)
@@ -93,8 +90,7 @@ const NavBar = observer(() => {
               </NavDropdown>
             ) : (
               <NavDropdown
-                className="dropdown"
-                variant="outline-success"
+                className=" d-flex navbar-light navbar-nav nav-link align-items-center"
                 title="Выберите город"
               >
                 {park.towns.map((town, id) => (
@@ -111,7 +107,7 @@ const NavBar = observer(() => {
                   </Dropdown.Item>
                 ))}
                 <Dropdown.Item
-                  style={{ color: '#6D9DE4' }}
+                  style={{ color: '#ffa100' }}
                   onClick={(e) => {
                     e.preventDefault()
                     park.setSelectedTown(null)
@@ -142,8 +138,7 @@ const NavBar = observer(() => {
                 }}
               />
               <Button
-                className="button"
-                variant="outline-success"
+                className="button2"
                 onClick={(e) => {
                   park.setSearchQuery(e.target.tempQuery)
                   park.setPage(1)
@@ -157,53 +152,41 @@ const NavBar = observer(() => {
 
         <Nav>
           {user.role === 'stuff' ? (
-            <Nav className="ml-auto">
-              <Button
-                className="button"
-                variant="outline-success"
-                onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
-              >
-                Администрирование
-              </Button>
-            </Nav>
+            <Button
+              className="button2 mx-2"
+              onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
+            >
+              Администрирование
+            </Button>
           ) : user.role === 'customer' ? (
-            <Nav className="ml-autoATTRACTION">
-              <Button
-                className="button"
-                variant="outline-success"
-                onClick={() => navigate(CUSTOMER_ROUTE + TICKETS_ROUTE)}
-              >
-                Мои билеты
-              </Button>
-            </Nav>
+            <Button
+              className="button2 mx-2"
+              onClick={() => navigate(CUSTOMER_ROUTE + TICKETS_ROUTE)}
+            >
+              Мои билеты
+            </Button>
           ) : null}
           {user.isAuth ? (
-            <Nav className="ml-auto">
-              <Button
-                className="button"
-                variant="outline-success"
-                onClick={(e) => {
-                  e.preventDefault()
-                  logOut()
-                  navigate(PARK_MAIN_ROUTE)
-                }}
-              >
-                Выйти
-              </Button>
-            </Nav>
+            <Button
+              className="button2 mx-2"
+              onClick={(e) => {
+                e.preventDefault()
+                logOut()
+                navigate(PARK_MAIN_ROUTE)
+              }}
+            >
+              Выйти
+            </Button>
           ) : (
-            <Nav className="ml-auto">
-              <Button
-                className="button"
-                variant="outline-success"
-                onClick={() => navigate(STUFF_ROUTE + LOGIN_ROUTE)}
-              >
-                Войти
-              </Button>
-            </Nav>
+            <Button
+              className="button2 mx-2"
+              onClick={() => navigate(STUFF_ROUTE + LOGIN_ROUTE)}
+            >
+              Войти
+            </Button>
           )}
         </Nav>
-      </Container>
+      </div>
     </Navbar>
   )
 })
