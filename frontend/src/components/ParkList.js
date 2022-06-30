@@ -4,7 +4,7 @@ import { Col } from 'react-bootstrap'
 import ParkItem from '../components/ParkItem'
 import { observer } from 'mobx-react-lite'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import '../styles/parkItem/parkItem.css'
+import '../styles/Items/parkItem/parkItem.css'
 const ParkList = observer(() => {
   const { park } = useContext(Context)
 

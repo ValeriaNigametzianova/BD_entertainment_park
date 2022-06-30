@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite'
 import React, { useContext } from 'react'
 import { Pagination } from 'react-bootstrap'
 import { Context } from '../index'
-import '../styles/parkItem/parkItem.css'
+import '../styles/Items/parkItem/parkItem.css'
 const Pages = observer(() => {
   const { park } = useContext(Context)
   const pageCount = Math.ceil(park.totalCount / park.limit)
