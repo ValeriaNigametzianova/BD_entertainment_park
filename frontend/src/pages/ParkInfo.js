@@ -2,12 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Col, Row, Container } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
 import { customerFetchOnePark } from '../http/parkAPI'
-import {
-  PARK_MAIN_ROUTE,
-  PARK_INFO_ROUTE,
-  PARK_ATTRACTIONS_ROUTE,
-  PARK_TARIF_ROUTE,
-} from '../utils/Consts'
+import { PARK_MAIN_ROUTE, PARK_INFO_ROUTE, PARK_ATTRACTIONS_ROUTE, PARK_TARIF_ROUTE } from '../utils/Consts'
 import '../styles/fonts/fonts.css'
 
 const ParkInfo = () => {
@@ -34,9 +29,7 @@ const ParkInfo = () => {
             <div
               className="heading3_2 text-center active-page"
               style={{ cursor: 'pointer' }}
-              onClick={() =>
-                navigate(PARK_MAIN_ROUTE + '/' + id + PARK_INFO_ROUTE)
-              }
+              onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id + PARK_INFO_ROUTE)}
             >
               Характеристики
             </div>
@@ -45,9 +38,7 @@ const ParkInfo = () => {
             <div
               className="heading3_2 text-center"
               style={{ cursor: 'pointer' }}
-              onClick={() =>
-                navigate(PARK_MAIN_ROUTE + '/' + id + PARK_ATTRACTIONS_ROUTE)
-              }
+              onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id + PARK_ATTRACTIONS_ROUTE)}
             >
               Аттракционы
             </div>
@@ -56,9 +47,7 @@ const ParkInfo = () => {
             <div
               className="heading3_2 text-center"
               style={{ cursor: 'pointer' }}
-              onClick={() =>
-                navigate(PARK_MAIN_ROUTE + '/' + id + PARK_TARIF_ROUTE)
-              }
+              onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id + PARK_TARIF_ROUTE)}
             >
               Купить билет
             </div>
@@ -76,25 +65,19 @@ const ParkInfo = () => {
             )}
             {park?.opening_time && (
               <Row>
-                <div className="description">
-                  Время открытия: {park?.opening_time}
-                </div>
+                <div className="description">Время открытия: {park?.opening_time}</div>
               </Row>
             )}
             {park?.closing_time && (
               <Row>
-                <div className="description">
-                  Время закрытия: {park?.closing_time}
-                </div>
+                <div className="description">Время закрытия: {park?.closing_time}</div>
               </Row>
             )}
           </Col>
           <Col>
             {park?.animators && (
               <Row>
-                <div className="description">
-                  Наличие аниматоров: {park?.animators}
-                </div>
+                <div className="description">Есть аниматоры</div>
               </Row>
             )}
             {park?.watersafe && (
@@ -109,18 +92,10 @@ const ParkInfo = () => {
             )}
           </Col>
           <Col>
-            {park?.cafe && (
-              <Row>
-                <div className="description">Количество кафе: {park?.cafe}</div>
-              </Row>
-            )}
-            {park?.shops && (
-              <Row>
-                <div className="description">
-                  Количество магазинов: {park?.shops}
-                </div>
-              </Row>
-            )}
+            <Row>
+              <div className="description">Количество кафе: {park?.cafe}</div>
+            </Row>
+            <Row>{<div className="description">Количество магазинов: {park?.shops}</div>}</Row>
           </Col>
         </Row>
         {park?.adress && (

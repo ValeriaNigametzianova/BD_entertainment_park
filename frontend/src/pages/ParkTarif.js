@@ -179,18 +179,12 @@ const ParkTarifs = () => {
             </Row>
             <Row>
               <Col className="mt-5 text-center">
-                {/* {order?.date && (
-                  <p>Выбранная дата: {order?.date.toLocaleDateString()}</p>
-                )} */}
                 <CalendarStore
                   value={order?.date}
                   onChange={(date) => setOrder({ ...order, date })}
                 />
               </Col>
               <Col>
-                {/* <Row className="mt-5 text-center">
-                  <div style={{ color: '#151E20' }}>Тарифы</div>
-                </Row> */}
                 {tarifs &&
                   tarifs.map((el) => (
                     <TarifItem

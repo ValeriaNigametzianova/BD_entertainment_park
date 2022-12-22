@@ -5,7 +5,7 @@ import { PARK_ATTRACTIONS_ROUTE, STUFF_ROUTE } from '../utils/Consts'
 import { deleteAttraction } from '../http/attractionAPI'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/container/container.css'
-import '../styles/attractionItem/attractionItem.css'
+// import '../styles/Items/attractionItem.css'
 import '../styles/fonts/fonts.css'
 
 const AttractionItem = ({ attraction }) => {

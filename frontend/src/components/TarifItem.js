@@ -5,7 +5,7 @@ import { PARK_TARIF_ROUTE, STUFF_ROUTE } from '../utils/Consts'
 import { Context } from '../index'
 import { deleteTarif } from '../http/tarifAPI'
 import '../styles/fonts/fonts.css'
-import '../styles/tarifItem/tarifItem.css'
+// import '../styles/tarifItem/tarifItem.css'
 
 const TarifItem = ({ tarif, addTarifs }) => {
   const { user } = useContext(Context)

@@ -23,9 +23,7 @@ const Auth = observer(() => {
   const { user } = useContext(Context)
   const location = useLocation()
   const navigate = useNavigate()
-  const isLogin =
-    location.pathname === STUFF_ROUTE + LOGIN_ROUTE ||
-    location.pathname === CUSTOMER_ROUTE + LOGIN_ROUTE
+  const isLogin = location.pathname === STUFF_ROUTE + LOGIN_ROUTE || location.pathname === CUSTOMER_ROUTE + LOGIN_ROUTE
   const [email, setEmail] = useState('')
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
@@ -35,15 +33,9 @@ const Auth = observer(() => {
       let data
       if (isLogin && location.pathname === STUFF_ROUTE + LOGIN_ROUTE) {
         data = await stuffLogin(login, password)
-      } else if (
-        isLogin &&
-        location.pathname === CUSTOMER_ROUTE + LOGIN_ROUTE
-      ) {
+      } else if (isLogin && location.pathname === CUSTOMER_ROUTE + LOGIN_ROUTE) {
         data = await customerLogin(email)
-      } else if (
-        !isLogin &&
-        location.pathname === STUFF_ROUTE + REGISTRATION_ROUTE
-      ) {
+      } else if (!isLogin && location.pathname === STUFF_ROUTE + REGISTRATION_ROUTE) {
         data = await stuffRegistration(login, password)
       }
       user.setUser(data)
@@ -63,14 +55,9 @@ const Auth = observer(() => {
   }
 
   return (
-    <Container
-      className="d-flex justify-content-center align-items-center"
-      style={{ minHeight: '62.5vh' }}
-    >
+    <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '62.5vh' }}>
       <Card style={{ width: 600 }} className="p-5">
-        <h2 className="authForm_title">
-          {isLogin ? 'Авторизация' : 'Регистрация'}
-        </h2>
+        <h2 className="authForm_title">{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
 
         <Row>
           <Col className="d-flex justify-content-center">
@@ -82,24 +69,14 @@ const Auth = observer(() => {
                   : 'heading3_1'
               }
               style={{ cursor: 'pointer' }}
-              onClick={() =>
-                navigate(
-                  isLogin
-                    ? STUFF_ROUTE + LOGIN_ROUTE
-                    : STUFF_ROUTE + REGISTRATION_ROUTE
-                )
-              }
+              onClick={() => navigate(isLogin ? STUFF_ROUTE + LOGIN_ROUTE : STUFF_ROUTE + REGISTRATION_ROUTE)}
             >
               Администратор
             </div>
           </Col>
           <Col className="d-flex justify-content-center">
             <div
-              className={
-                location.pathname === CUSTOMER_ROUTE + LOGIN_ROUTE
-                  ? 'heading3_1 active-page'
-                  : 'heading3_1'
-              }
+              className={location.pathname === CUSTOMER_ROUTE + LOGIN_ROUTE ? 'heading3_1 active-page' : 'heading3_1'}
               style={{ cursor: 'pointer' }}
               onClick={() => navigate(CUSTOMER_ROUTE + LOGIN_ROUTE)}
             >
@@ -107,14 +84,13 @@ const Auth = observer(() => {
             </div>
           </Col>
         </Row>
-        {location.pathname === STUFF_ROUTE + REGISTRATION_ROUTE ||
-        location.pathname === STUFF_ROUTE + LOGIN_ROUTE ? (
+        {location.pathname === STUFF_ROUTE + REGISTRATION_ROUTE || location.pathname === STUFF_ROUTE + LOGIN_ROUTE ? (
           <Form className="d-flex flex-column">
             <Form.Group controlId="formBasicLogin">
               <Form.Control
                 className="mt-3"
                 placeholder="Введите ваш login..."
-                autocomplete="on"
+                autoComplete="on"
                 value={login}
                 onChange={(e) => setLogin(e.target.value)}
               />
@@ -123,7 +99,7 @@ const Auth = observer(() => {
               <Form.Control
                 className="mt-3"
                 placeholder="Введите ваш пароль..."
-                autocomplete="on"
+                autoComplete="on"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
@@ -153,11 +129,7 @@ const Auth = observer(() => {
                   </div>
                 </div>
               )}
-              <Button
-                className="button2"
-                variant={'outline-success'}
-                onClick={click}
-              >
+              <Button className="button2" variant={'outline-success'} onClick={click}>
                 {isLogin ? 'Войти' : 'Регистрация'}
               </Button>
             </Row>
@@ -174,11 +146,7 @@ const Auth = observer(() => {
               />
             </Form.Group>
             <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
-              <Button
-                className="button2"
-                variant={'outline-success'}
-                onClick={click}
-              >
+              <Button className="button2" variant={'outline-success'} onClick={click}>
                 {isLogin ? 'Войти' : null}
               </Button>
             </Row>

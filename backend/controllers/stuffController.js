@@ -22,9 +22,7 @@ class StuffController {
       }
       const candidate = await Stuff.findOne({ where: { login } })
       if (candidate) {
-        return next(
-          ApiError.badRequest('Пользователь с таким email уже существует')
-        )
+        return next(ApiError.badRequest('Пользователь с таким email уже существует'))
       }
       const hashPassword = await bcrypt.hash(password, 5)
       const stuff = await Stuff.create({ login, password: hashPassword })
