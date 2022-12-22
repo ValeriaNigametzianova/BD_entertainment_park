@@ -4,11 +4,11 @@ const { GreenZone } = require('../models/models')
 class greenZoneController {
   async create(req, res, next) {
     try {
-      const { name, description, ParkId } = req.body
+      const { name, description, id } = req.body
       const greenZone = await GreenZone.create({
         name,
         description,
-        ParkId,
+        ParkId: id,
       })
       return res.json(greenZone)
     } catch (e) {
@@ -52,9 +52,7 @@ class greenZoneController {
       }
       const greenZone = await GreenZone.findOne({ where: { id } })
       if (!greenZone) {
-        return res.json(
-          ApiError.badRequest({ message: 'Зона отдыха не найдена' })
-        )
+        return res.json(ApiError.badRequest({ message: 'Зона отдыха не найдена' }))
       }
       await GreenZone.destroy({ where: { id } })
       return res.status(200).json(greenZone)

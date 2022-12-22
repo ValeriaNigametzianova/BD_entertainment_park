@@ -19,9 +19,7 @@ class CustomerController {
       const { email, phone_number } = req.body
       const candidate = await Customer.findOne({ where: { email } })
       if (candidate) {
-        return next(
-          ApiError.badRequest('Пользователь с таким email уже существует')
-        )
+        return next(ApiError.badRequest('Пользователь с таким email уже существует'))
       }
       const activationLink = uuid.v4()
       const customer = await Customer.create({ email, phone_number })

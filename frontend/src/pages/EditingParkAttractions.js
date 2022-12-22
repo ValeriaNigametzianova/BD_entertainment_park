@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Form, Button, Container, Col, Row } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
-import {
-  stuffFetchPark,
-  createAttraction,
-  editAttraction,
-  stuffFetchOneAttraction,
-} from '../http/parkAPI'
+import { stuffFetchPark, createAttraction, editAttraction, stuffFetchOneAttraction } from '../http/parkAPI'
 import { ATTRACTIONS_ADMIN_ROUTE, STUFF_ROUTE } from '../utils/Consts'
 import '../styles/navBar/navbar.css'
 import '../styles/fonts/fonts.css'
@@ -104,11 +99,11 @@ const EditingParkAttractions = () => {
   // }, [])
 
   const navigate = useNavigate()
-  const updateAttraction = () => {
-    editAttraction(attraction).then((data) => {})
+  const updateAttraction = async () => {
+    await editAttraction(attraction).then((data) => {})
   }
-  const newAttraction = () => {
-    createAttraction(attraction).then((data) => {})
+  const newAttraction = async () => {
+    await createAttraction(attraction).then((data) => {})
   }
 
   return (
@@ -118,30 +113,21 @@ const EditingParkAttractions = () => {
           <Form>
             <Form.Group className="mb-3 fs-3" controlId="formBasicEmail">
               {attraction?.id ? (
-                <Form.Label className="heading2_1 description">
-                  Редактировать информацию об аттракционе
-                </Form.Label>
+                <Form.Label className="heading2_1 description">Редактировать информацию об аттракционе</Form.Label>
               ) : (
-                <Form.Label className="heading2_1 description">
-                  Создать аттракцион
-                </Form.Label>
+                <Form.Label className="heading2_1 description">Создать аттракцион</Form.Label>
               )}
             </Form.Group>
-            {/* {attraction && ( */}
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label className="heading3 description">Название</Form.Label>
               <Form.Control
                 className="heading4 mb-3"
                 placeholder="Название"
                 value={attraction?.name}
-                onChange={(e) =>
-                  setAttraction({ ...attraction, name: e.target.value })
-                }
+                onChange={(e) => setAttraction({ ...attraction, name: e.target.value })}
               />
 
-              <Form.Label className="heading3 description">
-                Высота аттракциона
-              </Form.Label>
+              <Form.Label className="heading3 description">Высота аттракциона</Form.Label>
               <Form.Control
                 className="heading4 mb-3"
                 type="number"
@@ -156,9 +142,7 @@ const EditingParkAttractions = () => {
                 }
               />
 
-              <Form.Label className="heading3 description">
-                Ограничение по весу посетителя
-              </Form.Label>
+              <Form.Label className="heading3 description">Ограничение по весу посетителя</Form.Label>
               <Form.Control
                 className="heading4 mb-3"
                 type="number"
@@ -173,9 +157,7 @@ const EditingParkAttractions = () => {
                 }
               />
 
-              <Form.Label className="heading3 description">
-                Огранчиение по росту посетителя
-              </Form.Label>
+              <Form.Label className="heading3 description">Огранчиение по росту посетителя</Form.Label>
               <Form.Control
                 className="heading4 mb-3"
                 placeholder="Огранчиение по росту посетителя"
@@ -204,9 +186,7 @@ const EditingParkAttractions = () => {
                 }
               />
 
-              <Form.Label className="heading3">
-                Ограничение по возрасту посетителя
-              </Form.Label>
+              <Form.Label className="heading3">Ограничение по возрасту посетителя</Form.Label>
               <Form.Control
                 className="heading4  mb-3"
                 type="number"
@@ -221,9 +201,7 @@ const EditingParkAttractions = () => {
                 }
               />
 
-              <Form.Label className="heading3 description">
-                Максимальное количество человек
-              </Form.Label>
+              <Form.Label className="heading3 description">Максимальное количество человек</Form.Label>
               <Form.Control
                 className="heading4 mb-3"
                 type="number"
@@ -243,25 +221,23 @@ const EditingParkAttractions = () => {
                   className="heading3 description"
                   type={'checkbox'}
                   label={`Активный?`}
-                  chacked={attraction?.active}
-                  onChange={(e) =>
+                  checked={attraction?.active}
+                  onChange={(e) => {
+                    console.log(e.target.checked)
                     setAttraction({
                       ...attraction,
-                      active: !attraction?.active,
+                      active: e.target.checked,
                     })
-                  }
+                  }}
                 />
               </Form.Group>
             </Form.Group>
-            {/* )} */}
             <Row>
               <Col>
                 <Button
                   className="button2"
                   variant="primary"
-                  onClick={() =>
-                    navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)
-                  }
+                  onClick={() => navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)}
                 >
                   Назад
                 </Button>
@@ -271,11 +247,11 @@ const EditingParkAttractions = () => {
                   <Button
                     className="button-green"
                     variant="primary"
-                    onClick={() => (
-                      updateAttraction(),
-                      navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE),
-                      window.location.reload()
-                    )}
+                    onClick={() =>
+                      updateAttraction().then(() => {
+                        navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)
+                      })
+                    }
                   >
                     Обновить
                   </Button>
@@ -283,10 +259,7 @@ const EditingParkAttractions = () => {
                   <Button
                     className="button-green"
                     variant="primary"
-                    onClick={() => (
-                      newAttraction(),
-                      navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)
-                    )}
+                    onClick={() => newAttraction().then(() => navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE))}
                   >
                     Создать
                   </Button>

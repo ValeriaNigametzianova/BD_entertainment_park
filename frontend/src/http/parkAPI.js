@@ -1,6 +1,7 @@
 import { $authHost, $host } from './index'
 
 export const createPark = async (park) => {
+  // let files = new FormData(file)
   const { data } = await $authHost.post('api/stuff/park', park)
   return data
 }
@@ -32,8 +33,8 @@ export const deletePark = async (id) => {
   return data
 }
 
-export const createGreenZone = async (greenZone) => {
-  const { data } = await $authHost.post('api/stuff/greenZone', greenZone)
+export const createGreenZone = async (greenZone, id) => {
+  const { data } = await $authHost.post('api/stuff/greenZone', { ...greenZone, id })
   return data
 }
 export const customerFetchGreenZone = async (id) => {

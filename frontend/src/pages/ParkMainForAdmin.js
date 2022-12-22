@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Row, Button, Image } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import {
-  deletePark,
-  stuffFetchGreenZone,
-  stuffFetchPark,
-} from '../http/parkAPI'
+import { deletePark, stuffFetchGreenZone, stuffFetchPark } from '../http/parkAPI'
 import {
   ATTRACTIONS_ADMIN_ROUTE,
   MAIN_ADMIN_ROUTE,
@@ -28,9 +24,12 @@ const ParkMainForAdmin = () => {
   }, [])
   const navigate = useNavigate()
 
-  const destroyPark = (deletedPark) => {
-    setParks({ parks: parks.parks.filter((p) => p.park.id != deletedPark.id) })
-    deletePark(deletedPark.id).then((data) => {})
+  const destroyPark = async (deletedPark) => {
+    console.log(greenZones)
+    await deletePark(deletedPark.id).then(() => {
+      setParks({ parks: parks.parks.filter((p) => p.park.id != deletedPark.id) })
+      setGreenZones({ parks: parks.parks.filter((p) => p.greenZones.ParkId != deletedPark.id) })
+    })
   }
 
   return (
@@ -92,41 +91,33 @@ const ParkMainForAdmin = () => {
                 </Col>
                 <Col md={6}>
                   <Row className="description">
-                    <div>Наличие аниматоров: {el?.animators}</div>
+                    <div>{el?.animators ? `Наличие аниматоров: : есть` : 'Наличие аниматоров: : нет'}</div>
                   </Row>
                   <Row className="description">
-                    <div>Наличие водных пространств: {el?.watersafe}</div>
+                    <div>{el?.watersafe ? `Наличие одных пространств: есть` : 'Наличие одных пространств: нет'}</div>
                   </Row>
                   <Row className="description">
-                    <div>Наличие уголка с животными: {el?.zoo}</div>
+                    <div>{el?.zoo ? `Наличие уголка с животными: есть` : 'Наличие уголка с животными: нет'}</div>
                   </Row>
                   <Row className="description">
                     <div>Количетво кафе и ресторанов: {el?.cafe}</div>
                   </Row>
                   <Row className="description">
-                    <div>
-                      Количество магазинов и сувенирных лавок: {el?.shops}
-                    </div>
+                    <div>Количество магазинов и сувенирных лавок: {el?.shops}</div>
                   </Row>
                 </Col>
-                <Image
-                  className="my-5"
-                  width="100%"
-                  src={process.env.REACT_APP_API_URL + `${el.id}.jpg`}
-                />
+                <Image className="my-5" width="100%" src={process.env.REACT_APP_API_URL + `${el.id}.jpg`} />
               </Row>
             )
           })}
-        <div className="heading2_1 description mt={5}">
-          Зоны отдыха в парке развлечений
-        </div>
+        <div className="heading2_1 description mt={5}">Зоны отдыха в парке развлечений</div>
         {greenZones &&
           greenZones.parks.map((el) =>
             el.greenZones.map((el) => (
               <Row key={el.id}>
                 <Row mt={5}>
                   <div className="heading3_2 description">{el?.name}</div>
-                  <div className="description">{el?.description}</div>
+                  <div className="description">Описание: {el?.description}</div>
                 </Row>
               </Row>
             ))
@@ -138,30 +129,20 @@ const ParkMainForAdmin = () => {
                 {parks.parks.map((el) => {
                   el = el.park
                   return (
-                    <Button
-                      key={el.id}
-                      className="button-warning"
-                      onClick={() => destroyPark(el)}
-                    >
+                    <Button key={el.id} className="button-warning" onClick={() => destroyPark(el)}>
                       Удалить парк
                     </Button>
                   )
                 })}
               </Col>
               <Col>
-                <Button
-                  className="button2"
-                  onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}
-                >
+                <Button className="button2" onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
                   Обновить даннные
                 </Button>
               </Col>
             </Row>
           ) : (
-            <Button
-              className="button2"
-              onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}
-            >
+            <Button className="button2" onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
               Создать парк
             </Button>
           )}
