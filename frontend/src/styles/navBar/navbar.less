@@ -1,11 +1,71 @@
 .navbar {
-  background-color: #fefdef;
+  // margin-bottom: 30px;
+  height: 100px;
+  border-bottom: solid 0.5px #fefdef;
+  max-width: 100%;
+  padding: 0 calc(15px - (100vw - 100%)) 0 0;
+  justify-content: space-between;
 }
-.Dropdown_button{
-  background: #FEFDEF;
+
+.search {
   font-family: system-ui;
-  font-size: 30pt;
+  margin-right: 5px;
 }
-.search{
-  height: 10px;
+.button {
+  margin-right: 5px;
+  margin-left: 5px;
+  background: transparent;
+  color: #033783;
+  border-color: #033783;
+  font-family: system-ui;
+}
+.button:hover,
+.button:active {
+  background: #6d9de4;
+  border-color: #6d9de4;
+  color: #fefdef;
+}
+.button:focus,
+.button:visited {
+  background: #033783;
+  border-color: #033783;
+  color: #fefdef;
+  outline: none;
+  box-shadow: none !important;
+  -webkit-appearance: none;
+}
+.dropdown-toggle {
+  /* color: #ffa100; */
+  /* text-decoration:underline;
+  text-decoration-style: dashed; */
+  /* bottom: -5px;
+  border-width: 0 0 1px;
+  border-bottom: dashed rgb(254, 251, 251); */
+}
+.dropdown-toggle::after {
+  color: #ffa100;
+  vertical-align: middle;
+  /* text-decoration:underline;
+  text-decoration-style: dashed; */
+  /* bottom: -5px;
+  border-width: 0 0 1px;
+  border-bottom: dashed rgb(254, 251, 251); */
+}
+.navbar-light .navbar-nav .nav-link {
+  color: #fefdef;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #fefdef;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.navbar-light .navbar-nav .nav-link:focus {
+  color: #fefdef;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.navbar-brand {
+  color: #fefdef;
 }
