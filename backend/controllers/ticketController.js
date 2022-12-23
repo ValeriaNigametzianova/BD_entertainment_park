@@ -1,5 +1,5 @@
 const ApiError = require('../error/ApiError')
-const { Ticket, Customer, Tarif } = require('../models/models')
+const { Ticket, Customer, Tarif, Park } = require('../models/models')
 const pdf = require('html-pdf')
 const pdfTemplate = require('../documents/PDF')
 
@@ -9,9 +9,7 @@ class ticketController {
       const { email, phone_number, surname, name } = req.body.customer
       const date = req.body.date
       let tickets = []
-      let TarifId = Object.getOwnPropertyNames(req.body.tarifs).map(
-        (el) => req.body.tarifs[`${el}`]
-      )
+      let TarifId = Object.getOwnPropertyNames(req.body.tarifs).map((el) => req.body.tarifs[`${el}`])
 
       let customer = await Customer.findOne({ where: { email } })
       if (customer === null) {
@@ -20,6 +18,7 @@ class ticketController {
       await Promise.all(
         TarifId.map(async (element) => {
           const tarif = await Tarif.findOne({ where: { id: element.tarif.id } })
+          // let park = await PassThrough.findOne({ where: { id: element.tarif.ParkId } })
           let counter = []
           for (let i = 0; i < element.counter; i++) counter.push(element.tarif)
           await Promise.all(
@@ -50,9 +49,13 @@ class ticketController {
         if (!customer) return
         await customer.getTickets().then((tickets) => {
           tickets.map(async (ticket) => {
+            console.log('ticket', ticket.TarifId)
             const tarif = await Tarif.findOne({ where: { id: ticket.TarifId } }) //хотела в pdfTemplate передавать тариф, чтобы внутри сразу брать id
+            console.log('tarif', tarif)
+            const park = await Park.findOne({ where: { id: tarif.ParkId } })
+            console.log('tarifPDF', park)
             const file = pdf
-              .create(pdfTemplate({ ticket, tarif: ticket.TarifId }), {
+              .create(pdfTemplate({ ticket, tarif, park }), {
                 height: '10cm',
                 width: '15cm',
               })

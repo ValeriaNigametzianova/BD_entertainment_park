@@ -1,6 +1,6 @@
-module.exports = ({ ticket, tarif }) => {
+module.exports = ({ ticket, tarif, park }) => {
   //  const today = new Date();
-  console.log('ticketPDF', tarif)
+  console.log('tarifPDF', tarif)
   //   const tarif = await Tarif.findOne({ where: { id: ticket.TarifId } })
   return `
    <!doctype html>
@@ -84,7 +84,7 @@ module.exports = ({ ticket, tarif }) => {
       <body>
          <div class="invoice-box">
            <h1>Эмоциональные качели</h1>
-           <h1>{Имя парка}</h1>
+           <h1>${park?.name}</h1>
             <table cellpadding="0" cellspacing="0">
                <tr class="top">
                   <td colspan="2">
@@ -101,7 +101,7 @@ module.exports = ({ ticket, tarif }) => {
                          
                      </tr>
                      <tr><td>Стоимость:</td>
-                       <td> ${tarif?.cost}</td> 
+                       <td> ${tarif?.cost} ₽</td> 
                          
                       </tr>
                       <tr><td>Дата:</td>
