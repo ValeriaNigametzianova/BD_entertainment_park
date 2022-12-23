@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
+import AttractionItem from '../components/AttractionItem'
 import { customerFetchAttraction, customerFetchOnePark } from '../http/parkAPI'
-import {
-  PARK_ATTRACTIONS_ROUTE,
-  PARK_INFO_ROUTE,
-  PARK_MAIN_ROUTE,
-  PARK_TARIF_ROUTE,
-} from '../utils/Consts'
-import '../styles/fonts/fonts.css'
+import { PARK_ATTRACTIONS_ROUTE, PARK_INFO_ROUTE, PARK_MAIN_ROUTE, PARK_TARIF_ROUTE } from '../utils/Consts'
 
 const ParkAttractions = () => {
   const [park, setPark] = useState()
@@ -36,9 +31,7 @@ const ParkAttractions = () => {
             <div
               className="heading3_2 text-center"
               style={{ cursor: 'pointer' }}
-              onClick={() =>
-                navigate(PARK_MAIN_ROUTE + '/' + id + PARK_INFO_ROUTE)
-              }
+              onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id + PARK_INFO_ROUTE)}
             >
               Характеристики
             </div>
@@ -47,9 +40,7 @@ const ParkAttractions = () => {
             <div
               className="heading3_2 text-center active-page"
               style={{ cursor: 'pointer' }}
-              onClick={() =>
-                navigate(PARK_MAIN_ROUTE + '/' + id + PARK_ATTRACTIONS_ROUTE)
-              }
+              onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id + PARK_ATTRACTIONS_ROUTE)}
             >
               Аттракционы
             </div>
@@ -58,9 +49,7 @@ const ParkAttractions = () => {
             <div
               className="heading3_2 text-center"
               style={{ cursor: 'pointer' }}
-              onClick={() =>
-                navigate(PARK_MAIN_ROUTE + '/' + id + PARK_TARIF_ROUTE)
-              }
+              onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id + PARK_TARIF_ROUTE)}
             >
               Купить билет
             </div>
@@ -68,45 +57,38 @@ const ParkAttractions = () => {
         </Row>
         {attractions &&
           attractions.map((el) => (
-            <Row className="mb-5 px-5">
-              <Row>
-                <h2 className="heading3 description">{el?.name}</h2>
-              </Row>
-              <Row>
-                <div className="description">{el?.description}</div>
-              </Row>
-              <Col>
-                <Row>
-                  <div className="description">Высота: {el?.hight}</div>
-                </Row>
-                <Row>
-                  <div className="description">
-                    Возрастное ограничение: {el?.age_limitation}
-                  </div>
-                </Row>
-                <Row>
-                  <div className="description">
-                    Ограничение по весу: {el?.weight_limitation}
-                  </div>
-                </Row>
-                <Row>
-                  <div className="description">
-                    Ограничение по росту: {el?.height_limitation}
-                  </div>
-                </Row>
-                <Row>
-                  <div className="description">
-                    Максимальное количество посетителей:
-                    {el?.max_quantity_people}
-                  </div>
-                </Row>
-                <Row>
-                  <div className="description">
-                    {el?.active ?? 'Сейчас недоступен'}
-                  </div>
-                </Row>
-              </Col>
-            </Row>
+            <AttractionItem attraction={el}></AttractionItem>
+            // <Row className="mb-5 px-5">
+            //   <Row>
+            //     <h2 className="heading3 description">{el?.name}</h2>
+            //   </Row>
+            //   <Row>
+            //     <div className="description">{el?.description}</div>
+            //   </Row>
+            //   <Col>
+            //     <Row>
+            //       <div className="description">Высота: {el?.hight}</div>
+            //     </Row>
+            //     <Row>
+            //       <div className="description">Возрастное ограничение: {el?.age_limitation}</div>
+            //     </Row>
+            //     <Row>
+            //       <div className="description">Ограничение по весу: {el?.weight_limitation}</div>
+            //     </Row>
+            //     <Row>
+            //       <div className="description">Ограничение по росту: {el?.height_limitation}</div>
+            //     </Row>
+            //     <Row>
+            //       <div className="description">
+            //         Максимальное количество посетителей:
+            //         {el?.max_quantity_people}
+            //       </div>
+            //     </Row>
+            //     <Row>
+            //       <div className="description">{el?.active ?? 'Сейчас недоступен'}</div>
+            //     </Row>
+            //   </Col>
+            // </Row>
           ))}
       </Container>
     </Container>

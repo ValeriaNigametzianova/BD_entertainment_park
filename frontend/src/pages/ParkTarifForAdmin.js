@@ -55,14 +55,9 @@ const ParkTarifForAdmin = () => {
           {tarif && tarif.tarifs.lenght ? (
             {}
           ) : (
-            <Col className="justify-content-center">
-              <Button
-                className="button2 "
-                onClick={() => navigate(STUFF_ROUTE + PARK_TARIF_ROUTE)}
-              >
-                Создать тариф
-              </Button>
-            </Col>
+            <Button className="button2 my-3" onClick={() => navigate(STUFF_ROUTE + PARK_TARIF_ROUTE)}>
+              Создать тариф
+            </Button>
           )}
         </Row>
         <TarifList></TarifList>

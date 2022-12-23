@@ -18,10 +18,7 @@ const AttractionList = observer(() => {
 
   return (
     <Row>
-      {attractions.length &&
-        attractions.map((el) =>
-          el.map((el) => <AttractionItem key={el.id} attraction={el} />)
-        )}
+      {attractions.length && attractions.map((el) => el.map((el) => <AttractionItem key={el.id} attraction={el} />))}
     </Row>
   )
 })

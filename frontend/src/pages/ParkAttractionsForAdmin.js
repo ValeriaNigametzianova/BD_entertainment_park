@@ -20,7 +20,7 @@ import AttractionList from '../components/AttractionList'
 const ParkAttractionsForAdmin = () => {
   const [park, setPark] = useState()
   const [attractions, setAttractions] = useState()
-  const { id } = useParams()
+  const [isLoading, setIsLoading] = useState()
   useEffect(() => {
     stuffFetchPark().then((data) => setPark(data.parks))
   }, [])
@@ -28,48 +28,55 @@ const ParkAttractionsForAdmin = () => {
   return (
     <Container className="contr">
       <Container md={9}>
-        <Row className="d-flex justify-content-between">
-          <Col>
-            <div
-              className="heading3_2"
-              style={{ textAlign: 'left', cursor: 'pointer' }}
-              onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
-            >
-              О парке
+        {isLoading ? (
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border text-light mt-5" style={{ width: '3rem', height: '3rem' }} role="status">
+              <span className="visually-hidden">Загрузка...</span>
             </div>
-          </Col>
+          </div>
+        ) : (
           <Col>
-            <div
-              className="heading3_2 active-page"
-              style={{ textAlign: 'center', cursor: 'pointer' }}
-              onClick={() => navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)}
-            >
-              Аттракционы
-            </div>
+            <Row className="d-flex justify-content-between">
+              <Col>
+                <div
+                  className="heading3_2"
+                  style={{ textAlign: 'left', cursor: 'pointer' }}
+                  onClick={() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)}
+                >
+                  Парк
+                </div>
+              </Col>
+              <Col>
+                <div
+                  className="heading3_2 active-page"
+                  style={{ textAlign: 'center', cursor: 'pointer' }}
+                  onClick={() => navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)}
+                >
+                  Аттракционы
+                </div>
+              </Col>
+              <Col>
+                <div
+                  className="heading3_2"
+                  style={{ textAlign: 'right', cursor: 'pointer' }}
+                  onClick={() => navigate(STUFF_ROUTE + TARIF_ADMIN_ROUTE)}
+                >
+                  Тарифы
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              {attractions && attractions.attractions.lenght ? (
+                {}
+              ) : (
+                <Button className="button2 my-3" onClick={() => navigate(STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE)}>
+                  Создать аттракцион
+                </Button>
+              )}
+            </Row>
+            <AttractionList></AttractionList>
           </Col>
-          <Col>
-            <div
-              className="heading3_2"
-              style={{ textAlign: 'right', cursor: 'pointer' }}
-              onClick={() => navigate(STUFF_ROUTE + TARIF_ADMIN_ROUTE)}
-            >
-              Тарифы
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          {attractions && attractions.attractions.lenght ? (
-            {}
-          ) : (
-            <Button
-              className="button2 my-3"
-              onClick={() => navigate(STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE)}
-            >
-              Создать аттракцион
-            </Button>
-          )}
-        </Row>
-        <AttractionList></AttractionList>
+        )}
       </Container>
     </Container>
   )

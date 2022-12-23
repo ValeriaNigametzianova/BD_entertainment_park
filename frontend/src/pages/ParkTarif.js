@@ -46,9 +46,7 @@ const ParkTarifs = () => {
     if (!order?.date || !order?.tarifs) return console.log('not work')
     setOrder({ ...order, customer })
     setTotal(true)
-    let TarifId = Object.getOwnPropertyNames(order.tarifs).map(
-      (el) => order.tarifs[`${el}`]
-    )
+    let TarifId = Object.getOwnPropertyNames(order.tarifs).map((el) => order.tarifs[`${el}`])
     let tsumm = summ
     TarifId.map((element) => {
       return (tsumm += element.tarif?.cost * element?.counter)
@@ -88,20 +86,14 @@ const ParkTarifs = () => {
                 <div style={{ color: '#151E20' }}>Билеты</div>
               </Col>
               <Col md={4}>
-                <div style={{ color: '#151E20' }}>
-                  {order.customer?.surname}
-                </div>
+                <div style={{ color: '#151E20' }}>{order.customer?.surname}</div>
                 <div style={{ color: '#151E20' }}>{order.customer?.name}</div>
                 <div style={{ color: '#151E20' }}>{order.customer?.email}</div>
 
-                <div style={{ color: '#151E20' }}>
-                  {order.customer?.phone_number}
-                </div>
+                <div style={{ color: '#151E20' }}>{order.customer?.phone_number}</div>
                 <div>
                   {Object.getOwnPropertyNames(order.tarifs).map((el) => (
-                    <div style={{ color: '#151E20' }}>
-                      {order.tarifs[`${el}`].tarif?.name}
-                    </div>
+                    <div style={{ color: '#151E20' }}>{order.tarifs[`${el}`].tarif?.name}</div>
                   ))}
                 </div>
               </Col>
@@ -145,9 +137,7 @@ const ParkTarifs = () => {
                 <div
                   className="heading3_2 text-center"
                   style={{ cursor: 'pointer' }}
-                  onClick={() =>
-                    navigate(PARK_MAIN_ROUTE + '/' + id + PARK_INFO_ROUTE)
-                  }
+                  onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id + PARK_INFO_ROUTE)}
                 >
                   Характеристики
                 </div>
@@ -156,11 +146,7 @@ const ParkTarifs = () => {
                 <div
                   className="heading3_2 text-center"
                   style={{ cursor: 'pointer' }}
-                  onClick={() =>
-                    navigate(
-                      PARK_MAIN_ROUTE + '/' + id + PARK_ATTRACTIONS_ROUTE
-                    )
-                  }
+                  onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id + PARK_ATTRACTIONS_ROUTE)}
                 >
                   Аттракционы
                 </div>
@@ -169,9 +155,7 @@ const ParkTarifs = () => {
                 <div
                   className="heading3_2 text-center active-page"
                   style={{ cursor: 'pointer' }}
-                  onClick={() =>
-                    navigate(PARK_MAIN_ROUTE + '/' + id + PARK_TARIF_ROUTE)
-                  }
+                  onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id + PARK_TARIF_ROUTE)}
                 >
                   Купить билет
                 </div>
@@ -179,13 +163,11 @@ const ParkTarifs = () => {
             </Row>
             <Row>
               <Col className="mt-5 text-center">
-                <CalendarStore
-                  value={order?.date}
-                  onChange={(date) => setOrder({ ...order, date })}
-                />
+                <CalendarStore value={order?.date} onChange={(date) => setOrder({ ...order, date })} />
               </Col>
               <Col>
-                {tarifs &&
+                {console.log(tarifs)}
+                {tarifs.lenght ? (
                   tarifs.map((el) => (
                     <TarifItem
                       key={el.id}
@@ -197,7 +179,10 @@ const ParkTarifs = () => {
                         })
                       }}
                     ></TarifItem>
-                  ))}
+                  ))
+                ) : (
+                  <div className="description text-center mt-5">В этом парке пока нет билетов</div>
+                )}
               </Col>
             </Row>
             <Row>

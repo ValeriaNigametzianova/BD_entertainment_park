@@ -60,17 +60,17 @@ const ParkInfo = () => {
           <Col>
             {park?.square && (
               <Row>
-                <div className="description">Площадь: {park?.square}</div>
+                <div className="description">Площадь: {park?.square}м²</div>
               </Row>
             )}
             {park?.opening_time && (
               <Row>
-                <div className="description">Время открытия: {park?.opening_time}</div>
+                <div className="description">Время открытия: {park?.opening_time.substr(0, 5)}</div>
               </Row>
             )}
             {park?.closing_time && (
               <Row>
-                <div className="description">Время закрытия: {park?.closing_time}</div>
+                <div className="description">Время закрытия: {park?.closing_time.substr(0, 5)}</div>
               </Row>
             )}
           </Col>
