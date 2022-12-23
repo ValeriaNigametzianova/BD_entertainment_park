@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Form, Button, Container, Col, Row } from 'react-bootstrap'
+import { Form, Button, Container, Col, Row, Image } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import {
   editInfo,
@@ -8,6 +8,8 @@ import {
   createPark,
   editGreenZone,
   createGreenZone,
+  deletePhoto,
+  updatePhoto,
 } from '../http/parkAPI'
 import { MAIN_ADMIN_ROUTE, STUFF_ROUTE } from '../utils/Consts'
 import '../styles/container/container.css'
@@ -16,48 +18,77 @@ import '../styles/fonts/fonts.css'
 
 const EditingParkInfo = () => {
   const [park, setPark] = useState()
-  const [greenZones, setGreenZones] = useState()
-  const [name, setName] = useState('')
-  const [town, setTown] = useState('')
-  const [square, setSquare] = useState(0)
-  const [opening_time, setOpTime] = useState(0)
-  const [closing_time, setClTime] = useState(0)
-  const [description, setDescription] = useState('')
-  const [animator, setAnimator] = useState(false)
-  const [watersafe, setWatersafe] = useState(false)
-  const [zoo, setZoo] = useState(false)
-  const [cafe, setCafe] = useState(0)
-  const [shop, setShop] = useState(0)
-  const [adress, setAdress] = useState('')
-  const [gzName, setGzName] = useState('')
-  const [gzDescription, setGzDescription] = useState('')
+  const [greenZones, setGreenZones] = useState(null)
   const [ParkId, setParkId] = useState(0)
   const [GreenZoneId, setGreenZoneId] = useState(0)
-  const [file, setFile] = useState(null)
+  const [files, setFiles] = useState(null)
   const navigate = useNavigate()
-
-  const selectFile = (e) => {
-    setFile(e.target.files[0])
-  }
+  const [img, setImg] = useState()
+  let formData = new FormData()
 
   useEffect(() => {
     stuffFetchPark().then((data) => {
       setPark(data.parks[0]?.park)
       setParkId(data.parks[0]?.park.id)
-      console.log(data.parks[0]?.park)
+      setImg(process.env.REACT_APP_API_URL + `${ParkId}` + `.jpg`)
     })
     stuffFetchGreenZone().then((data) => {
       setGreenZones(data.parks[0]?.greenZones[0])
+      setGreenZoneId(data.parks[0]?.greenZones[0]?.id)
     })
-  }, [])
+  }, [img])
 
-  const updatePark = async () => {
-    let onePark = park
-    await editInfo(onePark)
+  // useEffect(() => {
+  //   setImg(process.env.REACT_APP_API_URL + `${ParkId}` + `.jpg`)
+  // },[])
+  const selectFiles = (e) => {
+    setFiles(e.target.files[0])
   }
+
+  const setPhoto = async (id) => {
+    const fd = new FormData()
+    fd.append('file', files)
+    fd.append('id', id)
+    await updatePhoto(fd)
+  }
+  const dropPhoto = async () => {
+    const fileName = `${ParkId}` + `.jpg`
+    await deletePhoto(fileName)
+    setImg(null)
+  }
+
   const newPark = async () => {
-    let onePark = park
-    const data = await createPark(onePark).then((data) => {
+    if (park?.name) formData.append('name', park?.name)
+    if (park?.town) formData.append('town', park?.town)
+    if (park?.square) formData.append('square', `${park?.square}`)
+    else formData.append('square', 0)
+    if (park?.opening_time) formData.append('opening_time', `${park?.opening_time}`)
+    else formData.append('opening_time', 0)
+    if (park?.closing_time) formData.append('closing_time', park?.closing_time)
+    else formData.append('closing_time', 0)
+    if (park?.description) formData.append('description', park?.description)
+    else formData.append('description', '')
+    if (park?.animators) formData.append('animators', `${park?.animators}`)
+    else formData.append('animators', false)
+    if (park?.watersafe) formData.append('watersafe', park?.watersafe)
+    else formData.append('watersafe', false)
+    if (park?.zoo) formData.append('zoo', park?.zoo)
+    else formData.append('zoo', false)
+    if (park?.cafe) formData.append('cafe', `${park?.cafe}`)
+    else formData.append('cafe', 0)
+    if (park?.shops) formData.append('shop', `${park?.shops}`)
+    else formData.append('shops', 0)
+    if (park?.adress) formData.append('adress', park?.adress)
+    else formData.append('adress', '')
+    const data = await createPark(formData).then((data) => {
+      return data
+    })
+    return data
+  }
+  const updatePark = async () => {
+    const fd = Object.entries(park).reduce((fd, [k, v]) => (fd.append(k, v), fd), new FormData())
+    // fd.append('file', files)
+    const data = await editInfo(fd).then((data) => {
       return data
     })
     return data
@@ -115,17 +146,27 @@ const EditingParkInfo = () => {
               <Form.Label className="heading3 description">Время открытия</Form.Label>
               <Form.Control
                 className="heading4 mb-3"
+                type="time"
+                step="300"
+                required
                 placeholder="Время открытия"
                 value={park?.opening_time}
-                onChange={(e) => setPark({ ...park, opening_time: e.target.value })}
+                onChange={(e) => {
+                  setPark({ ...park, opening_time: e.target.value + ':00' })
+                }}
               />
               <Form.Label className="heading3 description">Время закрытия</Form.Label>
               <Form.Control
                 className="heading4 mb-3"
-                type="dateTime"
+                type="time"
+                step="300"
+                required
                 placeholder="Время закрытия"
                 value={park?.closing_time}
-                onChange={(e) => setPark({ ...park, closing_time: e.target.value })}
+                onChange={(e) => {
+                  // let time = new Date(0000, 0, 0, e.target.value.split(':')[0],  e.target.value.split(':')[1], 0)
+                  setPark({ ...park, closing_time: e.target.value + ':00' })
+                }}
               />
               <Form.Label className="heading3 description">Описание</Form.Label>
               <Form.Control
@@ -191,9 +232,15 @@ const EditingParkInfo = () => {
                 value={park?.adress}
                 onChange={(e) => setPark({ ...park, adress: e.target.value })}
               />
-
+              <Image className="my-5" width="100%" src={process.env.REACT_APP_API_URL + `${park?.id}` + `.jpg`} />
+              <Button onClick={() => dropPhoto()}>Удалить фото</Button>
               <Form.Label className="heading3 description">Добавьте фото</Form.Label>
-              <Form.Control className="heading4 mb-3" type="file" onChange={selectFile} />
+              <Form.Control
+                className="heading4 mb-3"
+                type="file"
+                onChange={selectFiles}
+                accept="image/*, .png, .jpg, .gif, .web"
+              />
             </Form.Group>
 
             <Form.Group className="mt-5 fs-3" controlId="formBasicEmail">
@@ -235,10 +282,27 @@ const EditingParkInfo = () => {
                   <Button
                     className="button-green"
                     variant="primary"
-                    onClick={async () => {
+                    onClick={() => {
                       updatePark()
-                        .then(() => updateGreenZone())
-                        .then(() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE))
+                        .then((data) => {
+                          if (GreenZoneId) {
+                            console.log('1', greenZones)
+                            updateGreenZone()
+                          } else {
+                            if (greenZones) {
+                              console.log('2', greenZones)
+                              newGreenZone(data.id)
+                            }
+                          }
+                          setImg(process.env.REACT_APP_API_URL + `${ParkId}` + `.jpg`)
+                          if (files) setPhoto(data.id)
+                        })
+                        .then(() => {
+                          {
+                            navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)
+                            window.location.reload()
+                          }
+                        })
                     }}
                   >
                     Обновить
@@ -250,8 +314,8 @@ const EditingParkInfo = () => {
                     onClick={() => {
                       newPark()
                         .then((data) => {
-                          console.log(data)
-                          newGreenZone(data.id)
+                          if (files) setPhoto(data.id)
+                          if (greenZones) newGreenZone(data.id)
                         })
                         .then(() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE))
                     }}

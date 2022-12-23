@@ -31,7 +31,7 @@ const Attraction = sequelize.define('Attraction', {
 
 const GreenZone = sequelize.define('GreenZone', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: DataTypes.STRING, allowNull: false },
+  name: { type: DataTypes.STRING },
   description: { type: DataTypes.TEXT },
 })
 const Tarif = sequelize.define('Tarif', {

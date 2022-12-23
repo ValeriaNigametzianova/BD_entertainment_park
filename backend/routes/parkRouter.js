@@ -14,6 +14,8 @@ router.get('/:id/description', parkController.getDescription)
 router.get('/:id/attraction', attrationController.getAll)
 router.get('/:id/tarif', tarifController.getAll)
 router.post('/:id/tarif', ticketController.create)
+router.put('/photo', authStuffMiddleware, parkController.setPhoto)
+router.delete('/photo/:fileName', authStuffMiddleware, parkController.deletePhoto)
 
 router.put('/', authStuffMiddleware, parkController.update)
 router.put('/gz', authStuffMiddleware, greenZoneController.update)

@@ -1,8 +1,11 @@
 import { $authHost, $host } from './index'
 
-export const createPark = async (park) => {
-  // let files = new FormData(file)
-  const { data } = await $authHost.post('api/stuff/park', park)
+// export const createPark = async (park, file) => {
+//   const { data } = await $authHost.post('api/stuff/park', { ...park, file })
+//   return data
+// }
+export const createPark = async (formData) => {
+  const { data } = await $authHost.post('api/stuff/park', formData)
   return data
 }
 export const stuffFetchPark = async () => {
@@ -24,8 +27,17 @@ export const customerFetchOnePark = async (id) => {
   const { data } = await $host.get('api/park/' + id)
   return data
 }
-export const editInfo = async (park) => {
-  const { data } = await $authHost.put('api/stuff/park', park)
+export const editInfo = async (formData) => {
+  const { data } = await $authHost.put('api/stuff/park', formData)
+  return data
+}
+export const updatePhoto = async (formData) => {
+  const { data } = await $authHost.put('api/stuff/park/photo', formData)
+  return data
+}
+
+export const deletePhoto = async (fileName) => {
+  const { data } = await $authHost.delete('api/stuff/park/photo/' + fileName)
   return data
 }
 export const deletePark = async (id) => {
