@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { PARK_TARIF_ROUTE, STUFF_ROUTE } from '../utils/Consts'
 import { Context } from '../index'
 import { deleteTarif } from '../http/tarifAPI'
-import '../styles/fonts/fonts.css'
-// import '../styles/tarifItem/tarifItem.css'
+import '../styles/Items/tarifItem/tarifItem.css'
 
 const TarifItem = ({ tarif, addTarifs }) => {
   const { user } = useContext(Context)
@@ -36,14 +35,14 @@ const TarifItem = ({ tarif, addTarifs }) => {
           <div>{tarif.name}</div>
         </Row>
         <Row className="description">
-          <div>Стоимость: {tarif.cost} </div>
+          <div>Стоимость: {tarif.cost} ₽ </div>
         </Row>
         <Row className="description">
           <div>Описание: {tarif.description} </div>
         </Row>
       </Row>
       {user.role === 'stuff' ? (
-        <Row className="d-flex my-4 align-items-center">
+        <Row className="d-flex mb-3 mt-5 align-items-center">
           <Col className="d-flex justify-content-center">
             <Button
               className="button-warning"
@@ -59,39 +58,26 @@ const TarifItem = ({ tarif, addTarifs }) => {
               className="button-green"
               key={tarif.id}
               tarif={tarif}
-              onClick={() =>
-                navigate(STUFF_ROUTE + PARK_TARIF_ROUTE + '/' + tarif.id)
-              }
+              onClick={() => navigate(STUFF_ROUTE + PARK_TARIF_ROUTE + '/' + tarif.id)}
             >
               Обновить даннные
             </Button>
           </Col>
         </Row>
       ) : (
-        <Row className="d-flex my-4 align-items-center">
+        <Row className="d-flex mb-3 mt-5 align-items-center">
           <Col className="d-flex justify-content-center">
             {counter === 0 ? (
-              <Button
-                className="button2 mt-2"
-                key={tarif.id}
-                tarif={tarif}
-                onClick={() => setCounter(counter + 1)}
-              >
+              <Button className="button2 mt-2" key={tarif.id} tarif={tarif} onClick={() => setCounter(counter + 1)}>
                 Добавить
               </Button>
             ) : (
               <div className="description">
-                <Button
-                  className="button2 counter"
-                  onClick={() => setCounter(counter - 1)}
-                >
+                <Button className="button2 counter" onClick={() => setCounter(counter - 1)}>
                   -
                 </Button>
                 {counter}
-                <Button
-                  className="button2 counter"
-                  onClick={() => setCounter(counter + 1)}
-                >
+                <Button className="button2 counter" onClick={() => setCounter(counter + 1)}>
                   +
                 </Button>
               </div>
