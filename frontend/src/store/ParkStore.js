@@ -5,7 +5,7 @@ export default class ParkStore {
     this._towns = []
     this._selectedTown = ''
     this._searchQuery = ''
-    this._attarctions = []
+    this._attractions = []
     this._greenZones = []
     this._tarifs = []
     this._selectedPark = []
@@ -17,6 +17,7 @@ export default class ParkStore {
     this._alertStatus = null
     this._alertMessage = null
     this._visible = false
+    this._isLoading = true
     makeAutoObservable(this)
   }
 
@@ -35,8 +36,8 @@ export default class ParkStore {
   setTempQuery(tempQuery) {
     this._tempQuery = tempQuery
   }
-  setAttraction(attarctions) {
-    this._attarctions = attarctions
+  setAttraction(attractions) {
+    this._attractions = attractions
   }
   setGreenZones(greenZones) {
     this._greenZones = greenZones
@@ -65,6 +66,9 @@ export default class ParkStore {
   setVisible(visible) {
     this._visible = visible
   }
+  setIsLoading(isLoading) {
+    this._isLoading = isLoading
+  }
 
   get parks() {
     return this._parks
@@ -87,8 +91,8 @@ export default class ParkStore {
   get searchPark() {
     return this._searchPark
   }
-  get attarctions() {
-    return this._attarctions
+  get attractions() {
+    return this._attractions
   }
   get greenZones() {
     return this._greenZones
@@ -113,5 +117,8 @@ export default class ParkStore {
   }
   get visible() {
     return this._visible
+  }
+  get isLoading() {
+    return this._isLoading
   }
 }
