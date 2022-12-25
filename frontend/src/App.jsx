@@ -12,11 +12,12 @@ import { customerCheck } from './http/customerAPI'
 import './styles/app/app.css'
 import { useCallback } from 'react'
 import DialogWindow from './components/DialogWindow'
+import { customerFetchPark } from './http/parkAPI'
 
 const App = observer(() => {
   const { user } = useContext(Context)
   const { park } = useContext(Context)
-  const [loading, setLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
 
   // //считает ширину окна без прокрутки
   // const setWidthPage = useCallback(() => {
@@ -51,7 +52,7 @@ const App = observer(() => {
         user.setIsAuth(true)
         user.setRole(data.role)
       })
-      .finally(() => setLoading(false))
+      .finally(() => setIsLoading(false))
   }, [])
   useEffect(() => {
     customerCheck()
@@ -60,22 +61,32 @@ const App = observer(() => {
         user.setIsAuth(true)
         user.setRole(data.role)
       })
-      .finally(() => setLoading(false))
+      .finally(() => setIsLoading(false))
   }, [])
-  if (loading) {
-    return <Spinner animation={'grow'} className={'text-light'} />
-  }
+
+  useEffect(() => {
+    setIsLoading(true)
+    customerFetchPark(park.searchQuery, park.selectedTown, park.page, 3)
+      .then((data) => {
+        park.setTown(data.towns)
+      })
+      .finally(() => setIsLoading(false))
+  }, [])
 
   return (
     <BrowserRouter>
-      <div className="app">
-        {park.visible && <DialogWindow></DialogWindow>}
-        <NavBar />
-        <div className="wrap">
-          <AppRouter />
+      {isLoading ? (
+        <Spinner animation={'border'} className={'text-light'} />
+      ) : (
+        <div className="app">
+          {park.visible && <DialogWindow></DialogWindow>}
+          <NavBar />
+          <div className="wrap">
+            <AppRouter />
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
+      )}
     </BrowserRouter>
   )
 })
