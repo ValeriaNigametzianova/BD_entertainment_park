@@ -35,12 +35,13 @@ const ParkMainForAdmin = observer(() => {
   const destroyPark = async (deletedPark) => {
     setIsLoading(true)
     await deletePark(deletedPark.id)
-      .then(() => {
+      .then((data) => {
+        if (park) deletePhoto(`${deletedPark.id}` + '.jpg')
         setParks({ parks: parks.parks.filter((p) => p.park.id != deletedPark.id) })
         setGreenZones({ parks: parks.parks.filter((p) => p.greenZones.map((el) => el.ParkId != deletedPark.id)) })
-        park.setAlertMessage()
-        park.setAlertStatus()
-        deletePhoto(deletedPark.id)
+        park.setAlertMessage(data.message)
+        park.setAlertStatus(data.status)
+        if (data.status !== 200) park.setVisible(true)
       })
       .finally(() => setIsLoading(false))
   }
@@ -50,7 +51,7 @@ const ParkMainForAdmin = observer(() => {
       <Container md={9}>
         {isLoading ? (
           <div className="d-flex justify-content-center">
-            <div className="spinner-border text-light mt-5" style={{ width: '3rem', height: '3rem' }} role="status">
+            <div className="border text-light mt-5" style={{ width: '3rem', height: '3rem' }} role="status">
               <span className="visually-hidden">Загрузка...</span>
             </div>
           </div>
