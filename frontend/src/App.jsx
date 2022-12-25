@@ -11,6 +11,7 @@ import { stuffCheck } from './http/stuffAPI'
 import { customerCheck } from './http/customerAPI'
 import './styles/app/app.css'
 import { useCallback } from 'react'
+import DialogWindow from './components/DialogWindow'
 
 const App = observer(() => {
   const { user } = useContext(Context)
@@ -26,6 +27,23 @@ const App = observer(() => {
   //   }
   //   return widthClient
   // }, [window.innerWidth, document.documentElement.clientWidth])
+
+  const timeout = useCallback(() => {
+    if (park.visible) {
+      const timeId = setTimeout(() => {
+        park.setVisible(false)
+      }, 1500)
+      return () => {
+        clearTimeout(timeId)
+      }
+    }
+  }, [park.visible])
+
+  useEffect(() => {
+    console.log(park)
+    timeout()
+  }, [timeout])
+
   useEffect(() => {
     stuffCheck()
       .then((data) => {
@@ -48,13 +66,10 @@ const App = observer(() => {
     return <Spinner animation={'grow'} className={'text-light'} />
   }
 
-  // useEffect(() => {
-  //   setWidthPage()
-  // }, [document.documentElement.clientWidth])
-
   return (
     <BrowserRouter>
       <div className="app">
+        {park.visible && <DialogWindow></DialogWindow>}
         <NavBar />
         <div className="wrap">
           <AppRouter />

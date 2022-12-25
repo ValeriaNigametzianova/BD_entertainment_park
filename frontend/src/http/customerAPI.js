@@ -26,11 +26,13 @@ export const customerCheck = async () => {
 export const customerFetchPDF = async () => {
   const { data } = await $authHost.get('api/customer/ticket')
   let array = []
-  data.map(async (file) => {
-    const pdfBlob = new Blob([file], { type: 'application/pdf' })
-    array.push(pdfBlob)
-    // saveAs(pdfBlob, 'newPdf.pdf')
-  })
+  await Promise.all(
+    data.map(async (file) => {
+      const pdfBlob = new Blob([file], { type: 'application/pdf' })
+      array.push(pdfBlob)
+      // saveAs(pdfBlob, 'newPdf.pdf')
+    })
+  )
   return array
 }
 export const customerFetchTickets = async () => {

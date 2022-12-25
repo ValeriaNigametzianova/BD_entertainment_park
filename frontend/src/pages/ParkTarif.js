@@ -16,10 +16,10 @@ import {
 import { createTicket } from '../http/ticketApi'
 import { customerLogin } from '../http/customerAPI'
 import { Context } from '..'
-import { saveAs } from 'file-saver'
+// import { saveAs } from 'file-saver'
 
 const ParkTarifs = () => {
-  const [park, setPark] = useState()
+  // const [park, setPark] = useState()
   const { user } = useContext(Context)
   const [tarifs, setTarifs] = useState()
   const [order, setOrder] = useState()
@@ -37,9 +37,9 @@ const ParkTarifs = () => {
   }
 
   useEffect(() => {
-    customerFetchOnePark(id).then((data) => setPark(data))
+    // customerFetchOnePark(id).then((data) => setPark(data))
     customerFetchTarif(id).then((data) => setTarifs(data))
-  }, [])
+  }, [id])
   const navigate = useNavigate()
 
   const createOrder = (customer) => {
@@ -74,46 +74,45 @@ const ParkTarifs = () => {
     <div>
       {total ? (
         <Container className="contr">
-          <Container fluid>
-            <h2 style={{ color: '#151E20' }}>Итог</h2>
-            <Row>
-              <Col md={4}>
-                <div style={{ color: '#151E20' }}>Фамилия</div>
+          <Container fluid style={{ marginTop: '60px' }}>
+            <div className="heading1">Итог</div>
+            <Row style={{ marginBottom: '60px' }}>
+              <Row>
+                <Col>
+                  <div className="description">Фамилия</div>
 
-                <div style={{ color: '#151E20' }}>Имя</div>
-                <div style={{ color: '#151E20' }}>Почта</div>
-                <div style={{ color: '#151E20' }}>Номер телефона</div>
-                <div style={{ color: '#151E20' }}>Билеты</div>
-              </Col>
-              <Col md={4}>
-                <div style={{ color: '#151E20' }}>{order.customer?.surname}</div>
-                <div style={{ color: '#151E20' }}>{order.customer?.name}</div>
-                <div style={{ color: '#151E20' }}>{order.customer?.email}</div>
-
-                <div style={{ color: '#151E20' }}>{order.customer?.phone_number}</div>
-                <div>
-                  {Object.getOwnPropertyNames(order.tarifs).map((el) => (
-                    <div style={{ color: '#151E20' }}>{order.tarifs[`${el}`].tarif?.name}</div>
-                  ))}
-                </div>
-              </Col>
-            </Row>
-
-            <Row className="mt-4">
-              <Col md={4}>
-                <div style={{ color: '#151E20' }}>Сумма: </div>
-              </Col>
-              <Col md={4}>
-                <div style={{ color: '#151E20' }}>{summ}</div>
-              </Col>
+                  <div className="description">Имя</div>
+                  <div className="description">Почта</div>
+                  <div className="description">Номер телефона</div>
+                  <div className="description">Билеты</div>
+                </Col>
+                <Col>
+                  <div className="description">{order.customer?.surname}</div>
+                  <div className="description">{order.customer?.name}</div>
+                  <div className="description">{order.customer?.email}</div>
+                  <div className="description">{order.customer?.phone_number}</div>
+                  <div>
+                    {Object.getOwnPropertyNames(order.tarifs).map((el) => (
+                      <div className="description">{order.tarifs[`${el}`].tarif?.name}</div>
+                    ))}
+                  </div>
+                </Col>
+              </Row>
+              <Row className="mt-4">
+                <Col>
+                  <div className="description">Сумма: </div>
+                </Col>
+                <Col>
+                  <div className="description">{summ}</div>
+                </Col>
+              </Row>
             </Row>
             <Button
               className="button2"
-              style={{ position: 'absolute', bottom: '10%' }}
-              onClick={async () => {
-                await newTicket(order)
-                await lk()
-                navigate(CUSTOMER_ROUTE + TICKETS_ROUTE)
+              onClick={() => {
+                newTicket(order)
+                  .then(() => lk())
+                  .finally(() => navigate(CUSTOMER_ROUTE + TICKETS_ROUTE))
               }}
             >
               Подтвердить покупку
@@ -167,7 +166,7 @@ const ParkTarifs = () => {
               </Col>
               <Col>
                 {console.log(tarifs)}
-                {tarifs.lenght ? (
+                {tarifs ? (
                   tarifs.map((el) => (
                     <TarifItem
                       key={el.id}

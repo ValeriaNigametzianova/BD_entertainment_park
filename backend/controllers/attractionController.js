@@ -1,3 +1,4 @@
+const e = require('express')
 const ApiError = require('../error/ApiError')
 const { Attraction, Park } = require('../models/models')
 
@@ -26,7 +27,7 @@ class attraсtionController {
         active,
         ParkId,
       })
-      return res.json(attraсtion)
+      return res.json({ attraсtion, message: 'Аттракцион успешно создан' })
     } catch (e) {
       next(ApiError.badRequest(e.message))
     }
@@ -35,9 +36,9 @@ class attraсtionController {
     try {
       const { id } = req.params
       let attraсtion = await Attraction.findAll({ where: { ParkId: id } })
-      return res.status(200).json(attraсtion)
+      return res.status(200).json({ attraсtion, message: 'Аттракцион успешно создан' })
     } catch (error) {
-      return res.json(ApiError.internal({ message: 'Ошибка сервера' }))
+      return res.json(ApiError.internal({ message: error.message }))
     }
   }
 
@@ -68,9 +69,9 @@ class attraсtionController {
         },
       })
       let updatedAttraction = await Attraction.findByPk(attraсtion.id)
-      return res.status(200).json(updatedAttraction)
+      return res.status(200).json({ updatedAttraction, message: 'Данные об аттракционе успешно обновлены' })
     } catch (error) {
-      return res.json(ApiError.internal({ message: 'Ошибка сервера' }))
+      return res.json(ApiError.internal({ message: error.message }))
     }
   }
 
@@ -82,15 +83,13 @@ class attraсtionController {
       }
       const attraсtion = await Attraction.findOne({ where: { id } })
       if (!attraсtion) {
-        return res.json(
-          ApiError.badRequest({ message: 'Аттракцион не найден' })
-        )
+        return res.json(ApiError.badRequest({ message: 'Аттракцион не найден' }))
       }
       await Attraction.destroy({ where: { id } })
 
-      return res.status(200).json(attraсtion)
+      return res.status(200).json({ attraсtion, message: 'Аттракцион был удален' })
     } catch (e) {
-      res.json(ApiError.internal({ message: 'Ошибка сервера' }))
+      res.json(ApiError.internal({ message: error.message }))
     }
   }
 }

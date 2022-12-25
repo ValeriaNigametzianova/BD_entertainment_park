@@ -11,11 +11,13 @@ import Logo from '../assets/logo_black.svg'
 const Footer = observer(() => {
   const navigate = useNavigate()
   return (
-    <Navbar className="footer container-fluid ">
-      <Container className="d-flex px-0">
+    <Navbar className="footer px-5">
+      {/* <Container className="d-flex px-0"> */}
+      <div className="container_footer">
         <img src={Logo} className=" mx-3 start-0" alt="logo_img" width={70} />
         <div className="brand_name start-50">© Эмоциональные качели, 2022</div>
-      </Container>
+      </div>
+      {/* </Container> */}
     </Navbar>
   )
 })

@@ -2,7 +2,7 @@ const path = require('path')
 const sequelize = require('sequelize')
 const ApiError = require('../error/ApiError')
 const multer = require('multer')
-const { Park, Attraction, Stuff, Admin, GreenZone } = require('../models/models')
+const { Park, Attraction, Stuff, GreenZone } = require('../models/models')
 const fs = require('fs')
 
 class parkController {
@@ -22,7 +22,6 @@ class parkController {
         shops,
         adress,
       } = req.body
-      // const { file } = req.files
       const park = await Park.create({
         name,
         town,
@@ -39,14 +38,9 @@ class parkController {
       })
       const stuff = await Stuff.findOne({ where: { id: req.stuff.id } })
       await stuff.setParks(park)
-      // if (file) {
-      //   const type = file.name.split('.').pop()
-      //   let fileName = `${park.id}.jpg`
-      //   file.mv(path.resolve(__dirname, '..', '..', 'ParkPhotos', fileName))
-      // }
-      return res.status(200).json(park)
+      return res.status(200).json({ park, message: 'Парк развлечений успешно создан' })
     } catch (e) {
-      return next(ApiError.badRequest(e.message))
+      return res.json(ApiError.internal({ message: e.message }))
     }
   }
 
@@ -143,51 +137,50 @@ class parkController {
 
   async update(req, res) {
     // const { file } = req.files
-    const {
-      id,
-      name,
-      town,
-      square,
-      opening_time,
-      closing_time,
-      description,
-      animators,
-      watersafe,
-      zoo,
-      cafe,
-      shops,
-      adress,
-    } = req.body
-    const park = {
-      id: id,
-      name: name,
-      town: town,
-      square: square,
-      opening_time: opening_time,
-      closing_time: closing_time,
-      description: description,
-      animators: animators,
-      watersafe: watersafe,
-      zoo: zoo,
-      cafe: cafe,
-      shops: shops,
-      adress: adress,
-    }
-    if (!park.id) {
-      return res.json(ApiError.badRequest({ message: 'Id не указан' }))
-    }
-    await Park.update(park, {
-      where: {
-        id: park.id,
-      },
-    })
-      .then(async () => {
-        let updatedPark = await Park.findByPk(park.id)
-        return res.json({ updatedPark, message: 'Данные о парке успешно изменены' })
+    try {
+      const {
+        id,
+        name,
+        town,
+        square,
+        opening_time,
+        closing_time,
+        description,
+        animators,
+        watersafe,
+        zoo,
+        cafe,
+        shops,
+        adress,
+      } = req.body
+      const park = {
+        id: id,
+        name: name,
+        town: town,
+        square: square,
+        opening_time: opening_time,
+        closing_time: closing_time,
+        description: description,
+        animators: animators,
+        watersafe: watersafe,
+        zoo: zoo,
+        cafe: cafe,
+        shops: shops,
+        adress: adress,
+      }
+      if (!park.id) {
+        return res.json(ApiError.badRequest({ message: 'Id не указан' }))
+      }
+      await Park.update(park, {
+        where: {
+          id: park.id,
+        },
       })
-      .catch((e) => {
-        return res.json(ApiError.internal({ message: e.message }))
-      })
+      let updatedPark = await Park.findByPk(park.id)
+      return res.status(200).json({ updatedPark, message: 'Данные о парке успешно изменены' })
+    } catch (e) {
+      return res.json(ApiError.internal({ message: e.message }))
+    }
   }
 
   async setPhoto(req, res) {
@@ -207,8 +200,7 @@ class parkController {
       const { fileName } = req.params
       fs.access(path.resolve(__dirname, '..', '..', 'ParkPhotos', fileName), (err) => {
         if (!err) {
-          console.error('myfile already exists')
-          return
+          return res.json(ApiError.internal({ message: 'Такого файла не существует' }))
         }
         fs.unlinkSync(path.resolve(__dirname, '..', '..', 'ParkPhotos', fileName))
         return res.status(200).json(ApiError.badRequest({ message: 'Файл удален' }))
@@ -229,9 +221,9 @@ class parkController {
         return res.json(ApiError.badRequest({ message: 'Парк не найден' }))
       }
       await Park.destroy({ where: { id: park.id } })
-      return res.status(200).json(park)
+      return res.status(200).json({ park, message: 'Парк развлечений был удален' })
     } catch (e) {
-      return res.json(ApiError.internal({ message: e }))
+      return res.json(ApiError.internal({ message: e.message }))
     }
   }
 }

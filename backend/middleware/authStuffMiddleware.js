@@ -11,7 +11,7 @@ module.exports = function (req, res, next) {
     }
     const decoded = jwt.verify(token, process.env.SECRET_KEY)
     if (decoded.role != 'stuff') {
-      throw new Error('Без прав доступа')
+      throw new Error('Без прав доступа администратора')
     }
     req.stuff = decoded
 

@@ -14,6 +14,9 @@ export default class ParkStore {
     this._page = 1
     this._totalCount = 0
     this._limit = 3
+    this._alertStatus = null
+    this._alertMessage = null
+    this._visible = false
     makeAutoObservable(this)
   }
 
@@ -52,6 +55,15 @@ export default class ParkStore {
   }
   setTotalCount(totalCount) {
     this._totalCount = totalCount
+  }
+  setAlertStatus(alertStatus) {
+    this._alertStatus = alertStatus
+  }
+  setAlertMessage(alertMessage) {
+    this._alertMessage = alertMessage
+  }
+  setVisible(visible) {
+    this._visible = visible
   }
 
   get parks() {
@@ -92,5 +104,14 @@ export default class ParkStore {
   }
   get limit() {
     return this._limit
+  }
+  get alertStatus() {
+    return this._alertStatus
+  }
+  get alertMessage() {
+    return this._alertMessage
+  }
+  get visible() {
+    return this._visible
   }
 }

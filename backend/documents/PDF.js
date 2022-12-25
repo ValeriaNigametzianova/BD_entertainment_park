@@ -47,7 +47,7 @@ module.exports = ({ ticket, tarif, park }) => {
             color: #000;
             }
             .invoice-box table tr.information table td {
-            padding-bottom: 40px;
+            padding-bottom: 0px;
             }
             .invoice-box table tr.heading td {
             background: #eee;
@@ -88,7 +88,7 @@ module.exports = ({ ticket, tarif, park }) => {
             <table cellpadding="0" cellspacing="0">
                <tr class="top">
                   <td colspan="2">
-                               ${tarif?.name}
+                   ${tarif?.name}
                   </td>
                </tr>
                <tr class="information">

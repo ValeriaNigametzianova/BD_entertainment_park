@@ -45,27 +45,28 @@ class ticketController {
     try {
       const { id } = req.customer
       let files = []
-      await Customer.findOne({ where: { id } }).then(async (customer) => {
+      Customer.findOne({ where: { id } }).then((customer) => {
         if (!customer) return
-        await customer.getTickets().then((tickets) => {
-          tickets.map(async (ticket) => {
-            console.log('ticket', ticket.TarifId)
-            const tarif = await Tarif.findOne({ where: { id: ticket.TarifId } }) //хотела в pdfTemplate передавать тариф, чтобы внутри сразу брать id
-            console.log('tarif', tarif)
-            const park = await Park.findOne({ where: { id: tarif.ParkId } })
-            console.log('tarifPDF', park)
-            const file = pdf
-              .create(pdfTemplate({ ticket, tarif, park }), {
-                height: '10cm',
-                width: '15cm',
-              })
-              .toFile(`../PDFTickets/result${ticket.id}.pdf`, (err, ress) => {
-                if (err) {
-                  return res.send(Promise.reject())
-                }
-              })
-            files.push(`/PDFTickets/result${ticket.id}.pdf`)
-          })
+        customer.getTickets().then(async (tickets) => {
+          await Promise.all(
+            tickets.map(async (ticket, index) => {
+              const tarif = await Tarif.findOne({ where: { id: ticket.TarifId } }) //хотела в pdfTemplate передавать тариф, чтобы внутри сразу брать id
+              const park = await Park.findOne({ where: { id: tarif.ParkId } })
+              const file = pdf
+                .create(pdfTemplate({ ticket, tarif, park }), {
+                  height: '10cm',
+                  width: '15cm',
+                })
+                .toFile(`../PDFTickets/result${ticket.id}.pdf`, (err, ress) => {
+                  if (err) {
+                    return res.send(Promise.reject())
+                  }
+                })
+              console.log(index, ticket.id)
+              files.push(`/PDFTickets/result${ticket.id}.pdf`)
+            })
+          )
+          console.log(Date.now())
           return res.json(files)
         })
       })

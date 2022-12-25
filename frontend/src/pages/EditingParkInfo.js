@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Form, Button, Container, Col, Row, Image } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -15,9 +15,12 @@ import { MAIN_ADMIN_ROUTE, STUFF_ROUTE } from '../utils/Consts'
 import '../styles/container/container.css'
 import '../styles/navBar/navbar.css'
 import '../styles/fonts/fonts.css'
+import { Context } from '..'
+import { observer } from 'mobx-react-lite'
 
-const EditingParkInfo = () => {
-  const [park, setPark] = useState()
+const EditingParkInfo = observer(() => {
+  const { park } = useContext(Context)
+  const [Park, setPark] = useState()
   const [greenZones, setGreenZones] = useState(null)
   const [ParkId, setParkId] = useState(0)
   const [GreenZoneId, setGreenZoneId] = useState(0)
@@ -25,24 +28,27 @@ const EditingParkInfo = () => {
   const navigate = useNavigate()
   const [img, setImg] = useState()
   let formData = new FormData()
+  const [tempFile, setTempFile] = useState('')
 
   useEffect(() => {
     stuffFetchPark().then((data) => {
       setPark(data.parks[0]?.park)
       setParkId(data.parks[0]?.park.id)
       setImg(process.env.REACT_APP_API_URL + `${ParkId}` + `.jpg`)
+      setTempFile(process.env.REACT_APP_API_URL + `${Park?.id}` + `.jpg`)
     })
     stuffFetchGreenZone().then((data) => {
       setGreenZones(data.parks[0]?.greenZones[0])
       setGreenZoneId(data.parks[0]?.greenZones[0]?.id)
     })
-  }, [img])
+  }, [])
 
   // useEffect(() => {
   //   setImg(process.env.REACT_APP_API_URL + `${ParkId}` + `.jpg`)
   // },[])
   const selectFiles = (e) => {
     setFiles(e.target.files[0])
+    setTempFile(URL.createObjectURL(e.target.files[0]))
   }
 
   const setPhoto = async (id) => {
@@ -58,37 +64,44 @@ const EditingParkInfo = () => {
   }
 
   const newPark = async () => {
-    if (park?.name) formData.append('name', park?.name)
-    if (park?.town) formData.append('town', park?.town)
-    if (park?.square) formData.append('square', `${park?.square}`)
+    if (Park?.name) formData.append('name', Park?.name)
+    if (Park?.town) formData.append('town', Park?.town)
+    if (Park?.square) formData.append('square', `${Park?.square}`)
     else formData.append('square', 0)
-    if (park?.opening_time) formData.append('opening_time', `${park?.opening_time}`)
+    if (Park?.opening_time) formData.append('opening_time', `${Park?.opening_time}`)
     else formData.append('opening_time', 0)
-    if (park?.closing_time) formData.append('closing_time', park?.closing_time)
+    if (Park?.closing_time) formData.append('closing_time', Park?.closing_time)
     else formData.append('closing_time', 0)
-    if (park?.description) formData.append('description', park?.description)
+    if (Park?.description) formData.append('description', Park?.description)
     else formData.append('description', '')
-    if (park?.animators) formData.append('animators', `${park?.animators}`)
+    if (Park?.animators) formData.append('animators', `${Park?.animators}`)
     else formData.append('animators', false)
-    if (park?.watersafe) formData.append('watersafe', park?.watersafe)
+    if (Park?.watersafe) formData.append('watersafe', Park?.watersafe)
     else formData.append('watersafe', false)
-    if (park?.zoo) formData.append('zoo', park?.zoo)
+    if (Park?.zoo) formData.append('zoo', Park?.zoo)
     else formData.append('zoo', false)
-    if (park?.cafe) formData.append('cafe', `${park?.cafe}`)
+    if (Park?.cafe) formData.append('cafe', `${Park?.cafe}`)
     else formData.append('cafe', 0)
-    if (park?.shops) formData.append('shop', `${park?.shops}`)
+    if (Park?.shops) formData.append('shop', `${Park?.shops}`)
     else formData.append('shops', 0)
-    if (park?.adress) formData.append('adress', park?.adress)
+    if (Park?.adress) formData.append('adress', Park?.adress)
     else formData.append('adress', '')
+    console.log(formData)
     const data = await createPark(formData).then((data) => {
+      park.setAlertStatus(data.status)
+      park.setAlertMessage(data.data.message)
+      park.setVisible(true)
       return data
     })
     return data
   }
   const updatePark = async () => {
-    const fd = Object.entries(park).reduce((fd, [k, v]) => (fd.append(k, v), fd), new FormData())
-    // fd.append('file', files)
+    console.log(Park)
+    const fd = Object.entries(Park).reduce((fd, [k, v]) => (fd.append(k, v), fd), new FormData())
     const data = await editInfo(fd).then((data) => {
+      park.setAlertStatus(data.status)
+      park.setAlertMessage(data.data.message)
+      park.setVisible(true)
       return data
     })
     return data
@@ -105,6 +118,7 @@ const EditingParkInfo = () => {
 
   return (
     <Container className="contr">
+      {console.log(files)}
       <Container className={'d-flex justify-content-center text-light'}>
         <Col>
           <Form>
@@ -122,17 +136,17 @@ const EditingParkInfo = () => {
               <Form.Control
                 className="heading4 mb-3"
                 placeholder="Название"
-                value={park?.name}
-                onChange={(e) => setPark({ ...park, name: e.target.value })}
+                value={Park?.name}
+                onChange={(e) => setPark({ ...Park, name: e.target.value })}
               />
               <Form.Label className="heading3 description">Город</Form.Label>
               <Form.Control
                 className="heading4 mb-3"
                 placeholder="Город"
-                value={park?.town}
+                value={Park?.town}
                 onChange={(e) => {
                   e.stopPropagation()
-                  setPark({ ...park, town: e.target.value })
+                  setPark({ ...Park, town: e.target.value })
                 }}
               />
               <Form.Label className="heading3 description">Площадь</Form.Label>
@@ -140,8 +154,8 @@ const EditingParkInfo = () => {
                 className="heading4 mb-3"
                 type="number"
                 placeholder="Площадь"
-                value={park?.square}
-                onChange={(e) => setPark({ ...park, square: e.target.value })}
+                value={Park?.square}
+                onChange={(e) => setPark({ ...Park, square: e.target.value })}
               />
               <Form.Label className="heading3 description">Время открытия</Form.Label>
               <Form.Control
@@ -150,9 +164,9 @@ const EditingParkInfo = () => {
                 step="300"
                 required
                 placeholder="Время открытия"
-                value={park?.opening_time}
+                value={Park?.opening_time}
                 onChange={(e) => {
-                  setPark({ ...park, opening_time: e.target.value + ':00' })
+                  setPark({ ...Park, opening_time: e.target.value + ':00' })
                 }}
               />
               <Form.Label className="heading3 description">Время закрытия</Form.Label>
@@ -162,10 +176,10 @@ const EditingParkInfo = () => {
                 step="300"
                 required
                 placeholder="Время закрытия"
-                value={park?.closing_time}
+                value={Park?.closing_time}
                 onChange={(e) => {
                   // let time = new Date(0000, 0, 0, e.target.value.split(':')[0],  e.target.value.split(':')[1], 0)
-                  setPark({ ...park, closing_time: e.target.value + ':00' })
+                  setPark({ ...Park, closing_time: e.target.value + ':00' })
                 }}
               />
               <Form.Label className="heading3 description">Описание</Form.Label>
@@ -174,16 +188,16 @@ const EditingParkInfo = () => {
                 as="textarea"
                 placeholder="Описание"
                 rows={7}
-                value={park?.description}
-                onChange={(e) => setPark({ ...park, description: e.target.value })}
+                value={Park?.description}
+                onChange={(e) => setPark({ ...Park, description: e.target.value })}
               />
               <Form.Group controlId="formBasicCheckbox">
                 <Form.Check
                   className="heading4 description mb-3"
                   type={'checkbox'}
                   label={`Наличие аниматоров`}
-                  checked={park?.animators}
-                  onChange={(e) => setPark({ ...park, animators: e.target.checked })}
+                  checked={Park?.animators}
+                  onChange={(e) => setPark({ ...Park, animators: e.target.checked })}
                 />
               </Form.Group>
 
@@ -192,8 +206,8 @@ const EditingParkInfo = () => {
                   className="heading4 description mb-3"
                   type={'checkbox'}
                   label={`Наличие водных пространств`}
-                  checked={park?.watersafe}
-                  onChange={(e) => setPark({ ...park, watersafe: e.target.checked })}
+                  checked={Park?.watersafe}
+                  onChange={(e) => setPark({ ...Park, watersafe: e.target.checked })}
                 />
               </Form.Group>
 
@@ -202,8 +216,8 @@ const EditingParkInfo = () => {
                   className="heading4 description mb-3"
                   type={'checkbox'}
                   label={`Наличие уголка с животными`}
-                  checked={park?.zoo}
-                  onChange={(e) => setPark({ ...park, zoo: e.target.checked })}
+                  checked={Park?.zoo}
+                  onChange={(e) => setPark({ ...Park, zoo: e.target.checked })}
                 />
               </Form.Group>
 
@@ -212,8 +226,8 @@ const EditingParkInfo = () => {
                 className="heading4 mb-3"
                 type="number"
                 placeholder="Количество кафе"
-                value={park?.cafe}
-                onChange={(e) => setPark({ ...park, cafe: e.target.value })}
+                value={Park?.cafe}
+                onChange={(e) => setPark({ ...Park, cafe: e.target.value })}
               />
 
               <Form.Label className="heading3 description mb-3">Количество сувернирных лавок</Form.Label>
@@ -221,24 +235,26 @@ const EditingParkInfo = () => {
                 className="heading4 mb-3"
                 type="number"
                 placeholder="Количество сувернирных лавок"
-                value={park?.shops}
-                onChange={(e) => setPark({ ...park, shops: e.target.value })}
+                value={Park?.shops}
+                onChange={(e) => setPark({ ...Park, shops: e.target.value })}
               />
 
               <Form.Label className="heading3 description">Адрес</Form.Label>
               <Form.Control
                 className="heading4 mb-3"
                 placeholder="Адрес"
-                value={park?.adress}
-                onChange={(e) => setPark({ ...park, adress: e.target.value })}
+                value={Park?.adress}
+                onChange={(e) => setPark({ ...Park, adress: e.target.value })}
               />
-              <Image className="my-5" width="100%" src={process.env.REACT_APP_API_URL + `${park?.id}` + `.jpg`} />
+
+              <Image className="my-5" width="100%" src={tempFile} />
+
               <Button onClick={() => dropPhoto()}>Удалить фото</Button>
               <Form.Label className="heading3 description">Добавьте фото</Form.Label>
               <Form.Control
                 className="heading4 mb-3"
                 type="file"
-                onChange={selectFiles}
+                onChange={(e) => selectFiles(e)}
                 accept="image/*, .png, .jpg, .gif, .web"
               />
             </Form.Group>
@@ -286,21 +302,20 @@ const EditingParkInfo = () => {
                       updatePark()
                         .then((data) => {
                           if (GreenZoneId) {
-                            console.log('1', greenZones)
                             updateGreenZone()
                           } else {
                             if (greenZones) {
-                              console.log('2', greenZones)
                               newGreenZone(data.id)
                             }
                           }
-                          setImg(process.env.REACT_APP_API_URL + `${ParkId}` + `.jpg`)
-                          if (files) setPhoto(data.id)
+                          // setImg(process.env.REACT_APP_API_URL + `${ParkId}` + `.jpg`)
+                          console.log(data.data.updatedPark.id)
+                          if (files) setPhoto(data.data.updatedPark.id)
                         })
                         .then(() => {
                           {
                             navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)
-                            window.location.reload()
+                            // window.location.reload()
                           }
                         })
                     }}
@@ -330,6 +345,6 @@ const EditingParkInfo = () => {
       </Container>
     </Container>
   )
-}
+})
 
 export default EditingParkInfo

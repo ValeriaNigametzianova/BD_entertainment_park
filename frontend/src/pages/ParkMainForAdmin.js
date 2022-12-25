@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Col, Container, Row, Button, Image, Spinner } from 'react-bootstrap'
+import React, { useContext, useEffect, useState } from 'react'
+import { Col, Container, Row, Button, Image, Spinner, Alert } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { deletePark, deletePhoto, stuffFetchGreenZone, stuffFetchPark } from '../http/parkAPI'
 import {
@@ -13,11 +13,14 @@ import '../styles/navBar/navbar.css'
 import '../styles/container/container.css'
 import '../styles/button/button.css'
 import '../styles/fonts/fonts.css'
+import { observer, useObserver } from 'mobx-react-lite'
+import { Context } from '../index'
 
-const ParkMainForAdmin = () => {
+const ParkMainForAdmin = observer(() => {
   const [parks, setParks] = useState()
   const [greenZones, setGreenZones] = useState()
   const [isLoading, setIsLoading] = useState()
+  const { park } = useContext(Context)
   useEffect(() => {
     setIsLoading(true)
     fetchData().finally(() => setIsLoading(false))
@@ -35,6 +38,8 @@ const ParkMainForAdmin = () => {
       .then(() => {
         setParks({ parks: parks.parks.filter((p) => p.park.id != deletedPark.id) })
         setGreenZones({ parks: parks.parks.filter((p) => p.greenZones.map((el) => el.ParkId != deletedPark.id)) })
+        park.setAlertMessage()
+        park.setAlertStatus()
         deletePhoto(deletedPark.id)
       })
       .finally(() => setIsLoading(false))
@@ -176,6 +181,6 @@ const ParkMainForAdmin = () => {
       </Container>
     </Container>
   )
-}
+})
 
 export default ParkMainForAdmin

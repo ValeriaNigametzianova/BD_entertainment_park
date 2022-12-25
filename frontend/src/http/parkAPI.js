@@ -1,11 +1,17 @@
+import { useContext } from 'react'
+import { Context } from '..'
 import { $authHost, $host } from './index'
+// import {setAlertStatus, setAlertMessage} from '../store/ParkStore'
 
 // export const createPark = async (park, file) => {
 //   const { data } = await $authHost.post('api/stuff/park', { ...park, file })
 //   return data
 // }
 export const createPark = async (formData) => {
-  const { data } = await $authHost.post('api/stuff/park', formData)
+  const { data } = await $authHost
+    .post('api/stuff/park', formData)
+    .then((data) => data)
+    .catch((err) => err.response)
   return data
 }
 export const stuffFetchPark = async () => {
@@ -28,7 +34,10 @@ export const customerFetchOnePark = async (id) => {
   return data
 }
 export const editInfo = async (formData) => {
-  const { data } = await $authHost.put('api/stuff/park', formData)
+  const data = await $authHost
+    .put('api/stuff/park', formData)
+    .then((data) => data)
+    .catch((err) => err.response)
   return data
 }
 export const updatePhoto = async (formData) => {
@@ -41,7 +50,10 @@ export const deletePhoto = async (fileName) => {
   return data
 }
 export const deletePark = async (id) => {
-  const { data } = await $authHost.delete('api/stuff/park/' + id)
+  const { data } = await $authHost
+    .delete('api/stuff/park/' + id)
+    .then((data) => data)
+    .catch((err) => err.response)
   return data
 }
 
@@ -62,10 +74,6 @@ export const editGreenZone = async (greenZone) => {
   return data
 }
 
-export const createAttraction = async (attraction) => {
-  const { data } = await $authHost.post('api/stuff/attraction', attraction)
-  return data
-}
 export const customerFetchAttraction = async (id) => {
   const { data } = await $host.get('api/park/' + id + '/attraction')
   return data
@@ -76,10 +84,6 @@ export const stuffFetchAttraction = async () => {
 }
 export const stuffFetchOneAttraction = async (id) => {
   const { data } = await $authHost.get('api/stuff/attraction/' + id, {})
-  return data
-}
-export const editAttraction = async (attraction) => {
-  const { data } = await $authHost.put('api/stuff/attraction', attraction)
   return data
 }
 

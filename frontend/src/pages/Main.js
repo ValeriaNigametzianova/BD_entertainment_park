@@ -29,9 +29,9 @@ const Main = observer(() => {
   return (
     <Container className="contr">
       {park.selectedTown ? (
-        <Row className="heading1 description">Парки развлечений в городе {park.selectedTown}</Row>
+        <div className="heading1 description">Парки развлечений в городе {park.selectedTown}</div>
       ) : (
-        <Row className="heading1 description">Парки развлечений России</Row>
+        <div className="heading1 description">Парки развлечений России</div>
       )}
 
       {isLoading ? (
