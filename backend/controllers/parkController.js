@@ -40,7 +40,7 @@ class parkController {
       await stuff.setParks(park)
       return res.status(200).json({ park, message: 'Парк развлечений успешно создан' })
     } catch (e) {
-      return res.json(ApiError.internal({ message: e.message }))
+      next(ApiError.internal({ message: e.message }))
     }
   }
 
@@ -91,7 +91,7 @@ class parkController {
     }
   }
 
-  async getOne(req, res) {
+  async getOne(req, res, next) {
     try {
       const { id } = req.params
       if (!id) {
@@ -109,7 +109,7 @@ class parkController {
     }
   }
 
-  async getAttraction(req, res) {
+  async getAttraction(req, res, next) {
     try {
       const { id } = req.params
       const park = await Park.findOne({
@@ -122,7 +122,7 @@ class parkController {
     }
   }
 
-  async getDescription(req, res) {
+  async getDescription(req, res, next) {
     try {
       const { id } = req.params
       const park = await Park.findOne({
@@ -135,7 +135,7 @@ class parkController {
     }
   }
 
-  async update(req, res) {
+  async update(req, res, next) {
     // const { file } = req.files
     try {
       const {
@@ -169,7 +169,7 @@ class parkController {
         adress: adress,
       }
       if (!park.id) {
-        return res.json(ApiError.badRequest({ message: 'Id не указан' }))
+        return next(ApiError.badRequest({ message: 'Id не указан' }))
       }
       await Park.update(park, {
         where: {
@@ -179,11 +179,11 @@ class parkController {
       let updatedPark = await Park.findByPk(park.id)
       return res.status(200).json({ updatedPark, message: 'Данные о парке успешно изменены' })
     } catch (e) {
-      return res.json(ApiError.internal({ message: e.message }))
+      return next(ApiError.internal({ message: e.message }))
     }
   }
 
-  async setPhoto(req, res) {
+  async setPhoto(req, res, next) {
     try {
       const { file } = req.files
       const { id } = req.body
@@ -191,39 +191,42 @@ class parkController {
       let fileName = `${id}.jpg`
       file.mv(path.resolve(__dirname, '..', '..', 'ParkPhotos', fileName))
     } catch (e) {
-      return res.json(ApiError.internal({ message: e }))
+      return next(ApiError.internal({ message: e }))
     }
   }
 
-  async deletePhoto(req, res) {
+  async deletePhoto(req, res, next) {
     try {
       const { fileName } = req.params
       fs.access(path.resolve(__dirname, '..', '..', 'ParkPhotos', fileName), (err) => {
-        if (!err) {
-          return res.json(ApiError.internal({ message: 'Такого файла не существует' }))
+        if (err) {
+          return next(ApiError.internal({ message: 'Такого файла не существует' }))
         }
-        fs.unlinkSync(path.resolve(__dirname, '..', '..', 'ParkPhotos', fileName))
-        return res.status(200).json(ApiError.badRequest({ message: 'Файл удален' }))
+        fs.unlink(path.resolve(__dirname, '..', '..', 'ParkPhotos', fileName), (err) => {
+          if (err) console.log(err) // если возникла ошибка
+          else console.log('file was deleted')
+        })
+        return res.status(200).json({ message: 'Файл удален' })
       })
     } catch (e) {
-      return res.json(ApiError.internal({ message: e }))
+      next(ApiError.internal({ message: e }))
     }
   }
 
-  async delete(req, res) {
+  async delete(req, res, next) {
     try {
       const { id } = req.params
       if (!id) {
-        return res.json(ApiError.badRequest({ message: 'Id не указан' }))
+        next(ApiError.badRequest({ message: 'Id не указан' }))
       }
       const park = await Park.findOne({ where: { id } })
       if (!park) {
-        return res.json(ApiError.badRequest({ message: 'Парк не найден' }))
+        next(ApiError.badRequest({ message: 'Парк не найден' }))
       }
       await Park.destroy({ where: { id: park.id } })
       return res.status(200).json({ park, message: 'Парк развлечений был удален' })
     } catch (e) {
-      return res.json(ApiError.internal({ message: e.message }))
+      next(ApiError.internal({ message: e.message }))
     }
   }
 }

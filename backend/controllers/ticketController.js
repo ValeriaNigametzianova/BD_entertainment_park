@@ -4,7 +4,7 @@ const pdf = require('html-pdf')
 const pdfTemplate = require('../documents/PDF')
 
 class ticketController {
-  async create(req, res) {
+  async create(req, res, next) {
     try {
       const { email, phone_number, surname, name } = req.body.customer
       const date = req.body.date
@@ -35,13 +35,13 @@ class ticketController {
           )
         })
       )
-      return res.json(tickets)
+      return res.status(200).json({ tickets, message: 'Билеты уже у вас в личном кабинете!' })
     } catch (e) {
-      return res.json({ message: e.message })
+      next(ApiError.internal(e.message))
     }
   }
 
-  async getAll(req, res) {
+  async getAll(req, res, next) {
     try {
       const { id } = req.customer
       let files = []
@@ -62,11 +62,9 @@ class ticketController {
                     return res.send(Promise.reject())
                   }
                 })
-              console.log(index, ticket.id)
               files.push(`/PDFTickets/result${ticket.id}.pdf`)
             })
           )
-          console.log(Date.now())
           return res.json(files)
         })
       })
@@ -75,7 +73,7 @@ class ticketController {
     }
   }
 
-  async getTickets(req, res) {
+  async getTickets(req, res, next) {
     try {
       const { id } = req.customer
       const tickets = await Ticket.findAll({ where: { CustomerId: id } })

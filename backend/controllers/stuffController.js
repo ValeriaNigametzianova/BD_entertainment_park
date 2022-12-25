@@ -27,9 +27,9 @@ class StuffController {
       const hashPassword = await bcrypt.hash(password, 5)
       const stuff = await Stuff.create({ login, password: hashPassword })
       const token = generateJwt(stuff.id, stuff.login, 'stuff')
-      return res.status(200).json({ token })
+      return res.status(200).json({ token, message: 'Регистрация выполнена' })
     } catch (e) {
-      return next(ApiError.badRequest({ error: e }))
+      return next(ApiError.badRequest({ message: e.message }))
     }
   }
 
@@ -45,9 +45,9 @@ class StuffController {
         return next(ApiError.internal('Указан неверный пароль'))
       }
       const token = generateJwt(stuff.id, stuff.login, 'stuff')
-      return res.status(200).json({ token })
+      return res.status(200).json({ token, message: 'Вход выполнен' })
     } catch (e) {
-      return next(ApiError.badRequest({ error: e }))
+      return next(ApiError.badRequest({ message: e.message }))
     }
   }
 

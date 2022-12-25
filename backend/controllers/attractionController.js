@@ -16,6 +16,7 @@ class attraсtionController {
         active,
         ParkId,
       } = req.body
+      if (!ParkId) next(ApiError.badRequest('Вы не можете создать аттракцион вне парка'))
       const attraсtion = await Attraction.create({
         name,
         hight,
@@ -29,20 +30,20 @@ class attraсtionController {
       })
       return res.json({ attraсtion, message: 'Аттракцион успешно создан' })
     } catch (e) {
-      next(ApiError.badRequest(e.message))
+      next(ApiError.internal('Заполните все обязательные поля'))
     }
   }
-  async getAll(req, res) {
+  async getAll(req, res, next) {
     try {
       const { id } = req.params
       let attraсtion = await Attraction.findAll({ where: { ParkId: id } })
-      return res.status(200).json({ attraсtion, message: 'Аттракцион успешно создан' })
+      return res.status(200).json(attraсtion)
     } catch (error) {
-      return res.json(ApiError.internal({ message: error.message }))
+      next(ApiError.internal({ message: error.message }))
     }
   }
 
-  async getOne(req, res) {
+  async getOne(req, res, next) {
     try {
       const { id } = req.params
       if (!id) {
@@ -53,15 +54,15 @@ class attraсtionController {
       })
       return res.status(200).json({ attraсtion })
     } catch (error) {
-      return res.json(ApiError.internal({ message: 'Ошибка сервера' }))
+      next(ApiError.internal({ message: 'Ошибка сервера' }))
     }
   }
 
-  async update(req, res) {
+  async update(req, res, next) {
     try {
       let attraсtion = req.body
       if (!attraсtion.id) {
-        return res.json(ApiError.badRequest({ message: 'Id не указан' }))
+        next(ApiError.badRequest({ message: 'Id не указан' }))
       }
       await Attraction.update(attraсtion, {
         where: {
@@ -71,19 +72,19 @@ class attraсtionController {
       let updatedAttraction = await Attraction.findByPk(attraсtion.id)
       return res.status(200).json({ updatedAttraction, message: 'Данные об аттракционе успешно обновлены' })
     } catch (error) {
-      return res.json(ApiError.internal({ message: error.message }))
+      next(ApiError.internal({ message: error.message }))
     }
   }
 
-  async delete(req, res) {
+  async delete(req, res, next) {
     try {
       const { id } = req.params
       if (!id) {
-        return res.json(ApiError.badRequest({ message: 'Id не указан' }))
+        next(ApiError.badRequest({ message: 'Id не указан' }))
       }
       const attraсtion = await Attraction.findOne({ where: { id } })
       if (!attraсtion) {
-        return res.json(ApiError.badRequest({ message: 'Аттракцион не найден' }))
+        next(ApiError.badRequest({ message: 'Аттракцион не найден' }))
       }
       await Attraction.destroy({ where: { id } })
 

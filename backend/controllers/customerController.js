@@ -24,9 +24,9 @@ class CustomerController {
       const activationLink = uuid.v4()
       const customer = await Customer.create({ email, phone_number })
       const token = generateJwt(customer.id, customer.email, 'customer')
-      return res.status(200).json({ token })
+      return res.status(200).json({ token, message: 'Регистрация выполнена' })
     } catch (e) {
-      return next(ApiError.badRequest({ error: e }))
+      return next(ApiError.badRequest(e.message))
     }
   }
 
@@ -34,14 +34,13 @@ class CustomerController {
     try {
       const { email } = req.body
       const customer = await Customer.findOne({ where: { email } })
-      console.log(email)
       if (!customer) {
-        return next(ApiError.internal('Пользователь не найден'))
+        next(ApiError.internal('Пользователь не найден'))
       }
       const token = generateJwt(customer.id, customer.email, 'customer')
-      return res.status(200).json({ token })
-    } catch (error) {
-      return next(ApiError.badRequest({ error: error }))
+      return res.status(200).json({ token, message: 'Вход выполнен' })
+    } catch (e) {
+      next(ApiError.badRequest({ message: e.message }))
     }
   }
 
@@ -50,7 +49,7 @@ class CustomerController {
       const token = generateJwt(req.customer.id, req.customer.email, 'customer')
       return res.status(200).json({ token, customer: req.customer })
     } catch (error) {
-      return next(ApiError.badRequest({ error: error }))
+      return next(ApiError.badRequest(e.message))
     }
   }
 }

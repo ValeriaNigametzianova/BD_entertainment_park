@@ -21,16 +21,13 @@ class AdminController {
       if (!stuff) return
       if (!park) return
       const id = park.id
-      const admin = await Admin.update(
-        { ParkId: id },
-        { where: { StuffId: stuff.id } }
-      )
+      const admin = await Admin.update({ ParkId: id }, { where: { StuffId: stuff.id } })
     } catch (error) {
       return new Error(error.message)
     }
   }
 
-  async getAll(req, res) {
+  async getAll(req, res, next) {
     try {
       let admin = await Admin.findAll()
       return res.status(200).json(admin)
