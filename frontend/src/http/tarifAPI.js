@@ -1,7 +1,10 @@
 import { $authHost, $host } from './index'
 
 export const createTarif = async (tarif) => {
-  const { data } = await $authHost.post('api/stuff/tarif', tarif)
+  const data = await $authHost
+    .post('api/stuff/tarif', tarif)
+    .then((data) => data)
+    .catch((err) => err.response)
   return data
 }
 
@@ -15,11 +18,14 @@ export const fetchTarif = async () => {
   return data
 }
 export const editTarif = async (tarif) => {
-  const { data } = await $authHost.put('api/stuff/tarif', tarif)
+  const data = await $authHost
+    .put('api/stuff/tarif', tarif)
+    .then((data) => data)
+    .catch((err) => err.response)
   return data
 }
 
 export const deleteTarif = async (id) => {
-  const { data } = await $authHost.delete('api/stuff/tarif/' + id)
+  const data = await $authHost.delete('api/stuff/tarif/' + id)
   return data
 }

@@ -1,7 +1,10 @@
 import { $authHost, $host } from './index'
 
 export const createAttraction = async (attraction) => {
-  const { data } = await $authHost.post('api/stuff/attraction', attraction)
+  const data = await $authHost
+    .post('api/stuff/attraction', attraction)
+    .then((data) => data)
+    .catch((err) => err.response)
   return data
 }
 
@@ -15,11 +18,17 @@ export const customerFetchAttraction = async () => {
 }
 
 export const editAttraction = async (attraction) => {
-  const { data } = await $authHost.put('api/stuff/attraction', attraction)
+  const data = await $authHost
+    .put('api/stuff/attraction', attraction)
+    .then((data) => data)
+    .catch((err) => err.response)
   return data
 }
 
 export const deleteAttraction = async (id) => {
-  const { data } = await $authHost.delete('api/stuff/attraction/' + id)
+  const data = await $authHost
+    .delete('api/stuff/attraction/' + id)
+    .then((data) => data)
+    .catch((err) => err.response)
   return data
 }

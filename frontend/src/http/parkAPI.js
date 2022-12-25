@@ -8,11 +8,13 @@ import { $authHost, $host } from './index'
 //   return data
 // }
 export const createPark = async (formData) => {
-  const { data } = await $authHost
+  const data = await $authHost
     .post('api/stuff/park', formData)
     .then((data) => data)
     .catch((err) => err.response)
-  return data
+  console.log(data)
+  const res = { park: data.data.park, status: data.status, message: data.data.message }
+  return res
 }
 export const stuffFetchPark = async () => {
   const { data } = await $authHost.get('api/stuff/getPark')
@@ -50,11 +52,13 @@ export const deletePhoto = async (fileName) => {
   return data
 }
 export const deletePark = async (id) => {
-  const { data } = await $authHost
+  const data = await $authHost
     .delete('api/stuff/park/' + id)
     .then((data) => data)
     .catch((err) => err.response)
-  return data
+  console.log(data)
+  const res = { park: data.data.park, status: data.status, message: data.data.message }
+  return res
 }
 
 export const createGreenZone = async (greenZone, id) => {
@@ -72,6 +76,7 @@ export const stuffFetchGreenZone = async () => {
 export const editGreenZone = async (greenZone) => {
   const { data } = await $authHost.put('api/stuff/park/gz', greenZone)
   return data
+  return data
 }
 
 export const customerFetchAttraction = async (id) => {
@@ -87,12 +92,9 @@ export const stuffFetchOneAttraction = async (id) => {
   return data
 }
 
-export const createTarif = async (tarif) => {
-  const { data } = await $authHost.post('api/stuff/tarif', tarif)
-  return data
-}
 export const customerFetchTarif = async (id) => {
   const { data } = await $host.get('api/park/' + id + '/tarif')
+  console.log(data)
   return data
 }
 export const stuffFetchTarif = async () => {
@@ -101,9 +103,5 @@ export const stuffFetchTarif = async () => {
 }
 export const stuffFetchOneTarif = async (id) => {
   const { data } = await $authHost.get('api/stuff/tarif/' + id, {})
-  return data
-}
-export const editTarif = async (tarif) => {
-  const { data } = await $authHost.put('api/stuff/tarif', tarif)
   return data
 }

@@ -3,18 +3,24 @@ import jwt_decode from 'jwt-decode'
 import { saveAs } from 'file-saver'
 
 export const customerRegistration = async (phone_number, email) => {
-  const { data } = await $host.post('api/customer/registration', {
+  const data = await $host.post('api/customer/registration', {
     phone_number,
     email,
   })
-  localStorage.setItem('token', data.token)
-  return jwt_decode(data.token)
+  localStorage.setItem('token', data.data.token)
+  const user = jwt_decode(data.data.token)
+  const res = { user, data: data.data, status: data.status }
+  return res
 }
 
 export const customerLogin = async (email) => {
-  const { data } = await $host.post('api/customer/login', { email })
-  localStorage.setItem('token', data.token)
-  return jwt_decode(data.token)
+  const data = await $host.post('api/customer/login', { email })
+  console.log(data)
+  localStorage.setItem('token', data.data.token)
+  const user = jwt_decode(data.data.token)
+  const res = { user, data: data.data, status: data.status }
+  console.log(res)
+  return res
 }
 
 export const customerCheck = async () => {
