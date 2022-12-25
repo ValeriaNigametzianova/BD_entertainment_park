@@ -5,8 +5,10 @@ import { PARK_TARIF_ROUTE, STUFF_ROUTE } from '../utils/Consts'
 import { Context } from '../index'
 import { deleteTarif } from '../http/tarifAPI'
 import '../styles/Items/tarifItem/tarifItem.css'
+import { observer } from 'mobx-react-lite'
 
-const TarifItem = ({ tarif, addTarifs }) => {
+const TarifItem = observer(({ tarif, addTarifs }) => {
+  const { park } = useContext(Context)
   const { user } = useContext(Context)
   const [counter, setCounter] = useState(0)
   const navigate = useNavigate()
@@ -17,6 +19,7 @@ const TarifItem = ({ tarif, addTarifs }) => {
       [key]: { tarif: tarif, counter: counter },
     }
     addTarifs(tarifs)
+    console.log(counter)
   }
 
   useEffect(() => {
@@ -24,8 +27,19 @@ const TarifItem = ({ tarif, addTarifs }) => {
   }, [counter])
 
   const destroyTarif = (deletedTarif) => {
-    deleteTarif(deletedTarif.id).then((data) => {})
-    window.location.reload()
+    deleteTarif(deletedTarif.id).then((data) => {
+      park.setAlertStatus(data.status)
+      park.setAlertMessage(data.data.message)
+      park.setVisible(true)
+      park.setTarif(
+        park.tarifs.map((tarifArray) =>
+          tarifArray.filter((tarif) => {
+            return tarif.id != deletedTarif.id
+          })
+        )
+      )
+    })
+    // window.location.reload()
   }
 
   return (
@@ -87,5 +101,5 @@ const TarifItem = ({ tarif, addTarifs }) => {
       )}
     </Row>
   )
-}
+})
 export default TarifItem

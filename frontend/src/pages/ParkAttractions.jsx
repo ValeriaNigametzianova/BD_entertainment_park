@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import React, { useContext, useEffect, useState } from 'react'
+import { Col, Container, Row, Spinner } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
+import { Context } from '../index'
 import AttractionItem from '../components/AttractionItem'
 import { customerFetchAttraction, customerFetchOnePark } from '../http/parkAPI'
 import { PARK_ATTRACTIONS_ROUTE, PARK_INFO_ROUTE, PARK_MAIN_ROUTE, PARK_TARIF_ROUTE } from '../utils/Consts'
+import { observer } from 'mobx-react-lite'
 
-const ParkAttractions = () => {
-  const [park, setPark] = useState()
+const ParkAttractions = observer(() => {
+  const { park } = useContext(Context)
   const [attractions, setAttractions] = useState()
   const { id } = useParams()
   useEffect(() => {
-    customerFetchOnePark(id).then((data) => setPark(data))
+    park.setIsLoading(true)
     customerFetchAttraction(id).then((data) => setAttractions(data))
   }, [])
   const navigate = useNavigate()
@@ -55,44 +57,14 @@ const ParkAttractions = () => {
             </div>
           </Col>
         </Row>
-        {attractions &&
-          attractions.map((el) => (
-            <AttractionItem attraction={el}></AttractionItem>
-            // <Row className="mb-5 px-5">
-            //   <Row>
-            //     <h2 className="heading3 description">{el?.name}</h2>
-            //   </Row>
-            //   <Row>
-            //     <div className="description">{el?.description}</div>
-            //   </Row>
-            //   <Col>
-            //     <Row>
-            //       <div className="description">Высота: {el?.hight}</div>
-            //     </Row>
-            //     <Row>
-            //       <div className="description">Возрастное ограничение: {el?.age_limitation}</div>
-            //     </Row>
-            //     <Row>
-            //       <div className="description">Ограничение по весу: {el?.weight_limitation}</div>
-            //     </Row>
-            //     <Row>
-            //       <div className="description">Ограничение по росту: {el?.height_limitation}</div>
-            //     </Row>
-            //     <Row>
-            //       <div className="description">
-            //         Максимальное количество посетителей:
-            //         {el?.max_quantity_people}
-            //       </div>
-            //     </Row>
-            //     <Row>
-            //       <div className="description">{el?.active ?? 'Сейчас недоступен'}</div>
-            //     </Row>
-            //   </Col>
-            // </Row>
-          ))}
+        {park.isLoading ? (
+          <Spinner animation={'border'} className={'text-light'} />
+        ) : (
+          <div>{attractions && attractions.map((el) => <AttractionItem attraction={el}></AttractionItem>)}</div>
+        )}
       </Container>
     </Container>
   )
-}
+})
 
 export default ParkAttractions

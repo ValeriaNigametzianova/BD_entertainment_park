@@ -30,7 +30,7 @@ const ParkAttractionsForAdmin = () => {
       <Container md={9}>
         {isLoading ? (
           <div className="d-flex justify-content-center">
-            <div className="spinner-border text-light mt-5" style={{ width: '3rem', height: '3rem' }} role="status">
+            <div className="border text-light mt-5" style={{ width: '3rem', height: '3rem' }} role="status">
               <span className="visually-hidden">Загрузка...</span>
             </div>
           </div>

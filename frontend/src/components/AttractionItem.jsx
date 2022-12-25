@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { Col, Row, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { PARK_ATTRACTIONS_ROUTE, STUFF_ROUTE } from '../utils/Consts'
@@ -6,11 +6,25 @@ import { deleteAttraction } from '../http/attractionAPI'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/container/container.css'
 import '../styles/Items/attractionItem/attractionItem.css'
+import { observer } from 'mobx-react-lite'
+import { Context } from '../index'
 
-const AttractionItem = ({ attraction }) => {
+const AttractionItem = observer(({ attraction }) => {
+  const { park } = useContext(Context)
+  const { user } = useContext(Context)
   const destroyAttraction = (deletedAttraction) => {
-    deleteAttraction(deletedAttraction.id).then((data) => {})
-    window.location.reload()
+    deleteAttraction(deletedAttraction.id).then((data) => {
+      park.setAlertStatus(data.status)
+      park.setAlertMessage(data.data.message)
+      park.setVisible(true)
+      park.setAttraction(
+        park.attractions.map((attractionArray) =>
+          attractionArray.filter((attraction) => {
+            return attraction.id != deletedAttraction.id
+          })
+        )
+      )
+    })
   }
 
   const navigate = useNavigate()
@@ -60,33 +74,37 @@ const AttractionItem = ({ attraction }) => {
               <div>{el?.active ? 'Открыт к посещению' : 'Сейчас недоступен'}</div>
             </Row>
           </Row>
-          <Row className="d-flex mb-3 mt-5 align-items-center">
-            <Col className="d-flex justify-content-center">
-              <Button
-                className="button-warning"
-                onClick={() => {
-                  destroyAttraction(el)
-                }}
-              >
-                Удалить аттракцион
-              </Button>
-            </Col>
-            <Col className="d-flex justify-content-center">
-              <Button
-                className="button-green"
-                key={el.id}
-                attraction={el}
-                onClick={() => {
-                  navigate(STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE + '/' + el.id)
-                }}
-              >
-                Обновить даннные
-              </Button>
-            </Col>
-          </Row>
+          {user.isAuth && user.role === 'stuff' ? (
+            <Row className="d-flex mb-3 mt-5 align-items-center">
+              <Col className="d-flex justify-content-center">
+                <Button
+                  className="button-warning"
+                  onClick={() => {
+                    destroyAttraction(el)
+                  }}
+                >
+                  Удалить аттракцион
+                </Button>
+              </Col>
+              <Col className="d-flex justify-content-center">
+                <Button
+                  className="button-green"
+                  key={el.id}
+                  attraction={el}
+                  onClick={() => {
+                    navigate(STUFF_ROUTE + PARK_ATTRACTIONS_ROUTE + '/' + el.id)
+                  }}
+                >
+                  Обновить даннные
+                </Button>
+              </Col>
+            </Row>
+          ) : (
+            <></>
+          )}
         </Row>
       )}
     </Row>
   )
-}
+})
 export default AttractionItem
