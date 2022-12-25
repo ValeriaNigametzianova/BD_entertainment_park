@@ -63,6 +63,12 @@ const Admin = sequelize.define('Admin', {
 })
 
 Park.hasMany(Attraction, { onDelete: 'cascade', onUpdate: 'no action' })
+Attraction.belongsTo(Park, {
+  onDelete: 'cascade',
+  onUpdate: 'no action',
+  foreignKey: { allowNull: false },
+  hooks: true,
+})
 
 Park.hasMany(GreenZone, { onDelete: 'cascade' })
 GreenZone.belongsTo(Park, {
