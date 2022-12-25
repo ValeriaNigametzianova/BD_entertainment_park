@@ -13,7 +13,9 @@ const ParkAttractions = observer(() => {
   const { id } = useParams()
   useEffect(() => {
     park.setIsLoading(true)
-    customerFetchAttraction(id).then((data) => setAttractions(data))
+    customerFetchAttraction(id)
+      .then((data) => setAttractions(data))
+      .finally(() => park.setIsLoading(false))
   }, [])
   const navigate = useNavigate()
   return (
