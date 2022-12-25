@@ -82,23 +82,23 @@ const EditingParkInfo = observer(() => {
     else formData.append('zoo', false)
     if (Park?.cafe) formData.append('cafe', `${Park?.cafe}`)
     else formData.append('cafe', 0)
-    if (Park?.shops) formData.append('shop', `${Park?.shops}`)
+    if (Park?.shops) formData.append('shops', `${Park?.shops}`)
     else formData.append('shops', 0)
     if (Park?.adress) formData.append('adress', Park?.adress)
     else formData.append('adress', '')
     console.log(formData)
     const data = await createPark(formData).then((data) => {
       park.setAlertStatus(data.status)
-      park.setAlertMessage(data.data.message)
-      park.setVisible(true)
+      park.setAlertMessage(data.message)
+      if (data.status !== 200) park.setVisible(true)
       return data
     })
     return data
   }
   const updatePark = async () => {
-    console.log(Park)
     const fd = Object.entries(Park).reduce((fd, [k, v]) => (fd.append(k, v), fd), new FormData())
     const data = await editInfo(fd).then((data) => {
+      console.log(data)
       park.setAlertStatus(data.status)
       park.setAlertMessage(data.data.message)
       park.setVisible(true)
@@ -161,8 +161,6 @@ const EditingParkInfo = observer(() => {
               <Form.Control
                 className="heading4 mb-3"
                 type="time"
-                step="300"
-                required
                 placeholder="Время открытия"
                 value={Park?.opening_time}
                 onChange={(e) => {
@@ -173,8 +171,6 @@ const EditingParkInfo = observer(() => {
               <Form.Control
                 className="heading4 mb-3"
                 type="time"
-                step="300"
-                required
                 placeholder="Время закрытия"
                 value={Park?.closing_time}
                 onChange={(e) => {
@@ -197,7 +193,9 @@ const EditingParkInfo = observer(() => {
                   type={'checkbox'}
                   label={`Наличие аниматоров`}
                   checked={Park?.animators}
-                  onChange={(e) => setPark({ ...Park, animators: e.target.checked })}
+                  onChange={(e) => {
+                    setPark({ ...Park, animators: e.target.checked })
+                  }}
                 />
               </Form.Group>
 
@@ -249,7 +247,7 @@ const EditingParkInfo = observer(() => {
 
               <Image className="my-5" width="100%" src={tempFile} />
 
-              <Button onClick={() => dropPhoto()}>Удалить фото</Button>
+              {/* <Button onClick={() => dropPhoto()}>Удалить фото</Button> */}
               <Form.Label className="heading3 description">Добавьте фото</Form.Label>
               <Form.Control
                 className="heading4 mb-3"
@@ -309,7 +307,6 @@ const EditingParkInfo = observer(() => {
                             }
                           }
                           // setImg(process.env.REACT_APP_API_URL + `${ParkId}` + `.jpg`)
-                          console.log(data.data.updatedPark.id)
                           if (files) setPhoto(data.data.updatedPark.id)
                         })
                         .then(() => {
@@ -329,8 +326,9 @@ const EditingParkInfo = observer(() => {
                     onClick={() => {
                       newPark()
                         .then((data) => {
-                          if (files) setPhoto(data.id)
-                          if (greenZones) newGreenZone(data.id)
+                          console.log(data)
+                          if (files) setPhoto(data.park.id)
+                          if (greenZones) newGreenZone(data.park.id)
                         })
                         .then(() => navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE))
                     }}

@@ -20,6 +20,7 @@ import '../styles/button/button.css'
 import '../styles/auth/auth.css'
 
 const Auth = observer(() => {
+  const { park } = useContext(Context)
   const { user } = useContext(Context)
   const location = useLocation()
   const navigate = useNavigate()
@@ -32,15 +33,31 @@ const Auth = observer(() => {
     try {
       let data
       if (isLogin && location.pathname === STUFF_ROUTE + LOGIN_ROUTE) {
-        data = await stuffLogin(login, password)
+        data = await stuffLogin(login, password).then((data) => {
+          park.setAlertStatus(data.status)
+          park.setAlertMessage(data.data.message)
+          if (data.status !== 200) park.setVisible(true)
+          return data
+        })
       } else if (isLogin && location.pathname === CUSTOMER_ROUTE + LOGIN_ROUTE) {
-        data = await customerLogin(email)
+        data = await customerLogin(email).then((data) => {
+          console.log(data)
+          park.setAlertStatus(data.status)
+          park.setAlertMessage(data.data.message)
+          if (data.status !== 200) park.setVisible(true)
+          return data
+        })
       } else if (!isLogin && location.pathname === STUFF_ROUTE + REGISTRATION_ROUTE) {
-        data = await stuffRegistration(login, password)
+        data = await stuffRegistration(login, password).then((data) => {
+          park.setAlertStatus(data.status)
+          park.setAlertMessage(data.data.message)
+          if (data.status !== 200) park.setVisible(true)
+          return data
+        })
       }
-      user.setUser(data)
+      user.setUser(data.user)
       user.setIsAuth(true)
-      user.setRole(data.role)
+      user.setRole(data.user.role)
       if (location.pathname === CUSTOMER_ROUTE + LOGIN_ROUTE) {
         navigate(CUSTOMER_ROUTE + TICKETS_ROUTE)
       } else if (
@@ -49,8 +66,8 @@ const Auth = observer(() => {
       ) {
         navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)
       }
-    } catch (e) {
-      alert(e.response.data.message)
+    } catch (error) {
+      alert(error)
     }
   }
 

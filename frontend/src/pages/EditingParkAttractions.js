@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Form, Button, Container, Col, Row } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
-import { stuffFetchPark, createAttraction, editAttraction, stuffFetchOneAttraction } from '../http/parkAPI'
+import { stuffFetchPark, stuffFetchOneAttraction } from '../http/parkAPI'
+import { createAttraction, editAttraction } from '../http/attractionAPI'
 import { ATTRACTIONS_ADMIN_ROUTE, STUFF_ROUTE } from '../utils/Consts'
 import '../styles/navBar/navbar.css'
 import '../styles/fonts/fonts.css'
+import { Context } from '../index'
+import { observer } from 'mobx-react-lite'
 
-const EditingParkAttractions = () => {
-  const [park, setPark] = useState()
+const EditingParkAttractions = observer(() => {
+  // const [park, setPark] = useState()
   const [ParkId, setParkId] = useState(0)
   const [attraction, setAttraction] = useState({})
   const [AttractionId, setAttractionId] = useState(0)
@@ -19,6 +22,7 @@ const EditingParkAttractions = () => {
   const [age_limitation, setALim] = useState(0)
   const [max_quantity_people, setMaxQuan] = useState(0)
   const [active, setActive] = useState(false)
+  const { park } = useContext(Context)
 
   const { id } = useParams()
   // useEffect(() => {
@@ -86,7 +90,6 @@ const EditingParkAttractions = () => {
         data.parks.map((data) => {
           let park = data.park
           setAttraction({ ...attraction, ParkId: park.id })
-          console.log(attraction)
         })
       })
     })
@@ -100,10 +103,18 @@ const EditingParkAttractions = () => {
 
   const navigate = useNavigate()
   const updateAttraction = async () => {
-    await editAttraction(attraction).then((data) => {})
+    await editAttraction(attraction).then((data) => {
+      park.setAlertStatus(data.status)
+      park.setAlertMessage(data.data.message)
+      if (data.status !== 200) park.setVisible(true)
+    })
   }
   const newAttraction = async () => {
-    await createAttraction(attraction).then((data) => {})
+    await createAttraction(attraction).then((data) => {
+      park.setAlertStatus(data.status)
+      park.setAlertMessage(data.data.message)
+      if (data.status !== 200) park.setVisible(true)
+    })
   }
 
   return (
@@ -223,7 +234,6 @@ const EditingParkAttractions = () => {
                   label={`Активный?`}
                   checked={attraction?.active}
                   onChange={(e) => {
-                    console.log(e.target.checked)
                     setAttraction({
                       ...attraction,
                       active: e.target.checked,
@@ -259,7 +269,11 @@ const EditingParkAttractions = () => {
                   <Button
                     className="button-green"
                     variant="primary"
-                    onClick={() => newAttraction().then(() => navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE))}
+                    onClick={() =>
+                      newAttraction().then(() => {
+                        if (park.alertStatus === 200) navigate(STUFF_ROUTE + ATTRACTIONS_ADMIN_ROUTE)
+                      })
+                    }
                   >
                     Создать
                   </Button>
@@ -271,6 +285,6 @@ const EditingParkAttractions = () => {
       </Container>
     </Container>
   )
-}
+})
 
 export default EditingParkAttractions
