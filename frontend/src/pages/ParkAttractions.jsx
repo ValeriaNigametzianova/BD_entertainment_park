@@ -60,7 +60,11 @@ const ParkAttractions = observer(() => {
           </Col>
         </Row>
         {park.isLoading ? (
-          <Spinner animation={'border'} className={'text-light'} />
+          <div
+            style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', top: '50%', marginTop: '60px' }}
+          >
+            <Spinner animation={'border'} className={'text-light'} style={{ position: 'relative' }} />
+          </div>
         ) : (
           <div>{attractions && attractions.map((el) => <AttractionItem attraction={el}></AttractionItem>)}</div>
         )}

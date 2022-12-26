@@ -15,7 +15,9 @@ const ParkInfo = observer(() => {
   useEffect(() => {
     park.setIsLoading(true)
     customerFetchOnePark(id)
-      .then((data) => setPark(data.Park))
+      .then((data) => {
+        setPark(data.park)
+      })
       .finally(() => park.setIsLoading(false))
   }, [])
   return (
@@ -63,7 +65,11 @@ const ParkInfo = observer(() => {
           <h2 className="text-start heading2 description">Информация</h2>
         </Row>
         {park.isLoading ? (
-          <Spinner animation={'border'} className={'text-light'} />
+          <div
+            style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', top: '50%', marginTop: '60px' }}
+          >
+            <Spinner animation={'border'} className={'text-light'} style={{ position: 'relative' }} />
+          </div>
         ) : (
           <div>
             <Row className=" px-5">

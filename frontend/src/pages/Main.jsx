@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { customerFetchPark } from '../http/parkAPI'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col, Container, Row, Spinner } from 'react-bootstrap'
 import { Context } from '../index'
 import ParkList from '../components/ParkList'
 import Pages from '../components/Pages'
@@ -34,10 +34,8 @@ const Main = observer(() => {
       )}
 
       {isLoading ? (
-        <div className="d-flex justify-content-center">
-          <div className="border text-light mt-5" style={{ width: '3rem', height: '3rem' }} role="status">
-            <span className="visually-hidden">Загрузка...</span>
-          </div>
+        <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', top: '50%', marginTop: '60px' }}>
+          <Spinner animation={'border'} className={'text-light'} style={{ position: 'relative' }} />
         </div>
       ) : (
         <Col>

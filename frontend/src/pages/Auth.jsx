@@ -30,31 +30,32 @@ const Auth = observer(() => {
   const [password, setPassword] = useState('')
 
   const click = async () => {
-    try {
-      let data
-      if (isLogin && location.pathname === STUFF_ROUTE + LOGIN_ROUTE) {
-        data = await stuffLogin(login, password).then((data) => {
-          park.setAlertStatus(data.status)
-          park.setAlertMessage(data.data.message)
-          if (data.status !== 200) park.setVisible(true)
-          return data
-        })
-      } else if (isLogin && location.pathname === CUSTOMER_ROUTE + LOGIN_ROUTE) {
-        data = await customerLogin(email).then((data) => {
-          console.log(data)
-          park.setAlertStatus(data.status)
-          park.setAlertMessage(data.data.message)
-          if (data.status !== 200) park.setVisible(true)
-          return data
-        })
-      } else if (!isLogin && location.pathname === STUFF_ROUTE + REGISTRATION_ROUTE) {
-        data = await stuffRegistration(login, password).then((data) => {
-          park.setAlertStatus(data.status)
-          park.setAlertMessage(data.data.message)
-          if (data.status !== 200) park.setVisible(true)
-          return data
-        })
-      }
+    let data
+    if (isLogin && location.pathname === STUFF_ROUTE + LOGIN_ROUTE) {
+      data = await stuffLogin(login, password).then((data) => {
+        park.setAlertStatus(data.status)
+        park.setAlertMessage(data.data.message)
+        console.log(data)
+        if (data.status !== 200) park.setVisible(true)
+        return data
+      })
+    } else if (isLogin && location.pathname === CUSTOMER_ROUTE + LOGIN_ROUTE) {
+      data = await customerLogin(email).then((data) => {
+        console.log(data)
+        park.setAlertStatus(data.status)
+        park.setAlertMessage(data.data.message)
+        if (data.status !== 200) park.setVisible(true)
+        return data
+      })
+    } else if (!isLogin && location.pathname === STUFF_ROUTE + REGISTRATION_ROUTE) {
+      data = await stuffRegistration(login, password).then((data) => {
+        park.setAlertStatus(data.status)
+        park.setAlertMessage(data.data.message)
+        if (data.status !== 200) park.setVisible(true)
+        return data
+      })
+    }
+    if (data.status !== 500) {
       user.setUser(data.user)
       user.setIsAuth(true)
       user.setRole(data.user.role)
@@ -66,15 +67,13 @@ const Auth = observer(() => {
       ) {
         navigate(STUFF_ROUTE + MAIN_ADMIN_ROUTE)
       }
-    } catch (error) {
-      alert(error)
     }
   }
 
   return (
     <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '62.5vh' }}>
       <Card style={{ width: 600 }} className="p-5">
-        <h2 className="authForm_title">{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
+        <h2 className="authForm_title">{isLogin ? 'Вход' : 'Регистрация'}</h2>
 
         <Row>
           <Col className="d-flex justify-content-center">
@@ -131,7 +130,7 @@ const Auth = observer(() => {
                     style={{ cursor: 'pointer' }}
                     onClick={() => navigate(STUFF_ROUTE + REGISTRATION_ROUTE)}
                   >
-                    Зарегистрируйся!
+                    Зарегистрируйтесь
                   </div>
                 </div>
               ) : (

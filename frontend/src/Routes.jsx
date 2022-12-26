@@ -49,6 +49,10 @@ export const authStuffRoutes = [
     Component: <ParkTarifForAdmin />,
   },
   {
+    path: STUFF_ROUTE + PARK_MAIN_ROUTE + '/:id',
+    Component: <EditingParkInfo />,
+  },
+  {
     path: STUFF_ROUTE + PARK_MAIN_ROUTE,
     Component: <EditingParkInfo />,
   },

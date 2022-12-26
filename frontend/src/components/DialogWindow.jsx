@@ -17,7 +17,6 @@ const DialogWindow = observer(() => {
     <Alert
       variant={park.alertStatus === 200 ? 'success' : 'danger'}
       className={rootClasses.join(' ')}
-      style={{ width: '500px' }}
       onClick={() => {
         park.setVisible(false)
       }}

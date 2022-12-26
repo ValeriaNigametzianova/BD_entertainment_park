@@ -46,37 +46,33 @@ const App = observer(() => {
   }, [timeout])
 
   useEffect(() => {
-    stuffCheck()
-      .then((data) => {
-        user.setUser(data)
-        user.setIsAuth(true)
-        user.setRole(data.role)
-      })
-      .finally(() => setIsLoading(false))
-  }, [])
-  useEffect(() => {
-    customerCheck()
-      .then((data) => {
-        user.setUser(data)
-        user.setIsAuth(true)
-        user.setRole(data.role)
-      })
-      .finally(() => setIsLoading(false))
+    fetchData().finally(() => setIsLoading(false))
   }, [])
 
-  useEffect(() => {
-    setIsLoading(true)
-    customerFetchPark(park.searchQuery, park.selectedTown, park.page, 3)
-      .then((data) => {
+  const fetchData = async () => {
+    await Promise.all([
+      customerFetchPark(park.searchQuery, park.selectedTown, park.page, 3).then((data) => {
         park.setTown(data.towns)
-      })
-      .finally(() => setIsLoading(false))
-  }, [])
+      }),
+      customerCheck().then((data) => {
+        user.setUser(data)
+        user.setIsAuth(true)
+        user.setRole(data.role)
+      }),
+      stuffCheck().then((data) => {
+        user.setUser(data)
+        user.setIsAuth(true)
+        user.setRole(data.role)
+      }),
+    ])
+  }
 
   return (
     <BrowserRouter>
       {isLoading ? (
-        <Spinner animation={'border'} className={'text-light'} />
+        <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', top: '50%', marginTop: '60px' }}>
+          <Spinner animation={'border'} className={'text-light'} style={{ position: 'relative' }} />
+        </div>
       ) : (
         <div className="app">
           {park.visible && <DialogWindow></DialogWindow>}

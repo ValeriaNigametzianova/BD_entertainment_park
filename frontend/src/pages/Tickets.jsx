@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Container, Row } from 'react-bootstrap'
 import { customerFetchPDF, customerFetchTickets } from '../http/customerAPI'
@@ -7,18 +8,24 @@ const Tickets = () => {
   const baseLink = 'result'
   const format = '.pdf'
   const [isLoading, setIsLoading] = useState(true)
-
-  const fetchData = async () => {
-    await customerFetchPDF()
-    const data = await customerFetchTickets()
-    setTickets(data)
-  }
   useEffect(() => {
     setIsLoading(true)
     fetchData().finally(() => {
       setIsLoading(false)
     })
   }, [])
+
+  const fetchData = async () => {
+    const data1 = await customerFetchPDF()
+    console.log(Date.now())
+    await axios
+      .get('http://localhost:8000/result13.pdf')
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err))
+    const data = await customerFetchTickets()
+    console.log(2, data)
+    setTickets(data)
+  }
 
   return (
     <Container>

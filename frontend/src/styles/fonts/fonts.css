@@ -2,22 +2,16 @@
   font-family: 'Vivaldi';
   font-size: 23pt;
   margin-right: 10px;
-  color: #fefdef;
+  color: #dae9ff;
 }
 .navbar-light .navbar-brand:hover {
   font-family: 'Vivaldi';
   font-size: 23pt;
   margin-right: 10px;
-  color: #fefdef;
-}
-.navbar-light .navbar-brand:focus {
-  font-family: 'Vivaldi';
-  font-size: 23pt;
-  margin-right: 10px;
-  color: #fefdef;
+  color: #fffff0;
 }
 .heading1 {
-  font-family: 'Jost';
+  font-family: system-ui;
   font-size: 30pt;
   font-style: normal;
   font-weight: 400;
@@ -27,15 +21,15 @@
   margin-top: 20px;
 }
 .heading2 {
-  font-family: 'Jost';
+  font-family: system-ui;
   font-size: 24pt;
   text-align: center;
   font-weight: 100;
   margin-bottom: 20px;
-  color: #e8e8e8;
+  color: #e3e4e4;
 }
 .heading2_1 {
-  font-family: 'Jost';
+  font-family: system-ui;
   font-size: 28pt;
   margin-bottom: 20px;
   color: #151e20;
@@ -58,7 +52,7 @@
 .heading3_2 {
   font-family: system-ui;
   font-size: 14pt;
-  color: #e8e8e8;
+  color: #fefdef;
   margin-top: 10px;
   margin-bottom: 20px;
 }
@@ -89,5 +83,5 @@
   color: #ffa100;
 }
 .description {
-  color: #e8e8e8;
+  color: white;
 }

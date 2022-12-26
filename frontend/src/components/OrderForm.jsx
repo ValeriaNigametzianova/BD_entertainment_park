@@ -12,9 +12,7 @@ const OrderForm = observer(({ createOrder }) => {
   const [phone_number, setPhoneNumber] = useState()
 
   const createForm = () => {
-    console.log(surname, name, email, phone_number)
     if (!surname || !name || !email || !phone_number) {
-      console.log(555)
       park.setAlertMessage('Заполните данные формы')
       park.setAlertStatus(206)
       park.setVisible(true)

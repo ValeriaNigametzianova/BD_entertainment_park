@@ -1,6 +1,5 @@
 module.exports = ({ ticket, tarif, park }) => {
   //  const today = new Date();
-  console.log('tarifPDF', tarif)
   //   const tarif = await Tarif.findOne({ where: { id: ticket.TarifId } })
   return `
    <!doctype html>

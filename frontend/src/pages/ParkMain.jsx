@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Container, NavLink, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import {
-  PARK_MAIN_ROUTE,
-  PARK_INFO_ROUTE,
-  PARK_ATTRACTIONS_ROUTE,
-  PARK_TARIF_ROUTE,
-} from '../utils/Consts'
+import { PARK_MAIN_ROUTE, PARK_INFO_ROUTE, PARK_ATTRACTIONS_ROUTE, PARK_TARIF_ROUTE } from '../utils/Consts'
 import { useParams } from 'react-router-dom'
 import { customerFetchGreenZone, customerFetchOnePark } from '../http/parkAPI'
 import '../styles/container/container.css'
@@ -41,9 +36,7 @@ const ParkMain = () => {
             <div
               className="heading3_2 text-center"
               style={{ cursor: 'pointer' }}
-              onClick={() =>
-                navigate(PARK_MAIN_ROUTE + '/' + id + PARK_INFO_ROUTE)
-              }
+              onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id + PARK_INFO_ROUTE)}
             >
               Характеристики
             </div>
@@ -52,9 +45,7 @@ const ParkMain = () => {
             <div
               className="heading3_2 text-center"
               style={{ cursor: 'pointer' }}
-              onClick={() =>
-                navigate(PARK_MAIN_ROUTE + '/' + id + PARK_ATTRACTIONS_ROUTE)
-              }
+              onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id + PARK_ATTRACTIONS_ROUTE)}
             >
               Аттракционы
             </div>
@@ -63,9 +54,7 @@ const ParkMain = () => {
             <div
               className="heading3_2 text-center"
               style={{ cursor: 'pointer' }}
-              onClick={() =>
-                navigate(PARK_MAIN_ROUTE + '/' + id + PARK_TARIF_ROUTE)
-              }
+              onClick={() => navigate(PARK_MAIN_ROUTE + '/' + id + PARK_TARIF_ROUTE)}
             >
               Купить билет
             </div>
@@ -76,17 +65,22 @@ const ParkMain = () => {
             <h2 className="text-start heading2 description">{park?.name}</h2>
           </Row>
           <Row className="mt-3 px-5">
-            <div className="text-start description">{park?.description}</div>
+            <Col sm={8}>
+              <div className="text-start description">{park?.description}</div>
+            </Col>
           </Row>
         </Row>
         {greenZones &&
           greenZones.greenZone.map((el) => (
             <Row>
               <Row className="mt-5 px-5">
-                <h2 className="text-start heading2 description">{el?.name}</h2>
+                {/* <h2 className="text-start heading2 description">Зоны отдыха в парке</h2> */}
+                <h2 className="text-start heading2_1 description">{el?.name}</h2>
               </Row>
               <Row className="mt-3 px-5">
-                <div className="text-start description">{el?.description}</div>
+                <Col sm={8}>
+                  <div className="text-start description">{el?.description}</div>
+                </Col>
               </Row>
             </Row>
           ))}

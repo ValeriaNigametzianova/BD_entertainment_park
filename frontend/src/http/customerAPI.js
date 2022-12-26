@@ -14,13 +14,16 @@ export const customerRegistration = async (phone_number, email) => {
 }
 
 export const customerLogin = async (email) => {
-  const data = await $host.post('api/customer/login', { email })
-  console.log(data)
-  localStorage.setItem('token', data.data.token)
-  const user = jwt_decode(data.data.token)
-  const res = { user, data: data.data, status: data.status }
-  console.log(res)
-  return res
+  const data = await $host
+    .post('api/customer/login', { email })
+    .then((data) => {
+      localStorage.setItem('token', data.data.token)
+      const user = jwt_decode(data.data.token)
+      const res = { user, data: data.data, status: data.status }
+      return res
+    })
+    .catch((err) => err.response)
+  return data
 }
 
 export const customerCheck = async () => {

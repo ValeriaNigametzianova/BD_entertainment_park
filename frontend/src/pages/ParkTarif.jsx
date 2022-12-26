@@ -47,6 +47,7 @@ const ParkTarif = () => {
   }
 
   const createOrder = (customer) => {
+    let TarifId = Object.getOwnPropertyNames(order.tarifs).map((el) => order.tarifs[`${el}`])
     if (!order?.date) {
       park.setAlertMessage('Выберите дату посещения')
       park.setAlertStatus(206)
@@ -59,9 +60,14 @@ const ParkTarif = () => {
       park.setVisible(true)
       return
     }
+    if (order?.tarifs[TarifId[0].tarif.id].counter < 1) {
+      park.setAlertMessage('Купите билеты')
+      park.setAlertStatus(206)
+      park.setVisible(true)
+      return
+    }
     setOrder({ ...order, customer })
     setTotal(true)
-    let TarifId = Object.getOwnPropertyNames(order.tarifs).map((el) => order.tarifs[`${el}`])
     let tsumm = summ
     TarifId.map((element) => {
       return (tsumm += element.tarif?.cost * element?.counter)
@@ -82,7 +88,9 @@ const ParkTarif = () => {
   return (
     <Container className="contr">
       {park.Isloading ? (
-        <Spinner animation={'border'} className={'text-light'} />
+        <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', top: '50%', marginTop: '60px' }}>
+          <Spinner animation={'border'} className={'text-light'} style={{ position: 'relative' }} />
+        </div>
       ) : (
         <div>
           {total ? (
@@ -104,8 +112,10 @@ const ParkTarif = () => {
                     <div className="description">{order.customer?.email}</div>
                     <div className="description">{order.customer?.phone_number}</div>
                     <div>
-                      {Object.getOwnPropertyNames(order.tarifs).map((el) => (
-                        <div className="description">{order.tarifs[`${el}`].tarif?.name}</div>
+                      {Object.getOwnPropertyNames(order.tarifs).map((el, index) => (
+                        <div className="description" key={el[index]}>
+                          {order.tarifs[`${el}`].tarif?.name}
+                        </div>
                       ))}
                     </div>
                   </Col>

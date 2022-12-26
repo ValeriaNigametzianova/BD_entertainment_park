@@ -15,11 +15,13 @@ import '../styles/button/button.css'
 import '../styles/fonts/fonts.css'
 import { observer, useObserver } from 'mobx-react-lite'
 import { Context } from '../index'
+import axios from 'axios'
 
 const ParkMainForAdmin = observer(() => {
   const [parks, setParks] = useState()
   const [greenZones, setGreenZones] = useState()
   const [isLoading, setIsLoading] = useState()
+  const [imageURL, setImageURL] = useState('')
   const { park } = useContext(Context)
   useEffect(() => {
     setIsLoading(true)
@@ -29,8 +31,25 @@ const ParkMainForAdmin = observer(() => {
   const navigate = useNavigate()
 
   const fetchData = async () => {
-    await stuffFetchPark().then((data) => setParks(data))
-    await stuffFetchGreenZone().then((data) => setGreenZones(data))
+    await Promise.all([
+      stuffFetchPark().then((data) => {
+        setParks(data)
+        park.setPark(data)
+      }),
+      stuffFetchGreenZone().then((data) => setGreenZones(data)),
+    ])
+    console.log('1', park.parks.parks[0].park.id)
+    console.log(process.env.REACT_APP_API_URL + `${park.parks.parks[0].park.id}` + `.jpg`)
+    await axios
+      .get(process.env.REACT_APP_API_URL + `${park.parks.parks[0].park.id}` + `.jpg`)
+      .then((data) => {
+        console.log('d', data)
+        setImageURL(process.env.REACT_APP_API_URL + `${park.parks.parks[0].park.id}` + `.jpg`)
+      })
+      .catch((err) => {
+        console.log('e', err)
+        setImageURL('')
+      })
   }
   const destroyPark = async (deletedPark) => {
     setIsLoading(true)
@@ -48,6 +67,7 @@ const ParkMainForAdmin = observer(() => {
 
   return (
     <Container className="contr">
+      {console.log(park)}
       <Container md={9}>
         {isLoading ? (
           <div className="d-flex justify-content-center">
@@ -133,43 +153,50 @@ const ParkMainForAdmin = observer(() => {
                         <div>Адрес: {el?.adress}</div>
                       </Row>
                     </Col>
-                    <Image className="my-5" width="100%" src={process.env.REACT_APP_API_URL + `${el?.id}` + `.jpg`} />
+                    {imageURL ? (
+                      <Image className="my-5" width="100%" src={process.env.REACT_APP_API_URL + `${el?.id}` + `.jpg`} />
+                    ) : null}
                   </Row>
                 )
               })}
-            {greenZones &&
-              parks.parks.length &&
-              greenZones.parks.map((el) =>
-                el.greenZones.map((el) => (
-                  <Col>
-                    <div className="heading2_1 description mt={5}">Зоны отдыха в парке развлечений</div>
-                    <Row key={el.id}>
-                      <Row mt={5}>
-                        <div className="heading3_2 description">{el?.name}</div>
-                        <div className="description">Описание: {el?.description}</div>
+            {greenZones && parks.parks.length
+              ? greenZones.parks.map((el) =>
+                  el.greenZones.map((el) => (
+                    <Col>
+                      <div className="heading2_1 description mt={5}">Зоны отдыха в парке развлечений</div>
+                      <Row key={el.id}>
+                        <Row mt={5}>
+                          <div className="heading3_2 description">{el?.name}</div>
+                          <div className="description">Описание: {el?.description}</div>
+                        </Row>
                       </Row>
-                    </Row>
-                  </Col>
-                ))
-              )}
+                    </Col>
+                  ))
+                )
+              : null}
             <Row className="d-flex my-5">
               {parks && parks.parks.length ? (
                 <Row>
-                  <Col>
-                    {parks.parks.map((el) => {
-                      el = el.park
-                      return (
-                        <Button key={el.id} className="button-warning" onClick={() => destroyPark(el)}>
-                          Удалить парк
-                        </Button>
-                      )
-                    })}
-                  </Col>
-                  <Col>
-                    <Button className="button-green" onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>
-                      Обновить даннные
-                    </Button>
-                  </Col>
+                  {parks.parks.map((el) => {
+                    el = el.park
+                    return (
+                      <>
+                        <Col>
+                          <Button key={el.id} className="button-warning" onClick={() => destroyPark(el)}>
+                            Удалить парк
+                          </Button>
+                        </Col>
+                        <Col>
+                          <Button
+                            className="button-green"
+                            onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE + '/' + el.id)}
+                          >
+                            Обновить даннные
+                          </Button>
+                        </Col>
+                      </>
+                    )
+                  })}
                 </Row>
               ) : (
                 <Button className="button2" onClick={() => navigate(STUFF_ROUTE + PARK_MAIN_ROUTE)}>

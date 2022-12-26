@@ -19,7 +19,6 @@ const TarifItem = observer(({ tarif, addTarifs }) => {
       [key]: { tarif: tarif, counter: counter },
     }
     addTarifs(tarifs)
-    console.log(counter)
   }
 
   useEffect(() => {
